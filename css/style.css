@@ -1,0 +1,466 @@
+/* ==================== 基礎設定 ==================== */
+:root {
+    --primary: #4A90E2;
+    --secondary: #F39C12;
+    --success: #2ECC71;
+    --danger: #E74C3C;
+    --purple: #9B59B6;
+    --dark: #2C3E50;
+    --light: #ECF0F1;
+    --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --gradient-math: linear-gradient(135deg, #4A90E2 0%, #00D2FF 100%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans TC', 'Segoe UI', sans-serif;
+    background: #f8f9fa;
+    color: var(--dark);
+    line-height: 1.6;
+}
+
+/* ==================== Hero Section ==================== */
+.hero {
+    min-height: 60vh;
+    background: var(--gradient-math);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    z-index: 2;
+    padding: 20px;
+}
+
+.logo {
+    font-size: 5rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin: 20px 0 10px;
+    font-weight: 900;
+}
+
+.hero .highlight {
+    color: var(--secondary);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    opacity: 0.9;
+    margin-bottom: 20px;
+}
+
+.dates {
+    margin-bottom: 30px;
+}
+
+.date-badge {
+    background: rgba(255,255,255,0.2);
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.countdown {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.count-item {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    padding: 15px 25px;
+    border-radius: 15px;
+    min-width: 80px;
+}
+
+.count-item span {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 900;
+}
+
+.count-item small {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f8f9fa' fill-opacity='1' d='M0,96L48,112C96,128,192,160,288,165.3C384,171,480,149,576,128C672,107,768,85,864,90.7C960,96,1056,128,1152,138.7C1248,149,1344,139,1392,133.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") no-repeat bottom;
+    background-size: cover;
+}
+
+/* ==================== Section Styles ==================== */
+section {
+    padding: 60px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: var(--dark);
+}
+
+.section-desc {
+    text-align: center;
+    color: #666;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+}
+
+/* ==================== Timeline ==================== */
+.timeline {
+    position: relative;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 100%;
+    background: var(--primary);
+    border-radius: 2px;
+}
+
+.timeline-month {
+    margin-bottom: 50px;
+}
+
+.month-title {
+    text-align: center;
+    background: var(--primary);
+    color: white;
+    padding: 10px 30px;
+    border-radius: 30px;
+    display: inline-block;
+    margin: 0 auto 30px;
+    font-size: 1.3rem;
+}
+
+.timeline-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.activity-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    display: flex;
+    gap: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.activity-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+
+.activity-card.special {
+    background: var(--gradient-2);
+    color: white;
+}
+
+.activity-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.activity-info h4 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.activity-info .date {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.activity-info .desc {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* ==================== Games Section ==================== */
+.games-section {
+    background: linear-gradient(180deg, #f8f9fa 0%, #e8f4f8 100%);
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.game-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.game-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.game-card p {
+    font-size: 0.85rem;
+    color: #555;
+    margin: 10px 0;
+    line-height: 1.4;
+    min-height: 50px;
+}
+
+.game-rules {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.game-rules span {
+    background: #e8f4f8;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    color: var(--primary);
+}
+
+.game-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.game-card h4 {
+    color: var(--dark);
+    margin-bottom: 5px;
+}
+
+.game-card p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.more-games {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.more-games button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.more-games button:hover {
+    background: #357ABD;
+    transform: translateY(-2px);
+}
+
+/* ==================== AI Tutor Section ==================== */
+.ai-tutor-section {
+    background: var(--gradient-math);
+    color: white;
+    text-align: center;
+    border-radius: 30px;
+    margin: 60px auto;
+    max-width: 900px;
+}
+
+.ai-tutor-section h2 {
+    color: white;
+}
+
+.ai-tutor-section p {
+    opacity: 0.9;
+    margin-bottom: 30px;
+}
+
+.tutor-features {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.feature span {
+    font-size: 2.5rem;
+}
+
+.feature p {
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.btn-primary {
+    background: white;
+    color: var(--primary);
+    border: none;
+    padding: 18px 50px;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* ==================== About ==================== */
+.about-content {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.about-content > p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+.highlights {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.highlight-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.highlight-item .num {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--primary);
+}
+
+.highlight-item .label {
+    color: #666;
+    font-size: 1rem;
+}
+
+/* ==================== Footer ==================== */
+footer {
+    background: var(--dark);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.footer-content p {
+    margin-bottom: 10px;
+}
+
+.credit {
+    opacity: 0.6;
+    font-size: 0.9rem;
+}
+
+/* ==================== Mobile Responsive ==================== */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .countdown {
+        gap: 10px;
+    }
+    
+    .count-item {
+        padding: 10px 15px;
+        min-width: 60px;
+    }
+    
+    .count-item span {
+        font-size: 1.5rem;
+    }
+    
+    section h2 {
+        font-size: 1.8rem;
+    }
+    
+    .timeline::before {
+        left: 20px;
+    }
+    
+    .timeline-items {
+        padding-left: 50px;
+    }
+    
+    .highlights {
+        gap: 30px;
+    }
+    
+    .highlight-item .num {
+        font-size: 2rem;
+    }
+}

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 靈風中學 數學周 2026</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <div class="logo">🔢</div>
+            <h1>靈風中學 <span class="highlight">數學周</span> 2026</h1>
+            <p class="subtitle">探索數學的奇妙世界！</p>
+            <div class="dates">
+                <span class="date-badge">📅 13/4 - 8/5/2026</span>
+            </div>
+            <div class="countdown" id="countdown">
+                <div class="count-item"><span id="days">--</span><small>日</small></div>
+                <div class="count-item"><span id="hours">--</span><small>時</small></div>
+                <div class="count-item"><span id="mins">--</span><small>分</small></div>
+                <div class="count-item"><span id="secs">--</span><small>秒</small></div>
+            </div>
+        </div>
+        <div class="wave"></div>
+    </header>
+
+    <!-- 活動總覽 -->
+    <section class="activities" id="activities">
+        <h2>📋 活動總覽</h2>
+        <div class="timeline">
+            <!-- 4月 -->
+            <div class="timeline-month">
+                <h3 class="month-title">🌸 四月</h3>
+                <div class="timeline-items">
+                    <div class="activity-card">
+                        <div class="activity-icon">📝</div>
+                        <div class="activity-info">
+                            <h4>初中數學比賽 (第一階段)</h4>
+                            <p class="date">13/4 - 30/4</p>
+                            <p class="desc">逢星期一派發題目，星期四交回</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 5月 -->
+            <div class="timeline-month">
+                <h3 class="month-title">🌺 五月</h3>
+                <div class="timeline-items">
+                    <div class="activity-card">
+                        <div class="activity-icon">📖</div>
+                        <div class="activity-info">
+                            <h4>數學閱讀篇章</h4>
+                            <p class="date">4/5 (早讀時間)</p>
+                            <p class="desc">閱讀數學篇章，完成問答題</p>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-card">
+                        <div class="activity-icon">🏆</div>
+                        <div class="activity-info">
+                            <h4>初中數學比賽 (第二階段)</h4>
+                            <p class="date">6/5 (初中周會)</p>
+                            <p class="desc">台下比賽 + 台上iPad答題</p>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-card">
+                        <div class="activity-icon">🎓</div>
+                        <div class="activity-info">
+                            <h4>高中數學講座</h4>
+                            <p class="date">7/5 (高中周會)</p>
+                            <p class="desc">禮堂 - 邀請大學講師</p>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-card">
+                        <div class="activity-icon">🎨</div>
+                        <div class="activity-info">
+                            <h4>數學專題研習作品展</h4>
+                            <p class="date">4/5 - 7/5 (午間)</p>
+                            <p class="desc">故宮積木、黃金比例、聖誕帽設計</p>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-card">
+                        <div class="activity-icon">🃏</div>
+                        <div class="activity-info">
+                            <h4>Rummikub 大賽</h4>
+                            <p class="date">4/5 - 7/5 (午間)</p>
+                            <p class="desc">初賽 → 復賽 → 決賽 → 師生賽</p>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-card">
+                        <div class="activity-icon">🎮</div>
+                        <div class="activity-info">
+                            <h4>數學小遊戲</h4>
+                            <p class="date">4/5 - 8/5 (午間)</p>
+                            <p class="desc">完成遊戲獲得代幣</p>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-card">
+                        <div class="activity-icon">🏦</div>
+                        <div class="activity-info">
+                            <h4>數學銀行</h4>
+                            <p class="date">4/5 - 8/5 (午間)</p>
+                            <p class="desc">收集代幣，換取禮物</p>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-card special">
+                        <div class="activity-icon">🌈</div>
+                        <div class="activity-info">
+                            <h4>數學大彩虹</h4>
+                            <p class="date">8/5 (午間)</p>
+                            <p class="desc">用代幣換取禮物！</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 遊戲專區 -->
+    <section class="games-section" id="games">
+        <h2>🎮 數學遊戲專區</h2>
+        <p class="section-desc">計時挑戰！睇兩眼就識玩！</p>
+        
+        <div class="games-grid">
+            <div class="game-card" onclick="openGame('MultiplicationBattle')">
+                <div class="game-icon">⚡</div>
+                <h4>乘法拔河</h4>
+                <p class="game-desc">5秒答啱一題乘法，你既拉力就會將對手拉過黎！答錯會被拉走！</p>
+                <div class="game-rules">
+                    <span>🎯 極速心算</span>
+                    <span>⏱️ 5秒限時</span>
+                </div>
+            </div>
+            
+            <div class="game-card" onclick="openGame('RatioSafe')">
+                <div class="game-icon">🔐</div>
+                <h4>比例金庫</h4>
+                <p class="game-desc">破解銀行密碼！計啱比例，等式就會成立！唔洗寫，只需要揀答案。</p>
+                <div class="game-rules">
+                    <span>🔢 求未知數</span>
+                    <span>🧠 比例推理</span>
+                </div>
+            </div>
+            
+            <div class="game-card" onclick="openGame('MatrixConquest')">
+                <div class="game-icon">🔢</div>
+                <h4>矩陣爭奪戰</h4>
+                <p class="game-desc">兩人對戰！抽兩個數字，揀最大公因數，用積木霸領土！邊個佔最多邊就贏！</p>
+                <div class="game-rules">
+                    <span>👥 雙人對戰</span>
+                    <span>📐 最大公因數</span>
+                </div>
+            </div>
+            
+            <div class="game-card" onclick="openGame('PenaltyShootout')">
+                <div class="game-icon">⚽</div>
+                <h4>12碼射門</h4>
+                <p class="game-desc">輸入座標射門！例如(3,2)就係球門既第三格第二行！同守門員鬥快！</p>
+                <div class="game-rules">
+                    <span>📍 座標輸入</span>
+                    <span>🎯 射門準度</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- 關於我們 -->
+    <section class="about" id="about">
+        <h2>📚 關於數學周</h2>
+        <div class="about-content">
+            <p>數學周係靈風中學既年度盛事，旨在透過多元化既活動，讓同學感受數學既趣味同魅力！</p>
+            
+            <div class="highlights">
+                <div class="highlight-item">
+                    <span class="num">400+</span>
+                    <span class="label">題目</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="num">8</span>
+                    <span class="label">項活動</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="num">3</span>
+                    <span class="label">星期</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>🎓 靈風中學 數學周 2026</p>
+            <p class="credit">Made with 💙 by AI Assistant</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
