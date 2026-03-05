@@ -46,121 +46,101 @@
         </div>
     </section>
 
-    <!-- 活動總覽 (已合併活動形式) -->
-    <section class="activities" id="activities">
-        <h2>📋 活動總覽</h2>
+    <!-- 活動分類 -->
+    <section class="activity-categories">
+        <h2>📋 活動分類</h2>
         
-        <!-- 活動形式說明 -->
-        <div class="activity-format-merged">
-            <div class="format-row">
-                <div class="format-item">
-                    <span class="format-icon">🎤</span>
-                    <span class="format-title">周會</span>
-                    <span class="format-detail">
-                        <span class="badge junior">初中</span> 星期三
-                    </span>
-                    <span class="format-detail">
-                        <span class="badge senior">高中</span> 星期四
-                    </span>
+        <!-- 周會 -->
+        <div class="category-block">
+            <h3 class="category-title">
+                <span class="category-icon">🎤</span>
+                周會
+            </h3>
+            <div class="category-info">
+                <span class="badge junior">初中</span> 星期三
+                <span class="badge senior">高中</span> 星期四
+            </div>
+            <div class="activities-grid">
+                <div class="activity-card small">
+                    <div class="activity-icon">🏆</div>
+                    <div class="activity-info">
+                        <h4>初中數學比賽 (決賽)</h4>
+                        <p class="date">6/5 (周會)</p>
+                    </div>
                 </div>
-                <div class="format-item">
-                    <span class="format-icon">🍚</span>
-                    <span class="format-title">午間時段</span>
-                    <span class="format-detail">星期一至五 | 靈風舞台</span>
+                <div class="activity-card small">
+                    <div class="activity-icon">🎓</div>
+                    <div class="activity-info">
+                        <h4>高中數學講座</h4>
+                        <p class="date">7/5 (周會)</p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="timeline">
-            <!-- 4月 -->
-            <div class="timeline-month">
-                <h3 class="month-title">🌸 四月 - 第一階段</h3>
-                <div class="timeline-items">
-                    <div class="activity-card">
-                        <div class="activity-icon">📝</div>
-                        <div class="activity-info">
-                            <h4>初中數學比賽</h4>
-                            <p class="date">13/4 - 30/4</p>
-                            <p class="desc">逢星期一派發題目，星期四交回</p>
-                        </div>
+        <!-- 早讀時段 -->
+        <div class="category-block">
+            <h3 class="category-title">
+                <span class="category-icon">📖</span>
+                早讀時段
+            </h3>
+            <div class="category-info">
+                星期三 | 早上
+            </div>
+            <div class="activities-grid">
+                <div class="activity-card small">
+                    <div class="activity-icon">📝</div>
+                    <div class="activity-info">
+                        <h4>數學閱讀篇章</h4>
+                        <p class="date">4/5, 6/5, 7/5 (早讀)</p>
                     </div>
                 </div>
             </div>
-            
-            <!-- 5月 -->
-            <div class="timeline-month">
-                <h3 class="month-title">🌺 五月 - 數學周</h3>
-                <div class="timeline-items">
-                    <div class="activity-card">
-                        <div class="activity-icon">📖</div>
-                        <div class="activity-info">
-                            <h4>數學閱讀篇章</h4>
-                            <p class="date">4/5 (早讀時間)</p>
-                            <p class="desc">閱讀數學篇章，完成問答題</p>
-                        </div>
+        </div>
+
+        <!-- 午間時段 -->
+        <div class="category-block">
+            <h3 class="category-title">
+                <span class="category-icon">🍚</span>
+                午間時段
+            </h3>
+            <div class="category-info">
+                星期一至五 | 靈風舞台
+            </div>
+            <div class="activities-grid">
+                <div class="activity-card small">
+                    <div class="activity-icon">🎨</div>
+                    <div class="activity-info">
+                        <h4>數學專題研習作品展</h4>
+                        <p class="date">4/5 - 7/5</p>
                     </div>
-                    
-                    <div class="activity-card">
-                        <div class="activity-icon">🏆</div>
-                        <div class="activity-info">
-                            <h4>初中數學比賽 (決賽)</h4>
-                            <p class="date">6/5 (周會)</p>
-                            <p class="desc">台下比賽 + 台上iPad答題</p>
-                        </div>
+                </div>
+                <div class="activity-card small">
+                    <div class="activity-icon">🃏</div>
+                    <div class="activity-info">
+                        <h4>Rummikub 大賽</h4>
+                        <p class="date">4/5 - 7/5</p>
                     </div>
-                    
-                    <div class="activity-card">
-                        <div class="activity-icon">🎓</div>
-                        <div class="activity-info">
-                            <h4>高中數學講座</h4>
-                            <p class="date">7/5 (周會)</p>
-                            <p class="desc">禮堂 - 邀請大學講師</p>
-                        </div>
+                </div>
+                <div class="activity-card small">
+                    <div class="activity-icon">🎮</div>
+                    <div class="activity-info">
+                        <h4>數學小遊戲</h4>
+                        <p class="date">4/5 - 8/5</p>
                     </div>
-                    
-                    <div class="activity-card">
-                        <div class="activity-icon">🎨</div>
-                        <div class="activity-info">
-                            <h4>數學專題研習作品展</h4>
-                            <p class="date">4/5 - 7/5 (午間)</p>
-                            <p class="desc">故宮積木、黃金比例、聖誕帽設計</p>
-                        </div>
+                </div>
+                <div class="activity-card small">
+                    <div class="activity-icon">🏦</div>
+                    <div class="activity-info">
+                        <h4>數學銀行</h4>
+                        <p class="date">4/5 - 8/5</p>
                     </div>
-                    
-                    <div class="activity-card">
-                        <div class="activity-icon">🃏</div>
-                        <div class="activity-info">
-                            <h4>Rummikub 大賽</h4>
-                            <p class="date">4/5 - 7/5 (午間)</p>
-                            <p class="desc">初賽 → 復賽 → 決賽 → 師生賽</p>
-                        </div>
-                    </div>
-                    
-                    <div class="activity-card">
-                        <div class="activity-icon">🎮</div>
-                        <div class="activity-info">
-                            <h4>數學小遊戲</h4>
-                            <p class="date">4/5 - 8/5 (午間)</p>
-                            <p class="desc">完成遊戲獲得代幣</p>
-                        </div>
-                    </div>
-                    
-                    <div class="activity-card">
-                        <div class="activity-icon">🏦</div>
-                        <div class="activity-info">
-                            <h4>數學銀行</h4>
-                            <p class="date">4/5 - 8/5 (午間)</p>
-                            <p class="desc">收集代幣，換取禮物</p>
-                        </div>
-                    </div>
-                    
-                    <div class="activity-card special">
-                        <div class="activity-icon">🌈</div>
-                        <div class="activity-info">
-                            <h4>數學大彩虹</h4>
-                            <p class="date">8/5 (午間)</p>
-                            <p class="desc">用代幣換取禮物！</p>
-                        </div>
+                </div>
+                <div class="activity-card small special">
+                    <div class="activity-icon">🌈</div>
+                    <div class="activity-info">
+                        <h4>數學大彩虹</h4>
+                        <p class="date">8/5 (閉幕)</p>
                     </div>
                 </div>
             </div>
