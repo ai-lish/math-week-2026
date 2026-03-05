@@ -33,24 +33,29 @@
         <div class="structure-grid">
             <div class="structure-card">
                 <div class="structure-icon">📅</div>
-                <h3>🎯 第一階段：預熱環節</h3>
+                <h3 onclick="togglePhase1()" style="cursor:pointer;">🎯 第一階段：預熱環節 (4月13日 - 4月30日) <span id="phase1-icon">▼</span></h3>
                 <p class="structure-date">13/4 - 30/4</p>
                 <p class="structure-desc">為即將到來的數學周熱身，挑戰你的解難能力！</p>
-                <div style="margin-top: 15px; padding: 15px; background: #f8f9fa; border-radius: 10px; text-align: left;">
+                <div id="phase1-content" style="margin-top: 15px; padding: 15px; background: #f8f9fa; border-radius: 10px; text-align: left; display: none;">
                     <p style="font-weight: bold; margin-bottom: 10px;">🏆 初中數學比賽</p>
+                    <p style="margin-bottom: 10px; font-size: 0.9rem;">為即將到來的數學周熱身，挑戰你的解難能力！</p>
                     <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem;">
-                        <li>每週發佈數學挑戰題</li>
-                        <li>派發：逢星期一</li>
-                        <li>截止：逢星期四</li>
-                        <li>共3周：📝 第一周(4/13-17) → 📝 第二周(4/20-24) → 📝 第三周(4/27-30)</li>
+                        <li>活動形式： 每週發佈數學挑戰題</li>
+                        <li>派發時間： 逢星期一派發題目</li>
+                        <li>截止時間： 逢星期四交回作答</li>
+                        <li>參與對象： 全體初中同學</li>
                     </ul>
                 </div>
             </div>
             <div class="structure-card highlight">
                 <div class="structure-icon">🎯</div>
-                <h3>🎪 第二階段：數學周</h3>
+                <h3 onclick="togglePhase2()" style="cursor:pointer;">🎪 第二階段：正式開幕 (5月4日 - 5月8日) <span id="phase2-icon">▼</span></h3>
                 <p class="structure-date">5月正式開始</p>
                 <p class="structure-desc">8/5 數學大彩虹閉幕</p>
+                <div id="phase2-content" style="margin-top: 15px; padding: 15px; background: #e8f5e9; border-radius: 10px; text-align: center; display: none;">
+                    <p style="font-weight: bold;">📅 5月4日 - 5月8日 活動時間表</p>
+                    <p style="font-size: 0.9rem;">點擊呢度睇詳細時間表 ↓</p>
+                </div>
             </div>
         </div>
     </section>
@@ -59,7 +64,7 @@
 
     <!-- 日曆格式活動時間表 -->
     <section class="calendar-section" style="padding: 40px 20px; background: #f8f9fa;">
-        <h2 style="text-align: center; margin-bottom: 30px;">📅 5月4日 - 5月8日 活動時間表</h2>
+        <h2 style="text-align: center; margin-bottom: 30px;">📅 第二階段：數學周 (5月4日 - 5月8日) 活動時間表</h2>
         
         <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
             <thead>
@@ -75,10 +80,10 @@
             <tbody>
                 <tr>
                     <td style="padding: 12px; text-align: center; font-weight: bold; background: #fff3e0;">早讀</td>
-                    <td style="padding: 12px; text-align: center;"><a href="reading.html" style="color: #4A90E2; text-decoration: none;">📖 數學閱讀篇章</a></td>
+                    <td style="padding: 12px; text-align: center;">-</td>
                     <td style="padding: 12px; text-align: center;">-</td>
                     <td style="padding: 12px; text-align: center;"><a href="reading.html" style="color: #4A90E2; text-decoration: none;">📖 數學閱讀篇章</a></td>
-                    <td style="padding: 12px; text-align: center;"><a href="reading.html" style="color: #4A90E2; text-decoration: none;">📖 數學閱讀篇章</a></td>
+                    <td style="padding: 12px; text-align: center;">-</td>
                     <td style="padding: 12px; text-align: center;">-</td>
                 </tr>
                 <!-- 午間時段 (移到周會前面) -->
@@ -88,7 +93,7 @@
                     <td style="padding: 8px; text-align: center; border-top: 1px solid #eee; background: #fce4ec;"><strong>🌈 數學大彩虹</strong><br><small>閉幕</small></td>
                 </tr>
                 <tr>
-                    <td colspan="5" style="padding: 8px; text-align: center; border-top: 1px solid #eee;"><a href="games.html" style="color: #4A90E2; text-decoration: none;">🎮 數學小遊戲</a> | <a href="rummikub.html" style="color: #E91E63; text-decoration: none;">🎲 Rummikub</a></td>
+                    <td colspan="5" style="padding: 8px; text-align: center; border-top: 1px solid #eee;"><a href="games.html" style="color: #4A90E2; text-decoration: none;">🎮 數學小遊戲</a></td>
                 </tr>
                 <tr>
                     <td colspan="5" style="padding: 8px; text-align: center; border-top: 1px solid #eee;"><a href="rummikub.html" style="color: #E91E63; text-decoration: none;">🧩 Rummikub大賽</a></td>
@@ -102,10 +107,48 @@
                     <td style="padding: 12px; text-align: center;">-</td>
                     <td style="padding: 12px; text-align: center;">-</td>
                     <td style="padding: 12px; text-align: center; background: #e3f2fd;">🏆 初中數學比賽決賽</td>
-                    <td style="padding: 12px; text-align: center; background: #e3f2fd;">🎓 高中數學講座</td>
                     <td style="padding: 12px; text-align: center;">-</td>
+                    <td style="padding: 12px; text-align: center; background: #e3f2fd;">🎓 高中數學講座</td>
                 </tr>
             </tbody>
         </table>
     </section>
 
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>🎓 靈風中學 數學周 2026</p>
+            <p class="credit">Made with 💙 by AI Assistant</p>
+        </div>
+    </footer>
+
+    <script>
+    function togglePhase1() {
+        var content = document.getElementById('phase1-content');
+        var icon = document.getElementById('phase1-icon');
+        if (content.style.display === 'none') {
+            content.style.display = 'block';
+            icon.textContent = '▲';
+        } else {
+            content.style.display = 'none';
+            icon.textContent = '▼';
+        }
+    }
+    
+    function togglePhase2() {
+        var content = document.getElementById('phase2-content');
+        var icon = document.getElementById('phase2-icon');
+        if (content.style.display === 'none') {
+            content.style.display = 'block';
+            icon.textContent = '▲';
+        } else {
+            content.style.display = 'none';
+            icon.textContent = '▼';
+        }
+    }
+    </script>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
