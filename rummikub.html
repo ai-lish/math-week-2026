@@ -538,6 +538,96 @@
             </div>
         </div>
         
+        <!-- Scoring Screen -->
+        <div id="scoringScreen" class="screen">
+            <a class="back-btn" onclick="showScreen('menuScreen')">← 返回主目錄</a>
+            <div class="setup-card">
+                <h2 style="text-align: center; color: var(--success);">📊 輸入分數 - 第<span id="currentRound">1</span>回合</h2>
+                
+                <div class="scoring-players" id="scoringPlayers" style="display: flex; justify-content: center; gap: 15px; margin-bottom: 20px;"></div>
+                
+                <div style="background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                    <div id="currentExpression" style="font-size: 1.2rem; color: #666; min-height: 30px;"></div>
+                    <div id="currentTotal" style="font-size: 2.5rem; font-weight: bold; color: var(--primary);">= 0</div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 15px;">
+                    <button onclick="addTile(1)" style="padding: 15px; border: 2px solid #ddd; border-radius: 10px; background: white; font-size: 1.1rem; cursor: pointer;">1</button>
+                    <button onclick="addTile(2)" style="padding: 15px; border: 2px solid #ddd; border-radius: 10px; background: white; font-size: 1.1rem; cursor: pointer;">2</button>
+                    <button onclick="addTile(3)" style="padding: 15px; border: 2px solid #ddd; border-radius: 10px; background: white; font-size: 1.1rem; cursor: pointer;">3</button>
+                    <button onclick="addTile(4)" style="padding: 15px; border: 2px solid #ddd; border-radius: 10px; background: white; font-size: 1.1rem; cursor: pointer;">4</button>
+                    <button onclick="addTile(5)" style="padding: 15px; border: 2px solid #ddd; border-radius: 10px; background: white; font-size: 1.1rem; cursor: pointer;">5</button>
+                    <button onclick="addTile(6)" style="padding: 15px; border: 2px solid #ddd; border-radius: 10px; background: white; font-size: 1.1rem; cursor: pointer;">6</button>
+                    <button onclick="addTile(7)" style="padding: 15px; border: 2px solid #ddd; border-radius: 10px; background: white; font-size: 1.1rem; cursor: pointer;">7</button>
+                    <button onclick="addTile(8)" style="padding: 15px; border: 2px solid #ddd; border-radius: 10px; background: white; font-size: 1.1rem; cursor: pointer;">8</button>
+                    <button onclick="addTile(9)" style="padding: 15px; border: 2px solid #ddd; border-radius: 10px; background: white; font-size: 1.1rem; cursor: pointer;">9</button>
+                    <button onclick="addTile(10)" style="padding: 15px; border: 2px solid #ddd; border-radius: 10px; background: white; font-size: 1.1rem; cursor: pointer;">10</button>
+                    <button onclick="addTile(11)" style="padding: 15px; border: 2px solid #ddd; border-radius: 10px; background: white; font-size: 1.1rem; cursor: pointer;">11</button>
+                    <button onclick="addTile(12)" style="padding: 15px; border: 2px solid #ddd; border-radius: 10px; background: white; font-size: 1.1rem; cursor: pointer;">12</button>
+                    <button onclick="addTile(13)" style="padding: 15px; border: 2px solid #e91e63; border-radius: 10px; background: #fce4ec; font-size: 1.1rem; cursor: pointer;">🃏</button>
+                    <button onclick="addTile(25)" style="padding: 15px; border: 2px solid #e91e63; border-radius: 10px; background: #fce4ec; font-size: 1.1rem; cursor: pointer;">25</button>
+                    <button onclick="addTile(100)" style="padding: 15px; border: 2px solid #4caf50; border-radius: 10px; background: #e8f5e9; font-size: 1.1rem; cursor: pointer;">百搭</button>
+                </div>
+                
+                <div style="display: flex; gap: 10px;">
+                    <button onclick="clearLast()" style="flex: 1; padding: 12px; border: none; border-radius: 10px; background: #ff9800; color: white; font-size: 1rem; cursor: pointer;">↩️ 取消</button>
+                    <button onclick="clearAll()" style="flex: 1; padding: 12px; border: none; border-radius: 10px; background: #e74c3c; color: white; font-size: 1rem; cursor: pointer;">🗑️ 清除</button>
+                    <button onclick="confirmScore()" style="flex: 2; padding: 12px; border: none; border-radius: 10px; background: var(--success); color: white; font-size: 1.1rem; font-weight: bold; cursor: pointer;">✓ 確認</button>
+                </div>
+                
+                <button onclick="showRoundResult()" id="nextScoringBtn" style="display: none; width: 100%; padding: 15px; margin-top: 15px; border: none; border-radius: 10px; background: var(--primary); color: white; font-size: 1.1rem; font-weight: bold; cursor: pointer;">
+                    ✅ 確認並查看結果
+                </button>
+            </div>
+        </div>
+        
+        <!-- Result Screen -->
+        <div id="resultScreen" class="screen">
+            <a class="back-btn" onclick="showScreen('menuScreen')">← 返回主目錄</a>
+            <div class="setup-card">
+                <h2 style="text-align: center; color: var(--primary); margin-bottom: 20px;">🏆 第<span id="resultRound">1</span>回合結果</h2>
+                
+                <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                    <thead>
+                        <tr style="background: var(--primary); color: white;">
+                            <th style="padding: 15px;">玩家</th>
+                            <th style="padding: 15px;">今回扣分</th>
+                            <th style="padding: 15px;">總分</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultTableBody"></tbody>
+                </table>
+                
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button onclick="nextRound()" style="flex: 1; padding: 15px; border: none; border-radius: 10px; background: var(--warning); color: white; font-size: 1rem; font-weight: bold; cursor: pointer;">🔄 下一回合</button>
+                    <button onclick="endGame()" style="flex: 1; padding: 15px; border: none; border-radius: 10px; background: var(--danger); color: white; font-size: 1rem; font-weight: bold; cursor: pointer;">🏁 結束遊戲</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Final Result Screen -->
+        <div id="finalResultScreen" class="screen">
+            <a class="back-btn" onclick="showScreen('menuScreen')">← 返回主目錄</a>
+            <div class="setup-card">
+                <h2 style="text-align: center; color: #ffd700; margin-bottom: 20px; font-size: 2rem;">🎉 最終結果</h2>
+                
+                <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                    <thead>
+                        <tr style="background: var(--success); color: white;">
+                            <th style="padding: 15px;">排名</th>
+                            <th style="padding: 15px;">玩家</th>
+                            <th style="padding: 15px;">總分</th>
+                        </tr>
+                    </thead>
+                    <tbody id="finalResultBody"></tbody>
+                </table>
+                
+                <button onclick="resetGame()" style="width: 100%; padding: 15px; margin-top: 20px; border: none; border-radius: 10px; background: var(--primary); color: white; font-size: 1.1rem; font-weight: bold; cursor: pointer;">
+                    🔄 重新遊戲
+                </button>
+            </div>
+        </div>
+        
     </div>
 
     <script>
@@ -651,6 +741,8 @@
         // ==================== Game Functions ====================
         let playerCount = 4;
         let players = [];
+        let round = 1;
+        let currentScoringIndex = 0;
         let turnTime = 60;
         let currentPlayer = 0;
         let timerInterval = null;
@@ -762,7 +854,130 @@
         
         function finishRound() {
             clearInterval(timerInterval);
-            alert('遊戲結束！');
+            currentScoringIndex = 0;
+            round = 1;
+            showScreen('scoringScreen');
+            updateScoringUI();
+        }
+        
+        // ==================== Scoring Functions ====================
+        let currentTiles = [];
+        
+        function updateScoringUI() {
+            const container = document.getElementById('scoringPlayers');
+            container.innerHTML = '';
+            for (let i = 0; i < players.length; i++) {
+                container.innerHTML += `
+                    <div onclick="selectScoringPlayer(${i})" style="padding: 15px; border-radius: 10px; background: ${i === currentScoringIndex ? 'var(--success)' : '#eee'}; color: ${i === currentScoringIndex ? 'white' : '#666'}; cursor: pointer; text-align: center;">
+                        <div style="font-weight: bold;">${players[i].name}</div>
+                        <div style="font-size: 0.9rem;">${players[i].score}分</div>
+                    </div>
+                `;
+            }
+            currentTiles = [];
+            updateTilesDisplay();
+            document.getElementById('currentRound').textContent = round;
+            document.getElementById('nextScoringBtn').style.display = 'none';
+        }
+        
+        function selectScoringPlayer(index) {
+            currentScoringIndex = index;
+            currentTiles = [];
+            updateScoringUI();
+        }
+        
+        function addTile(value) {
+            currentTiles.push(value);
+            updateTilesDisplay();
+        }
+        
+        function updateTilesDisplay() {
+            const expression = currentTiles.join(' + ');
+            const total = currentTiles.reduce((a, b) => a + b, 0);
+            document.getElementById('currentExpression').textContent = expression || '';
+            document.getElementById('currentTotal').textContent = total > 0 ? '= ' + total : '= 0';
+        }
+        
+        function clearLast() {
+            currentTiles.pop();
+            updateTilesDisplay();
+        }
+        
+        function clearAll() {
+            currentTiles = [];
+            updateTilesDisplay();
+        }
+        
+        function confirmScore() {
+            if (currentTiles.length === 0) return;
+            const total = currentTiles.reduce((a, b) => a + b, 0);
+            players[currentScoringIndex].score -= total;
+            
+            if (currentScoringIndex < players.length - 1) {
+                currentScoringIndex++;
+                currentTiles = [];
+                updateScoringUI();
+            } else {
+                document.getElementById('nextScoringBtn').style.display = 'block';
+            }
+        }
+        
+        function showRoundResult() {
+            document.getElementById('resultRound').textContent = round;
+            
+            const tbody = document.getElementById('resultTableBody');
+            tbody.innerHTML = '';
+            
+            // Calculate round scores
+            let minScore = Math.min(...players.map(p => p.score));
+            let roundScores = players.map(p => p.score - minScore);
+            
+            for (let i = 0; i < players.length; i++) {
+                let isWinner = players[i].score === Math.max(...players.map(p => p.score));
+                tbody.innerHTML += `
+                    <tr style="background: ${isWinner ? '#fff5f5' : 'white'}; ${isWinner ? 'border-left: 4px solid var(--success);' : ''}">
+                        <td style="padding: 15px; text-align: center;">${players[i].name}</td>
+                        <td style="padding: 15px; text-align: center; color: ${roundScores[i] > 0 ? 'var(--danger)' : 'var(--success)'};">
+                            ${roundScores[i] > 0 ? '-' : ''}${Math.abs(roundScores[i])}
+                        </td>
+                        <td style="padding: 15px; text-align: center; font-weight: bold;">${players[i].score}</td>
+                    </tr>
+                `;
+            }
+            
+            showScreen('resultScreen');
+        }
+        
+        function nextRound() {
+            round++;
+            currentPlayer = (currentPlayer + 1) % playerCount;
+            currentScoringIndex = 0;
+            showScreen('gameScreen');
+            updateGameUI();
+            startTimer();
+        }
+        
+        function endGame() {
+            const sorted = players.map((p, i) => ({name: p.name, score: p.score, index: i}))
+                .sort((a, b) => b.score - a.score);
+            
+            const tbody = document.getElementById('finalResultBody');
+            tbody.innerHTML = '';
+            sorted.forEach((p, i) => {
+                let medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '';
+                tbody.innerHTML += `
+                    <tr style="background: ${i === 0 ? '#fff9c4' : 'white'};">
+                        <td style="padding: 15px; text-align: center; font-size: 1.2rem;">${medal} ${i + 1}</td>
+                        <td style="padding: 15px; text-align: center;">${p.name}</td>
+                        <td style="padding: 15px; text-align: center; font-weight: bold; font-size: 1.1rem;">${p.score}</td>
+                    </tr>
+                `;
+            });
+            
+            showScreen('finalResultScreen');
+        }
+        
+        function resetGame() {
             showScreen('menuScreen');
         }
         
