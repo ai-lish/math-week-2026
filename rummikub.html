@@ -22,12 +22,167 @@
             color: var(--dark);
         }
         
-        /* Container */
         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
         
         /* Screens */
         .screen { display: none; }
         .screen.active { display: block; }
+        
+        /* Main Menu */
+        .menu-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        .menu-card h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        .menu-card p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .menu-btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: white;
+        }
+        .menu-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .menu-btn.student { background: var(--primary); }
+        .menu-btn.teacher { background: var(--warning); }
+        .menu-btn.scorer { background: var(--success); }
+        
+        /* Student Page */
+        .student-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .student-card h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            background: #eee;
+            color: #666;
+        }
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 8px; }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* Teacher Page */
+        .teacher-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .teacher-card h2 {
+            color: var(--warning);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .password-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--warning);
+            border-radius: 10px;
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .teacher-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .teacher-tab {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            background: #eee;
+            color: #666;
+        }
+        .teacher-tab.active {
+            background: var(--warning);
+            color: white;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .data-table th, .data-table td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        .data-table th {
+            background: #f8f9fa;
+            font-weight: bold;
+        }
+        .action-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            background: var(--success);
+            color: white;
+        }
         
         /* Setup Screen */
         .setup-card {
@@ -36,10 +191,7 @@
             padding: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
-        .setup-card h1 { text-align: center; color: var(--primary); margin-bottom: 20px; }
-        
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; font-weight: bold; margin-bottom: 8px; }
+        .setup-card h1 { text-align: center; color: var(--success); margin-bottom: 20px; }
         
         .player-count-btns {
             display: flex;
@@ -71,7 +223,7 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: var(--primary);
+            background: var(--success);
             color: white;
             display: flex;
             align-items: center;
@@ -94,7 +246,7 @@
         .time-input input {
             width: 80px;
             padding: 10px;
-            border: 2px solid var(--primary);
+            border: 2px solid var(--success);
             border-radius: 10px;
             font-size: 1rem;
             text-align: center;
@@ -142,12 +294,6 @@
             color: white;
             box-shadow: 0 0 20px var(--success);
         }
-        .player-dot .score {
-            position: absolute;
-            bottom: -25px;
-            font-size: 0.8rem;
-            white-space: nowrap;
-        }
         
         .timer-display {
             font-size: 5rem;
@@ -193,17 +339,6 @@
         .timer-container {
             text-align: center;
         }
-        .timer-label {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 10px;
-        }
-        
-        .current-player-name {
-            text-align: center;
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
         
         .game-controls {
             display: flex;
@@ -222,173 +357,134 @@
         .btn-end { background: var(--danger); color: white; }
         .btn-finish { background: var(--success); color: white; }
         
-        /* Scoring Screen */
-        .scoring-card {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        .scoring-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .scoring-players {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 20px;
-        }
-        .scoring-player {
-            text-align: center;
-            cursor: pointer;
-            padding: 10px;
-            border-radius: 10px;
-            transition: all 0.3s;
-        }
-        .scoring-player.active {
-            background: #e8f5e9;
-            border: 2px solid var(--success);
-        }
-        .scoring-player .avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: #ddd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 5px;
-            font-weight: bold;
-        }
-        .scoring-player.active .avatar {
-            background: var(--success);
+        /* Back Button */
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.3);
             color: white;
-        }
-        
-        .score-input-area {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        .current-expression {
-            font-size: 1.5rem;
-            text-align: center;
-            margin-bottom: 10px;
-            min-height: 40px;
-        }
-        .current-total {
-            font-size: 2rem;
-            text-align: center;
-            font-weight: bold;
-            color: var(--primary);
-        }
-        
-        .tile-buttons {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 8px;
+            text-decoration: none;
+            border-radius: 8px;
             margin-bottom: 15px;
-        }
-        .tile-btn {
-            padding: 15px 5px;
-            border: none;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-        .tile-btn.number { background: #e3f2fd; color: var(--dark); }
-        .tile-btn.joker { background: #ffebee; color: var(--danger); }
-        .tile-btn.quick { background: #fff3e0; color: var(--warning); }
-        
-        .control-buttons {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        .control-buttons button {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            font-weight: bold;
             cursor: pointer;
         }
-        .btn-clear { background: #ffebee; color: var(--danger); }
-        .btn-all-clear { background: #ff9800; color: white; }
-        .btn-confirm { background: var(--success); color: white; font-size: 1.2rem; }
-        
-        .next-player-btn {
-            width: 100%;
-            padding: 15px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.2rem;
-            cursor: pointer;
+        .back-btn:hover {
+            background: rgba(255,255,255,0.5);
         }
         
-        /* Result Screen */
-        .result-card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        .result-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .result-header h2 { color: var(--primary); }
-        
-        .result-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        .result-table th, .result-table td {
-            padding: 12px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
-        }
-        .result-table th { background: #f8f9fa; }
-        .result-table .winner {
-            background: #e8f5e9;
-            font-weight: bold;
-        }
-        
-        .result-buttons {
-            display: flex;
-            gap: 10px;
-        }
-        .result-buttons button {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .btn-next-round { background: var(--success); color: white; }
-        .btn-end-game { background: var(--dark); color: white; }
-        
-        /* Footer */
         footer {
             text-align: center;
             padding: 20px;
             color: white;
         }
-        footer a { color: white; }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Setup Screen -->
-        <div id="setupScreen" class="screen active">
+        <!-- Main Menu -->
+        <div id="menuScreen" class="screen active">
+            <div class="menu-card">
+                <h1>🎲 Rummikub</h1>
+                <p>靈風中學 數學周 2026</p>
+                
+                <a href="#" class="menu-btn student" onclick="showScreen('studentScreen')">
+                    👨‍🎓 學生頁面
+                </a>
+                <a href="#" class="menu-btn teacher" onclick="showScreen('teacherLogin')">
+                    👨‍🏫 老師頁面
+                </a>
+                <a href="#" class="menu-btn scorer" onclick="showScreen('setupScreen')">
+                    📊 計分員頁面
+                </a>
+            </div>
+        </div>
+        
+        <!-- Student Screen -->
+        <div id="studentScreen" class="screen">
+            <a class="back-btn" onclick="showScreen('menuScreen')">← 返回主目錄</a>
+            <div class="student-card">
+                <h2>👨‍🎓 學生頁面</h2>
+                
+                <div class="tab-buttons">
+                    <button class="tab-btn active" onclick="switchStudentTab('register')">📝 報名</button>
+                    <button class="tab-btn" onclick="switchStudentTab('score')">🔍 查詢成績</button>
+                </div>
+                
+                <!-- Registration Tab -->
+                <div id="registerTab">
+                    <div class="form-group">
+                        <label>姓名</label>
+                        <input type="text" id="regName" placeholder="請輸入姓名">
+                    </div>
+                    <div class="form-group">
+                        <label>班別</label>
+                        <input type="text" id="regClass" placeholder="例如：1C">
+                    </div>
+                    <div class="form-group">
+                        <label>學號</label>
+                        <input type="text" id="regID" placeholder="請輸入學號">
+                    </div>
+                    <button class="submit-btn" onclick="registerPlayer()">✅ 提交報名</button>
+                </div>
+                
+                <!-- Score Query Tab -->
+                <div id="scoreTab" style="display: none;">
+                    <div class="form-group">
+                        <label>姓名</label>
+                        <input type="text" id="queryName" placeholder="請輸入姓名">
+                    </div>
+                    <div class="form-group">
+                        <label>班別</label>
+                        <input type="text" id="queryClass" placeholder="例如：1C">
+                    </div>
+                    <div class="form-group">
+                        <label>學號</label>
+                        <input type="text" id="queryID" placeholder="請輸入學號">
+                    </div>
+                    <button class="submit-btn" onclick="queryScore()">🔍 查詢成績</button>
+                    <div id="scoreResult" style="margin-top: 20px;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Teacher Login -->
+        <div id="teacherLogin" class="screen">
+            <a class="back-btn" onclick="showScreen('menuScreen')">← 返回主目錄</a>
+            <div class="teacher-card">
+                <h2>👨‍🏫 老師登入</h2>
+                <input type="password" class="password-input" id="teacherPassword" placeholder="請輸入密碼">
+                <button class="submit-btn" onclick="teacherLogin()">登入</button>
+                <p id="loginError" style="color: red; text-align: center; margin-top: 10px; display: none;">密碼錯誤！</p>
+            </div>
+        </div>
+        
+        <!-- Teacher Page -->
+        <div id="teacherPage" class="screen">
+            <a class="back-btn" onclick="showScreen('menuScreen')">← 返回主目錄</a>
+            <div class="teacher-card">
+                <h2>👨‍🏫 老師頁面</h2>
+                
+                <div class="teacher-tabs">
+                    <button class="teacher-tab active" onclick="switchTeacherTab('participants')">📋 報名名單</button>
+                    <button class="teacher-tab" onclick="switchTeacherTab('groups')">👥 分組</button>
+                </div>
+                
+                <!-- Participants Tab -->
+                <div id="participantsTab">
+                    <p style="text-align: center; color: #666;">尚未有學生報名</p>
+                </div>
+                
+                <!-- Groups Tab -->
+                <div id="groupsTab">
+                    <button class="action-btn" onclick="randomGroup()">🔀 隨機分組 (4人一組)</button>
+                    <div id="groupsResult" style="margin-top: 20px;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Setup Screen (Scorekeeper) -->
+        <div id="setupScreen" class="screen">
+            <a class="back-btn" onclick="showScreen('menuScreen')">← 返回主目錄</a>
             <div class="setup-card">
                 <h1>🎲 Rummikub 計時器</h1>
                 
@@ -403,25 +499,20 @@
                 
                 <div class="form-group">
                     <label>📝 玩家名稱</label>
-                    <div class="player-inputs" id="playerInputs">
-                        <!-- Generated by JS -->
-                    </div>
+                    <div class="player-inputs" id="playerInputs"></div>
                 </div>
                 
                 <div class="form-group">
-                    <label>⏱️ 每回合思考時間 (秒)</label>
+                    <label>⏱️ 每回合時間 (秒)</label>
                     <div class="time-input">
-                        <input type="number" id="timeLimit" value="60">
+                        <input type="number" id="turnTime" value="60">
+                        <span>秒</span>
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label>🎯 開始玩家</label>
-                    <div class="player-count-btns">
-                        <button onclick="setStartPlayer('random')" class="active">🎲 隨機</button>
-                        <button onclick="setStartPlayer(0)">玩家1</button>
-                        <button onclick="setStartPlayer(1)">玩家2</button>
-                    </div>
+                    <label>🎲 起始玩家</label>
+                    <div class="player-count-btns" id="startPlayerBtns"></div>
                 </div>
                 
                 <button class="start-btn" onclick="startGame()">🚀 開始遊戲</button>
@@ -431,219 +522,216 @@
         <!-- Game Screen -->
         <div id="gameScreen" class="screen">
             <div class="game-header">
-                <div class="players-row" id="gamePlayers">
-                    <!-- Generated by JS -->
-                </div>
-                <div class="current-player-name" id="currentPlayerName">玩家1 既回合</div>
-                <div class="timer-container"><div class="timer-label" id="timerLabel">倒數計時</div><div class="timer-display" id="timerDisplay"><span>60</span></div></div>
-                <div class="game-controls">
-                    <button class="btn-pause" onclick="togglePause()">⏸️ 暫停</button>
-                    <button class="btn-end" onclick="endTurn()">⏭️ End Turn</button>
-                    <button class="btn-finish" onclick="finishRound()">🏁 Finish Round</button>
-                </div>
+                <div class="players-row" id="playersRow"></div>
+            </div>
+            
+            <div class="timer-container">
+                <div class="current-player-name" id="currentPlayerName">玩家1</div>
+                <div class="timer-display" id="timerDisplay"><span>60</span></div>
+                <div class="timer-label" id="timerLabel">秒</div>
+            </div>
+            
+            <div class="game-controls">
+                <button class="btn-pause" onclick="togglePause()">⏸️ 暫停</button>
+                <button class="btn-end" onclick="endTurn()">⏭️ 下一位</button>
+                <button class="btn-finish" onclick="finishRound()">🏁 結束遊戲</button>
             </div>
         </div>
         
-        <!-- Scoring Screen -->
-        <div id="scoringScreen" class="screen">
-            <div class="scoring-card">
-                <div class="scoring-header">
-                    <h2>📊 輸入分數 - Round <span id="currentRound">1</span></h2>
-                </div>
-                
-                <div class="scoring-players" id="scoringPlayers">
-                    <!-- Generated by JS -->
-                </div>
-                
-                <div class="score-input-area">
-                    <div class="current-expression" id="currentExpression"></div>
-                    <div class="current-total" id="currentTotal">= 0</div>
-                </div>
-                
-                <div class="tile-buttons">
-                    <button class="tile-btn number" onclick="addTile(1)">1</button>
-                    <button class="tile-btn number" onclick="addTile(2)">2</button>
-                    <button class="tile-btn number" onclick="addTile(3)">3</button>
-                    <button class="tile-btn number" onclick="addTile(4)">4</button>
-                    <button class="tile-btn number" onclick="addTile(5)">5</button>
-                    <button class="tile-btn number" onclick="addTile(6)">6</button>
-                    <button class="tile-btn number" onclick="addTile(7)">7</button>
-                    <button class="tile-btn number" onclick="addTile(8)">8</button>
-                    <button class="tile-btn number" onclick="addTile(9)">9</button>
-                    <button class="tile-btn number" onclick="addTile(10)">10</button>
-                    <button class="tile-btn number" onclick="addTile(11)">11</button>
-                    <button class="tile-btn number" onclick="addTile(12)">12</button>
-                    <button class="tile-btn number" onclick="addTile(13)">13</button>
-                    <button class="tile-btn joker" onclick="addTile(25)">🃏<br>25</button>
-                    <button class="tile-btn quick" onclick="addTile(100)">100</button>
-                    <button class="tile-btn quick" onclick="addTile(200)">200</button>
-                </div>
-                
-                <div class="control-buttons">
-                    <button class="btn-clear" onclick="clearLast()">C</button>
-                    <button class="btn-all-clear" onclick="clearAll()">AC</button>
-                    <button class="btn-confirm" onclick="confirmScore()">✓ 確認</button>
-                </div>
-                
-                <button class="next-player-btn" onclick="nextScoringPlayer()" id="nextScoringBtn" style="display:none;">
-                    ⏭️ 下一位玩家
-                </button>
-            </div>
-        </div>
-        
-        <!-- Result Screen -->
-        <div id="resultScreen" class="screen">
-            <div class="result-card">
-                <div class="result-header">
-                    <h2>🏆 Round <span id="resultRound">1</span> 結果</h2>
-                </div>
-                
-                <table class="result-table">
-                    <thead>
-                        <tr>
-                            <th>玩家</th>
-                            <th>今回合</th>
-                            <th>總分</th>
-                        </tr>
-                    </thead>
-                    <tbody id="resultTableBody">
-                        <!-- Generated by JS -->
-                    </tbody>
-                </table>
-                
-                <div class="result-buttons">
-                    <button class="btn-next-round" onclick="nextRound()">🔄 Next Round</button>
-                    <button class="btn-end-game" onclick="endGame()">🏁 End Game</button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Final Result Screen -->
-        <div id="finalResultScreen" class="screen">
-            <div class="result-card">
-                <div class="result-header">
-                    <h2>🎉 最終結果</h2>
-                </div>
-                
-                <table class="result-table">
-                    <thead>
-                        <tr>
-                            <th>排名</th>
-                            <th>玩家</th>
-                            <th>總分</th>
-                        </tr>
-                    </thead>
-                    <tbody id="finalResultBody">
-                        <!-- Generated by JS -->
-                    </tbody>
-                </table>
-                
-                <button class="start-btn" onclick="resetGame()">🔄 重新遊戲</button>
-            </div>
-        </div>
     </div>
-    
-    <footer>
-        <p>🎲 靈風中學 數學周 2026 | <a href="index.html">返回首頁</a></p>
-    </footer>
-    
+
     <script>
-        // Game State
-        let playerCount = 4;
-        let playerNames = ['玩家1', '玩家2', '玩家3', '玩家4'];
-        let timeLimit = 60;
-        let startPlayer = 'random';
-        
-        let currentPlayerIndex = 0;
-        let timer = 60;
-        let timerInterval = null;
-        let isPaused = false;
-        
-        let round = 1;
-        let scores = [0, 0, 0, 0];
-        let currentScoringIndex = 0;
-        let currentTiles = [];
-        
-        // Initialize
-        function init() {
-            generatePlayerInputs();
-        }
-        
-        function setPlayerCount(count) {
-            playerCount = count;
-            document.querySelectorAll('.player-count-btns button').forEach((btn, i) => {
-                if (i < 3) btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            generatePlayerInputs();
-        }
-        
-        function generatePlayerInputs() {
-            const container = document.getElementById('playerInputs');
-            container.innerHTML = '';
-            for (let i = 0; i < playerCount; i++) {
-                container.innerHTML += `
-                    <div class="player-input">
-                        <div class="avatar">${String.fromCharCode(65 + i)}</div>
-                        <input type="text" placeholder="玩家${i + 1}" value="玩家${i + 1}" onchange="playerNames[${i}] = this.value">
-                    </div>
-                `;
-            }
-        }
-        
-        function setStartPlayer(player) {
-            startPlayer = player;
-            document.querySelectorAll('.form-group:last-child .player-count-btns button').forEach((btn, i) => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-        }
-        
-        function startGame() {
-            timeLimit = parseInt(document.getElementById('timeLimit').value) || 60;
-            
-            if (startPlayer === 'random') {
-                currentPlayerIndex = Math.floor(Math.random() * playerCount);
-            } else {
-                currentPlayerIndex = startPlayer;
-            }
-            
-            scores = new Array(playerCount).fill(0);
-            round = 1;
-            
-            showScreen('gameScreen');
-            updateGameUI();
-            startTimer();
-        }
-        
+        // ==================== Navigation ====================
         function showScreen(screenId) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(screenId).classList.add('active');
         }
         
-        function updateGameUI() {
-            const playersContainer = document.getElementById('gamePlayers');
-            playersContainer.innerHTML = '';
-            for (let i = 0; i < playerCount; i++) {
-                playersContainer.innerHTML += `
-                    <div class="player-dot ${i === currentPlayerIndex ? 'active' : ''}">
-                        ${String.fromCharCode(65 + i)}
-                        <div class="score">${scores[i]}分</div>
+        function switchStudentTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (tab === 'register') {
+                document.getElementById('registerTab').style.display = 'block';
+                document.getElementById('scoreTab').style.display = 'none';
+            } else {
+                document.getElementById('registerTab').style.display = 'none';
+                document.getElementById('scoreTab').style.display = 'block';
+            }
+        }
+        
+        function switchTeacherTab(tab) {
+            document.querySelectorAll('.teacher-tab').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (tab === 'participants') {
+                document.getElementById('participantsTab').style.display = 'block';
+                document.getElementById('groupsTab').style.display = 'none';
+            } else {
+                document.getElementById('participantsTab').style.display = 'none';
+                document.getElementById('groupsTab').style.display = 'block';
+            }
+        }
+        
+        // ==================== Student Functions ====================
+        function registerPlayer() {
+            const name = document.getElementById('regName').value;
+            const className = document.getElementById('regClass').value;
+            const id = document.getElementById('regID').value;
+            
+            if (!name || !className || !id) {
+                alert('請填寫所有資料！');
+                return;
+            }
+            
+            // TODO: Connect to Google Sheets
+            alert('報名成功！\n姓名：' + name + '\n班別：' + className + '\n學號：' + id);
+            
+            // Clear form
+            document.getElementById('regName').value = '';
+            document.getElementById('regClass').value = '';
+            document.getElementById('regID').value = '';
+        }
+        
+        function queryScore() {
+            const name = document.getElementById('queryName').value;
+            const className = document.getElementById('queryClass').value;
+            const id = document.getElementById('queryID').value;
+            
+            if (!name || !className || !id) {
+                alert('請填寫所有資料！');
+                return;
+            }
+            
+            // TODO: Connect to Google Sheets
+            document.getElementById('scoreResult').innerHTML = 
+                '<div style="padding: 20px; background: #f8f9fa; border-radius: 10px; text-align: center;">' +
+                '<p style="color: #666;">暫時未能找到成績</p>' +
+                '<p style="font-size: 0.9rem; color: #999;">連接Google Sheets後即可查詢</p></div>';
+        }
+        
+        // ==================== Teacher Functions ====================
+        let teacherPassword = 'math2026'; // TODO: Move to Google Sheets
+        
+        function teacherLogin() {
+            const input = document.getElementById('teacherPassword').value;
+            if (input === teacherPassword) {
+                document.getElementById('loginError').style.display = 'none';
+                showScreen('teacherPage');
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+            }
+        }
+        
+        let participants = []; // TODO: Load from Google Sheets
+        
+        function randomGroup() {
+            if (participants.length < 4) {
+                alert('報名人數不足，需要至少4人！');
+                return;
+            }
+            
+            // Shuffle
+            let shuffled = [...participants].sort(() => Math.random() - 0.5);
+            let groups = [];
+            for (let i = 0; i < shuffled.length; i += 4) {
+                groups.push(shuffled.slice(i, i + 4));
+            }
+            
+            // Display
+            let html = '<table class="data-table"><tr><th>組別</th><th>隊員</th></tr>';
+            groups.forEach((group, idx) => {
+                html += '<tr><td>第' + (idx+1) + '組</td><td>' + group.map(p => p.name).join('、') + '</td></tr>';
+            });
+            html += '</table>';
+            
+            document.getElementById('groupsResult').innerHTML = html;
+        }
+        
+        // ==================== Game Functions ====================
+        let playerCount = 4;
+        let players = [];
+        let turnTime = 60;
+        let currentPlayer = 0;
+        let timerInterval = null;
+        let timeLeft = 60;
+        let isPaused = false;
+        
+        function setPlayerCount(count) {
+            playerCount = count;
+            document.querySelectorAll('.player-count-btns button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            generatePlayerInputs();
+
+        function generatePlayerInputs() {
+            const container = document.getElementById('playerInputs');
+            container.innerHTML = '';
+            
+            for (let i = 1; i <= playerCount; i++) {
+                container.innerHTML += `
+                    <div class="player-input">
+                        <div class="avatar">P${i}</div>
+                        <input type="text" placeholder="玩家${i}名稱" id="player${i}Name">
                     </div>
                 `;
             }
-            document.getElementById('currentPlayerName').textContent = `${playerNames[currentPlayerIndex]} 既回合`;
+            
+            // Generate start player buttons
+            const startContainer = document.getElementById('startPlayerBtns');
+            startContainer.innerHTML = '';
+            for (let i = 1; i <= playerCount; i++) {
+                startContainer.innerHTML += `<button onclick="setStartPlayer(${i-1})">玩家${i}</button>`;
+            }
+        }
+        
+        function setStartPlayer(idx) {
+            currentPlayer = idx;
+            document.querySelectorAll('#startPlayerBtns button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        
+        function startGame() {
+            players = [];
+            for (let i = 1; i <= playerCount; i++) {
+                let name = document.getElementById('player' + i + 'Name').value || '玩家' + i;
+                players.push({ name: name, score: 0 });
+            }
+            
+            turnTime = parseInt(document.getElementById('turnTime').value) || 60;
+            
+            updateGameUI();
+            showScreen('gameScreen');
+            startTimer();
+        }
+        
+        function updateGameUI() {
+            const container = document.getElementById('playersRow');
+            container.innerHTML = '';
+            
+            players.forEach((player, idx) => {
+                let active = idx === currentPlayer ? 'active' : '';
+                container.innerHTML += `<div class="player-dot ${active}">${player.name.charAt(0)}</div>`;
+            });
+            
+            document.getElementById('currentPlayerName').textContent = players[currentPlayer].name;
         }
         
         function startTimer() {
-            timer = timeLimit;
+            timeLeft = turnTime;
+            isPaused = false;
             updateTimerDisplay();
+            
             timerInterval = setInterval(() => {
                 if (!isPaused) {
-                    timer--;
+                    timeLeft--;
                     updateTimerDisplay();
-                    if (timer <= 0) {
-                        endTurn();
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(timerInterval);
+                        // TODO: Play alarm sound
+                        alert('時間到！');
+                    } else if (timeLeft <= 10) {
+                        // TODO: Play warning beep
                     }
                 }
             }, 1000);
@@ -651,16 +739,14 @@
         
         function updateTimerDisplay() {
             const display = document.getElementById('timerDisplay');
-            display.querySelector('span').textContent = timer;
-            display.className = 'timer-display';
+            display.querySelector('span').textContent = timeLeft;
             
-            // Update circular progress
-            const progress = (timer / timeLimit) * 360;
-            const color = timer <= 10 ? 'var(--danger)' : (timer <= 20 ? 'var(--warning)' : 'var(--primary)');
-            display.style.background = `conic-gradient(${color} ${progress}deg, #eee 0deg)`;
-            
-            if (timer <= 10) display.classList.add('danger');
-            else if (timer <= 20) display.classList.add('warning');
+            display.classList.remove('warning', 'danger');
+            if (timeLeft <= 10) {
+                display.classList.add('danger');
+            } else if (timeLeft <= 20) {
+                display.classList.add('warning');
+            }
         }
         
         function togglePause() {
@@ -669,142 +755,19 @@
         }
         
         function endTurn() {
-            clearInterval(timerInterval);
-            currentPlayerIndex = (currentPlayerIndex + 1) % playerCount;
+            currentPlayer = (currentPlayer + 1) % playerCount;
             updateGameUI();
             startTimer();
         }
         
         function finishRound() {
             clearInterval(timerInterval);
-            currentScoringIndex = 0;
-            showScreen('scoringScreen');
-            updateScoringUI();
+            alert('遊戲結束！');
+            showScreen('menuScreen');
         }
         
-        // Scoring Functions
-        function updateScoringUI() {
-            const container = document.getElementById('scoringPlayers');
-            container.innerHTML = '';
-            for (let i = 0; i < playerCount; i++) {
-                container.innerHTML += `
-                    <div class="scoring-player ${i === currentScoringIndex ? 'active' : ''}" onclick="selectScoringPlayer(${i})">
-                        <div class="avatar">${String.fromCharCode(65 + i)}</div>
-                        <div>${playerNames[i]}</div>
-                    </div>
-                `;
-            }
-            currentTiles = [];
-            updateTilesDisplay();
-        }
-        
-        function selectScoringPlayer(index) {
-            currentScoringIndex = index;
-            currentTiles = [];
-            updateScoringUI();
-        }
-        
-        function addTile(value) {
-            currentTiles.push(value);
-            updateTilesDisplay();
-        }
-        
-        function updateTilesDisplay() {
-            const expression = currentTiles.join(' + ');
-            const total = currentTiles.reduce((a, b) => a + b, 0);
-            document.getElementById('currentExpression').textContent = expression || '';
-            document.getElementById('currentTotal').textContent = total > 0 ? '= ' + total : '= 0';
-        }
-        
-        function clearLast() {
-            currentTiles.pop();
-            updateTilesDisplay();
-        }
-        
-        function clearAll() {
-            currentTiles = [];
-            updateTilesDisplay();
-        }
-        
-        function confirmScore() {
-            if (currentTiles.length === 0) return;
-            const total = currentTiles.reduce((a, b) => a + b, 0);
-            scores[currentScoringIndex] -= total;
-            
-            if (currentScoringIndex < playerCount - 1) {
-                currentScoringIndex++;
-                currentTiles = [];
-                updateScoringUI();
-                document.getElementById('nextScoringBtn').style.display = 'none';
-            } else {
-                document.getElementById('nextScoringBtn').style.display = 'block';
-                document.getElementById('nextScoringBtn').textContent = '✅ 確認並查看結果';
-                document.getElementById('nextScoringBtn').onclick = showRoundResult;
-            }
-        }
-        
-        function nextScoringPlayer() {
-            // Already handled in confirmScore
-        }
-        
-        function showRoundResult() {
-            document.getElementById('resultRound').textContent = round;
-            
-            // Calculate round scores (winner gets positive, others negative)
-            const roundScores = [...scores];
-            const winnerIndex = scores.indexOf(Math.max(...scores));
-            const winnerScore = roundScores.reduce((a, b) => a + Math.abs(b), 0);
-            roundScores[winnerIndex] = winnerScore;
-            
-            // Update display
-            const tbody = document.getElementById('resultTableBody');
-            tbody.innerHTML = '';
-            for (let i = 0; i < playerCount; i++) {
-                tbody.innerHTML += `
-                    <tr class="${i === winnerIndex ? 'winner' : ''}">
-                        <td>${String.fromCharCode(65 + i)} ${playerNames[i]}</td>
-                        <td>${roundScores[i] > 0 ? '+' : ''}${roundScores[i]}</td>
-                        <td>${scores[i]}</td>
-                    </tr>
-                `;
-            }
-            
-            showScreen('resultScreen');
-        }
-        
-        function nextRound() {
-            round++;
-            currentPlayerIndex = (currentPlayerIndex + 1) % playerCount;
-            showScreen('gameScreen');
-            updateGameUI();
-            startTimer();
-        }
-        
-        function endGame() {
-            const sorted = scores.map((s, i) => ({name: playerNames[i], score: s, index: i}))
-                .sort((a, b) => b.score - a.score);
-            
-            const tbody = document.getElementById('finalResultBody');
-            tbody.innerHTML = '';
-            sorted.forEach((p, i) => {
-                tbody.innerHTML += `
-                    <tr class="${i === 0 ? 'winner' : ''}">
-                        <td>${i + 1} ${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : ''}</td>
-                        <td>${p.name}</td>
-                        <td>${p.score}</td>
-                    </tr>
-                `;
-            });
-            
-            showScreen('finalResultScreen');
-        }
-        
-        function resetGame() {
-            showScreen('setupScreen');
-        }
-        
-        // Initialize on load
-        init();
+        // Initialize
+        generatePlayerInputs();
     </script>
 </body>
 </html>
