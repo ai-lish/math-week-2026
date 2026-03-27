@@ -1,0 +1,182 @@
+[
+  {
+    "id": "calc-001",
+    "expression": "24/3",
+    "time_sec": 6.8,
+    "fair_for_30s": "fair",
+    "notes": "Straightforward division. No UI issues.",
+    "usability_score": 5,
+    "improvements": ["None for simple arithmetic"]
+  },
+  {
+    "id": "calc-002",
+    "expression": "7+5",
+    "time_sec": 6.1,
+    "fair_for_30s": "fair",
+    "notes": "Simple addition.",
+    "usability_score": 5,
+    "improvements": ["None"]
+  },
+  {
+    "id": "calc-003",
+    "expression": "15-8",
+    "time_sec": 6.5,
+    "fair_for_30s": "fair",
+    "notes": "Simple subtraction.",
+    "usability_score": 5,
+    "improvements": ["None"]
+  },
+  {
+    "id": "calc-004",
+    "expression": "9*6",
+    "time_sec": 7.2,
+    "fair_for_30s": "fair",
+    "notes": "Multiplication — clear.",
+    "usability_score": 5,
+    "improvements": ["None"]
+  },
+  {
+    "id": "calc-005",
+    "expression": "0.75*16",
+    "time_sec": 8.9,
+    "fair_for_30s": "fair",
+    "notes": "Decimal multiplication — notation OK.",
+    "usability_score": 5,
+    "improvements": ["Consider showing fixed-decimal hint for novices"]
+  },
+  {
+    "id": "calc-006",
+    "expression": "5/8*64",
+    "time_sec": 10.4,
+    "fair_for_30s": "fair",
+    "notes": "Fraction then multiply; order clear but parentheses could help novices.",
+    "usability_score": 4,
+    "improvements": ["Add optional parentheses or suggestion: (5/8)*64 to avoid ambiguity"]
+  },
+  {
+    "id": "calc-007",
+    "expression": "0.25*240",
+    "time_sec": 7.6,
+    "fair_for_30s": "fair",
+    "notes": "Percentage-style calculation feels fine.",
+    "usability_score": 5,
+    "improvements": ["None"]
+  },
+  {
+    "id": "calc-008",
+    "expression": "0.125+0.375",
+    "time_sec": 9.0,
+    "fair_for_30s": "fair",
+    "notes": "Decimal addition — result expected to 3sf sometimes; display should show full precision on request.",
+    "usability_score": 4,
+    "improvements": ["Allow toggling between rounded and exact answers"]
+  },
+  {
+    "id": "calc-009",
+    "expression": "14/0.7",
+    "time_sec": 9.8,
+    "fair_for_30s": "fair",
+    "notes": "Division by decimal — easy but watch formatting (14 ÷ 0.7 shown clearly).",
+    "usability_score": 5,
+    "improvements": ["None"]
+  },
+  {
+    "id": "calc-010",
+    "expression": "6^2",
+    "time_sec": 7.4,
+    "fair_for_30s": "fair",
+    "notes": "Exponent notation ^ is fine; ensure display supports superscript.",
+    "usability_score": 5,
+    "improvements": ["Render superscripts for readability"]
+  },
+  {
+    "id": "calc-011",
+    "expression": "sqrt(49)",
+    "time_sec": 8.2,
+    "fair_for_30s": "fair",
+    "notes": "Root notation clear. Some users expect √ symbol.",
+    "usability_score": 5,
+    "improvements": ["Show both sqrt() and √ for clarity"]
+  },
+  {
+    "id": "calc-012",
+    "expression": "27^(1/3)",
+    "time_sec": 11.3,
+    "fair_for_30s": "fair",
+    "notes": "Fractional exponent for cube root may confuse novices; maybe offer a 'cube root' shortcut.",
+    "usability_score": 4,
+    "improvements": ["Provide cube-root operator or suggestion"]
+  },
+  {
+    "id": "calc-013",
+    "expression": "0.2*1000",
+    "time_sec": 7.0,
+    "fair_for_30s": "fair",
+    "notes": "Scientific notation shown as 2.00e2 in CSV; UI should display both forms.",
+    "usability_score": 5,
+    "improvements": ["Show both standard and scientific forms when large/small numbers involved"]
+  },
+  {
+    "id": "calc-014",
+    "expression": "3/8",
+    "time_sec": 8.6,
+    "fair_for_30s": "fair",
+    "notes": "Fraction display good; allow simplified fraction view.",
+    "usability_score": 5,
+    "improvements": ["Offer simplified fraction toggle (e.g., 3/8 stays but show decimal if requested)"]
+  },
+  {
+    "id": "calc-015",
+    "expression": "0.45*200",
+    "time_sec": 8.1,
+    "fair_for_30s": "fair",
+    "notes": "Percentage-style; answer straightforward.",
+    "usability_score": 5,
+    "improvements": ["None"]
+  },
+  {
+    "id": "calc-016",
+    "expression": "(1/3)*3",
+    "time_sec": 10.0,
+    "fair_for_30s": "fair",
+    "notes": "Parentheses remove ambiguity; good example.",
+    "usability_score": 5,
+    "improvements": ["Encourage use of parentheses for clarity in UI hints"]
+  },
+  {
+    "id": "calc-017",
+    "expression": "5+3*2",
+    "time_sec": 9.7,
+    "fair_for_30s": "fair",
+    "notes": "Order of operations — some users may mis-evaluate if not reminded about PEMDAS.",
+    "usability_score": 4,
+    "improvements": ["Show evaluated expression tree or note about operator precedence"]
+  },
+  {
+    "id": "calc-018",
+    "expression": "(5+3)*2",
+    "time_sec": 8.9,
+    "fair_for_30s": "fair",
+    "notes": "Brackets make intent explicit.",
+    "usability_score": 5,
+    "improvements": ["None"]
+  },
+  {
+    "id": "calc-019",
+    "expression": "100/4-3",
+    "time_sec": 12.2,
+    "fair_for_30s": "fair",
+    "notes": "Mixed operations; ensure clear precedence.",
+    "usability_score": 4,
+    "improvements": ["Consider adding parentheses in suggested hint: (100/4)-3"]
+  },
+  {
+    "id": "calc-020",
+    "expression": "8*0.125",
+    "time_sec": 7.3,
+    "fair_for_30s": "fair",
+    "notes": "Decimal multiplication easy.",
+    "usability_score": 5,
+    "improvements": ["None"]
+  }
+]

@@ -1,0 +1,3619 @@
+{
+  "total": 600,
+  "passes": 0,
+  "fails": 600,
+  "pass_rate": 0.0,
+  "fail_list": [
+    {
+      "id": "calc-0001",
+      "expression": "7*190",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0002",
+      "expression": "11.238*36.85",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0003",
+      "expression": "2**5",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0004",
+      "expression": "8-24",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0005",
+      "expression": "25.317*1.424",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0006",
+      "expression": "35.829*35.096",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0007",
+      "expression": "sqrt(9)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0008",
+      "expression": "sqrt(36)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0009",
+      "expression": "2*12/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0010",
+      "expression": "sqrt(16)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0011",
+      "expression": "40*15/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0012",
+      "expression": "27*10/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0013",
+      "expression": "sqrt(4)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0014",
+      "expression": "89*20/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0015",
+      "expression": "187+118",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0016",
+      "expression": "sqrt(4)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0017",
+      "expression": "5**4",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0018",
+      "expression": "4**2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0019",
+      "expression": "170*59",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0020",
+      "expression": "60/26",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0021",
+      "expression": "117*25/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0022",
+      "expression": "18.572*10.554",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0023",
+      "expression": "180*10/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0024",
+      "expression": "11**3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0025",
+      "expression": "12**3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0026",
+      "expression": "23.167*13.57",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0027",
+      "expression": "4**4",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0028",
+      "expression": "59*9",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0029",
+      "expression": "sqrt(16)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0030",
+      "expression": "55*146",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0031",
+      "expression": "32.806*19.842",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0032",
+      "expression": "sqrt(9)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0033",
+      "expression": "36*15/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0034",
+      "expression": "9**4",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0035",
+      "expression": "7**5",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0036",
+      "expression": "57*12/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0037",
+      "expression": "8**2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0038",
+      "expression": "29-40",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0039",
+      "expression": "sqrt(36)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0040",
+      "expression": "99/98",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0041",
+      "expression": "5**2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0042",
+      "expression": "175*138",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0043",
+      "expression": "29*20/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0044",
+      "expression": "sqrt(9)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0045",
+      "expression": "sqrt(4)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0046",
+      "expression": "129*12/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0047",
+      "expression": "2**4",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0048",
+      "expression": "10**3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0049",
+      "expression": "18.758*8.161",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0050",
+      "expression": "1**4",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0051",
+      "expression": "sqrt(4)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0052",
+      "expression": "93-79",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0053",
+      "expression": "62+146",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0054",
+      "expression": "188+125",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0055",
+      "expression": "3**3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0056",
+      "expression": "sqrt(36)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0057",
+      "expression": "13.326*43.634",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0058",
+      "expression": "sqrt(9)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0059",
+      "expression": "12**3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0060",
+      "expression": "103*25/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0061",
+      "expression": "sqrt(36)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0062",
+      "expression": "sqrt(4)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0063",
+      "expression": "11.312*16.97",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0064",
+      "expression": "9**3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0065",
+      "expression": "4**2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0066",
+      "expression": "182+162",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0067",
+      "expression": "3.463*1.668",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0068",
+      "expression": "19*50/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0069",
+      "expression": "13.996*24.322",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0070",
+      "expression": "3**5",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0071",
+      "expression": "39.253*40.394",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0072",
+      "expression": "4.807*32.983",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0073",
+      "expression": "109*30/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0074",
+      "expression": "sqrt(49)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0075",
+      "expression": "173+168",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0076",
+      "expression": "104*187",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0077",
+      "expression": "64-50",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0078",
+      "expression": "8**3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0079",
+      "expression": "sqrt(9)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0080",
+      "expression": "119*15/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0081",
+      "expression": "114+141",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0082",
+      "expression": "167+139",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0083",
+      "expression": "193-61",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0084",
+      "expression": "sqrt(25)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0085",
+      "expression": "sqrt(9)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0086",
+      "expression": "sqrt(4)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0087",
+      "expression": "19.011*49.267",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0088",
+      "expression": "117*20/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0089",
+      "expression": "sqrt(49)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0090",
+      "expression": "11**5",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0091",
+      "expression": "9.576*10.963",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0092",
+      "expression": "149+189",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0093",
+      "expression": "15*5/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0094",
+      "expression": "8**3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0095",
+      "expression": "131-21",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0096",
+      "expression": "153-18",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0097",
+      "expression": "sqrt(4)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0098",
+      "expression": "4**2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0099",
+      "expression": "2**5",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0100",
+      "expression": "10**4",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0101",
+      "expression": "53*25/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0102",
+      "expression": "13.354*6.631",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0103",
+      "expression": "118*25/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0104",
+      "expression": "3+118",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0105",
+      "expression": "138*55",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0106",
+      "expression": "46.67*44.055",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0107",
+      "expression": "18.539*7.972",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0108",
+      "expression": "12**4",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0109",
+      "expression": "11**2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0110",
+      "expression": "5**2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0111",
+      "expression": "13.297*44.497",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0112",
+      "expression": "3**4",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0113",
+      "expression": "155*15/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0114",
+      "expression": "53*20/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0115",
+      "expression": "8**4",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0116",
+      "expression": "24/163",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0117",
+      "expression": "12*5/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0118",
+      "expression": "198*12/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0119",
+      "expression": "42*40/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0120",
+      "expression": "12**5",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0121",
+      "expression": "1**2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0122",
+      "expression": "177+39",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0123",
+      "expression": "150*50/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0124",
+      "expression": "21.546*2.187",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0125",
+      "expression": "11*25/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0126",
+      "expression": "34.135*33.38",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0127",
+      "expression": "200*50/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0128",
+      "expression": "sqrt(36)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0129",
+      "expression": "46.296*11.913",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0130",
+      "expression": "48.813*40.558",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0131",
+      "expression": "sqrt(4)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0132",
+      "expression": "36.855*16.676",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0133",
+      "expression": "sqrt(49)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0134",
+      "expression": "13.414*39.39",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0135",
+      "expression": "98/10",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0136",
+      "expression": "10.059*45.931",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0137",
+      "expression": "79*15/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0138",
+      "expression": "1.281*9.737",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0139",
+      "expression": "72*10/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0140",
+      "expression": "90*50/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0141",
+      "expression": "sqrt(49)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0142",
+      "expression": "6**2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0143",
+      "expression": "67*46",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0144",
+      "expression": "28/153",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0145",
+      "expression": "187*25/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0146",
+      "expression": "sqrt(36)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0147",
+      "expression": "2**5",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0148",
+      "expression": "4**4",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0149",
+      "expression": "182+112",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0150",
+      "expression": "9**3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0151",
+      "expression": "111*10/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0152",
+      "expression": "160*25/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0153",
+      "expression": "185*77",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0154",
+      "expression": "sqrt(16)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0155",
+      "expression": "sqrt(49)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0156",
+      "expression": "142*12/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0157",
+      "expression": "21.08*47.024",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0158",
+      "expression": "30.814*15.117",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0159",
+      "expression": "1**4",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0160",
+      "expression": "54*30/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0161",
+      "expression": "10**4",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0162",
+      "expression": "sqrt(25)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0163",
+      "expression": "sqrt(49)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0164",
+      "expression": "25.608*39.707",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0165",
+      "expression": "32.977*14.261",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0166",
+      "expression": "6**2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0167",
+      "expression": "33.673*11.31",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0168",
+      "expression": "7.453*2.406",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0169",
+      "expression": "sqrt(36)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0170",
+      "expression": "117-107",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0171",
+      "expression": "sqrt(25)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0172",
+      "expression": "sqrt(9)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0173",
+      "expression": "32.837*0.377",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0174",
+      "expression": "200-109",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0175",
+      "expression": "40.225*34.826",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0176",
+      "expression": "sqrt(4)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0177",
+      "expression": "4**2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0178",
+      "expression": "sqrt(9)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0179",
+      "expression": "sqrt(49)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0180",
+      "expression": "9**4",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0181",
+      "expression": "sqrt(36)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0182",
+      "expression": "7**5",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0183",
+      "expression": "37.208*23.786",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0184",
+      "expression": "193*15/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0185",
+      "expression": "197*50/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0186",
+      "expression": "sqrt(49)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0187",
+      "expression": "13.802*3.966",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0188",
+      "expression": "61*20/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0189",
+      "expression": "82*50/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0190",
+      "expression": "36-39",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0191",
+      "expression": "sqrt(49)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0192",
+      "expression": "35.35*3.305",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0193",
+      "expression": "sqrt(16)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0194",
+      "expression": "8**5",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0195",
+      "expression": "53/108",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0196",
+      "expression": "12**2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0197",
+      "expression": "7**5",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0198",
+      "expression": "91/77",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0199",
+      "expression": "sqrt(36)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0200",
+      "expression": "10**3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0201",
+      "expression": "sqrt(9)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0202",
+      "expression": "112*40/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0203",
+      "expression": "100/87",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0204",
+      "expression": "42.041*45.985",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0205",
+      "expression": "9**2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0206",
+      "expression": "sqrt(36)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0207",
+      "expression": "11**2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0208",
+      "expression": "165-110",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0209",
+      "expression": "sqrt(9)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0210",
+      "expression": "67*98",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0211",
+      "expression": "22.789*16.941",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0212",
+      "expression": "sqrt(16)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0213",
+      "expression": "sqrt(16)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0214",
+      "expression": "121+5",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0215",
+      "expression": "58*10/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0216",
+      "expression": "194-8",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0217",
+      "expression": "41.978*31.105",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0218",
+      "expression": "6.398*33.506",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0219",
+      "expression": "4**5",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0220",
+      "expression": "197*25/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0221",
+      "expression": "30.334*48.19",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0222",
+      "expression": "200*42",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0223",
+      "expression": "149*7",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0224",
+      "expression": "11**5",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0225",
+      "expression": "sqrt(49)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0226",
+      "expression": "3.892*34.562",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0227",
+      "expression": "5.185*38.647",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0228",
+      "expression": "2**2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0229",
+      "expression": "137*30/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0230",
+      "expression": "18*50/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0231",
+      "expression": "4*30/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0232",
+      "expression": "sqrt(4)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0233",
+      "expression": "sqrt(16)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0234",
+      "expression": "sqrt(49)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0235",
+      "expression": "21.831*36.716",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0236",
+      "expression": "158*50/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0237",
+      "expression": "sqrt(25)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0238",
+      "expression": "sqrt(49)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0239",
+      "expression": "5**4",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0240",
+      "expression": "41.553*4.424",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0241",
+      "expression": "sqrt(9)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0242",
+      "expression": "sqrt(36)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0243",
+      "expression": "11**5",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0244",
+      "expression": "8*40/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0245",
+      "expression": "47*40/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0246",
+      "expression": "17.806*12.992",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0247",
+      "expression": "153*20/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0248",
+      "expression": "1**3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0249",
+      "expression": "62/185",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0250",
+      "expression": "sqrt(36)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0251",
+      "expression": "34.561*32.331",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0252",
+      "expression": "sqrt(25)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0253",
+      "expression": "24-76",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0254",
+      "expression": "sqrt(49)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0255",
+      "expression": "15.38*29.12",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0256",
+      "expression": "sqrt(36)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0257",
+      "expression": "6**5",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0258",
+      "expression": "6**4",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0259",
+      "expression": "sqrt(16)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0260",
+      "expression": "65*15/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0261",
+      "expression": "185*50",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0262",
+      "expression": "191-138",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0263",
+      "expression": "10.898*24.262",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0264",
+      "expression": "9**4",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0265",
+      "expression": "50-76",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0266",
+      "expression": "46*20/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0267",
+      "expression": "182-137",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0268",
+      "expression": "12*5/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0269",
+      "expression": "5**3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0270",
+      "expression": "sqrt(4)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0271",
+      "expression": "147/73",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0272",
+      "expression": "sqrt(25)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0273",
+      "expression": "48*5/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0274",
+      "expression": "123*10/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0275",
+      "expression": "103+126",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0276",
+      "expression": "11**2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0277",
+      "expression": "7.545*28.186",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0278",
+      "expression": "22*15/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0279",
+      "expression": "143/196",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0280",
+      "expression": "10**3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0281",
+      "expression": "7**5",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0282",
+      "expression": "sqrt(16)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0283",
+      "expression": "7**4",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0284",
+      "expression": "10**2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0285",
+      "expression": "12**2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0286",
+      "expression": "31.313*13.306",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0287",
+      "expression": "41-62",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0288",
+      "expression": "2**3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0289",
+      "expression": "105/116",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0290",
+      "expression": "9*15/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0291",
+      "expression": "181*20/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0292",
+      "expression": "sqrt(4)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0293",
+      "expression": "46.203*39.413",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0294",
+      "expression": "11**3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0295",
+      "expression": "sqrt(4)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0296",
+      "expression": "4**3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0297",
+      "expression": "37*10/100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0298",
+      "expression": "43*79",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0299",
+      "expression": "sqrt(4)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0300",
+      "expression": "sqrt(49)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0301",
+      "expression": "13/6*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0302",
+      "expression": "sqrt(71)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0303",
+      "expression": "4.935e6*1",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0304",
+      "expression": "(10/6)*2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0305",
+      "expression": "ln(7)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0306",
+      "expression": "log10(250)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0307",
+      "expression": "log10(50)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0308",
+      "expression": "5.665e5*5",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0309",
+      "expression": "sin(45)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0310",
+      "expression": "ln(50)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0311",
+      "expression": "(7/7)*12",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0312",
+      "expression": "ln(7)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0313",
+      "expression": "(7/9)*11",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0314",
+      "expression": "sin(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0315",
+      "expression": "1.792e4*6",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0316",
+      "expression": "sin(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0317",
+      "expression": "sqrt(61)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0318",
+      "expression": "sin(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0319",
+      "expression": "(4/3)*pi*9^3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0320",
+      "expression": "(10/9)*16",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0321",
+      "expression": "log10(50)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0322",
+      "expression": "18/4*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0323",
+      "expression": "15/9*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0324",
+      "expression": "ln(2)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0325",
+      "expression": "(4/3)*pi*3^3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0326",
+      "expression": "18/2*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0327",
+      "expression": "sqrt(54)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0328",
+      "expression": "ln(7)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0329",
+      "expression": "ln(50)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0330",
+      "expression": "ln(7)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0331",
+      "expression": "9.385e4*9",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0332",
+      "expression": "sin(45)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0333",
+      "expression": "3.191e6*3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0334",
+      "expression": "(4/3)*pi*10^3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0335",
+      "expression": "sqrt(97)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0336",
+      "expression": "pi*3^2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0337",
+      "expression": "14/7*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0338",
+      "expression": "sqrt(36)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0339",
+      "expression": "log10(250)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0340",
+      "expression": "19/11*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0341",
+      "expression": "8.779e5*9",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0342",
+      "expression": "(6/10)*19",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0343",
+      "expression": "sin(45)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0344",
+      "expression": "(4/5)*20",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0345",
+      "expression": "cos(60)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0346",
+      "expression": "sin(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0347",
+      "expression": "(8/8)*14",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0348",
+      "expression": "pi*16^2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0349",
+      "expression": "log10(50)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0350",
+      "expression": "sqrt(77)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0351",
+      "expression": "(2/9)*5",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0352",
+      "expression": "sqrt(60)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0353",
+      "expression": "log10(50)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0354",
+      "expression": "cos(60)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0355",
+      "expression": "ln(50)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0356",
+      "expression": "11/11*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0357",
+      "expression": "sin(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0358",
+      "expression": "(9/8)*12",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0359",
+      "expression": "8.843e2*2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0360",
+      "expression": "8/3*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0361",
+      "expression": "sin(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0362",
+      "expression": "ln(50)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0363",
+      "expression": "pi*10^2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0364",
+      "expression": "log10(10)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0365",
+      "expression": "(1/6)*13",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0366",
+      "expression": "(7/4)*9",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0367",
+      "expression": "sqrt(54)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0368",
+      "expression": "pi*6^2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0369",
+      "expression": "pi*3^2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0370",
+      "expression": "cos(60)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0371",
+      "expression": "9.206e3*4",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0372",
+      "expression": "15/6*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0373",
+      "expression": "log10(999)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0374",
+      "expression": "18/4*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0375",
+      "expression": "ln(50)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0376",
+      "expression": "(10/6)*15",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0377",
+      "expression": "15/6*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0378",
+      "expression": "(4/3)*pi*7^3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0379",
+      "expression": "1.959e5*6",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0380",
+      "expression": "1/12*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0381",
+      "expression": "tan(45)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0382",
+      "expression": "log10(2500)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0383",
+      "expression": "log10(2500)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0384",
+      "expression": "8.487e4*4",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0385",
+      "expression": "(4/3)*pi*4^3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0386",
+      "expression": "5/12*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0387",
+      "expression": "ln(2)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0388",
+      "expression": "15/2*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0389",
+      "expression": "(3/3)*11",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0390",
+      "expression": "(7/4)*8",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0391",
+      "expression": "pi*18^2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0392",
+      "expression": "(9/10)*10",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0393",
+      "expression": "pi*9^2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0394",
+      "expression": "9.697e4*6",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0395",
+      "expression": "9.656e3*4",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0396",
+      "expression": "sqrt(48)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0397",
+      "expression": "ln(50)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0398",
+      "expression": "log10(250)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0399",
+      "expression": "sqrt(17)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0400",
+      "expression": "4.314e4*7",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0401",
+      "expression": "ln(7)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0402",
+      "expression": "1.225e6*6",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0403",
+      "expression": "ln(50)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0404",
+      "expression": "14/3*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0405",
+      "expression": "pi*2^2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0406",
+      "expression": "log10(250)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0407",
+      "expression": "2.044e3*9",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0408",
+      "expression": "sin(45)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0409",
+      "expression": "(9/8)*20",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0410",
+      "expression": "pi*14^2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0411",
+      "expression": "ln(50)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0412",
+      "expression": "tan(45)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0413",
+      "expression": "log10(250)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0414",
+      "expression": "(4/3)*pi*8^3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0415",
+      "expression": "9.545e4*2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0416",
+      "expression": "sqrt(84)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0417",
+      "expression": "(1/8)*10",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0418",
+      "expression": "(4/3)*pi*2^3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0419",
+      "expression": "1.824e3*1",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0420",
+      "expression": "(4/4)*20",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0421",
+      "expression": "(4/3)*pi*2^3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0422",
+      "expression": "sqrt(28)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0423",
+      "expression": "(4/3)*pi*4^3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0424",
+      "expression": "(3/2)*10",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0425",
+      "expression": "pi*5^2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0426",
+      "expression": "sqrt(34)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0427",
+      "expression": "pi*4^2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0428",
+      "expression": "log10(50)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0429",
+      "expression": "log10(250)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0430",
+      "expression": "(4/3)*pi*10^3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0431",
+      "expression": "(1/4)*10",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0432",
+      "expression": "log10(50)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0433",
+      "expression": "sin(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0434",
+      "expression": "ln(50)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0435",
+      "expression": "7.994e6*2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0436",
+      "expression": "sqrt(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0437",
+      "expression": "log10(2500)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0438",
+      "expression": "15/12*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0439",
+      "expression": "log10(10)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0440",
+      "expression": "8.617e5*2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0441",
+      "expression": "1.661e2*6",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0442",
+      "expression": "ln(7)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0443",
+      "expression": "20/12*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0444",
+      "expression": "sqrt(93)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0445",
+      "expression": "(7/10)*11",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0446",
+      "expression": "5.545e5*2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0447",
+      "expression": "sqrt(94)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0448",
+      "expression": "(4/3)*pi*7^3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0449",
+      "expression": "8.984e5*6",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0450",
+      "expression": "sin(45)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0451",
+      "expression": "ln(20)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0452",
+      "expression": "tan(45)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0453",
+      "expression": "12/4*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0454",
+      "expression": "1.604e2*2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0455",
+      "expression": "ln(20)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0456",
+      "expression": "pi*18^2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0457",
+      "expression": "log10(2500)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0458",
+      "expression": "sqrt(73)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0459",
+      "expression": "(2/8)*13",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0460",
+      "expression": "sin(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0461",
+      "expression": "20/6*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0462",
+      "expression": "(2/10)*8",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0463",
+      "expression": "pi*16^2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0464",
+      "expression": "(4/3)*pi*2^3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0465",
+      "expression": "(9/7)*5",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0466",
+      "expression": "19/5*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0467",
+      "expression": "sin(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0468",
+      "expression": "1/4*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0469",
+      "expression": "10/7*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0470",
+      "expression": "(1/4)*6",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0471",
+      "expression": "sin(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0472",
+      "expression": "pi*1^2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0473",
+      "expression": "ln(100)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0474",
+      "expression": "(4/3)*pi*7^3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0475",
+      "expression": "sin(45)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0476",
+      "expression": "(3/7)*11",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0477",
+      "expression": "(10/3)*3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0478",
+      "expression": "pi*6^2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0479",
+      "expression": "log10(10)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0480",
+      "expression": "15/12*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0481",
+      "expression": "sin(45)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0482",
+      "expression": "4.724e3*9",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0483",
+      "expression": "(7/3)*11",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0484",
+      "expression": "5.737e4*1",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0485",
+      "expression": "sin(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0486",
+      "expression": "log10(50)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0487",
+      "expression": "7/4*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0488",
+      "expression": "10/7*100",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0489",
+      "expression": "ln(2)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0490",
+      "expression": "7.716e3*3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0491",
+      "expression": "sqrt(92)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0492",
+      "expression": "(4/3)*pi*9^3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0493",
+      "expression": "sqrt(87)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0494",
+      "expression": "(2/8)*3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0495",
+      "expression": "sin(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0496",
+      "expression": "9.281e4*7",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0497",
+      "expression": "tan(45)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0498",
+      "expression": "ln(50)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0499",
+      "expression": "log10(250)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0500",
+      "expression": "pi*20^2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0501",
+      "expression": "sin(75)+cos(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0502",
+      "expression": "102410^(1/3)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0503",
+      "expression": "ln(482*e)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0504",
+      "expression": "(3+4*5)/(2+3) * sqrt(7)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0505",
+      "expression": "ln(351*e)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0506",
+      "expression": "arctan(1)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0507",
+      "expression": "ln(495*e)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0508",
+      "expression": "242335^(1/3)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0509",
+      "expression": "826964^(1/3)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0510",
+      "expression": "(pi+e)*1/5",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0511",
+      "expression": "arctan(1)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0512",
+      "expression": "(3+4*5)/(2+3) * sqrt(7)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0513",
+      "expression": "378154^(1/3)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0514",
+      "expression": "(pi+e)*2/1",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0515",
+      "expression": "(pi+e)*3/2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0516",
+      "expression": "(pi+e)*5/2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0517",
+      "expression": "arctan(1)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0518",
+      "expression": "(pi+e)*4/4",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0519",
+      "expression": "sin(75)+cos(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0520",
+      "expression": "916228^(1/3)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0521",
+      "expression": "168290^(1/3)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0522",
+      "expression": "sin(75)+cos(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0523",
+      "expression": "arctan(1)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0524",
+      "expression": "sin(75)+cos(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0525",
+      "expression": "sin(75)+cos(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0526",
+      "expression": "19^( 0.5 )",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0527",
+      "expression": "541981^(1/3)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0528",
+      "expression": "arctan(1)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0529",
+      "expression": "31^( 1.5 )",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0530",
+      "expression": "arcsin(0.5)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0531",
+      "expression": "882097^(1/3)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0532",
+      "expression": "6^( 0.5 )",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0533",
+      "expression": "ln(286*e)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0534",
+      "expression": "arcsin(0.707)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0535",
+      "expression": "(3+4*5)/(2+3) * sqrt(7)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0536",
+      "expression": "644394^(1/3)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0537",
+      "expression": "sin(75)+cos(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0538",
+      "expression": "(pi+e)*1/4",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0539",
+      "expression": "arctan(1)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0540",
+      "expression": "759014^(1/3)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0541",
+      "expression": "arctan(1)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0542",
+      "expression": "(pi+e)*1/2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0543",
+      "expression": "sin(75)+cos(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0544",
+      "expression": "sin(75)+cos(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0545",
+      "expression": "(pi+e)*3/3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0546",
+      "expression": "26^( 1.5 )",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0547",
+      "expression": "721875^(1/3)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0548",
+      "expression": "arcsin(0.707)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0549",
+      "expression": "arctan(1)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0550",
+      "expression": "109096^(1/3)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0551",
+      "expression": "ln(195*e)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0552",
+      "expression": "(pi+e)*3/1",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0553",
+      "expression": "(pi+e)*3/3",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0554",
+      "expression": "ln(116*e)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0555",
+      "expression": "arctan(1)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0556",
+      "expression": "37^( 1.5 )",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0557",
+      "expression": "862686^(1/3)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0558",
+      "expression": "(pi+e)*5/1",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0559",
+      "expression": "ln(310*e)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0560",
+      "expression": "arcsin(0.707)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0561",
+      "expression": "13^( 0.3333333333333333 )",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0562",
+      "expression": "813373^(1/3)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0563",
+      "expression": "sin(75)+cos(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0564",
+      "expression": "(3+4*5)/(2+3) * sqrt(7)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0565",
+      "expression": "(3+4*5)/(2+3) * sqrt(7)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0566",
+      "expression": "(pi+e)*2/1",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0567",
+      "expression": "8^( 0.5 )",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0568",
+      "expression": "928964^(1/3)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0569",
+      "expression": "(pi+e)*5/4",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0570",
+      "expression": "(pi+e)*2/2",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0571",
+      "expression": "(pi+e)*4/1",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0572",
+      "expression": "ln(236*e)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0573",
+      "expression": "(3+4*5)/(2+3) * sqrt(7)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0574",
+      "expression": "sin(75)+cos(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0575",
+      "expression": "50^( 1.5 )",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0576",
+      "expression": "(3+4*5)/(2+3) * sqrt(7)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0577",
+      "expression": "(3+4*5)/(2+3) * sqrt(7)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0578",
+      "expression": "32^( 0.3333333333333333 )",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0579",
+      "expression": "721256^(1/3)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0580",
+      "expression": "sin(75)+cos(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0581",
+      "expression": "sin(75)+cos(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0582",
+      "expression": "26^( 1.5 )",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0583",
+      "expression": "(pi+e)*2/5",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0584",
+      "expression": "(pi+e)*3/1",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0585",
+      "expression": "sin(75)+cos(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0586",
+      "expression": "591478^(1/3)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0587",
+      "expression": "arctan(1)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0588",
+      "expression": "arctan(1)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0589",
+      "expression": "7^( 0.3333333333333333 )",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0590",
+      "expression": "30^( 0.3333333333333333 )",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0591",
+      "expression": "ln(96*e)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0592",
+      "expression": "sin(75)+cos(30)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0593",
+      "expression": "985670^(1/3)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0594",
+      "expression": "arcsin(0.707)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0595",
+      "expression": "arcsin(0.707)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0596",
+      "expression": "257231^(1/3)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0597",
+      "expression": "ln(91*e)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0598",
+      "expression": "(3+4*5)/(2+3) * sqrt(7)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0599",
+      "expression": "arcsin(0.707)",
+      "computed": null,
+      "answer_3sf": null
+    },
+    {
+      "id": "calc-0600",
+      "expression": "arctan(1)",
+      "computed": null,
+      "answer_3sf": null
+    }
+  ],
+  "topic_distribution": {
+    "basic": 300,
+    "intermediate": 200,
+    "advanced": 100
+  },
+  "avg_compute_time_s": 3.982782363891601e-06,
+  "duration_s": 0.10922122001647949,
+  "failure_categories": {
+    "eval_error": 600
+  },
+  "green": false
+}

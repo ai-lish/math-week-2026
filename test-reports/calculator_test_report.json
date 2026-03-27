@@ -1,0 +1,157 @@
+{
+  "total_rows": 600,
+  "passes": 566,
+  "fails": 34,
+  "fail_examples": [
+    {
+      "id": "calc-0303",
+      "expression": "4.935e6*1",
+      "provided_answer": "3.45e+07",
+      "computed_answer": 4940000.0,
+      "reason": "mismatch"
+    },
+    {
+      "id": "calc-0308",
+      "expression": "5.665e5*5",
+      "provided_answer": "1.7e+06",
+      "computed_answer": 2830000.0,
+      "reason": "mismatch"
+    },
+    {
+      "id": "calc-0315",
+      "expression": "1.792e4*6",
+      "provided_answer": "3.58e+04",
+      "computed_answer": 108000.0,
+      "reason": "mismatch"
+    },
+    {
+      "id": "calc-0331",
+      "expression": "9.385e4*9",
+      "provided_answer": "4.69e+05",
+      "computed_answer": 845000.0,
+      "reason": "mismatch"
+    },
+    {
+      "id": "calc-0333",
+      "expression": "3.191e6*3",
+      "provided_answer": "2.23e+07",
+      "computed_answer": 9570000.0,
+      "reason": "mismatch"
+    },
+    {
+      "id": "calc-0341",
+      "expression": "8.779e5*9",
+      "provided_answer": "7.02e+06",
+      "computed_answer": 7900000.0,
+      "reason": "mismatch"
+    },
+    {
+      "id": "calc-0359",
+      "expression": "8.843e2*2",
+      "provided_answer": "3.54e+03",
+      "computed_answer": 1770.0,
+      "reason": "mismatch"
+    },
+    {
+      "id": "calc-0371",
+      "expression": "9.206e3*4",
+      "provided_answer": "7.36e+04",
+      "computed_answer": 36800.0,
+      "reason": "mismatch"
+    },
+    {
+      "id": "calc-0379",
+      "expression": "1.959e5*6",
+      "provided_answer": "9.8e+05",
+      "computed_answer": 1180000.0,
+      "reason": "mismatch"
+    },
+    {
+      "id": "calc-0384",
+      "expression": "8.487e4*4",
+      "provided_answer": "5.09e+05",
+      "computed_answer": 339000.0,
+      "reason": "mismatch"
+    },
+    {
+      "id": "calc-0394",
+      "expression": "9.697e4*6",
+      "provided_answer": "1.94e+05",
+      "computed_answer": 582000.0,
+      "reason": "mismatch"
+    },
+    {
+      "id": "calc-0395",
+      "expression": "9.656e3*4",
+      "provided_answer": "6.76e+04",
+      "computed_answer": 38600.0,
+      "reason": "mismatch"
+    },
+    {
+      "id": "calc-0400",
+      "expression": "4.314e4*7",
+      "provided_answer": "2.59e+05",
+      "computed_answer": 302000.0,
+      "reason": "mismatch"
+    },
+    {
+      "id": "calc-0402",
+      "expression": "1.225e6*6",
+      "provided_answer": "4.9e+06",
+      "computed_answer": 7350000.0,
+      "reason": "mismatch"
+    },
+    {
+      "id": "calc-0407",
+      "expression": "2.044e3*9",
+      "provided_answer": "6.13e+03",
+      "computed_answer": 18400.0,
+      "reason": "mismatch"
+    },
+    {
+      "id": "calc-0415",
+      "expression": "9.545e4*2",
+      "provided_answer": "5.73e+05",
+      "computed_answer": 191000.0,
+      "reason": "mismatch"
+    },
+    {
+      "id": "calc-0435",
+      "expression": "7.994e6*2",
+      "provided_answer": "6.4e+07",
+      "computed_answer": 16000000.0,
+      "reason": "mismatch"
+    },
+    {
+      "id": "calc-0440",
+      "expression": "8.617e5*2",
+      "provided_answer": "6.89e+06",
+      "computed_answer": 1720000.0,
+      "reason": "mismatch"
+    },
+    {
+      "id": "calc-0441",
+      "expression": "1.661e2*6",
+      "provided_answer": "498",
+      "computed_answer": 997.0,
+      "reason": "mismatch"
+    },
+    {
+      "id": "calc-0449",
+      "expression": "8.984e5*6",
+      "provided_answer": "7.19e+06",
+      "computed_answer": 5390000.0,
+      "reason": "mismatch"
+    }
+  ],
+  "topic_distribution": {
+    "basic": 300,
+    "intermediate": 200,
+    "advanced": 100
+  },
+  "average_computation_time": 6.494919459025065e-06,
+  "parsing_errors": [],
+  "ambiguous_notation_suggestions": [
+    "Replace ^ with **; clarify log base if ln vs log10; specify degrees:true for trig when needed"
+  ]
+}

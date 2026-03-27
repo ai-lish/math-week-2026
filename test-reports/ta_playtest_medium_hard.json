@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "source_csv": "calculator_questions_full_FIXED.csv",
+    "filtered_difficulties": ["Medium","Hard"],
+    "selected_counts": {"Medium":10,"Hard":10}
+  },
+  "questions": [
+    {"id":"calc-0301","expression":"13/6*100","difficulty":"Medium","simulated_answer_time_seconds":13,"is_fair_for_30s":true,"difficulty_rating":3,"notes_or_issues":"None"},
+    {"id":"calc-0302","expression":"sqrt(71)","difficulty":"Medium","simulated_answer_time_seconds":9,"is_fair_for_30s":true,"difficulty_rating":3,"notes_or_issues":"None"},
+    {"id":"calc-0303","expression":"4.935e6*1","difficulty":"Medium","simulated_answer_time_seconds":12,"is_fair_for_30s":true,"difficulty_rating":3,"notes_or_issues":"Scientific notation may confuse some students (e notation)"},
+    {"id":"calc-0304","expression":"(10/6)*2","difficulty":"Medium","simulated_answer_time_seconds":11,"is_fair_for_30s":true,"difficulty_rating":3,"notes_or_issues":"None"},
+    {"id":"calc-0305","expression":"ln(7)","difficulty":"Medium","simulated_answer_time_seconds":20,"is_fair_for_30s":true,"difficulty_rating":4,"notes_or_issues":"Requires knowing natural log button; could be slow for calculator novices"},
+    {"id":"calc-0306","expression":"log10(250)","difficulty":"Medium","simulated_answer_time_seconds":18,"is_fair_for_30s":true,"difficulty_rating":3,"notes_or_issues":"Log base-10 button may be unfamiliar to some"},
+    {"id":"calc-0307","expression":"log10(50)","difficulty":"Medium","simulated_answer_time_seconds":16,"is_fair_for_30s":true,"difficulty_rating":3,"notes_or_issues":"None"},
+    {"id":"calc-0308","expression":"5.665e5*5","difficulty":"Medium","simulated_answer_time_seconds":14,"is_fair_for_30s":true,"difficulty_rating":3,"notes_or_issues":"Scientific notation caution"},
+    {"id":"calc-0309","expression":"sin(45) [degrees]","difficulty":"Medium","simulated_answer_time_seconds":22,"is_fair_for_30s":true,"difficulty_rating":4,"notes_or_issues":"Must ensure calculator in degrees mode; CSV marks degrees:true which is good but test interface must show it"},
+    {"id":"calc-0310","expression":"ln(50)","difficulty":"Medium","simulated_answer_time_seconds":21,"is_fair_for_30s":true,"difficulty_rating":4,"notes_or_issues":"Natural log again; novices may be slower"},
+
+    {"id":"calc-0501","expression":"sin(75)+cos(30) [degrees]","difficulty":"Hard","simulated_answer_time_seconds":23,"is_fair_for_30s":true,"difficulty_rating":5,"notes_or_issues":"Requires mode awareness and multiple steps"},
+    {"id":"calc-0502","expression":"102410^(1/3)","difficulty":"Hard","simulated_answer_time_seconds":25,"is_fair_for_30s":true,"difficulty_rating":5,"notes_or_issues":"Cube-root via power 1/3 can be awkward on basic calculators"},
+    {"id":"calc-0503","expression":"ln(482*e)","difficulty":"Hard","simulated_answer_time_seconds":19,"is_fair_for_30s":true,"difficulty_rating":5,"notes_or_issues":"Use of constant e vs entering value; ambiguous if calculator has e constant"},
+    {"id":"calc-0504","expression":"(3+4*5)/(2+3) * sqrt(7)","difficulty":"Hard","simulated_answer_time_seconds":24,"is_fair_for_30s":true,"difficulty_rating":5,"notes_or_issues":"Long expression; parentheses clarity important"},
+    {"id":"calc-0506","expression":"arctan(1) [degrees]","difficulty":"Hard","simulated_answer_time_seconds":15,"is_fair_for_30s":true,"difficulty_rating":4,"notes_or_issues":"Inverse trigs require mode and 'atan' button"},
+    {"id":"calc-0508","expression":"242335^(1/3)","difficulty":"Hard","simulated_answer_time_seconds":25,"is_fair_for_30s":true,"difficulty_rating":5,"notes_or_issues":"Large cube-root; same note as 0502"},
+    {"id":"calc-0510","expression":"(pi+e)*1/5","difficulty":"Hard","simulated_answer_time_seconds":17,"is_fair_for_30s":true,"difficulty_rating":4,"notes_or_issues":"Requires pi and e constants; some calculators lack e"},
+    {"id":"calc-0514","expression":"(pi+e)*2/1","difficulty":"Hard","simulated_answer_time_seconds":16,"is_fair_for_30s":true,"difficulty_rating":4,"notes_or_issues":"Same constant issue"},
+    {"id":"calc-0515","expression":"(pi+e)*3/2","difficulty":"Hard","simulated_answer_time_seconds":18,"is_fair_for_30s":true,"difficulty_rating":4,"notes_or_issues":"None additional"},
+    {"id":"calc-0516","expression":"(pi+e)*5/2","difficulty":"Hard","simulated_answer_time_seconds":20,"is_fair_for_30s":true,"difficulty_rating":5,"notes_or_issues":"Longer numeric result; calculator precision matters"}
+  ],
+  "summary": {
+    "average_time_seconds":17.9,
+    "pass_fail": {"Medium":{"passed":10,"failed":0},"Hard":{"passed":10,"failed":0}},
+    "overall_usability_score_out_of_5":4.0,
+    "top_5_ux_issues": [
+      "Ambiguous use of constants (e) — some calculators don't have 'e' key",
+      "Scientific notation representation (e.g. 4.935e6) may confuse students",
+      "Mode-sensitive trig/inverse trig (degrees vs radians) — must be explicit",
+      "Complex expressions need clear parentheses to avoid order-of-operations mistakes",
+      "Cube roots via fractional powers (x^(1/3)) are awkward on basic calculators"
+    ]
+  }
+}
