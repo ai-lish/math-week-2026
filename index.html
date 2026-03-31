@@ -27,6 +27,38 @@
         <div class="wave"></div>
     </header>
 
+    <!-- 快速導航 -->
+    <nav style="background:rgba(0,0,0,0.03); padding:12px 20px; text-align:center; position:sticky; top:0; z-index:100; backdrop-filter:blur(10px);">
+        <a href="#games-section" style="color:#4A90E2; text-decoration:none; font-weight:bold; margin:0 15px;">🎮 數學遊戲</a>
+        <a href="#schedule" style="color:#4A90E2; text-decoration:none; font-weight:bold; margin:0 15px;">📅 時間表</a>
+        <a href="games.html" style="color:#E91E63; text-decoration:none; font-weight:bold; margin:0 15px;">🕹️ 遊戲專區</a>
+        <a href="rummikub.html" style="color:#FF9800; text-decoration:none; font-weight:bold; margin:0 15px;">🧩 Rummikub</a>
+    </nav>
+
+    <!-- 數學小遊戲 Section -->
+    <section id="games-section" style="padding:40px 20px; background:linear-gradient(135deg,#667eea,#764ba2); color:white;">
+        <h2 style="text-align:center; margin-bottom:10px;">🎮 數學小遊戲</h2>
+        <p style="text-align:center; opacity:0.9; margin-bottom:25px;">午休 iPad 站｜三大遊戲等你挑戰！</p>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:15px; max-width:900px; margin:0 auto;">
+            <a href="games/計算機大賽-CalculatorRace.html" style="background:rgba(255,255,255,0.15); border-radius:15px; padding:20px; text-decoration:none; color:white; display:block; text-align:center; transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+                <div style="font-size:2.5rem;">🧮</div>
+                <h3 style="margin:10px 0 5px;">計算機大賽</h3>
+                <p style="opacity:0.8; font-size:0.9rem;">CASIO fx-50FHII 速度挑戰<br>答對+1 答錯-1</p>
+            </a>
+            <a href="games/公式圖像配對-FormulaMatch.html" style="background:rgba(255,255,255,0.15); border-radius:15px; padding:20px; text-decoration:none; color:white; display:block; text-align:center; transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+                <div style="font-size:2.5rem;">🃏</div>
+                <h3 style="margin:10px 0 5px;">公式圖像配對</h3>
+                <p style="opacity:0.8; font-size:0.9rem;">翻牌記憶配對遊戲<br>鬥快鬥少翻牌</p>
+            </a>
+            <a href="games/四則運算拉力賽-TugOfWar.html" style="background:rgba(255,255,255,0.15); border-radius:15px; padding:20px; text-decoration:none; color:white; display:block; text-align:center; transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+                <div style="font-size:2.5rem;">⚡</div>
+                <h3 style="margin:10px 0 5px;">四則運算拉力賽</h3>
+                <p style="opacity:0.8; font-size:0.9rem;">加減乘除拉力戰<br>5秒答題 拉到底就贏</p>
+            </a>
+        </div>
+        <p style="text-align:center; margin-top:20px;"><a href="games.html" style="color:white; background:rgba(255,255,255,0.25); padding:10px 30px; border-radius:25px; text-decoration:none; font-weight:bold;">🕹️ 查看所有遊戲 →</a></p>
+    </section>
+
     <!-- 數學周結構 -->
     <section class="structure">
         <h2>🏗️ 數學周結構</h2>
@@ -60,7 +92,7 @@
     </section>
 
     <!-- 日曆格式活動時間表 -->
-    <section class="calendar-section" style="padding: 40px 20px; background: #f8f9fa;">
+    <section id="schedule" class="calendar-section" style="padding: 40px 20px; background: #f8f9fa;">
         <h2 style="text-align: center; margin-bottom: 30px;">📅 第二階段：數學周 (5月4日 - 5月8日) 活動時間表</h2>
         
         <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">

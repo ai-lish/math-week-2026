@@ -38,6 +38,9 @@ function updateCountdown() {
 // ==================== 遊戲功能 ====================
 function openGame(gameName) {
     const games = {
+        'CalculatorRace': 'games/計算機大賽-CalculatorRace.html',
+        'FormulaMatch': 'games/公式圖像配對-FormulaMatch.html',
+        'TugOfWar': 'games/四則運算拉力賽-TugOfWar.html',
         'MultiplicationBattle': 'games/乘法拔河-MultiplicationBattle.html',
         'RatioSafe': 'games/比例金庫-RatioSafe.html',
         'MatrixConquest': 'games/矩陣爭奪戰-MatrixConquest.html',

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ 四則運算拉力賽 - Tug of War</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Noto Sans TC',sans-serif; background:linear-gradient(135deg,#0d1b2a,#1b2838,#2d4059); color:#fff; min-height:100vh; overflow-x:hidden; }
+        .container { max-width:600px; margin:0 auto; padding:15px; }
+        .back-link { display:inline-block; color:#aaa; text-decoration:none; padding:10px 0; font-size:0.9rem; }
+        h1 { text-align:center; font-size:1.6rem; margin:5px 0; }
+        .subtitle { text-align:center; color:#aaa; font-size:0.85rem; margin-bottom:10px; }
+        
+        .setup { text-align:center; padding:30px 10px; }
+        .setup label { display:block; margin:10px 0 5px; }
+        .setup input, .setup select { width:200px; padding:8px; border-radius:8px; border:none; font-size:1rem; text-align:center; }
+        .btn { display:inline-block; padding:12px 35px; border-radius:25px; border:none; font-size:1.1rem; font-weight:bold; cursor:pointer; margin:10px; }
+        .btn-go { background:linear-gradient(135deg,#f39c12,#e74c3c); color:#fff; }
+        .btn-start { background:linear-gradient(135deg,#00b09b,#96c93d); color:#fff; }
+        
+        .game { display:none; text-align:center; }
+        
+        /* Tug of War rope */
+        .rope-area { margin:20px 0; position:relative; height:80px; }
+        .rope-track { height:12px; background:#555; border-radius:6px; position:relative; margin:30px 20px; }
+        .rope-marker { width:24px; height:24px; background:radial-gradient(circle,#f39c12,#e67e22); border-radius:50%; position:absolute; top:-6px; left:50%; transform:translateX(-50%); transition:left 0.3s ease; box-shadow:0 0 10px rgba(243,156,18,0.6); }
+        .rope-label { position:absolute; top:0; font-size:0.8rem; font-weight:bold; }
+        .rope-label.left { left:20px; color:#e74c3c; }
+        .rope-label.right { right:20px; color:#2ecc71; }
+        .win-zone { position:absolute; top:0; bottom:0; width:15%; }
+        .win-zone.left { left:0; background:rgba(231,76,60,0.2); border-radius:6px 0 0 6px; }
+        .win-zone.right { right:0; background:rgba(46,204,113,0.2); border-radius:0 6px 6px 0; }
+        
+        .stats-row { display:flex; justify-content:space-around; margin:15px 0; }
+        .stat-box { text-align:center; }
+        .stat-box .num { font-size:2rem; font-weight:900; }
+        .stat-box .lbl { font-size:0.7rem; color:#aaa; }
+        
+        .question-box { background:rgba(255,255,255,0.1); border-radius:15px; padding:25px; margin:15px 0; }
+        .expression { font-size:2rem; font-weight:900; margin:10px 0; }
+        .op-badge { display:inline-block; padding:3px 10px; border-radius:15px; font-size:0.75rem; font-weight:bold; margin:3px; }
+        .op-add { background:#2ecc71; }
+        .op-sub { background:#e74c3c; }
+        .op-mul { background:#3498db; }
+        .op-div { background:#9b59b6; }
+        
+        .choices { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:15px 0; }
+        .choice { padding:15px; border-radius:12px; background:rgba(255,255,255,0.1); border:2px solid rgba(255,255,255,0.2); cursor:pointer; font-size:1.3rem; font-weight:bold; transition:all 0.2s; }
+        .choice:hover { background:rgba(255,255,255,0.2); transform:scale(1.03); }
+        .choice:active { transform:scale(0.97); }
+        .choice.correct { background:rgba(46,204,113,0.3); border-color:#2ecc71; }
+        .choice.wrong { background:rgba(231,76,60,0.3); border-color:#e74c3c; }
+        
+        .timer-bar { height:6px; background:#333; border-radius:3px; margin:10px 0; overflow:hidden; }
+        .timer-fill { height:100%; background:linear-gradient(90deg,#2ecc71,#f39c12); transition:width 0.1s; }
+        .timer-fill.danger { background:linear-gradient(90deg,#e74c3c,#f39c12); }
+        
+        .results { display:none; text-align:center; padding:30px 10px; }
+        .results .big { font-size:3.5rem; font-weight:900; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="../games.html" class="back-link">← 返回遊戲專區</a>
+    <h1>⚡ 四則運算拉力賽</h1>
+    <p class="subtitle">加減乘除，答對拉過嚟！答錯被拉走！</p>
+    
+    <div class="setup" id="setup">
+        <p style="margin-bottom:15px;">每題5秒，答對向右拉1格，答錯向左拉1格。<br>拉到底就贏/輸！</p>
+        <label>👤 名字</label>
+        <input type="text" id="playerName" placeholder="輸入名字">
+        <label>🏫 班別</label>
+        <input type="text" id="playerClass" placeholder="例: 1C">
+        <label>📊 難度</label>
+        <select id="difficulty">
+            <option value="easy">初級（兩位數以內）</option>
+            <option value="medium" selected>中級（三位數）</option>
+            <option value="hard">高級（混合運算）</option>
+        </select>
+        <br><br>
+        <button class="btn btn-go" onclick="startGame()">⚡ 開始拉力賽</button>
+    </div>
+    
+    <div class="game" id="game">
+        <div class="rope-area">
+            <span class="rope-label left">💀 輸</span>
+            <span class="rope-label right">🏆 贏</span>
+            <div class="rope-track">
+                <div class="win-zone left"></div>
+                <div class="win-zone right"></div>
+                <div class="rope-marker" id="marker"></div>
+            </div>
+        </div>
+        
+        <div class="timer-bar"><div class="timer-fill" id="timerFill"></div></div>
+        
+        <div class="stats-row">
+            <div class="stat-box"><span class="num" id="scoreDisp">0</span><span class="lbl">得分</span></div>
+            <div class="stat-box"><span class="num" id="streakDisp">0</span><span class="lbl">連對🔥</span></div>
+            <div class="stat-box"><span class="num" id="qNumDisp">1</span><span class="lbl">題目</span></div>
+        </div>
+        
+        <div class="question-box">
+            <div id="opBadge"></div>
+            <div class="expression" id="expression">?</div>
+        </div>
+        
+        <div class="choices" id="choices"></div>
+    </div>
+    
+    <div class="results" id="results">
+        <h2 id="resultTitle">🏆 你贏了！</h2>
+        <div class="big" id="finalScore">0</div>
+        <p>最終得分</p>
+        <p style="margin:15px 0;">答對 <strong id="rCorrect">0</strong> 題 | 答錯 <strong id="rWrong">0</strong> 題 | 最長連對 <strong id="rStreak">0</strong></p>
+        <button class="btn btn-start" onclick="resetGame()">🔄 再戰</button>
+    </div>
+</div>
+
+<script>
+const OPS = ['+', '−', '×', '÷'];
+const OP_CLASS = { '+':'op-add', '−':'op-sub', '×':'op-mul', '÷':'op-div' };
+
+let position = 0; // -10 to +10, start at 0
+const WIN_POS = 10;
+const LOSE_POS = -10;
+let score = 0, correctCount = 0, wrongCount = 0, streak = 0, maxStreak = 0, qNum = 0;
+let questionTimer = null;
+let difficulty = 'medium';
+let answering = false;
+
+function genQuestion() {
+    const op = OPS[Math.floor(Math.random()*4)];
+    let a, b, answer;
+    const isEasy = difficulty === 'easy';
+    const isHard = difficulty === 'hard';
+    const max = isEasy ? 20 : isHard ? 100 : 50;
+    
+    if(op === '+') {
+        a = Math.floor(Math.random()*max)+1;
+        b = Math.floor(Math.random()*max)+1;
+        answer = a + b;
+    } else if(op === '−') {
+        a = Math.floor(Math.random()*max)+1;
+        b = Math.floor(Math.random()*a)+1; // ensure positive result most times
+        answer = a - b;
+    } else if(op === '×') {
+        const mmax = isEasy ? 12 : isHard ? 25 : 15;
+        a = Math.floor(Math.random()*mmax)+2;
+        b = Math.floor(Math.random()*mmax)+2;
+        answer = a * b;
+    } else { // ÷
+        b = Math.floor(Math.random()*(isEasy?10:20))+2;
+        answer = Math.floor(Math.random()*(isEasy?10:20))+1;
+        a = b * answer; // ensure clean division
+    }
+    
+    return { a, b, op, answer, display: `${a} ${op} ${b} = ?` };
+}
+
+function genChoices(correct) {
+    const choices = [correct];
+    while(choices.length < 4) {
+        let offset = Math.floor(Math.random()*Math.max(10, Math.abs(correct)*0.3))+1;
+        if(Math.random()>0.5) offset = -offset;
+        const wrong = correct + offset;
+        if(!choices.includes(wrong)) choices.push(wrong);
+    }
+    // Shuffle
+    for(let i=choices.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1));[choices[i],choices[j]]=[choices[j],choices[i]]; }
+    return choices;
+}
+
+function updateRope() {
+    const pct = ((position - LOSE_POS) / (WIN_POS - LOSE_POS)) * 100;
+    document.getElementById('marker').style.left = pct + '%';
+}
+
+function startGame() {
+    const name = document.getElementById('playerName').value.trim();
+    if(!name) { alert('請輸入名字！'); return; }
+    difficulty = document.getElementById('difficulty').value;
+    
+    position = 0; score = 0; correctCount = 0; wrongCount = 0; streak = 0; maxStreak = 0; qNum = 0;
+    
+    document.getElementById('setup').style.display = 'none';
+    document.getElementById('game').style.display = 'block';
+    document.getElementById('results').style.display = 'none';
+    
+    updateRope();
+    nextQuestion();
+}
+
+let currentAnswer = null;
+let timeLeft = 5;
+
+function nextQuestion() {
+    if(position >= WIN_POS) return endGame(true);
+    if(position <= LOSE_POS) return endGame(false);
+    
+    qNum++;
+    const q = genQuestion();
+    currentAnswer = q.answer;
+    answering = true;
+    
+    document.getElementById('expression').textContent = q.display;
+    document.getElementById('opBadge').innerHTML = `<span class="op-badge ${OP_CLASS[q.op]}">${q.op}</span>`;
+    document.getElementById('qNumDisp').textContent = qNum;
+    
+    const choices = genChoices(q.answer);
+    const container = document.getElementById('choices');
+    container.innerHTML = '';
+    choices.forEach(c => {
+        const div = document.createElement('div');
+        div.className = 'choice';
+        div.textContent = c;
+        div.addEventListener('click', () => selectAnswer(c, div));
+        container.appendChild(div);
+    });
+    
+    // 5-second timer
+    timeLeft = 5;
+    const fill = document.getElementById('timerFill');
+    fill.style.width = '100%';
+    fill.className = 'timer-fill';
+    
+    clearInterval(questionTimer);
+    questionTimer = setInterval(() => {
+        timeLeft -= 0.1;
+        const pct = (timeLeft/5)*100;
+        fill.style.width = pct+'%';
+        if(pct < 30) fill.className = 'timer-fill danger';
+        if(timeLeft <= 0) {
+            clearInterval(questionTimer);
+            handleWrong();
+        }
+    }, 100);
+}
+
+function selectAnswer(val, el) {
+    if(!answering) return;
+    answering = false;
+    clearInterval(questionTimer);
+    
+    if(val === currentAnswer) {
+        el.classList.add('correct');
+        position++;
+        score++;
+        correctCount++;
+        streak++;
+        if(streak > maxStreak) maxStreak = streak;
+    } else {
+        el.classList.add('wrong');
+        // Show correct
+        document.querySelectorAll('.choice').forEach(c => {
+            if(parseInt(c.textContent) === currentAnswer) c.classList.add('correct');
+        });
+        position--;
+        score--;
+        wrongCount++;
+        streak = 0;
+    }
+    
+    document.getElementById('scoreDisp').textContent = score;
+    document.getElementById('streakDisp').textContent = streak;
+    updateRope();
+    
+    setTimeout(nextQuestion, 500);
+}
+
+function handleWrong() {
+    answering = false;
+    position--;
+    wrongCount++;
+    streak = 0;
+    score--;
+    
+    document.querySelectorAll('.choice').forEach(c => {
+        if(parseInt(c.textContent) === currentAnswer) c.classList.add('correct');
+    });
+    
+    document.getElementById('scoreDisp').textContent = score;
+    document.getElementById('streakDisp').textContent = streak;
+    updateRope();
+    
+    setTimeout(nextQuestion, 800);
+}
+
+function endGame(won) {
+    clearInterval(questionTimer);
+    document.getElementById('game').style.display = 'none';
+    document.getElementById('results').style.display = 'block';
+    document.getElementById('resultTitle').textContent = won ? '🏆 你贏了！' : '💀 被拉走了...';
+    document.getElementById('finalScore').textContent = score;
+    document.getElementById('rCorrect').textContent = correctCount;
+    document.getElementById('rWrong').textContent = wrongCount;
+    document.getElementById('rStreak').textContent = maxStreak;
+}
+
+function resetGame() {
+    document.getElementById('results').style.display = 'none';
+    document.getElementById('setup').style.display = 'block';
+}
+</script>
+</body>
+</html>

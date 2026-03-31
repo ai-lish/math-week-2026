@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧮 計算機大賽 - Calculator Race</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Noto Sans TC',sans-serif; background:linear-gradient(135deg,#0f0c29,#302b63,#24243e); color:#fff; min-height:100vh; }
+        .container { max-width:600px; margin:0 auto; padding:20px; }
+        .back-link { display:inline-block; color:#aaa; text-decoration:none; padding:10px 0; font-size:0.9rem; }
+        .back-link:hover { color:#fff; }
+        h1 { text-align:center; font-size:1.8rem; margin:10px 0; }
+        .subtitle { text-align:center; color:#aaa; margin-bottom:20px; font-size:0.9rem; }
+        
+        /* Setup Screen */
+        .setup { text-align:center; padding:40px 20px; }
+        .setup label { display:block; margin:15px 0 5px; font-size:1rem; }
+        .setup input, .setup select { width:200px; padding:10px; border-radius:8px; border:none; font-size:1rem; text-align:center; }
+        .btn { display:inline-block; padding:15px 40px; border-radius:25px; border:none; font-size:1.2rem; font-weight:bold; cursor:pointer; margin:10px; transition:transform 0.2s; }
+        .btn:hover { transform:scale(1.05); }
+        .btn-start { background:linear-gradient(135deg,#00b09b,#96c93d); color:#fff; }
+        .btn-stop { background:linear-gradient(135deg,#e74c3c,#c0392b); color:#fff; }
+        
+        /* Game Screen */
+        .game { display:none; text-align:center; }
+        .timer-bar { height:8px; background:#333; border-radius:4px; margin:15px 0; overflow:hidden; }
+        .timer-fill { height:100%; background:linear-gradient(90deg,#00b09b,#96c93d); transition:width 0.1s linear; }
+        .timer-fill.danger { background:linear-gradient(90deg,#e74c3c,#f39c12); }
+        .stats { display:flex; justify-content:space-around; margin:10px 0 20px; }
+        .stat { text-align:center; }
+        .stat .num { font-size:2rem; font-weight:900; }
+        .stat .label { font-size:0.7rem; color:#aaa; }
+        
+        .question-box { background:rgba(255,255,255,0.1); border-radius:15px; padding:30px; margin:15px 0; }
+        .expression { font-size:1.6rem; font-weight:bold; margin-bottom:5px; font-family:monospace; word-break:break-all; }
+        .hint { color:#aaa; font-size:0.8rem; }
+        
+        .answer-input { width:100%; padding:15px; border-radius:12px; border:2px solid #555; background:#1a1a2e; color:#fff; font-size:1.5rem; text-align:center; margin:10px 0; }
+        .answer-input:focus { outline:none; border-color:#00b09b; }
+        .answer-input.correct { border-color:#2ecc71; background:rgba(46,204,113,0.15); }
+        .answer-input.wrong { border-color:#e74c3c; background:rgba(231,76,60,0.15); }
+        
+        .feedback { font-size:1.2rem; min-height:30px; margin:5px 0; }
+        
+        /* Results */
+        .results { display:none; text-align:center; padding:30px 20px; }
+        .results h2 { font-size:2rem; margin-bottom:20px; }
+        .result-card { background:rgba(255,255,255,0.1); border-radius:15px; padding:25px; margin:15px 0; }
+        .big-score { font-size:4rem; font-weight:900; }
+        .result-detail { display:flex; justify-content:space-around; margin:20px 0; }
+        .result-detail .item { text-align:center; }
+        .result-detail .val { font-size:1.5rem; font-weight:bold; }
+        .result-detail .lbl { font-size:0.8rem; color:#aaa; }
+        
+        .hidden { display:none; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="../games.html" class="back-link">← 返回遊戲專區</a>
+    <h1>🧮 計算機大賽</h1>
+    <p class="subtitle">CASIO fx-50FHII 計算機速度挑戰</p>
+    
+    <!-- Setup -->
+    <div class="setup" id="setup">
+        <p style="margin-bottom:20px;">用你的計算機，鬥快鬥準！</p>
+        <label>👤 你的名字</label>
+        <input type="text" id="playerName" placeholder="輸入名字" maxlength="20">
+        <label>🏫 班別</label>
+        <input type="text" id="playerClass" placeholder="例: 3A" maxlength="5">
+        <label>⏱️ 遊戲時間</label>
+        <select id="gameTime">
+            <option value="30">30 秒</option>
+            <option value="60" selected>60 秒</option>
+            <option value="90">90 秒</option>
+        </select>
+        <label>📊 難度</label>
+        <select id="difficulty">
+            <option value="Easy">初級 (Easy)</option>
+            <option value="Medium" selected>中級 (Medium)</option>
+            <option value="Hard">高級 (Hard)</option>
+            <option value="all">全部混合</option>
+        </select>
+        <br><br>
+        <button class="btn btn-start" onclick="startGame()">🚀 開始挑戰</button>
+    </div>
+    
+    <!-- Game -->
+    <div class="game" id="game">
+        <div class="timer-bar"><div class="timer-fill" id="timerFill"></div></div>
+        <div class="stats">
+            <div class="stat"><span class="num" id="scoreDisplay">0</span><span class="label">得分</span></div>
+            <div class="stat"><span class="num" id="timeDisplay">60</span><span class="label">秒</span></div>
+            <div class="stat"><span class="num" id="qNum">1</span><span class="label">題目</span></div>
+        </div>
+        <div class="question-box">
+            <div class="expression" id="expression">Loading...</div>
+            <div class="hint" id="hint"></div>
+        </div>
+        <input type="text" class="answer-input" id="answerInput" placeholder="輸入答案（3位有效數字）" inputmode="decimal" autocomplete="off">
+        <div class="feedback" id="feedback"></div>
+        <button class="btn btn-stop" onclick="endGame()">⏹ 結束</button>
+    </div>
+    
+    <!-- Results -->
+    <div class="results" id="results">
+        <h2>🏆 挑戰完成！</h2>
+        <div class="result-card">
+            <div class="big-score" id="finalScore">0</div>
+            <p>最終得分</p>
+        </div>
+        <div class="result-detail">
+            <div class="item"><div class="val" id="rCorrect">0</div><div class="lbl">✅ 答對</div></div>
+            <div class="item"><div class="val" id="rWrong">0</div><div class="lbl">❌ 答錯</div></div>
+            <div class="item"><div class="val" id="rSkip">0</div><div class="lbl">⏭️ 跳過</div></div>
+            <div class="item"><div class="val" id="rAvg">0</div><div class="lbl">⏱️ 平均(秒)</div></div>
+        </div>
+        <button class="btn btn-start" onclick="resetGame()">🔄 再玩一次</button>
+    </div>
+</div>
+
+<script>
+// Question bank (loaded from CSV inline for offline use)
+let questions = [];
+let currentQ = null;
+let score = 0, correct = 0, wrong = 0, skipped = 0, qIndex = 0;
+let totalTime = 60, timeLeft = 60;
+let timerInterval = null;
+let questionStartTime = 0;
+let answerTimes = [];
+
+// Parse embedded CSV (will be loaded via fetch)
+async function loadQuestions() {
+    try {
+        const resp = await fetch('../question-bank/calculator_questions_full_CORRECTED.csv');
+        const text = await resp.text();
+        const lines = text.trim().split('\n');
+        const headers = lines[0].split(',');
+        questions = lines.slice(1).map(line => {
+            const cols = line.split(',');
+            return {
+                id: cols[0],
+                expression: cols[1],
+                answer: cols[2],
+                exact: cols[3],
+                difficulty: cols[4],
+                topics: cols[5]
+            };
+        });
+    } catch(e) {
+        // Fallback: generate random questions
+        console.warn('Could not load question bank, using generated questions');
+        for(let i=0; i<100; i++) {
+            const a = Math.floor(Math.random()*100)+1;
+            const b = Math.floor(Math.random()*100)+1;
+            const ops = ['+','-','*'];
+            const op = ops[Math.floor(Math.random()*3)];
+            const ans = eval(`${a}${op}${b}`);
+            questions.push({ id:`gen-${i}`, expression:`${a}${op}${b}`, answer:String(Number(ans.toPrecision(3))), difficulty:'Medium' });
+        }
+    }
+}
+
+function filterQuestions(diff) {
+    if(diff === 'all') return [...questions];
+    return questions.filter(q => q.difficulty === diff);
+}
+
+function shuffleArray(arr) {
+    for(let i=arr.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]; }
+    return arr;
+}
+
+let gameQuestions = [];
+
+function startGame() {
+    const name = document.getElementById('playerName').value.trim();
+    if(!name) { alert('請輸入名字！'); return; }
+    
+    totalTime = parseInt(document.getElementById('gameTime').value);
+    timeLeft = totalTime;
+    const diff = document.getElementById('difficulty').value;
+    
+    score=0; correct=0; wrong=0; skipped=0; qIndex=0; answerTimes=[];
+    gameQuestions = shuffleArray(filterQuestions(diff));
+    if(gameQuestions.length === 0) { alert('無題目！'); return; }
+    
+    document.getElementById('setup').style.display='none';
+    document.getElementById('game').style.display='block';
+    document.getElementById('results').style.display='none';
+    
+    updateDisplay();
+    nextQuestion();
+    
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay();
+        if(timeLeft <= 0) endGame();
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    document.getElementById('timeDisplay').textContent = timeLeft;
+    const pct = (timeLeft/totalTime)*100;
+    const fill = document.getElementById('timerFill');
+    fill.style.width = pct+'%';
+    fill.className = pct < 20 ? 'timer-fill danger' : 'timer-fill';
+}
+
+function updateDisplay() {
+    document.getElementById('scoreDisplay').textContent = score;
+    document.getElementById('timeDisplay').textContent = timeLeft;
+    document.getElementById('qNum').textContent = qIndex+1;
+}
+
+function displayExpression(expr) {
+    // Make expression more readable
+    return expr.replace(/\*\*/g, '^').replace(/\*/g, ' × ').replace(/\//g, ' ÷ ').replace(/sqrt\(/g, '√(').replace(/ln\(/g, 'ln(');
+}
+
+function nextQuestion() {
+    if(qIndex >= gameQuestions.length) {
+        gameQuestions = shuffleArray(gameQuestions); // reshuffle
+        qIndex = 0;
+    }
+    currentQ = gameQuestions[qIndex];
+    document.getElementById('expression').textContent = displayExpression(currentQ.expression);
+    document.getElementById('hint').textContent = `難度: ${currentQ.difficulty} | 答案取3位有效數字`;
+    document.getElementById('answerInput').value = '';
+    document.getElementById('answerInput').className = 'answer-input';
+    document.getElementById('feedback').textContent = '';
+    document.getElementById('answerInput').focus();
+    questionStartTime = Date.now();
+}
+
+function checkAnswer(userAns) {
+    const expected = currentQ.answer.trim();
+    // Parse both as numbers for comparison
+    const userNum = parseFloat(userAns);
+    const expNum = parseFloat(expected);
+    
+    if(isNaN(userNum)) return false;
+    
+    // Allow 1% tolerance or exact string match
+    if(userAns.trim() === expected) return true;
+    if(expNum === 0) return Math.abs(userNum) < 0.01;
+    return Math.abs((userNum - expNum)/expNum) < 0.015;
+}
+
+// Handle Enter key
+document.addEventListener('DOMContentLoaded', () => {
+    loadQuestions();
+    document.getElementById('answerInput').addEventListener('keydown', (e) => {
+        if(e.key === 'Enter') {
+            const val = e.target.value.trim();
+            if(!val) { // Skip on empty enter
+                skipped++;
+                qIndex++;
+                updateDisplay();
+                nextQuestion();
+                return;
+            }
+            
+            const elapsed = (Date.now() - questionStartTime)/1000;
+            answerTimes.push(elapsed);
+            
+            if(checkAnswer(val)) {
+                score++;
+                correct++;
+                e.target.className = 'answer-input correct';
+                document.getElementById('feedback').textContent = '✅ 正確！';
+            } else {
+                score--;
+                wrong++;
+                e.target.className = 'answer-input wrong';
+                document.getElementById('feedback').textContent = `❌ 答案: ${currentQ.answer}`;
+            }
+            
+            updateDisplay();
+            qIndex++;
+            setTimeout(nextQuestion, 600);
+        }
+    });
+});
+
+function endGame() {
+    clearInterval(timerInterval);
+    document.getElementById('game').style.display='none';
+    document.getElementById('results').style.display='block';
+    
+    document.getElementById('finalScore').textContent = score;
+    document.getElementById('rCorrect').textContent = correct;
+    document.getElementById('rWrong').textContent = wrong;
+    document.getElementById('rSkip').textContent = skipped;
+    const avg = answerTimes.length ? (answerTimes.reduce((a,b)=>a+b,0)/answerTimes.length).toFixed(1) : '—';
+    document.getElementById('rAvg').textContent = avg;
+}
+
+function resetGame() {
+    document.getElementById('results').style.display='none';
+    document.getElementById('setup').style.display='block';
+}
+</script>
+</body>
+</html>
