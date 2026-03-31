@@ -57,12 +57,17 @@
 // ============================================================
 const SHEET_ID = '1c-eAuLu2hLCdMZ02T7aiPZfQkmgoqHhN5G7zmn_Q4Tk';
 
-const GAMES = ['計算機大賽', '公式圖像配對', '四則運算拉力賽'];
+const GAMES = [
+  { name: '計算機大賽',     gid: '1841574299' },
+  { name: '公式圖像配對',  gid: '1163130944' },
+  { name: '四則運算拉力賽', gid: '921321371'  }
+];
 const MEDALS = { 1: '🥇', 2: '🥈', 3: '🥉' };
 let cache = {};
 
-function csvUrl(sheetName) {
-  return `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}`;
+function csvUrl(game) {
+  // Uses "anyone with link" CSV export — no "publish to web" needed
+  return `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${game.gid}`;
 }
 
 function parseCSV(text) {
@@ -94,9 +99,8 @@ async function loadGame(name) {
   if (cache[name]) { render(cache[name], el); return; }
   el.innerHTML = '<div class="loading">載入中...</div>';
   try {
-    const res = await fetch(csvUrl(name));
-    if (!res.ok) throw new Error(res.status);
-    const rows = parseCSV(await res.text()).filter(r => r['姓名']);
+    const game = GAMES.find(g => g.name === name);
+    const res = await fetch(csvUrl(game));
     rows.sort((a, b) => (parseFloat(b['總分']) || 0) - (parseFloat(a['總分']) || 0));
     rows.forEach((r, i) => r._rank = i + 1);
     cache[name] = rows;
@@ -128,7 +132,7 @@ document.querySelectorAll('.tab').forEach(tab => {
 });
 
 // Auto-refresh every 30s
-loadGame(GAMES[0]);
+loadGame(GAMES[0].name);
 setInterval(() => {
   cache = {};
   const active = document.querySelector('.tab.active');
