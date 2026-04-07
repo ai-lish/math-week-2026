@@ -62,9 +62,8 @@
         <div class="dual-entry">
             <button class="dual-entry-btn student" onclick="scrollToSection('#activities')">
                 <span class="icon">👦</span>
-                <span>我是學生</span>
+                <span>學生專區</span>
             </button>
-            <!-- 教師按鈕已移除 -->
         </div>
     </div>
     <div class="wave-divider">
@@ -74,38 +73,6 @@
     </div>
 </section>
 
-<section class="section section-alt" id="activities">
-    <div class="container">
-        <div class="section-header">
-            <h2>🎯 活動亮點</h2>
-            <p>五大精彩活動，總有一個啱你！</p>
-        </div>
-        <div class="highlights-grid">
-            <a href="games.html" class="highlight-card">
-                <div class="highlight-card-img blue">🧮</div>
-                <div class="highlight-card-body"><h4>計算機大賽</h4><p>60秒限時挑戰，考驗計算速度。</p></div>
-            </a>
-            <a href="rummikub.html" class="highlight-card">
-                <div class="highlight-card-img orange">🧩</div>
-                <div class="highlight-card-body"><h4>Rummikub 大賽</h4><p>班際比賽，鬥快清牌！</p></div>
-            </a>
-            <a href="games.html" class="highlight-card">
-                <div class="highlight-card-img yellow">📐</div>
-                <div class="highlight-card-body"><h4>公式圖像配對</h4><p>配對公式與名稱。</p></div>
-            </a>
-            <a href="#schedule" class="highlight-card">
-                <div class="highlight-card-img green">🏆</div>
-                <div class="highlight-card-body"><h4>初中數學比賽</h4><p>每週發布挑戰題，決賽 5月6日。</p></div>
-            </a>
-            <a href="leaderboard/leaderboard.html" class="highlight-card">
-                <div class="highlight-card-img purple">📊</div>
-                <div class="highlight-card-body"><h4>積分排行榜</h4><p>個人及班際排名，實時更新。</p></div>
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- ==================== SCHEDULE (TABS + CALENDAR + BUTTONS + HIGHLIGHTS) ==================== -->
 <section class="section schedule-section" id="schedule">
     <div class="container">
         <div class="section-header">
@@ -163,41 +130,35 @@
                 </table>
             </div>
 
-            <!-- Phase 2 calendar (May 4 - 8) -->
+            <!-- Phase 2 calendar (May 4 - 8) - X-axis = dates -->
             <div id="phase2-calendar" class="calendar-wrap" style="display:none;">
                 <table class="schedule-table">
                     <thead>
-                        <tr><th>日期</th><th>早讀</th><th>午膳</th><th>周會</th></tr>
+                        <tr><th>活動</th><th>5月4日（週一）</th><th>5月5日（週二）</th><th>5月6日（週三）</th><th>5月7日（週四）</th><th>5月8日（週五）</th></tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>5月4日（週一）</td>
+                            <td>早讀</td>
                             <td>—</td>
-                            <td>🎨 數學專題研習作品展</td>
                             <td>—</td>
-                        </tr>
-                        <tr>
-                            <td>5月5日（週二）</td>
-                            <td>—</td>
-                            <td>🎮 數學小遊戲</td>
-                            <td>—</td>
-                        </tr>
-                        <tr>
-                            <td>5月6日（週三）</td>
                             <td><a href="reading.html">📖 數學閱讀</a></td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>午膳</td>
+                            <td>🎨 數學專題研習作品展</td>
+                            <td>🎮 數學小遊戲</td>
                             <td>🧩 Rummikub 大賽</td>
-                            <td>🏆 初中數學比賽決賽</td>
-                        </tr>
-                        <tr>
-                            <td>5月7日（週四）</td>
-                            <td>—</td>
                             <td>🏦 數學銀行</td>
-                            <td>🎓 高中數學講座</td>
+                            <td>🌈 閉幕式 + 遊戲</td>
                         </tr>
                         <tr>
-                            <td>5月8日（週五）</td>
+                            <td>周會</td>
                             <td>—</td>
-                            <td>🌈 閉幕式 + 遊戲</td>
+                            <td>—</td>
+                            <td>🏆 初中數學比賽決賽</td>
+                            <td>🎓 高中數學講座</td>
                             <td>—</td>
                         </tr>
                     </tbody>
@@ -205,6 +166,38 @@
             </div>
         </div>
 
+    </div>
+</section>
+
+<!-- ==================== ACTIVITY HIGHLIGHTS (MOVED TO BOTTOM) ==================== -->
+<section class="section section-alt" id="activities">
+    <div class="container">
+        <div class="section-header">
+            <h2>🎯 活動亮點</h2>
+            <p>五大精彩活動，總有一個啱你！</p>
+        </div>
+        <div class="highlights-grid">
+            <a href="games.html" class="highlight-card">
+                <div class="highlight-card-img blue">🧮</div>
+                <div class="highlight-card-body"><h4>計算機大賽</h4><p>60秒限時挑戰，考驗計算速度。</p></div>
+            </a>
+            <a href="rummikub.html" class="highlight-card">
+                <div class="highlight-card-img orange">🧩</div>
+                <div class="highlight-card-body"><h4>Rummikub 大賽</h4><p>班際比賽，鬥快清牌！</p></div>
+            </a>
+            <a href="games.html" class="highlight-card">
+                <div class="highlight-card-img yellow">📐</div>
+                <div class="highlight-card-body"><h4>公式圖像配對</h4><p>配對公式與名稱。</p></div>
+            </a>
+            <a href="#schedule" class="highlight-card">
+                <div class="highlight-card-img green">🏆</div>
+                <div class="highlight-card-body"><h4>初中數學比賽</h4><p>每週發布挑戰題，決賽 5月6日。</p></div>
+            </a>
+            <a href="leaderboard/leaderboard.html" class="highlight-card">
+                <div class="highlight-card-img purple">📊</div>
+                <div class="highlight-card-body"><h4>積分排行榜</h4><p>個人及班際排名，實時更新。</p></div>
+            </a>
+        </div>
     </div>
 </section>
 
