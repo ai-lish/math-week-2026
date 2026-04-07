@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎓 靈風中學 數學周 2026 | 13/4 - 8/5/2026</title>
-    <meta name="description" content="靈風中學數學周 2026 — 探索數學的奇妙世界！中學生及老師專屬活動，計算機大賽、配對卡牌、Rummikub、每日挑戰等著你！">
+    <title>🔢 數學周 2026 | 13/4 - 8/5/2026</title>
+    <meta name="description" content="數學周 2026 — 學生活動、挑戰與日程表。">
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- ==================== NAVBAR ==================== -->
 <nav class="navbar">
     <div class="navbar-inner">
         <a href="index.html" class="navbar-brand">
@@ -33,7 +31,6 @@
     </div>
 </nav>
 
-<!-- Mobile Nav -->
 <div class="mobile-nav" id="mobileNav">
     <div class="mobile-nav-panel">
         <div class="mobile-nav-header">
@@ -47,61 +44,29 @@
             <li><a href="rummikub.html" onclick="toggleMobileNav()">🧩 Rummikub</a></li>
             <li><a href="reading.html" onclick="toggleMobileNav()">📖 數學閱讀</a></li>
             <li><a href="leaderboard/leaderboard.html" onclick="toggleMobileNav()">🏆 積分榜</a></li>
-            <li><a href="#teachers" onclick="toggleMobileNav()">👨‍🏫 教師專區</a></li>
         </ul>
     </div>
 </div>
 
-<!-- ==================== HERO ==================== -->
 <section class="hero">
     <div class="hero-inner">
-        <div class="hero-eyebrow">📅 2025-26 學年 精彩活動</div>
-
-        <h1>靈風中學<br><span class="highlight">數學周 2026</span></h1>
-        <p class="hero-sub">探索數學的奇妙世界！中學生及老師專屬活動，等你參與！</p>
+        <div class="hero-eyebrow">📅 2025-26 學年</div>
+        <h1>數學周 2026</h1>
+        <p class="hero-sub">學生專屬活動：每日挑戰、遊戲、比賽與豐富日程。</p>
 
         <div class="hero-badges">
             <span class="hero-badge">📅 13/4 – 8/5/2026</span>
             <span class="hero-badge cta">🎯 立即報名</span>
         </div>
 
-        <!-- Dual Entry CTA -->
         <div class="dual-entry">
             <button class="dual-entry-btn student" onclick="scrollToSection('#activities')">
                 <span class="icon">👦</span>
                 <span>我是學生</span>
             </button>
-            <button class="dual-entry-btn teacher" onclick="scrollToSection('#teachers')">
-                <span class="icon">👨‍🏫</span>
-                <span>我是老師</span>
-            </button>
-        </div>
-
-        <!-- Countdown -->
-        <div class="countdown-wrap" id="countdownWrap">
-            <div class="countdown-label">距離數學周正式開始</div>
-            <div class="countdown-grid" id="countdownGrid">
-                <div class="countdown-item">
-                    <span class="num" id="cd-days">--</span>
-                    <span class="unit">日</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="num" id="cd-hours">--</span>
-                    <span class="unit">時</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="num" id="cd-mins">--</span>
-                    <span class="unit">分</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="num" id="cd-secs">--</span>
-                    <span class="unit">秒</span>
-                </div>
-            </div>
+            <!-- 教師按鈕已移除 -->
         </div>
     </div>
-
-    <!-- Wave -->
     <div class="wave-divider">
         <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
             <path fill="#F7FAFC" d="M0,60 L1440,60 L1440,0 Q720,50 0,30 Z"></path>
@@ -109,320 +74,207 @@
     </div>
 </section>
 
-<!-- ==================== ACTIVITY HIGHLIGHTS ==================== -->
 <section class="section section-alt" id="activities">
     <div class="container">
         <div class="section-header">
             <h2>🎯 活動亮點</h2>
             <p>五大精彩活動，總有一個啱你！</p>
         </div>
-
         <div class="highlights-grid">
-            <!-- Card 1 -->
             <a href="games.html" class="highlight-card">
                 <div class="highlight-card-img blue">🧮</div>
-                <div class="highlight-card-body">
-                    <h4>計算機大賽</h4>
-                    <p>用 CASIO fx-50FHII 計算機鬥快計數！涵蓋基礎、指數、對數、三角，60秒限時挑戰。</p>
-                    <span class="highlight-card-tag tag-blue">🎮 午休 iPad 站</span>
-                </div>
+                <div class="highlight-card-body"><h4>計算機大賽</h4><p>60秒限時挑戰，考驗計算速度。</p></div>
             </a>
-
-            <!-- Card 2 -->
             <a href="rummikub.html" class="highlight-card">
                 <div class="highlight-card-img orange">🧩</div>
-                <div class="highlight-card-body">
-                    <h4>Rummikub 大賽</h4>
-                    <p>經典數字牌遊戲！鬥快將手中的牌砌成順子或三同，快速清牌就贏！</p>
-                    <span class="highlight-card-tag tag-orange">🏆 班際比賽</span>
-                </div>
+                <div class="highlight-card-body"><h4>Rummikub 大賽</h4><p>班際比賽，鬥快清牌！</p></div>
             </a>
-
-            <!-- Card 3 -->
             <a href="games.html" class="highlight-card">
                 <div class="highlight-card-img yellow">📐</div>
-                <div class="highlight-card-body">
-                    <h4>公式圖像配對</h4>
-                    <p>配對數學公式和對應的答案/名稱！考驗你的記憶力和數學知識，鬥快完成！</p>
-                    <span class="highlight-card-tag tag-yellow">📱 iPad 觸控</span>
-                </div>
+                <div class="highlight-card-body"><h4>公式圖像配對</h4><p>配對公式與名稱。</p></div>
             </a>
-
-            <!-- Card 4 -->
             <a href="#schedule" class="highlight-card">
                 <div class="highlight-card-img green">🏆</div>
-                <div class="highlight-card-body">
-                    <h4>初中數學比賽</h4>
-                    <p>每週發佈挑戰題，逢星期四交回！決賽在 5月6日（週三）周會舉行。</p>
-                    <span class="highlight-card-tag tag-green">📅 4月13日開始</span>
-                </div>
+                <div class="highlight-card-body"><h4>初中數學比賽</h4><p>每週發布挑戰題，決賽 5月6日。</p></div>
             </a>
-
-            <!-- Card 5 -->
             <a href="leaderboard/leaderboard.html" class="highlight-card">
                 <div class="highlight-card-img purple">📊</div>
-                <div class="highlight-card-body">
-                    <h4>積分排行榜</h4>
-                    <p>遊戲積分即時更新！個人及班際排名，終極大獎等住你！</p>
-                    <span class="highlight-card-tag tag-blue">🏆 總積分冠軍</span>
-                </div>
+                <div class="highlight-card-body"><h4>積分排行榜</h4><p>個人及班際排名，實時更新。</p></div>
             </a>
         </div>
     </div>
 </section>
 
-<!-- ==================== DAILY CHALLENGE PREVIEW ==================== -->
-<section class="section">
-    <div class="container">
-        <div class="daily-challenge">
-            <div class="daily-challenge-label">⚡ 今日挑戰</div>
-            <h3>考驗你的數學直覺！</h3>
-            <p>每日都有一個新挑戰，等住你午休時來試試！挑戰成功可以獲得積分，累計積分可以兌換精美禮品。</p>
-            <a href="games.html" class="btn btn-accent btn-lg">
-                🎮 立即挑戰
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- ==================== SCHEDULE ==================== -->
-<section class="section section-alt schedule-section" id="schedule">
+<!-- ==================== SCHEDULE (TABS + CALENDAR + BUTTONS + HIGHLIGHTS) ==================== -->
+<section class="section schedule-section" id="schedule">
     <div class="container">
         <div class="section-header">
-            <h2>📅 第二階段：數學周日程表</h2>
-            <p>5月4日（週一）至 5月8日（週五）</p>
+            <h2>📅 數學周日程與活動</h2>
+            <p>在此選擇階段與查看日程（點擊月曆項目可跳至相關活動）。</p>
         </div>
 
-        <div class="calendar-tabs">
-            <button class="calendar-tab active" onclick="showSchedule('all')">全部</button>
-            <button class="calendar-tab" onclick="showSchedule('morning')">早讀/周會</button>
-            <button class="calendar-tab" onclick="showSchedule('lunch')">午休</button>
-            <button class="calendar-tab" onclick="showSchedule('special')">特別活動</button>
+        <!-- Phase Tabs -->
+        <div class="phase-tabs" style="display:flex;gap:8px;margin-bottom:18px;">
+            <button class="phase-tab active" data-phase="phase1" onclick="switchPhase(event)">第一階段</button>
+            <button class="phase-tab" data-phase="phase2" onclick="switchPhase(event)">第二階段</button>
         </div>
 
-        <div class="schedule-table-wrap">
-            <table class="schedule-table">
-                <thead>
-                    <tr>
-                        <th class="time-col">時段</th>
-                        <th>5月4日<br><small>週一</small></th>
-                        <th>5月5日<br><small>週二</small></th>
-                        <th>5月6日<br><small>週三</small></th>
-                        <th>5月7日<br><small>週四</small></th>
-                        <th class="closed">5月8日<br><small>週五 🌈</small></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- 早讀 -->
-                    <tr>
-                        <td class="time-col schedule-cell morning">早讀</td>
-                        <td class="schedule-cell empty">—</td>
-                        <td class="schedule-cell empty">—</td>
-                        <td class="schedule-cell morning"><a href="reading.html">📖 數學閱讀</a></td>
-                        <td class="schedule-cell empty">—</td>
-                        <td class="schedule-cell empty">—</td>
-                    </tr>
-                    <!-- 午休 row 1 -->
-                    <tr>
-                        <td class="time-col schedule-cell lunch" rowspan="4">午休</td>
-                        <td class="schedule-cell lunch" colspan="4">🎨 數學專題研習作品展</td>
-                        <td class="schedule-cell special">🌈 數學大彩虹<br><small>閉幕式</small></td>
-                    </tr>
-                    <!-- 午休 row 2 -->
-                    <tr>
-                        <td class="schedule-cell lunch" colspan="4"><a href="games.html">🎮 數學小遊戲</a></td>
-                        <td class="schedule-cell lunch">🎮 數學小遊戲</td>
-                    </tr>
-                    <!-- 午休 row 3 -->
-                    <tr>
-                        <td class="schedule-cell lunch" colspan="4"><a href="rummikub.html">🧩 Rummikub大賽</a></td>
-                        <td class="schedule-cell empty">—</td>
-                    </tr>
-                    <!-- 午休 row 4 -->
-                    <tr>
-                        <td class="schedule-cell lunch" colspan="4">🏦 數學銀行</td>
-                        <td class="schedule-cell lunch">🏦 數學銀行</td>
-                    </tr>
-                    <!-- 周會 -->
-                    <tr>
-                        <td class="time-col schedule-cell assembly">周會</td>
-                        <td class="schedule-cell empty">—</td>
-                        <td class="schedule-cell empty">—</td>
-                        <td class="schedule-cell assembly">🏆 初中數學比賽決賽</td>
-                        <td class="schedule-cell assembly">🎓 高中數學講座</td>
-                        <td class="schedule-cell empty">—</td>
-                    </tr>
-                </tbody>
-            </table>
+        <!-- Button selectors (changes per phase) -->
+        <div id="selectors" style="margin-bottom:18px;">
+            <!-- Phase 1 selectors -->
+            <div class="selector-row" id="phase1-selectors">
+                <button class="sel-btn" data-week="week1" onclick="selectWeek(event)">星期1</button>
+                <button class="sel-btn" data-week="week2" onclick="selectWeek(event)">星期2</button>
+                <button class="sel-btn" data-week="week3" onclick="selectWeek(event)">星期3</button>
+            </div>
+            <!-- Phase 2 selectors (hidden by default) -->
+            <div class="selector-row" id="phase2-selectors" style="display:none;">
+                <button class="sel-btn" data-activity="morning" onclick="selectActivity(event)">早讀</button>
+                <button class="sel-btn" data-activity="lunch" onclick="selectActivity(event)">午膳</button>
+                <button class="sel-btn" data-activity="assembly" onclick="selectActivity(event)">周會</button>
+            </div>
         </div>
 
-        <div class="text-center" style="margin-top:30px;">
-            <a href="games.html" class="btn btn-primary btn-lg">
-                🎮 前往遊戲專區
-            </a>
+        <!-- Activity highlight area -->
+        <div id="activityHighlights" class="section-alt" style="padding:18px;border-radius:12px;margin-bottom:18px;">
+            <div id="activityContent">
+                <h3 class="text-center">請選擇週次或活動以查看內容</h3>
+            </div>
         </div>
+
+        <!-- Calendar (置頂顯示) -->
+        <div id="calendarArea">
+            <!-- Phase 1 calendar (April 13 - May 1) -->
+            <div id="phase1-calendar" class="calendar-wrap">
+                <table class="schedule-table">
+                    <thead>
+                        <tr><th>日期</th><th>活動</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>4月13日（週一）</td><td><a href="#" onclick="jumpToSelector('phase1','week1');return false;">開幕儀式</a></td></tr>
+                        <tr><td>4月14日（週二）</td><td><a href="#" onclick="jumpToSelector('phase1','week1');return false;">星期1 題目發布</a></td></tr>
+                        <tr><td>4月16日（週四）</td><td>初中數學比賽第一輪</td></tr>
+                        <tr><td>4月21日（週一）</td><td><a href="#" onclick="jumpToSelector('phase1','week2');return false;">星期2 題目發布</a></td></tr>
+                        <tr><td>4月23日（週四）</td><td>初中數學比賽第二輪</td></tr>
+                        <tr><td>4月27日（週一）</td><td><a href="#" onclick="jumpToSelector('phase1','week3');return false;">星期3 題目發布</a></td></tr>
+                        <tr><td>4月29日（週三）</td><td>初中數學比賽第三輪</td></tr>
+                        <tr><td>5月1日（週五）</td><td>勞動節假期</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Phase 2 calendar (May 4 - 8) -->
+            <div id="phase2-calendar" class="calendar-wrap" style="display:none;">
+                <table class="schedule-table">
+                    <thead>
+                        <tr><th>日期</th><th>早讀</th><th>午膳</th><th>周會</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>5月4日（週一）</td>
+                            <td>—</td>
+                            <td>🎨 數學專題研習作品展</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>5月5日（週二）</td>
+                            <td>—</td>
+                            <td>🎮 數學小遊戲</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>5月6日（週三）</td>
+                            <td><a href="reading.html">📖 數學閱讀</a></td>
+                            <td>🧩 Rummikub 大賽</td>
+                            <td>🏆 初中數學比賽決賽</td>
+                        </tr>
+                        <tr>
+                            <td>5月7日（週四）</td>
+                            <td>—</td>
+                            <td>🏦 數學銀行</td>
+                            <td>🎓 高中數學講座</td>
+                        </tr>
+                        <tr>
+                            <td>5月8日（週五）</td>
+                            <td>—</td>
+                            <td>🌈 閉幕式 + 遊戲</td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
 </section>
 
-<!-- ==================== TEACHERS SECTION ==================== -->
-<section class="section" id="teachers">
-    <div class="container">
-        <div class="section-header">
-            <h2>👨‍🏫 教師專區</h2>
-            <p>老師們可以在這裡找到工作紙、簡報及課堂建議</p>
-        </div>
-
-        <div class="teachers-grid">
-            <div class="teacher-card">
-                <div class="teacher-card-icon">📄</div>
-                <div>
-                    <h4>工作紙下載</h4>
-                    <p>初中數學比賽工作紙、每日挑戰題目 PDF 版本，可直接列印使用。</p>
-                    <span class="download-tag">📥 PDF 格式 · 即将上线</span>
-                </div>
-            </div>
-
-            <div class="teacher-card">
-                <div class="teacher-card-icon">📊</div>
-                <div>
-                    <h4>早會簡報</h4>
-                    <p>可在早會時使用的簡短數學知識簡報，包含有趣的數學小故事和知識點。</p>
-                    <span class="download-tag">📥 PPT 格式 · 即将上线</span>
-                </div>
-            </div>
-
-            <div class="teacher-card">
-                <div class="teacher-card-icon">🎯</div>
-                <div>
-                    <h4>課堂活動建議</h4>
-                    <p>配合數學周的課堂活動建議，包括互動小遊戲、分組比賽、討論問題。</p>
-                    <span class="download-tag">📥 PDF 格式 · 即将上线</span>
-                </div>
-            </div>
-
-            <div class="teacher-card">
-                <div class="teacher-card-icon">🏆</div>
-                <div>
-                    <h4>比賽評分準則</h4>
-                    <p>初中數學比賽決賽的評分準則和注意事項，方便老師準備和主持比賽。</p>
-                    <span class="download-tag">📥 PDF 格式 · 即将上线</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ==================== LEADERBOARD PREVIEW ==================== -->
 <section class="section section-alt">
-    <div class="container">
-        <div class="section-header">
-            <h2>🏆 積分榜</h2>
-            <p>看看目前誰領先！積分每天更新</p>
-        </div>
-
-        <div class="leaderboard-list">
-            <div class="leaderboard-item">
-                <div class="leaderboard-rank gold">🥇</div>
-                <div class="leaderboard-info">
-                    <div class="leaderboard-name">——</div>
-                    <div class="leaderboard-class">敬請期待</div>
-                </div>
-                <div class="leaderboard-score">— 分</div>
-            </div>
-            <div class="leaderboard-item">
-                <div class="leaderboard-rank silver">🥈</div>
-                <div class="leaderboard-info">
-                    <div class="leaderboard-name">——</div>
-                    <div class="leaderboard-class">敬請期待</div>
-                </div>
-                <div class="leaderboard-score">— 分</div>
-            </div>
-            <div class="leaderboard-item">
-                <div class="leaderboard-rank bronze">🥉</div>
-                <div class="leaderboard-info">
-                    <div class="leaderboard-name">——</div>
-                    <div class="leaderboard-class">敬請期待</div>
-                </div>
-                <div class="leaderboard-score">— 分</div>
-            </div>
-        </div>
-
-        <div class="text-center" style="margin-top:24px;">
-            <a href="leaderboard/leaderboard.html" class="btn btn-outline">
-                查看完整排名 →
-            </a>
-        </div>
+    <div class="container text-center">
+        <h2>🏆 積分榜</h2>
+        <p>查看完整排名 → <a href="leaderboard/leaderboard.html">積分榜</a></p>
     </div>
 </section>
 
-<!-- ==================== FOOTER ==================== -->
 <footer class="footer">
-    <div class="footer-logo">🎓 靈風中學 數學周 2026</div>
+    <div class="footer-logo">🔢 數學周 2026</div>
     <p>探索數學的奇妙世界！</p>
-    <div class="footer-links">
-        <a href="games.html">數學遊戲</a>
-        <a href="rummikub.html">Rummikub</a>
-        <a href="reading.html">數學閱讀</a>
-        <a href="leaderboard/leaderboard.html">積分榜</a>
-    </div>
 </footer>
 
-<!-- ==================== SCRIPTS ==================== -->
 <script>
-/* Countdown Timer */
-(function() {
-    const target = new Date('2026-05-04T08:00:00+08:00');
-    const wrap = document.getElementById('countdownWrap');
-    const grid = document.getElementById('countdownGrid');
+function toggleMobileNav(){document.getElementById('mobileNav').classList.toggle('open');}
+function scrollToSection(selector){var el=document.querySelector(selector);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
 
-    function update() {
-        const now = new Date();
-        const diff = target - now;
-
-        if (diff <= 0) {
-            wrap.innerHTML = `
-                <div class="countdown-expired">
-                    <div class="emoji">🎉</div>
-                    <div class="msg">數學周進行中！</div>
-                </div>
-            `;
-            return;
-        }
-
-        const days = Math.floor(diff / 86400000);
-        const hours = Math.floor((diff % 86400000) / 3600000);
-        const mins = Math.floor((diff % 3600000) / 60000);
-        const secs = Math.floor((diff % 60000) / 1000);
-
-        document.getElementById('cd-days').textContent = days;
-        document.getElementById('cd-hours').textContent = hours;
-        document.getElementById('cd-mins').textContent = mins;
-        document.getElementById('cd-secs').textContent = secs;
-    }
-
-    update();
-    setInterval(update, 1000);
-})();
-
-/* Mobile Nav */
-function toggleMobileNav() {
-    const nav = document.getElementById('mobileNav');
-    nav.classList.toggle('open');
+// Phase switching
+function switchPhase(e){
+    document.querySelectorAll('.phase-tab').forEach(t=>t.classList.remove('active'));
+    e.currentTarget.classList.add('active');
+    const phase = e.currentTarget.getAttribute('data-phase');
+    document.getElementById('phase1-selectors').style.display = phase==='phase1' ? 'flex' : 'none';
+    document.getElementById('phase2-selectors').style.display = phase==='phase2' ? 'flex' : 'none';
+    document.getElementById('phase1-calendar').style.display = phase==='phase1' ? 'block' : 'none';
+    document.getElementById('phase2-calendar').style.display = phase==='phase2' ? 'block' : 'none';
+    // reset activity area
+    document.getElementById('activityContent').innerHTML = '<h3 class="text-center">請選擇週次或活動以查看內容</h3>';
 }
 
-/* Scroll to section */
-function scrollToSection(selector) {
-    const el = document.querySelector(selector);
-    if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+// Phase1: week selector
+function selectWeek(e){
+    document.querySelectorAll('#phase1-selectors .sel-btn').forEach(b=>b.classList.remove('active'));
+    e.currentTarget.classList.add('active');
+    const week = e.currentTarget.getAttribute('data-week');
+    // No questions yet -> show 待更新
+    const html = `<h3>${week==='week1'? '星期1': week==='week2'? '星期2':'星期3'} — 題目和答案</h3><p>待更新</p>`;
+    document.getElementById('activityContent').innerHTML = html;
 }
 
-/* Schedule tabs */
-function showSchedule(filter) {
-    document.querySelectorAll('.calendar-tab').forEach(t => t.classList.remove('active'));
-    event.target.classList.add('active');
-    // Filter logic can be expanded
+// Phase2: activity selector
+function selectActivity(e){
+    document.querySelectorAll('#phase2-selectors .sel-btn').forEach(b=>b.classList.remove('active'));
+    e.currentTarget.classList.add('active');
+    const activity = e.currentTarget.getAttribute('data-activity');
+    let html='';
+    if(activity==='morning'){
+        html = `<h3>早讀</h3><div class="card"> <h4>📖 數學閱讀</h4><p>週三 5月6日：數學閱讀活動，地點：圖書館。</p></div>`;
+    } else if(activity==='lunch'){
+        html = `<h3>午膳活動</h3><div class="card"> <h4>🎮 午膳遊戲站</h4><p>每日午膳時段：數學小遊戲、作品展與數學銀行。</p></div>`;
+    } else if(activity==='assembly'){
+        html = `<h3>周會</h3><div class="card"> <h4>🏆 周會活動</h4><p>5月6日：初中數學比賽決賽；5月7日：高中數學講座。</p></div>`;
+    }
+    document.getElementById('activityContent').innerHTML = html;
+}
+
+// Calendar jump to selector
+function jumpToSelector(phase, target){
+    // switch phase first
+    if(phase==='phase1'){
+        document.querySelector('[data-phase="phase1"]').click();
+        // map target week
+        if(target==='week1') document.querySelector('#phase1-selectors .sel-btn[data-week="week1"]').click();
+        if(target==='week2') document.querySelector('#phase1-selectors .sel-btn[data-week="week2"]').click();
+        if(target==='week3') document.querySelector('#phase1-selectors .sel-btn[data-week="week3"]').click();
+    } else {
+        document.querySelector('[data-phase="phase2"]').click();
+    }
 }
 </script>
 </body>
