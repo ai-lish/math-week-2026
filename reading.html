@@ -3,266 +3,287 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>數學閱讀篇章 | 靈風中學 數學周 2026</title>
+    <title>📖 數學閱讀篇章 | 靈風中學 數學周 2026</title>
+    <meta name="description" content="靈風中學數學周2026 數學閱讀專區 — 零的誕生、畢達哥拉斯、機會的遊戲、黃金比例，精彩數學故事！">
+    <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #4A90E2;
-            --secondary: #F39C12;
-            --dark: #2C3E50;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Noto Sans TC', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: var(--dark);
-        }
-        
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--primary) 0%, #00D2FF 100%);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-        }
-        header h1 { font-size: 2rem; margin-bottom: 10px; }
-        header a { color: white; text-decoration: none; }
-        
-        /* Container */
-        .container { max-width: 900px; margin: 0 auto; padding: 30px 20px; }
-        
-        /* Story Cards */
-        .story-card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        .story-card:hover { transform: translateY(-5px); }
-        .story-card h2 { color: var(--primary); margin-bottom: 10px; }
-        .story-card .meta { color: #888; font-size: 0.9rem; margin-bottom: 10px; }
-        .story-card .preview { color: #555; line-height: 1.6; }
-        .story-card .read-more {
-            display: inline-block;
-            margin-top: 15px;
-            color: var(--primary);
-            font-weight: bold;
-        }
-        
-        /* Story Content */
-        .story-content {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            display: none;
-        }
-        .story-content.active { display: block; }
-        .story-content h1 { color: var(--primary); margin-bottom: 15px; }
-        .story-content .meta { color: #888; margin-bottom: 20px; }
-        .story-content .content { line-height: 1.8; font-size: 1.1rem; }
-        .story-content .back-btn {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 10px 20px;
+        body { background: var(--bg); }
+        .reading-hero {
             background: var(--primary);
             color: white;
-            border-radius: 10px;
-            text-decoration: none;
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
+            padding: 50px 20px;
             text-align: center;
-            padding: 20px;
         }
+        .reading-hero h1 { margin-bottom: 10px; }
+        .reading-hero p { opacity: 0.8; }
+        .reading-content-area {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .reading-list { }
+        .story-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+            border-left: 5px solid var(--primary);
+            display: block;
+        }
+        .story-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            border-left-color: var(--accent);
+        }
+        .story-card h3 { margin-bottom: 6px; }
+        .story-meta {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            font-size: 0.82rem;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+        .story-meta .star { color: var(--secondary-dark); }
+        .story-preview {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .story-full {
+            display: none;
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 36px;
+            box-shadow: var(--shadow);
+            line-height: 1.85;
+            font-size: 1.02rem;
+        }
+        .story-full.active { display: block; }
+        .story-full h2 {
+            color: var(--primary);
+            margin: 28px 0 14px;
+            font-size: 1.4rem;
+        }
+        .story-full h2:first-child { margin-top: 0; }
+        .story-full p { margin-bottom: 16px; }
+        .story-full .back-btn {
+            display: inline-block;
+            margin-top: 28px;
+            padding: 10px 22px;
+            background: var(--primary);
+            color: white;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .story-full .back-btn:hover {
+            background: var(--primary-dark);
+        }
+        .difficulty {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        .diff-easy { background: #F0FFF4; color: #276749; }
+        .diff-med { background: #FFFAF0; color: var(--accent-dark); }
+        .diff-hard { background: #FFF5F5; color: var(--danger); }
     </style>
 </head>
 <body>
-    <header>
-        <h1>📖 數學閱讀篇章</h1>
-        <p><a href="index.html">← 返回數學周</a></p>
-    </header>
-    
-    <div class="container">
-        <!-- Story List -->
-        <div id="storyList">
-            <div class="story-card" onclick="showStory(1)">
-                <h2>🔢 零的誕生</h2>
-                <p class="meta">難度：⭐⭐ | 閱讀時間：5分鐘</p>
-                <p class="preview">你知道「零」這個數字是幾時發明的呢？...</p>
-                <span class="read-more">閱讀全文 →</span>
+
+<!-- Back -->
+<div style="position:sticky;top:0;z-index:100;">
+    <a href="index.html" class="btn btn-white btn-sm" style="margin:16px 20px;display:inline-flex;align-items:center;gap:6px;box-shadow:var(--shadow-sm);">
+        ← 返回首頁
+    </a>
+</div>
+
+<!-- Hero -->
+<div class="reading-hero">
+    <h1>📖 數學閱讀篇章</h1>
+    <p>午讀時間 | 認識數學的故事</p>
+</div>
+
+<div class="reading-content-area">
+
+    <!-- Story List -->
+    <div class="reading-list" id="storyList">
+        <div class="story-card" onclick="showStory(1)">
+            <h3>🔢 零的誕生</h3>
+            <div class="story-meta">
+                <span class="difficulty diff-easy">⭐ 簡單</span>
+                <span>⏱️ 5分鐘</span>
             </div>
-            
-            <div class="story-card" onclick="showStory(2)">
-                <h2>📐 畢達哥拉斯的秘密</h2>
-                <p class="meta">難度：⭐⭐⭐ | 閱讀時間：8分鐘</p>
-                <p class="preview">畢達哥拉斯同他的定理，點樣改變了數學的發展？...</p>
-                <span class="read-more">閱讀全文 →</span>
-            </div>
-            
-            <div class="story-card" onclick="showStory(3)">
-                <h2>🎲 機會的遊戲</h2>
-                <p class="meta">難度：⭐⭐ | 閱讀時間：6分鐘</p>
-                <p class="preview">擲硬幣、擲骰仔...機會率究竟是怎樣運作的？...</p>
-                <span class="read-more">閱讀全文 →</span>
-            </div>
-            
-            <div class="story-card" onclick="showStory(4)">
-                <h2>🔢 黃金比例的魔法</h2>
-                <p class="meta">難度：⭐⭐⭐⭐ | 閱讀時間：10分鐘</p>
-                <p class="preview">自然界裡面的螺旋、藝術品裡面的構圖，原來都有同一個數字？...</p>
-                <span class="read-more">閱讀全文 →</span>
-            </div>
+            <p class="story-preview">你知道「零」這個數字是幾時發明的呢？原來人類花了幾千年才想到這個概念...</p>
         </div>
-        
-        <!-- Story 1 -->
-        <div id="story1" class="story-content">
-            <h1>🔢 零的誕生</h1>
-            <p class="meta">作者：靈風中學數學科 | 閱讀時間：5分鐘</p>
-            <div class="content">
-                <p>你可能會想，「零」這個數字如此簡單，當然是一直都有！但原來零的發明，是人類花了幾千年才想到。</p>
-                
-                <h3>🎭 古代人怎樣數數？</h3>
-                <p>古代的人數數的時候，會用手指、石頭、或者刻木做記號。但他們始終都覺得「有」才是數，「無」就不需要記。</p>
-                
-                <p>例如：「我有3隻羊」、「我有5隻羊」。但如果「我甚麼都沒有」呢？他們就甚麼都不記，覺得不需要表示「零」。</p>
-                
-                <h3>🏛️ 印度人的大發現</h3>
-                <p>大約1500年前，印度的數學家開始想：「如果『有東西』可以寫做1,2,3，那麼『甚麼都沒有』怎麼辦？」</p>
-                
-                <p>他們就發明了一個符號「0」來代表「空無」。這個看似簡單的想法，其實改變了整個數學世界！</p>
-                
-                <h3>🌍 零的旅程</h3>
-                <p>零由印度傳去阿拉伯，再由阿拉伯傳到歐洲。一開始的時候，歐洲人還很不敢相信這個「東西」，說「甚麼都沒有」怎麼可以是一個數字？</p>
-                
-                <p>但後來發現，零很好用！例如100，如果你寫錯漏了個0，就變成1，差很遠！所以零除了代表「無」，還可以幫我們定位呢！</p>
-                
-                <h3>💡 小結</h3>
-                <p>今日我們用的數字系統「0,1,2,3,4,5,6,7,8,9」，叫做「阿拉伯數字」，但其實是印度人發明的。零的發明，使數學變得更精確，亦都為後來的電腦科技奠定基礎！</p>
+
+        <div class="story-card" onclick="showStory(2)">
+            <h3>📐 畢達哥拉斯的秘密</h3>
+            <div class="story-meta">
+                <span class="difficulty diff-med">⭐⭐ 中等</span>
+                <span>⏱️ 8分鐘</span>
             </div>
-            <a href="reading.html" class="back-btn" onclick="hideStory(1)">← 返回故事列表</a>
+            <p class="story-preview">畢達哥拉斯同他的定理，點樣改變了數學的發展？音樂與數學又有什麼關係？</p>
         </div>
-        
-        <!-- Story 2 -->
-        <div id="story2" class="story-content">
-            <h1>📐 畢達哥拉斯的秘密</h1>
-            <p class="meta">作者：靈風中學數學科 | 閱讀時間：8分鐘</p>
-            <div class="content">
-                <p>畢達哥拉斯（Pythagoras）是古希臘的數學家，他提出的「畢氏定理」可以說是最有名的數學公式之一。但他的故事，你又知道多少？</p>
-                
-                <h3>🎵 音樂與數學</h3>
-                <p>畢達哥拉斯發現一個秘密：音樂的和諧程度，跟弦的長度有密切關係！</p>
-                <p>如果一條弦的長度是另一條的兩倍，那麼兩條弦一起彈的時候，聲音會特別好聽——這個就是「八度」的由來。</p>
-                <p>他說：「萬物皆數」——所有東西都可以用數字和比例來解釋。</p>
-                
-                <h3>📐 畢氏定理</h3>
-                <p>大家都知道：「直角三角形的兩條直角邊平方相加，等於斜邊的平方。」</p>
-                <p>即是如果直角的兩邊是 a 同 b，斜邊是 c，那麼：</p>
-                <p style="text-align: center; font-size: 1.3rem; padding: 20px;">a² + b² = c²</p>
-                
-                <p>例如3-4-5三角形：3² + 4² = 9 + 16 = 25 = 5²</p>
-                
-                <h3>🔺 證明方法</h3>
-                <p>畢氏定理有超過400種證明方法！有些很簡單，有些很複雜。有興趣的同學可以自己找一個最適合你的證明方法！</p>
-                
-                <h3>🌍 怎樣應用？</h3>
-                <p>今日我們建築、測量、甚至GPS導航都在用畢氏定理。如果你想知兩點之間的直線距離，就靠這條公式啦！</p>
+
+        <div class="story-card" onclick="showStory(3)">
+            <h3>🎲 機會的遊戲</h3>
+            <div class="story-meta">
+                <span class="difficulty diff-easy">⭐ 簡單</span>
+                <span>⏱️ 6分鐘</span>
             </div>
-            <a href="reading.html" class="back-btn" onclick="hideStory(2)">← 返回故事列表</a>
+            <p class="story-preview">擲硬幣、擲骰仔...機會率究竟是怎樣運作的？為什麼有些人運氣特別好？</p>
         </div>
-        
-        <!-- Story 3 -->
-        <div id="story3" class="story-content">
-            <h1>🎲 機會的遊戲</h1>
-            <p class="meta">作者：靈風中學數學科 | 閱讀時間：6分鐘</p>
-            <div class="content">
-                <p>你有沒有想過：為什麼有些人一擲硬幣就連續幾次都是公？這些究竟是運氣，還是數學的必然？</p>
-                
-                <h3>🪙 擲硬幣的概率</h3>
-                <p>擲一次硬幣，「公」同「字」的機會都是一樣的——50%和50%。</p>
-                <p>但如果你連續擲10次，都有可能10次都是公！這個叫做「小概率事件」——雖然難，但不是沒有可能。</p>
-                
-                <h3>🎲 骰仔的秘密</h3>
-                <p>一粒標準的六面骰仔，每一面出現的機會都是1/6。</p>
-                <p>但如果你問：「擲兩粒骰仔，總數是7的機會是多少？」</p>
-                <p>答案是6/36 = 1/6！因為有6種組合可以砌成7：(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)</p>
-                
-                <h3>🎰  Casino的秘密</h3>
-                <p>所有遊戲都設計到有利於舉辦方——這個就是「莊家優勢」。</p>
-                <p>例如俄羅斯輪盤，有37個數字，但派彩只是35倍。長期來說，赌场一定賺錢。</p>
-                
-                <h3>💡 學到甚麼？</h3>
-                <p>• 獨立事件：每次擲硬幣都是獨立的，之前的結果不會影響下一次<br>
-                • 期望值：如果長期玩，你的平均收益是可以計算的<br>
-                • 享受遊戲：明白概率，不要太迷信「運氣」</p>
+
+        <div class="story-card" onclick="showStory(4)">
+            <h3>🔢 黃金比例的魔法</h3>
+            <div class="story-meta">
+                <span class="difficulty diff-hard">⭐⭐⭐ 進階</span>
+                <span>⏱️ 10分鐘</span>
             </div>
-            <a href="reading.html" class="back-btn" onclick="hideStory(3)">← 返回故事列表</a>
-        </div>
-        
-        <!-- Story 4 -->
-        <div id="story4" class="story-content">
-            <h1>🔢 黃金比例的魔法</h1>
-            <p class="meta">作者：靈風中學數學科 | 閱讀時間：10分鐘</p>
-            <div class="content">
-                <p>如果你問自然界同藝術品有甚麼共通點，答案可能是一個神秘的數字——1.618...</p>
-                
-                <h3>✨ 甚麼是黃金比例？</h3>
-                <p>如果有一條線，分做兩份，令到</p>
-                <p style="text-align: center; font-size: 1.3rem; padding: 15px;">(長部分) ÷ (短部分) = (整條) ÷ (長部分)</p>
-                <p>那麼這個比例就叫做「黃金比例」，數值約等於1.618。</p>
-                
-                <p>這個數學表示為 φ (Phi)，是希臘字母第21個。</p>
-                
-                <h3>🌻 自然界的足跡</h3>
-                <p>黃金比例在自然界到處都見到：</p>
-                <p>• 向日葵的葵花籽：螺旋的比例符合黃金比例<br>
-                • 松果的鱗片：同樣的螺旋排列<br>
-                • 貝殼的螺旋：越向外越大，但比例不變<br>
-                • 人的身體：手指比例、面孔比例...</p>
-                
-                <h3>🎨 藝術的秘密</h3>
-                <p>好多藝術家都用黃金比例來創作：</p>
-                <p>• 達文西的《蒙娜麗莎》：面孔的比例<br>
-                • 胡夫金字塔：側面的比例<br>
-                • 雅典的帕特農神廟：柱子的排列</p>
-                
-                <h3>📱 現代應用</h3>
-                <p>今日的設計師都喜歡用黃金比例：</p>
-                <p>• 信用卡的形狀<br>
-                • iPhone的屏幕比例<br>
-                • logo設計<br>
-                • 影相構圖</p>
-                
-                <h3>🎯 找黃金比例</h3>
-                <p>下次你拍照的時候，可以試試將主體放在畫面的「黃金點」——即是大約在畫面的1/3位置，會特別好看！</p>
-            </div>
-            <a href="reading.html" class="back-btn" onclick="hideStory(4)">← 返回故事列表</a>
+            <p class="story-preview">自然界裡面的螺旋、藝術品裡面的構圖，原來都有同一個神秘數字？</p>
         </div>
     </div>
-    
-    <footer>
-        <p>📖 靈風中學 數學周 2026</p>
-    </footer>
-    
-    <script>
-    function showStory(id) {
-        document.getElementById('storyList').style.display = 'none';
-        document.getElementById('story' + id).classList.add('active');
-        window.scrollTo(0, 0);
-    }
-    
-    function hideStory(id) {
-        document.getElementById('story' + id).classList.remove('active');
-        document.getElementById('storyList').style.display = 'block';
-    }
-    </script>
+
+    <!-- Story 1 -->
+    <div class="story-full" id="story1">
+        <h2>🔢 零的誕生</h2>
+        <p class="story-meta" style="margin-bottom:20px;">
+            <span class="difficulty diff-easy">⭐ 簡單</span>
+            <span>⏱️ 5分鐘</span>
+            <span>✍️ 靈風中學數學科</span>
+        </p>
+
+        <h2>古代人怎樣數數？</h2>
+        <p>古代的人數數的時候，會用手指、石頭、或者刻木做記號。但他們始終都覺得「有」才是數，「無」就不需要記。</p>
+        <p>例如：「我有3隻羊」、「我有5隻羊」。但如果「我甚麼都沒有」呢？他們就甚麼都不記，覺得不需要表示「零」。</p>
+
+        <h2>印度人的大發現</h2>
+        <p>大約1500年前，印度的數學家開始想：「如果『有東西』可以寫做1,2,3，那麼『甚麼都沒有』怎麼辦？」</p>
+        <p>他們就發明了一個符號「0」來代表「空無」。這個看似簡單的想法，其實改變了整個數學世界！</p>
+
+        <h2>零的旅程</h2>
+        <p>零由印度傳去阿拉伯，再由阿拉伯傳到歐洲。一開始的時候，歐洲人還很不敢相信這個「東西」，說「甚麼都沒有」怎麼可以是一個數字？</p>
+        <p>但後來發現，零很好用！例如100，如果你寫錯漏了個0，就變成1，差很遠！所以零除了代表「無」，還可以幫我們定位呢！</p>
+
+        <h2>小結</h2>
+        <p>今日我們用的數字系統「0,1,2,3,4,5,6,7,8,9」，叫做「阿拉伯數字」，但其實是印度人發明的。零的發明，使數學變得更精確，亦都為後來的電腦科技奠定基礎！</p>
+
+        <a href="reading.html" class="back-btn" onclick="hideStory(1);return false;">← 返回故事列表</a>
+    </div>
+
+    <!-- Story 2 -->
+    <div class="story-full" id="story2">
+        <h2>📐 畢達哥拉斯的秘密</h2>
+        <p class="story-meta" style="margin-bottom:20px;">
+            <span class="difficulty diff-med">⭐⭐ 中等</span>
+            <span>⏱️ 8分鐘</span>
+            <span>✍️ 靈風中學數學科</span>
+        </p>
+
+        <h2>音樂與數學</h2>
+        <p>畢達哥拉斯（Pythagoras）發現一個秘密：音樂的和諧程度，跟弦的長度有密切關係！</p>
+        <p>如果一條弦的長度是另一條的兩倍，那麼兩條弦一起彈的時候，聲音會特別好聽——這個就是「八度」的由來。</p>
+        <p>他說：「萬物皆數」——所有東西都可以用數字和比例來解釋。</p>
+
+        <h2>畢氏定理</h2>
+        <p>大家都知道：「直角三角形的兩條直角邊平方相加，等於斜邊的平方。」</p>
+        <p style="text-align:center;font-size:1.2rem;padding:16px;background:var(--bg);border-radius:var(--radius-sm);margin:16px 0;">
+            <strong>a² + b² = c²</strong>
+        </p>
+        <p>例如3-4-5三角形：3² + 4² = 9 + 16 = 25 = 5²</p>
+
+        <h2>怎樣應用？</h2>
+        <p>今日我們建築、測量、甚至GPS導航都在用畢氏定理。如果你想知兩點之間的直線距離，就靠這條公式啦！</p>
+
+        <a href="reading.html" class="back-btn" onclick="hideStory(2);return false;">← 返回故事列表</a>
+    </div>
+
+    <!-- Story 3 -->
+    <div class="story-full" id="story3">
+        <h2>🎲 機會的遊戲</h2>
+        <p class="story-meta" style="margin-bottom:20px;">
+            <span class="difficulty diff-easy">⭐ 簡單</span>
+            <span>⏱️ 6分鐘</span>
+            <span>✍️ 靈風中學數學科</span>
+        </p>
+
+        <h2>擲硬幣的概率</h2>
+        <p>擲一次硬幣，「公」同「字」的機會都是一樣的——50%和50%。</p>
+        <p>但如果你連續擲10次，都有可能10次都是公！這個叫做「小概率事件」——雖然難，但不是沒有可能。</p>
+
+        <h2>骰仔的秘密</h2>
+        <p>一粒標準的六面骰仔，每一面出現的機會都是1/6。</p>
+        <p>但如果你問：「擲兩粒骰仔，總數是7的機會是多少？」答案是6/36 = 1/6！因為有6種組合可以砌成7：(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)</p>
+
+        <h2>學到甚麼？</h2>
+        <p>• <strong>獨立事件：</strong>每次擲硬幣都是獨立的，之前的結果不會影響下一次<br>
+        • <strong>期望值：</strong>如果長期玩，你的平均收益是可以計算的<br>
+        • <strong>享受遊戲：</strong>明白概率，不要太迷信「運氣」</p>
+
+        <a href="reading.html" class="back-btn" onclick="hideStory(3);return false;">← 返回故事列表</a>
+    </div>
+
+    <!-- Story 4 -->
+    <div class="story-full" id="story4">
+        <h2>🔢 黃金比例的魔法</h2>
+        <p class="story-meta" style="margin-bottom:20px;">
+            <span class="difficulty diff-hard">⭐⭐⭐ 進階</span>
+            <span>⏱️ 10分鐘</span>
+            <span>✍️ 靈風中學數學科</span>
+        </p>
+
+        <h2>甚麼是黃金比例？</h2>
+        <p>如果有一條線，分做兩份，令到：</p>
+        <p style="text-align:center;font-size:1.1rem;padding:16px;background:var(--bg);border-radius:var(--radius-sm);margin:12px 0;">
+            <strong>(長部分) ÷ (短部分) = (整條) ÷ (長部分) ≈ 1.618</strong>
+        </p>
+        <p>這個比例叫做「黃金比例」，數值約等於 1.618，用希臘字母 φ (Phi) 表示。</p>
+
+        <h2>自然界的足跡</h2>
+        <p>黃金比例在自然界到處都見到：</p>
+        <p>• 向日葵的葵花籽：螺旋的比例符合黃金比例<br>
+        • 松果的鱗片：同樣的螺旋排列<br>
+        • 貝殼的螺旋：越向外越大，但比例不變<br>
+        • 人的身體：手指比例、面孔比例...</p>
+
+        <h2>藝術的秘密</h2>
+        <p>好多藝術家都用黃金比例來創作：達文西的《蒙娜麗莎》、胡夫金字塔、雅典的帕特農神廟...</p>
+
+        <h2>找黃金比例</h2>
+        <p>下次你拍照的時候，可以試試將主體放在畫面的「黃金點」——即是大約在畫面的 1/3 位置，會特別好看！</p>
+
+        <a href="reading.html" class="back-btn" onclick="hideStory(4);return false;">← 返回故事列表</a>
+    </div>
+
+</div>
+
+<footer class="footer" style="margin-top:20px;">
+    <div class="footer-logo">📖 靈風中學 數學周 2026</div>
+    <p>探索數學的奇妙世界！</p>
+</footer>
+
+<script>
+function showStory(id) {
+    document.getElementById('storyList').style.display = 'none';
+    const story = document.getElementById('story' + id);
+    story.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function hideStory(id) {
+    document.getElementById('story' + id).classList.remove('active');
+    document.getElementById('storyList').style.display = 'block';
+}
+</script>
+
 </body>
 </html>

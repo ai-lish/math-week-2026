@@ -3,185 +3,427 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎓 靈風中學 數學周 2026</title>
+    <title>🎓 靈風中學 數學周 2026 | 13/4 - 8/5/2026</title>
+    <meta name="description" content="靈風中學數學周 2026 — 探索數學的奇妙世界！中學生及老師專屬活動，計算機大賽、配對卡牌、Rummikub、每日挑戰等著你！">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Hero Section -->
-    <header class="hero">
-        <div class="hero-content">
-            <div class="logo">🔢</div>
-            <h1>靈風中學 <span class="highlight">數學周</span> 2026</h1>
-            <p class="subtitle">探索數學的奇妙世界！</p>
-            <div class="dates">
-                <span class="date-badge">📅 13/4 - 8/5/2026</span>
-            </div>
-            <div class="countdown" id="countdown">
-                <div class="count-item"><span id="days">--</span><small>日</small></div>
-                <div class="count-item"><span id="hours">--</span><small>時</small></div>
-                <div class="count-item"><span id="mins">--</span><small>分</small></div>
-                <div class="count-item"><span id="secs">--</span><small>秒</small></div>
-            </div>
+
+<!-- ==================== NAVBAR ==================== -->
+<nav class="navbar">
+    <div class="navbar-inner">
+        <a href="index.html" class="navbar-brand">
+            <div class="navbar-brand-icon">🔢</div>
+            數學周 2026
+        </a>
+
+        <ul class="navbar-links">
+            <li><a href="#activities" class="active">活動</a></li>
+            <li><a href="#schedule">日程表</a></li>
+            <li><a href="games.html">🎮 遊戲</a></li>
+            <li><a href="rummikub.html">🧩 Rummikub</a></li>
+            <li><a href="reading.html">📖 閱讀</a></li>
+            <li><a href="leaderboard/leaderboard.html">🏆 積分榜</a></li>
+        </ul>
+
+        <button class="navbar-toggle" onclick="toggleMobileNav()" aria-label="選單">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-panel">
+        <div class="mobile-nav-header">
+            <strong style="color:var(--primary);">🔢 數學周 2026</strong>
+            <button onclick="toggleMobileNav()" style="background:none;border:none;font-size:1.5rem;cursor:pointer;">✕</button>
         </div>
-        <div class="wave"></div>
-    </header>
+        <ul class="mobile-nav-links">
+            <li><a href="#activities" onclick="toggleMobileNav()">🎯 活動</a></li>
+            <li><a href="#schedule" onclick="toggleMobileNav()">📅 日程表</a></li>
+            <li><a href="games.html" onclick="toggleMobileNav()">🎮 數學遊戲</a></li>
+            <li><a href="rummikub.html" onclick="toggleMobileNav()">🧩 Rummikub</a></li>
+            <li><a href="reading.html" onclick="toggleMobileNav()">📖 數學閱讀</a></li>
+            <li><a href="leaderboard/leaderboard.html" onclick="toggleMobileNav()">🏆 積分榜</a></li>
+            <li><a href="#teachers" onclick="toggleMobileNav()">👨‍🏫 教師專區</a></li>
+        </ul>
+    </div>
+</div>
 
-    <!-- 快速導航 -->
-    <nav style="background:rgba(0,0,0,0.03); padding:12px 20px; text-align:center; position:sticky; top:0; z-index:100; backdrop-filter:blur(10px);">
-        <a href="#games-section" style="color:#4A90E2; text-decoration:none; font-weight:bold; margin:0 15px;">🎮 數學遊戲</a>
-        <a href="#schedule" style="color:#4A90E2; text-decoration:none; font-weight:bold; margin:0 15px;">📅 時間表</a>
-        <a href="games.html" style="color:#E91E63; text-decoration:none; font-weight:bold; margin:0 15px;">🕹️ 遊戲專區</a>
-        <a href="rummikub.html" style="color:#FF9800; text-decoration:none; font-weight:bold; margin:0 15px;">🧩 Rummikub</a>
-    </nav>
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+    <div class="hero-inner">
+        <div class="hero-eyebrow">📅 2025-26 學年 精彩活動</div>
 
-    <!-- 數學小遊戲 Section -->
-    <section id="games-section" style="padding:40px 20px; background:linear-gradient(135deg,#667eea,#764ba2); color:white;">
-        <h2 style="text-align:center; margin-bottom:10px;">🎮 數學小遊戲</h2>
-        <p style="text-align:center; opacity:0.9; margin-bottom:25px;">午休 iPad 站｜三大遊戲等你挑戰！</p>
-        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:15px; max-width:900px; margin:0 auto;">
-            <a href="games/計算機大賽-CalculatorRace.html" style="background:rgba(255,255,255,0.15); border-radius:15px; padding:20px; text-decoration:none; color:white; display:block; text-align:center; transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
-                <div style="font-size:2.5rem;">🧮</div>
-                <h3 style="margin:10px 0 5px;">計算機大賽</h3>
-                <p style="opacity:0.8; font-size:0.9rem;">CASIO fx-50FHII 速度挑戰<br>答對+1 答錯-1</p>
-            </a>
-            <a href="games/配對卡牌/viewer.html" style="background:rgba(255,255,255,0.15); border-radius:15px; padding:20px; text-decoration:none; color:white; display:block; text-align:center; transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
-                <div style="font-size:2.5rem;">🃏</div>
-                <h3 style="margin:10px 0 5px;">配對卡牌（課題瀏覽器）</h3>
-                <p style="opacity:0.8; font-size:0.9rem;">代數 ↔ 圖像 配對卡牌<br>13個中一課題 · 可列印</p>
-            </a>
-            <a href="games/四則運算拉力賽-TugOfWar.html" style="background:rgba(255,255,255,0.15); border-radius:15px; padding:20px; text-decoration:none; color:white; display:block; text-align:center; transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
-                <div style="font-size:2.5rem;">⚡</div>
-                <h3 style="margin:10px 0 5px;">四則運算拉力賽</h3>
-                <p style="opacity:0.8; font-size:0.9rem;">加減乘除拉力戰<br>5秒答題 拉到底就贏</p>
-            </a>
+        <h1>靈風中學<br><span class="highlight">數學周 2026</span></h1>
+        <p class="hero-sub">探索數學的奇妙世界！中學生及老師專屬活動，等你參與！</p>
+
+        <div class="hero-badges">
+            <span class="hero-badge">📅 13/4 – 8/5/2026</span>
+            <span class="hero-badge cta">🎯 立即報名</span>
         </div>
-        <p style="text-align:center; margin-top:20px;"><a href="games.html" style="color:white; background:rgba(255,255,255,0.25); padding:10px 30px; border-radius:25px; text-decoration:none; font-weight:bold;">🕹️ 查看所有遊戲 →</a></p>
-    </section>
 
-    <!-- 數學周結構 -->
-    <section class="structure">
-        <h2>🏗️ 數學周結構</h2>
-        <div class="structure-grid">
-            <div class="structure-card">
-                <div class="structure-icon">📅</div>
-                <h3 onclick="togglePhase1()" style="cursor:pointer;">🎯 第一階段：預熱環節 (4月13日 - 4月30日) <span id="phase1-icon">▼</span></h3>
-                <p class="structure-date">13/4 - 30/4</p>
-                <p class="structure-desc">為即將到來的數學周熱身，挑戰你的解難能力！</p>
-                <div id="phase1-content" style="margin-top: 15px; padding: 15px; background: #f8f9fa; border-radius: 10px; text-align: left; display: none;">
-                    <p style="font-weight: bold; margin-bottom: 10px;">🏆 初中數學比賽</p>
-                    <p style="margin-bottom: 10px; font-size: 0.9rem;">為即將到來的數學周熱身，挑戰你的解難能力！</p>
-                    <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem;">
-                        <li>活動形式： 每週發佈數學挑戰題</li>
-                        <li>派發時間： 逢星期一派發題目</li>
-                        <li>截止時間： 逢星期四交回作答</li>
-                        <li>參與對象： 全體初中同學</li>
-                    </ul>
+        <!-- Dual Entry CTA -->
+        <div class="dual-entry">
+            <button class="dual-entry-btn student" onclick="scrollToSection('#activities')">
+                <span class="icon">👦</span>
+                <span>我是學生</span>
+            </button>
+            <button class="dual-entry-btn teacher" onclick="scrollToSection('#teachers')">
+                <span class="icon">👨‍🏫</span>
+                <span>我是老師</span>
+            </button>
+        </div>
+
+        <!-- Countdown -->
+        <div class="countdown-wrap" id="countdownWrap">
+            <div class="countdown-label">距離數學周正式開始</div>
+            <div class="countdown-grid" id="countdownGrid">
+                <div class="countdown-item">
+                    <span class="num" id="cd-days">--</span>
+                    <span class="unit">日</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="num" id="cd-hours">--</span>
+                    <span class="unit">時</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="num" id="cd-mins">--</span>
+                    <span class="unit">分</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="num" id="cd-secs">--</span>
+                    <span class="unit">秒</span>
                 </div>
             </div>
-            <div class="structure-card highlight">
-                <div class="structure-icon">🎯</div>
-                <h3 onclick="togglePhase2()" style="cursor:pointer;">🎪 第二階段：正式開幕 (5月4日 - 5月8日) <span id="phase2-icon">▼</span></h3>
-                <p class="structure-date">5月正式開始</p>
-                <p class="structure-desc">8/5 數學大彩虹閉幕</p>
-                <div id="phase2-content" style="margin-top: 15px; padding: 15px; background: #e8f5e9; border-radius: 10px; text-align: center; display: none;">
-                    <p style="font-weight: bold;">📅 5月4日 - 5月8日 活動時間表</p>
-                    </div>
+        </div>
+    </div>
+
+    <!-- Wave -->
+    <div class="wave-divider">
+        <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#F7FAFC" d="M0,60 L1440,60 L1440,0 Q720,50 0,30 Z"></path>
+        </svg>
+    </div>
+</section>
+
+<!-- ==================== ACTIVITY HIGHLIGHTS ==================== -->
+<section class="section section-alt" id="activities">
+    <div class="container">
+        <div class="section-header">
+            <h2>🎯 活動亮點</h2>
+            <p>五大精彩活動，總有一個啱你！</p>
+        </div>
+
+        <div class="highlights-grid">
+            <!-- Card 1 -->
+            <a href="games.html" class="highlight-card">
+                <div class="highlight-card-img blue">🧮</div>
+                <div class="highlight-card-body">
+                    <h4>計算機大賽</h4>
+                    <p>用 CASIO fx-50FHII 計算機鬥快計數！涵蓋基礎、指數、對數、三角，60秒限時挑戰。</p>
+                    <span class="highlight-card-tag tag-blue">🎮 午休 iPad 站</span>
+                </div>
+            </a>
+
+            <!-- Card 2 -->
+            <a href="rummikub.html" class="highlight-card">
+                <div class="highlight-card-img orange">🧩</div>
+                <div class="highlight-card-body">
+                    <h4>Rummikub 大賽</h4>
+                    <p>經典數字牌遊戲！鬥快將手中的牌砌成順子或三同，快速清牌就贏！</p>
+                    <span class="highlight-card-tag tag-orange">🏆 班際比賽</span>
+                </div>
+            </a>
+
+            <!-- Card 3 -->
+            <a href="games.html" class="highlight-card">
+                <div class="highlight-card-img yellow">📐</div>
+                <div class="highlight-card-body">
+                    <h4>公式圖像配對</h4>
+                    <p>配對數學公式和對應的答案/名稱！考驗你的記憶力和數學知識，鬥快完成！</p>
+                    <span class="highlight-card-tag tag-yellow">📱 iPad 觸控</span>
+                </div>
+            </a>
+
+            <!-- Card 4 -->
+            <a href="#schedule" class="highlight-card">
+                <div class="highlight-card-img green">🏆</div>
+                <div class="highlight-card-body">
+                    <h4>初中數學比賽</h4>
+                    <p>每週發佈挑戰題，逢星期四交回！決賽在 5月6日（週三）周會舉行。</p>
+                    <span class="highlight-card-tag tag-green">📅 4月13日開始</span>
+                </div>
+            </a>
+
+            <!-- Card 5 -->
+            <a href="leaderboard/leaderboard.html" class="highlight-card">
+                <div class="highlight-card-img purple">📊</div>
+                <div class="highlight-card-body">
+                    <h4>積分排行榜</h4>
+                    <p>遊戲積分即時更新！個人及班際排名，終極大獎等住你！</p>
+                    <span class="highlight-card-tag tag-blue">🏆 總積分冠軍</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== DAILY CHALLENGE PREVIEW ==================== -->
+<section class="section">
+    <div class="container">
+        <div class="daily-challenge">
+            <div class="daily-challenge-label">⚡ 今日挑戰</div>
+            <h3>考驗你的數學直覺！</h3>
+            <p>每日都有一個新挑戰，等住你午休時來試試！挑戰成功可以獲得積分，累計積分可以兌換精美禮品。</p>
+            <a href="games.html" class="btn btn-accent btn-lg">
+                🎮 立即挑戰
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== SCHEDULE ==================== -->
+<section class="section section-alt schedule-section" id="schedule">
+    <div class="container">
+        <div class="section-header">
+            <h2>📅 第二階段：數學周日程表</h2>
+            <p>5月4日（週一）至 5月8日（週五）</p>
+        </div>
+
+        <div class="calendar-tabs">
+            <button class="calendar-tab active" onclick="showSchedule('all')">全部</button>
+            <button class="calendar-tab" onclick="showSchedule('morning')">早讀/周會</button>
+            <button class="calendar-tab" onclick="showSchedule('lunch')">午休</button>
+            <button class="calendar-tab" onclick="showSchedule('special')">特別活動</button>
+        </div>
+
+        <div class="schedule-table-wrap">
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th class="time-col">時段</th>
+                        <th>5月4日<br><small>週一</small></th>
+                        <th>5月5日<br><small>週二</small></th>
+                        <th>5月6日<br><small>週三</small></th>
+                        <th>5月7日<br><small>週四</small></th>
+                        <th class="closed">5月8日<br><small>週五 🌈</small></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 早讀 -->
+                    <tr>
+                        <td class="time-col schedule-cell morning">早讀</td>
+                        <td class="schedule-cell empty">—</td>
+                        <td class="schedule-cell empty">—</td>
+                        <td class="schedule-cell morning"><a href="reading.html">📖 數學閱讀</a></td>
+                        <td class="schedule-cell empty">—</td>
+                        <td class="schedule-cell empty">—</td>
+                    </tr>
+                    <!-- 午休 row 1 -->
+                    <tr>
+                        <td class="time-col schedule-cell lunch" rowspan="4">午休</td>
+                        <td class="schedule-cell lunch" colspan="4">🎨 數學專題研習作品展</td>
+                        <td class="schedule-cell special">🌈 數學大彩虹<br><small>閉幕式</small></td>
+                    </tr>
+                    <!-- 午休 row 2 -->
+                    <tr>
+                        <td class="schedule-cell lunch" colspan="4"><a href="games.html">🎮 數學小遊戲</a></td>
+                        <td class="schedule-cell lunch">🎮 數學小遊戲</td>
+                    </tr>
+                    <!-- 午休 row 3 -->
+                    <tr>
+                        <td class="schedule-cell lunch" colspan="4"><a href="rummikub.html">🧩 Rummikub大賽</a></td>
+                        <td class="schedule-cell empty">—</td>
+                    </tr>
+                    <!-- 午休 row 4 -->
+                    <tr>
+                        <td class="schedule-cell lunch" colspan="4">🏦 數學銀行</td>
+                        <td class="schedule-cell lunch">🏦 數學銀行</td>
+                    </tr>
+                    <!-- 周會 -->
+                    <tr>
+                        <td class="time-col schedule-cell assembly">周會</td>
+                        <td class="schedule-cell empty">—</td>
+                        <td class="schedule-cell empty">—</td>
+                        <td class="schedule-cell assembly">🏆 初中數學比賽決賽</td>
+                        <td class="schedule-cell assembly">🎓 高中數學講座</td>
+                        <td class="schedule-cell empty">—</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-center" style="margin-top:30px;">
+            <a href="games.html" class="btn btn-primary btn-lg">
+                🎮 前往遊戲專區
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== TEACHERS SECTION ==================== -->
+<section class="section" id="teachers">
+    <div class="container">
+        <div class="section-header">
+            <h2>👨‍🏫 教師專區</h2>
+            <p>老師們可以在這裡找到工作紙、簡報及課堂建議</p>
+        </div>
+
+        <div class="teachers-grid">
+            <div class="teacher-card">
+                <div class="teacher-card-icon">📄</div>
+                <div>
+                    <h4>工作紙下載</h4>
+                    <p>初中數學比賽工作紙、每日挑戰題目 PDF 版本，可直接列印使用。</p>
+                    <span class="download-tag">📥 PDF 格式 · 即将上线</span>
+                </div>
+            </div>
+
+            <div class="teacher-card">
+                <div class="teacher-card-icon">📊</div>
+                <div>
+                    <h4>早會簡報</h4>
+                    <p>可在早會時使用的簡短數學知識簡報，包含有趣的數學小故事和知識點。</p>
+                    <span class="download-tag">📥 PPT 格式 · 即将上线</span>
+                </div>
+            </div>
+
+            <div class="teacher-card">
+                <div class="teacher-card-icon">🎯</div>
+                <div>
+                    <h4>課堂活動建議</h4>
+                    <p>配合數學周的課堂活動建議，包括互動小遊戲、分組比賽、討論問題。</p>
+                    <span class="download-tag">📥 PDF 格式 · 即将上线</span>
+                </div>
+            </div>
+
+            <div class="teacher-card">
+                <div class="teacher-card-icon">🏆</div>
+                <div>
+                    <h4>比賽評分準則</h4>
+                    <p>初中數學比賽決賽的評分準則和注意事項，方便老師準備和主持比賽。</p>
+                    <span class="download-tag">📥 PDF 格式 · 即将上线</span>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- 日曆格式活動時間表 -->
-    <section id="schedule" class="calendar-section" style="padding: 40px 20px; background: #f8f9fa;">
-        <h2 style="text-align: center; margin-bottom: 30px;">📅 第二階段：數學周 (5月4日 - 5月8日) 活動時間表</h2>
-        
-        <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-            <thead>
-                <tr style="background: linear-gradient(135deg, #4A90E2, #00D2FF); color: white;">
-                    <th style="padding: 15px; text-align: center; width: 80px;">時段</th>
-                    <th style="padding: 15px; text-align: center;">5月4日<br>(週一)</th>
-                    <th style="padding: 15px; text-align: center;">5月5日<br>(週二)</th>
-                    <th style="padding: 15px; text-align: center;">5月6日<br>(週三)</th>
-                    <th style="padding: 15px; text-align: center;">5月7日<br>(週四)</th>
-                    <th style="padding: 15px; text-align: center; background: linear-gradient(135deg, #E91E63, #FF9800);">5月8日<br>(週五 🌈)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- 早讀 -->
-                <tr>
-                    <td style="padding: 10px; text-align: center; font-weight: bold; background: #fff3e0;">早讀</td>
-                    <td style="padding: 8px; text-align: center;">-</td>
-                    <td style="padding: 8px; text-align: center;">-</td>
-                    <td style="padding: 8px; text-align: center; background: #e3f2fd;"><a href="reading.html" style="color: #4A90E2; text-decoration: none;">📖 數學閱讀篇章</a></td>
-                    <td style="padding: 8px; text-align: center;">-</td>
-                    <td style="padding: 8px; text-align: center;">-</td>
-                </tr>
-                <!-- 午休 -->
-                <tr>
-                    <td style="padding: 10px; text-align: center; font-weight: bold; background: #fff3e0;" rowspan="4">午休</td>
-                    <td style="padding: 8px; text-align: center; background: #fce4ec;" colspan="4">🎨 數學專題研習作品展</td>
-                    <td style="padding: 8px; text-align: center; background: #f3e5f5;">🌈 數學大彩虹<br><small>(閉幕)</small></td>
-                </tr>
-                <tr>
-                    <td style="padding: 8px; text-align: center;" colspan="4"><a href="games.html" style="color: #2196F3;">🎮 數學小遊戲</a></td>
-                    <td style="padding: 8px; text-align: center;">🎮 數學小遊戲</td>
-                </tr>
-                <tr>
-                    <td style="padding: 8px; text-align: center;" colspan="4"><a href="rummikub.html" style="color: #FF9800;">🧩 Rummikub大賽</a></td>
-                    <td style="padding: 8px; text-align: center;">-</td>
-                </tr>
-                <tr>
-                    <td style="padding: 8px; text-align: center;" colspan="4">🏦 數學銀行</td>
-                    <td style="padding: 8px; text-align: center;">🏦 數學銀行</td>
-                </tr>
-                <!-- 周會 -->
-                <tr style="background: #f5f5f5;">
-                    <td style="padding: 10px; text-align: center; font-weight: bold; background: #e8f5e9;">周會</td>
-                    <td style="padding: 8px; text-align: center;">-</td>
-                    <td style="padding: 8px; text-align: center;">-</td>
-                    <td style="padding: 8px; text-align: center; background: #e8f5e9;">🏆 初中數學比賽決賽</td>
-                    <td style="padding: 8px; text-align: center; background: #e8f5e9;">🎓 高中數學講座</td>
-                    <td style="padding: 8px; text-align: center;">-</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <p>🎓 靈風中學 數學周 2026</p>
-            <p class="credit">Made with 💙 by AI Assistant</p>
+<!-- ==================== LEADERBOARD PREVIEW ==================== -->
+<section class="section section-alt">
+    <div class="container">
+        <div class="section-header">
+            <h2>🏆 積分榜</h2>
+            <p>看看目前誰領先！積分每天更新</p>
         </div>
-    </footer>
 
-    <script>
-    function togglePhase1() {
-        var content = document.getElementById('phase1-content');
-        var icon = document.getElementById('phase1-icon');
-        if (content.style.display === 'none') {
-            content.style.display = 'block';
-            icon.textContent = '▲';
-        } else {
-            content.style.display = 'none';
-            icon.textContent = '▼';
-        }
-    }
-    
-    function togglePhase2() {
-        var content = document.getElementById('phase2-content');
-        var icon = document.getElementById('phase2-icon');
-        if (content.style.display === 'none') {
-            content.style.display = 'block';
-            icon.textContent = '▲';
-        } else {
-            content.style.display = 'none';
-            icon.textContent = '▼';
-        }
-    }
-    </script>
+        <div class="leaderboard-list">
+            <div class="leaderboard-item">
+                <div class="leaderboard-rank gold">🥇</div>
+                <div class="leaderboard-info">
+                    <div class="leaderboard-name">——</div>
+                    <div class="leaderboard-class">敬請期待</div>
+                </div>
+                <div class="leaderboard-score">— 分</div>
+            </div>
+            <div class="leaderboard-item">
+                <div class="leaderboard-rank silver">🥈</div>
+                <div class="leaderboard-info">
+                    <div class="leaderboard-name">——</div>
+                    <div class="leaderboard-class">敬請期待</div>
+                </div>
+                <div class="leaderboard-score">— 分</div>
+            </div>
+            <div class="leaderboard-item">
+                <div class="leaderboard-rank bronze">🥉</div>
+                <div class="leaderboard-info">
+                    <div class="leaderboard-name">——</div>
+                    <div class="leaderboard-class">敬請期待</div>
+                </div>
+                <div class="leaderboard-score">— 分</div>
+            </div>
+        </div>
 
-    <script src="js/main.js"></script>
+        <div class="text-center" style="margin-top:24px;">
+            <a href="leaderboard/leaderboard.html" class="btn btn-outline">
+                查看完整排名 →
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+    <div class="footer-logo">🎓 靈風中學 數學周 2026</div>
+    <p>探索數學的奇妙世界！</p>
+    <div class="footer-links">
+        <a href="games.html">數學遊戲</a>
+        <a href="rummikub.html">Rummikub</a>
+        <a href="reading.html">數學閱讀</a>
+        <a href="leaderboard/leaderboard.html">積分榜</a>
+    </div>
+</footer>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script>
+/* Countdown Timer */
+(function() {
+    const target = new Date('2026-05-04T08:00:00+08:00');
+    const wrap = document.getElementById('countdownWrap');
+    const grid = document.getElementById('countdownGrid');
+
+    function update() {
+        const now = new Date();
+        const diff = target - now;
+
+        if (diff <= 0) {
+            wrap.innerHTML = `
+                <div class="countdown-expired">
+                    <div class="emoji">🎉</div>
+                    <div class="msg">數學周進行中！</div>
+                </div>
+            `;
+            return;
+        }
+
+        const days = Math.floor(diff / 86400000);
+        const hours = Math.floor((diff % 86400000) / 3600000);
+        const mins = Math.floor((diff % 3600000) / 60000);
+        const secs = Math.floor((diff % 60000) / 1000);
+
+        document.getElementById('cd-days').textContent = days;
+        document.getElementById('cd-hours').textContent = hours;
+        document.getElementById('cd-mins').textContent = mins;
+        document.getElementById('cd-secs').textContent = secs;
+    }
+
+    update();
+    setInterval(update, 1000);
+})();
+
+/* Mobile Nav */
+function toggleMobileNav() {
+    const nav = document.getElementById('mobileNav');
+    nav.classList.toggle('open');
+}
+
+/* Scroll to section */
+function scrollToSection(selector) {
+    const el = document.querySelector(selector);
+    if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
+/* Schedule tabs */
+function showSchedule(filter) {
+    document.querySelectorAll('.calendar-tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+    // Filter logic can be expanded
+}
+</script>
 </body>
 </html>

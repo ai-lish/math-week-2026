@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rummikub 計時器 | 靈風中學 數學周 2026</title>
+    <title>🧩 Rummikub 計時器 | 靈風中學 數學周 2026</title>
+    <meta name="description" content="靈風中學數學周2026 Rummikub計時器 — 方便老師和學生計算Rummikub遊戲時間的工具。">
+    <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
+        body { background: var(--bg); font-family: var(--font); }
         :root {
             --primary: #4A90E2;
             --success: #2ECC71;
@@ -15,320 +18,232 @@
             --light: #ECF0F1;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Noto Sans TC', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: var(--dark);
-        }
-        
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        
-        /* Screens */
-        .screen { display: none; }
-        .screen.active { display: block; }
-        
-        /* Main Menu */
-        .menu-card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+
+        .rmk-page-header {
+            background: var(--primary);
+            color: white;
+            padding: 40px 20px;
             text-align: center;
         }
-        .menu-card h1 {
-            color: var(--primary);
-            margin-bottom: 10px;
+        .rmk-page-header h1 { margin-bottom: 8px; }
+        .rmk-page-header p { opacity: 0.8; }
+
+        .rmk-container { max-width: 580px; margin: 0 auto; padding: 20px; }
+
+        /* Screens */
+        .rmk-screen { display: none; }
+        .rmk-screen.active { display: block; }
+
+        /* Card */
+        .rmk-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 16px;
         }
-        .menu-card p {
-            color: #666;
-            margin-bottom: 30px;
+        .rmk-card h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
         }
-        .menu-btn {
+        .rmk-card h2.blue { color: var(--primary); }
+        .rmk-card h2.yellow { color: var(--warning); }
+        .rmk-card h2.green { color: var(--success); }
+
+        /* Menu buttons */
+        .rmk-menu-btn {
             display: block;
             width: 100%;
-            padding: 18px;
-            margin-bottom: 15px;
+            padding: 16px;
+            margin-bottom: 12px;
             border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: bold;
+            border-radius: var(--radius-sm);
+            font-size: 1.05rem;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
+            transition: var(--transition);
+            font-family: var(--font);
             color: white;
-        }
-        .menu-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        .menu-btn.student { background: var(--primary); }
-        .menu-btn.teacher { background: var(--warning); }
-        .menu-btn.scorer { background: var(--success); }
-        
-        /* Student Page */
-        .student-card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        .student-card h2 {
-            color: var(--primary);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .tab-buttons {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .tab-btn {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            background: #eee;
-            color: #666;
-        }
-        .tab-btn.active {
-            background: var(--primary);
-            color: white;
-        }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; font-weight: bold; margin-bottom: 8px; }
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-size: 1rem;
-        }
-        .submit-btn {
-            width: 100%;
-            padding: 15px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        
-        /* Teacher Page */
-        .teacher-card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        .teacher-card h2 {
-            color: var(--warning);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .password-input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid var(--warning);
-            border-radius: 10px;
-            font-size: 1.1rem;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-        .teacher-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .teacher-tab {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            cursor: pointer;
-            background: #eee;
-            color: #666;
-        }
-        .teacher-tab.active {
-            background: var(--warning);
-            color: white;
-        }
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-        .data-table th, .data-table td {
-            padding: 10px;
-            text-align: center;
-            border-bottom: 1px solid #eee;
-        }
-        .data-table th {
-            background: #f8f9fa;
-            font-weight: bold;
-        }
-        .action-btn {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            background: var(--success);
-            color: white;
-        }
-        
-        /* Setup Screen */
-        .setup-card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        .setup-card h1 { text-align: center; color: var(--success); margin-bottom: 20px; }
-        
-        .player-count-btns {
-            display: flex;
-            gap: 10px;
-        }
-        .player-count-btns button {
-            flex: 1;
-            padding: 15px;
-            border: 2px solid var(--primary);
-            background: white;
-            border-radius: 10px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .player-count-btns button.active {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .player-inputs { margin-top: 20px; }
-        .player-input {
+            text-align: left;
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
-            gap: 10px;
+            gap: 12px;
         }
-        .player-input .avatar {
-            width: 40px;
-            height: 40px;
+        .rmk-menu-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .rmk-menu-btn.student { background: var(--primary); }
+        .rmk-menu-btn.teacher { background: var(--warning); }
+        .rmk-menu-btn.scorer { background: var(--success); }
+
+        /* Back */
+        .rmk-back {
+            display: inline-block;
+            padding: 10px 18px;
+            background: var(--bg-alt);
+            color: var(--text);
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.88rem;
+            margin-bottom: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-family: var(--font);
+        }
+        .rmk-back:hover { background: var(--primary); color: white; }
+
+        /* Form */
+        .rmk-form-group { margin-bottom: 18px; }
+        .rmk-form-group label { display: block; font-weight: 700; margin-bottom: 8px; font-size: 0.9rem; }
+        .rmk-form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--bg-alt);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-family: var(--font);
+            transition: var(--transition);
+        }
+        .rmk-form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        .rmk-submit {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: var(--font);
+            transition: var(--transition);
+        }
+        .rmk-submit:hover { background: var(--primary-dark); }
+
+        /* Tabs */
+        .rmk-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+        .rmk-tab {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            background: var(--bg-alt);
+            color: var(--text-light);
+            font-family: var(--font);
+            transition: var(--transition);
+        }
+        .rmk-tab.active { background: var(--primary); color: white; }
+
+        /* Player inputs */
+        .rmk-player-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .rmk-player-avatar {
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
-            background: var(--success);
+            background: var(--primary);
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
+            font-weight: 900;
+            flex-shrink: 0;
+            font-size: 0.9rem;
         }
-        .player-input input {
-            flex: 1;
-            padding: 10px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-size: 1rem;
-        }
-        
-        .time-input {
+        .rmk-player-row input { flex: 1; }
+
+        /* Player count btns */
+        .rmk-count-btns {
             display: flex;
-            gap: 10px;
-            align-items: center;
+            gap: 8px;
         }
-        .time-input input {
-            width: 80px;
-            padding: 10px;
-            border: 2px solid var(--success);
-            border-radius: 10px;
-            font-size: 1rem;
-            text-align: center;
-        }
-        
-        .start-btn {
-            width: 100%;
-            padding: 15px;
-            background: var(--success);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        
-        /* Game Screen */
-        .game-header {
+        .rmk-count-btn {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid var(--primary);
             background: white;
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: var(--font);
+            transition: var(--transition);
         }
-        .players-row {
+        .rmk-count-btn.active { background: var(--primary); color: white; }
+
+        /* Game UI */
+        .rmk-players-row {
             display: flex;
             justify-content: space-around;
             margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 8px;
         }
-        .player-dot {
-            width: 50px;
-            height: 50px;
+        .rmk-player-dot {
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
-            background: #ddd;
+            background: var(--bg-alt);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
+            font-weight: 900;
+            font-size: 1.1rem;
+            color: var(--text-light);
+            transition: var(--transition);
         }
-        .player-dot.active {
+        .rmk-player-dot.active {
             background: var(--success);
             color: white;
-            box-shadow: 0 0 20px var(--success);
+            box-shadow: 0 0 20px rgba(46,204,113,0.4);
         }
-        
-        .timer-display {
-            font-size: 5rem;
-            font-weight: bold;
+        .rmk-current-name {
             text-align: center;
-            margin: 20px 0;
-            position: relative;
-            display: inline-block;
-            width: 200px;
-            height: 200px;
-            line-height: 200px;
-            border-radius: 50%;
-            background: conic-gradient(var(--primary) 360deg, #eee 0deg);
-            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text);
         }
-        .timer-display::before {
+        .rmk-timer-container { text-align: center; margin-bottom: 20px; }
+        .rmk-timer-display {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary) 360deg, var(--bg-alt) 0deg);
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            position: relative;
+            transition: var(--transition);
+        }
+        .rmk-timer-display::before {
             content: '';
             position: absolute;
-            top: 10px;
-            left: 10px;
-            right: 10px;
-            bottom: 10px;
+            top: 12px; left: 12px; right: 12px; bottom: 12px;
             background: white;
             border-radius: 50%;
         }
-        .timer-display span {
-            position: relative;
-            z-index: 1;
-        }
-        .timer-display.warning { 
-            background: conic-gradient(var(--warning) 360deg, #eee 0deg);
-            color: var(--warning);
-        }
-        .timer-display.danger { 
-            background: conic-gradient(var(--danger) 360deg, #eee 0deg);
+        .rmk-timer-display span { position: relative; z-index: 1; }
+        .rmk-timer-display.warning { background: conic-gradient(var(--warning) 360deg, var(--bg-alt) 0deg); color: var(--warning); }
+        .rmk-timer-display.danger {
+            background: conic-gradient(var(--danger) 360deg, var(--bg-alt) 0deg);
             color: var(--danger);
             animation: pulse 1s infinite;
         }
@@ -336,657 +251,575 @@
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
         }
-        .timer-container {
-            text-align: center;
-        }
-        
-        .game-controls {
-            display: flex;
-            gap: 10px;
-        }
-        .game-controls button {
+        .rmk-timer-label { font-size: 0.85rem; color: var(--text-light); margin-top: 6px; }
+        .rmk-controls { display: flex; gap: 8px; flex-wrap: wrap; }
+        .rmk-ctrl-btn {
             flex: 1;
-            padding: 15px;
+            padding: 13px;
             border: none;
-            border-radius: 10px;
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: var(--font);
+            color: white;
+            transition: var(--transition);
+            min-width: 100px;
+        }
+        .rmk-ctrl-btn.pause { background: var(--warning); }
+        .rmk-ctrl-btn.next { background: var(--primary); }
+        .rmk-ctrl-btn.end { background: var(--danger); }
+        .rmk-ctrl-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+        /* Scorer keypad */
+        .rmk-keypad {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+        .rmk-key {
+            padding: 14px;
+            border: 2px solid var(--bg-alt);
+            border-radius: var(--radius-sm);
+            background: white;
             font-size: 1rem;
-            font-weight: bold;
+            font-weight: 700;
             cursor: pointer;
+            font-family: var(--font);
+            transition: var(--transition);
         }
-        .btn-pause { background: var(--warning); color: white; }
-        .btn-end { background: var(--danger); color: white; }
-        .btn-finish { background: var(--success); color: white; }
-        
-        /* Back Button */
-        .back-btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background: rgba(255,255,255,0.3);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            cursor: pointer;
-        }
-        .back-btn:hover {
-            background: rgba(255,255,255,0.5);
-        }
-        
-        footer {
+        .rmk-key:hover { border-color: var(--primary); background: var(--bg); }
+        .rmk-key.special { background: #fce4ec; border-color: #f8bbd0; color: #c2185b; }
+        .rmk-key百 { background: #e8f5e9; border-color: #c8e6c9; color: #2e7d32; }
+        .rmk-expression {
+            background: var(--bg);
+            border-radius: var(--radius-sm);
+            padding: 16px;
             text-align: center;
-            padding: 20px;
-            color: white;
+            margin-bottom: 16px;
         }
+        .rmk-expression-text { font-size: 1rem; color: var(--text-light); min-height: 24px; }
+        .rmk-expression-total { font-size: 2.5rem; font-weight: 900; color: var(--primary); }
+        .rmk-action-row { display: flex; gap: 8px; }
+        .rmk-action-row button { flex: 1; padding: 12px; border: none; border-radius: var(--radius-sm); font-size: 0.9rem; font-weight: 700; cursor: pointer; font-family: var(--font); color: white; transition: var(--transition); }
+        .rmk-action-row .rmk-undo { background: var(--warning); }
+        .rmk-action-row .rmk-clear { background: var(--danger); }
+        .rmk-action-row .rmk-confirm { background: var(--success); flex: 2; }
+
+        /* Result table */
+        .rmk-result-table { width: 100%; border-collapse: collapse; overflow: hidden; border-radius: var(--radius-sm); }
+        .rmk-result-table th { background: var(--primary); color: white; padding: 12px; text-align: center; font-size: 0.85rem; }
+        .rmk-result-table td { padding: 12px; text-align: center; border-bottom: 1px solid var(--bg-alt); font-size: 0.9rem; }
+        .rmk-result-table tr:last-child td { border-bottom: none; }
+        .rmk-result-row-win { background: #fff9c4 !important; border-left: 4px solid var(--warning); }
+
+        /* Scoring player selector */
+        .rmk-score-players {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .rmk-score-player {
+            flex: 1;
+            min-width: 70px;
+            padding: 12px 8px;
+            border-radius: var(--radius-sm);
+            background: var(--bg-alt);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        .rmk-score-player.active { background: var(--success); color: white; border-color: var(--success); }
+        .rmk-score-player-name { font-weight: 700; font-size: 0.85rem; }
+        .rmk-score-player-pts { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
+
+        .rmk-next-btn {
+            display: none;
+            width: 100%;
+            padding: 14px;
+            margin-top: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: var(--font);
+        }
+
+        /* Final result medals */
+        .medal-row { font-size: 1.2rem; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Main Menu -->
-        <div id="menuScreen" class="screen active">
-            <div class="menu-card">
-                <h1>🎲 Rummikub</h1>
-                <p>靈風中學 數學周 2026</p>
-                
-                <button class="menu-btn student" onclick="showScreen('studentScreen')">
-                    👨‍🎓 學生頁面
-                </button>
-                <button class="menu-btn teacher" onclick="showScreen('teacherLogin')">
-                    👨‍🏫 老師頁面
-                </button>
-                <button class="menu-btn scorer" onclick="showScreen('setupScreen')">
-                    📊 計分員頁面
-                </button>
-            </div>
+
+<!-- Back -->
+<div style="position:sticky;top:0;z-index:100;">
+    <a href="index.html" class="rmk-back" style="margin:16px 20px;display:inline-flex;align-items:center;gap:6px;">
+        ← 返回首頁
+    </a>
+</div>
+
+<!-- Header -->
+<div class="rmk-page-header">
+    <h1>🧩 Rummikub 計時器</h1>
+    <p>靈風中學 數學周 2026</p>
+</div>
+
+<div class="rmk-container">
+
+    <!-- Menu -->
+    <div id="menuScreen" class="rmk-screen active">
+        <div class="rmk-card">
+            <h2 class="blue">🎲 請選擇身份</h2>
+            <button class="rmk-menu-btn student" onclick="showScreen('studentScreen')">
+                <span>👨‍🎓</span> 學生頁面
+            </button>
+            <button class="rmk-menu-btn teacher" onclick="showScreen('teacherLogin')">
+                <span>👨‍🏫</span> 老師頁面
+            </button>
+            <button class="rmk-menu-btn scorer" onclick="showScreen('setupScreen')">
+                <span>📊</span> 計分員頁面
+            </button>
         </div>
-        
-        <!-- Student Screen -->
-        <div id="studentScreen" class="screen">
-            <a class="back-btn" onclick="showScreen('menuScreen')">← 返回主目錄</a>
-            <a class="back-btn" onclick="showScreen('menuScreen')">← 返回主目錄</a>
-            <div class="student-card">
-                <h2>👨‍🎓 學生頁面</h2>
-                
-                <div class="tab-buttons">
-                    <button class="tab-btn active" onclick="switchStudentTab('register')">📝 報名</button>
-                    <button class="tab-btn" onclick="switchStudentTab('score')">🔍 查詢成績</button>
-                </div>
-                
-                <!-- Registration Tab -->
-                <div id="registerTab">
-                    <div class="form-group">
-                        <label>姓名</label>
-                        <input type="text" id="regName" placeholder="請輸入姓名">
-                    </div>
-                    <div class="form-group">
-                        <label>班別</label>
-                        <input type="text" id="regClass" placeholder="例如：1C">
-                    </div>
-                    <div class="form-group">
-                        <label>學號</label>
-                        <input type="text" id="regID" placeholder="請輸入學號">
-                    </div>
-                    <button class="submit-btn" onclick="registerPlayer()">✅ 提交報名</button>
-                </div>
-                
-                <!-- Score Query Tab -->
-                <div id="scoreTab" style="display: none;">
-                    <div class="form-group">
-                        <label>姓名</label>
-                        <input type="text" id="queryName" placeholder="請輸入姓名">
-                    </div>
-                    <div class="form-group">
-                        <label>班別</label>
-                        <input type="text" id="queryClass" placeholder="例如：1C">
-                    </div>
-                    <div class="form-group">
-                        <label>學號</label>
-                        <input type="text" id="queryID" placeholder="請輸入學號">
-                    </div>
-                    <button class="submit-btn" onclick="queryScore()">🔍 查詢成績</button>
-                    <div id="scoreResult" style="margin-top: 20px;"></div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Teacher Login -->
-        <div id="teacherLogin" class="screen">
-            <a class="back-btn" onclick="showScreen('menuScreen')">← 返回主目錄</a>
-            <div class="teacher-card">
-                <h2>👨‍🏫 老師登入</h2>
-                <input type="password" class="password-input" id="teacherPassword" placeholder="請輸入密碼">
-                <button class="submit-btn" onclick="teacherLogin()">登入</button>
-                <p id="loginError" style="color: red; text-align: center; margin-top: 10px; display: none;">密碼錯誤！</p>
-            </div>
-        </div>
-        
-        <!-- Teacher Page -->
-        <div id="teacherPage" class="screen">
-            <a class="back-btn" onclick="showScreen('menuScreen')">← 返回主目錄</a>
-            <div class="teacher-card">
-                <h2>👨‍🏫 老師頁面</h2>
-                
-                <div class="teacher-tabs">
-                    <button class="teacher-tab active" onclick="switchTeacherTab('participants')">📋 報名名單</button>
-                    <button class="teacher-tab" onclick="switchTeacherTab('groups')">👥 分組</button>
-                </div>
-                
-                <!-- Participants Tab -->
-                <div id="participantsTab">
-                    <p style="text-align: center; color: #666;">尚未有學生報名</p>
-                </div>
-                
-                <!-- Groups Tab -->
-                <div id="groupsTab">
-                    <button class="action-btn" onclick="randomGroup()">🔀 隨機分組 (4人一組)</button>
-                    <div id="groupsResult" style="margin-top: 20px;"></div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Setup Screen (Scorekeeper) -->
-        <div id="setupScreen" class="screen">
-            <a class="back-btn" onclick="showScreen('menuScreen')">← 返回主目錄</a>
-            <a class="back-btn" onclick="showScreen('menuScreen')">← 返回主目錄</a>
-            <div class="setup-card">
-                <h1>🎲 Rummikub 計時器</h1>
-                
-                <div class="form-group">
-                    <label>👥 玩家人數</label>
-                    <div class="player-count-btns">
-                        <button onclick="setPlayerCount(2)">2人</button>
-                        <button onclick="setPlayerCount(3)">3人</button>
-                        <button onclick="setPlayerCount(4)" class="active">4人</button>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>📝 玩家名稱</label>
-                    <div class="player-inputs" id="playerInputs"></div>
-                </div>
-                
-                <div class="form-group">
-                    <label>⏱️ 每回合時間 (秒)</label>
-                    <div class="time-input">
-                        <input type="number" id="turnTime" value="60">
-                        <span>秒</span>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>🎲 起始玩家</label>
-                    <div class="player-count-btns" id="startPlayerBtns"></div>
-                </div>
-                
-                <button class="start-btn" onclick="startGame()">🚀 開始遊戲</button>
-            </div>
-        </div>
-        
-        <!-- Game Screen -->
-        <div id="gameScreen" class="screen">
-            <a class="back-btn" onclick="showScreen('menuScreen')">← 返回主目錄</a>
-            <div class="game-header">
-                <div class="players-row" id="playersRow"></div>
-            </div>
-            
-            <div class="timer-container">
-                <div class="current-player-name" id="currentPlayerName">玩家1</div>
-                <div class="timer-display" id="timerDisplay"><span>60</span></div>
-                <div class="timer-label" id="timerLabel">秒</div>
-            </div>
-            
-            <div class="game-controls">
-                <button class="btn-pause" onclick="togglePause()">⏸️ 暫停</button>
-                <button class="btn-end" onclick="endTurn()">⏭️ 下一位</button>
-                <button class="btn-finish" onclick="finishRound()">🏁 結束遊戲</button>
-            </div>
-        </div>
-        
-        <!-- Scoring Screen -->
-        <div id="scoringScreen" class="screen">
-            <a class="back-btn" onclick="showScreen('menuScreen')">← 返回主目錄</a>
-            <div class="setup-card">
-                <h2 style="text-align: center; color: var(--success);">📊 輸入分數 - 第<span id="currentRound">1</span>回合</h2>
-                
-                <div class="scoring-players" id="scoringPlayers" style="display: flex; justify-content: center; gap: 15px; margin-bottom: 20px;"></div>
-                
-                <div style="background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                    <div id="currentExpression" style="font-size: 1.2rem; color: #666; min-height: 30px;"></div>
-                    <div id="currentTotal" style="font-size: 2.5rem; font-weight: bold; color: var(--primary);">= 0</div>
-                </div>
-                
-                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 15px;">
-                    <button onclick="addTile(1)" style="padding: 15px; border: 2px solid #ddd; border-radius: 10px; background: white; font-size: 1.1rem; cursor: pointer;">1</button>
-                    <button onclick="addTile(2)" style="padding: 15px; border: 2px solid #ddd; border-radius: 10px; background: white; font-size: 1.1rem; cursor: pointer;">2</button>
-                    <button onclick="addTile(3)" style="padding: 15px; border: 2px solid #ddd; border-radius: 10px; background: white; font-size: 1.1rem; cursor: pointer;">3</button>
-                    <button onclick="addTile(4)" style="padding: 15px; border: 2px solid #ddd; border-radius: 10px; background: white; font-size: 1.1rem; cursor: pointer;">4</button>
-                    <button onclick="addTile(5)" style="padding: 15px; border: 2px solid #ddd; border-radius: 10px; background: white; font-size: 1.1rem; cursor: pointer;">5</button>
-                    <button onclick="addTile(6)" style="padding: 15px; border: 2px solid #ddd; border-radius: 10px; background: white; font-size: 1.1rem; cursor: pointer;">6</button>
-                    <button onclick="addTile(7)" style="padding: 15px; border: 2px solid #ddd; border-radius: 10px; background: white; font-size: 1.1rem; cursor: pointer;">7</button>
-                    <button onclick="addTile(8)" style="padding: 15px; border: 2px solid #ddd; border-radius: 10px; background: white; font-size: 1.1rem; cursor: pointer;">8</button>
-                    <button onclick="addTile(9)" style="padding: 15px; border: 2px solid #ddd; border-radius: 10px; background: white; font-size: 1.1rem; cursor: pointer;">9</button>
-                    <button onclick="addTile(10)" style="padding: 15px; border: 2px solid #ddd; border-radius: 10px; background: white; font-size: 1.1rem; cursor: pointer;">10</button>
-                    <button onclick="addTile(11)" style="padding: 15px; border: 2px solid #ddd; border-radius: 10px; background: white; font-size: 1.1rem; cursor: pointer;">11</button>
-                    <button onclick="addTile(12)" style="padding: 15px; border: 2px solid #ddd; border-radius: 10px; background: white; font-size: 1.1rem; cursor: pointer;">12</button>
-                    <button onclick="addTile(13)" style="padding: 15px; border: 2px solid #e91e63; border-radius: 10px; background: #fce4ec; font-size: 1.1rem; cursor: pointer;">🃏</button>
-                    <button onclick="addTile(25)" style="padding: 15px; border: 2px solid #e91e63; border-radius: 10px; background: #fce4ec; font-size: 1.1rem; cursor: pointer;">25</button>
-                    <button onclick="addTile(100)" style="padding: 15px; border: 2px solid #4caf50; border-radius: 10px; background: #e8f5e9; font-size: 1.1rem; cursor: pointer;">百搭</button>
-                </div>
-                
-                <div style="display: flex; gap: 10px;">
-                    <button onclick="clearLast()" style="flex: 1; padding: 12px; border: none; border-radius: 10px; background: #ff9800; color: white; font-size: 1rem; cursor: pointer;">↩️ 取消</button>
-                    <button onclick="clearAll()" style="flex: 1; padding: 12px; border: none; border-radius: 10px; background: #e74c3c; color: white; font-size: 1rem; cursor: pointer;">🗑️ 清除</button>
-                    <button onclick="confirmScore()" style="flex: 2; padding: 12px; border: none; border-radius: 10px; background: var(--success); color: white; font-size: 1.1rem; font-weight: bold; cursor: pointer;">✓ 確認</button>
-                </div>
-                
-                <button onclick="showRoundResult()" id="nextScoringBtn" style="display: none; width: 100%; padding: 15px; margin-top: 15px; border: none; border-radius: 10px; background: var(--primary); color: white; font-size: 1.1rem; font-weight: bold; cursor: pointer;">
-                    ✅ 確認並查看結果
-                </button>
-            </div>
-        </div>
-        
-        <!-- Result Screen -->
-        <div id="resultScreen" class="screen">
-            <a class="back-btn" onclick="showScreen('menuScreen')">← 返回主目錄</a>
-            <div class="setup-card">
-                <h2 style="text-align: center; color: var(--primary); margin-bottom: 20px;">🏆 第<span id="resultRound">1</span>回合結果</h2>
-                
-                <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                    <thead>
-                        <tr style="background: var(--primary); color: white;">
-                            <th style="padding: 15px;">玩家</th>
-                            <th style="padding: 15px;">今回扣分</th>
-                            <th style="padding: 15px;">總分</th>
-                        </tr>
-                    </thead>
-                    <tbody id="resultTableBody"></tbody>
-                </table>
-                
-                <div style="display: flex; gap: 10px; margin-top: 20px;">
-                    <button onclick="nextRound()" style="flex: 1; padding: 15px; border: none; border-radius: 10px; background: var(--warning); color: white; font-size: 1rem; font-weight: bold; cursor: pointer;">🔄 下一回合</button>
-                    <button onclick="endGame()" style="flex: 1; padding: 15px; border: none; border-radius: 10px; background: var(--danger); color: white; font-size: 1rem; font-weight: bold; cursor: pointer;">🏁 結束遊戲</button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Final Result Screen -->
-        <div id="finalResultScreen" class="screen">
-            <a class="back-btn" onclick="showScreen('menuScreen')">← 返回主目錄</a>
-            <div class="setup-card">
-                <h2 style="text-align: center; color: #ffd700; margin-bottom: 20px; font-size: 2rem;">🎉 最終結果</h2>
-                
-                <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                    <thead>
-                        <tr style="background: var(--success); color: white;">
-                            <th style="padding: 15px;">排名</th>
-                            <th style="padding: 15px;">玩家</th>
-                            <th style="padding: 15px;">總分</th>
-                        </tr>
-                    </thead>
-                    <tbody id="finalResultBody"></tbody>
-                </table>
-                
-                <button onclick="resetGame()" style="width: 100%; padding: 15px; margin-top: 20px; border: none; border-radius: 10px; background: var(--primary); color: white; font-size: 1.1rem; font-weight: bold; cursor: pointer;">
-                    🔄 重新遊戲
-                </button>
-            </div>
-        </div>
-        
     </div>
 
-    <script>
-        // ==================== Navigation ====================
-        function showScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById(screenId).classList.add('active');
-        }
-        
-        function switchStudentTab(tab) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            if (tab === 'register') {
-                document.getElementById('registerTab').style.display = 'block';
-                document.getElementById('scoreTab').style.display = 'none';
-            } else {
-                document.getElementById('registerTab').style.display = 'none';
-                document.getElementById('scoreTab').style.display = 'block';
-            }
-        }
-        
-        function switchTeacherTab(tab) {
-            document.querySelectorAll('.teacher-tab').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            if (tab === 'participants') {
-                document.getElementById('participantsTab').style.display = 'block';
-                document.getElementById('groupsTab').style.display = 'none';
-            } else {
-                document.getElementById('participantsTab').style.display = 'none';
-                document.getElementById('groupsTab').style.display = 'block';
-            }
-        }
-        
-        // ==================== Student Functions ====================
-        function registerPlayer() {
-            const name = document.getElementById('regName').value;
-            const className = document.getElementById('regClass').value;
-            const id = document.getElementById('regID').value;
-            
-            if (!name || !className || !id) {
-                alert('請填寫所有資料！');
-                return;
-            }
-            
-            // TODO: Connect to Google Sheets
-            alert('報名成功！\n姓名：' + name + '\n班別：' + className + '\n學號：' + id);
-            
-            // Clear form
-            document.getElementById('regName').value = '';
-            document.getElementById('regClass').value = '';
-            document.getElementById('regID').value = '';
-        }
-        
-        function queryScore() {
-            const name = document.getElementById('queryName').value;
-            const className = document.getElementById('queryClass').value;
-            const id = document.getElementById('queryID').value;
-            
-            if (!name || !className || !id) {
-                alert('請填寫所有資料！');
-                return;
-            }
-            
-            // TODO: Connect to Google Sheets
-            document.getElementById('scoreResult').innerHTML = 
-                '<div style="padding: 20px; background: #f8f9fa; border-radius: 10px; text-align: center;">' +
-                '<p style="color: #666;">暫時未能找到成績</p>' +
-                '<p style="font-size: 0.9rem; color: #999;">連接Google Sheets後即可查詢</p></div>';
-        }
-        
-        // ==================== Teacher Functions ====================
-        let teacherPassword = 'math2026'; // TODO: Move to Google Sheets
-        
-        function teacherLogin() {
-            const input = document.getElementById('teacherPassword').value;
-            if (input === teacherPassword) {
-                document.getElementById('loginError').style.display = 'none';
-                showScreen('teacherPage');
-            } else {
-                document.getElementById('loginError').style.display = 'block';
-            }
-        }
-        
-        let participants = []; // TODO: Load from Google Sheets
-        
-        function randomGroup() {
-            if (participants.length < 4) {
-                alert('報名人數不足，需要至少4人！');
-                return;
-            }
-            
-            // Shuffle
-            let shuffled = [...participants].sort(() => Math.random() - 0.5);
-            let groups = [];
-            for (let i = 0; i < shuffled.length; i += 4) {
-                groups.push(shuffled.slice(i, i + 4));
-            }
-            
-            // Display
-            let html = '<table class="data-table"><tr><th>組別</th><th>隊員</th></tr>';
-            groups.forEach((group, idx) => {
-                html += '<tr><td>第' + (idx+1) + '組</td><td>' + group.map(p => p.name).join('、') + '</td></tr>';
-            });
-            html += '</table>';
-            
-            document.getElementById('groupsResult').innerHTML = html;
-        }
-        
-        // ==================== Game Functions ====================
-        let playerCount = 4;
-        let players = [];
-        let round = 1;
-        let currentScoringIndex = 0;
-        let turnTime = 60;
-        let currentPlayer = 0;
-        let timerInterval = null;
-        let timeLeft = 60;
-        let isPaused = false;
-        
-        function setPlayerCount(count) {
-            playerCount = count;
-            document.querySelectorAll('.player-count-btns button').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            generatePlayerInputs();
-        }
-        
-        function generatePlayerInputs() {
-            const container = document.getElementById('playerInputs');
-            container.innerHTML = '';
-            
-            for (let i = 1; i <= playerCount; i++) {
-                container.innerHTML += `
-                    <div class="player-input">
-                        <div class="avatar">P${i}</div>
-                        <input type="text" placeholder="玩家${i}名稱" id="player${i}Name">
-                    </div>
-                `;
-            }
-            
-            // Generate start player buttons
-            const startContainer = document.getElementById('startPlayerBtns');
-            startContainer.innerHTML = '';
-            for (let i = 1; i <= playerCount; i++) {
-                startContainer.innerHTML += `<button onclick="setStartPlayer(${i-1})">玩家${i}</button>`;
-            }
-        }
-        
-        function setStartPlayer(idx) {
-            currentPlayer = idx;
-            document.querySelectorAll('#startPlayerBtns button').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-        }
-        
-        function startGame() {
-            players = [];
-            for (let i = 1; i <= playerCount; i++) {
-                let name = document.getElementById('player' + i + 'Name').value || '玩家' + i;
-                players.push({ name: name, score: 0 });
-            }
-            
-            turnTime = parseInt(document.getElementById('turnTime').value) || 60;
-            
-            updateGameUI();
-            showScreen('gameScreen');
-            startTimer();
-        }
-        
-        function updateGameUI() {
-            const container = document.getElementById('playersRow');
-            container.innerHTML = '';
-            
-            players.forEach((player, idx) => {
-                let active = idx === currentPlayer ? 'active' : '';
-                container.innerHTML += `<div class="player-dot ${active}">${player.name.charAt(0)}</div>`;
-            });
-            
-            document.getElementById('currentPlayerName').textContent = players[currentPlayer].name;
-        }
-        
-        function startTimer() {
-            timeLeft = turnTime;
-            isPaused = false;
+    <!-- Student -->
+    <div id="studentScreen" class="rmk-screen">
+        <button class="rmk-back" onclick="showScreen('menuScreen')">← 返回主目錄</button>
+        <div class="rmk-card">
+            <h2 class="blue">👨‍🎓 學生頁面</h2>
+            <div class="rmk-tabs">
+                <button class="rmk-tab active" onclick="switchStudentTab('register', this)">📝 報名</button>
+                <button class="rmk-tab" onclick="switchStudentTab('score', this)">🔍 查詢成績</button>
+            </div>
+            <div id="registerTab">
+                <div class="rmk-form-group">
+                    <label>姓名</label>
+                    <input type="text" id="regName" placeholder="請輸入姓名">
+                </div>
+                <div class="rmk-form-group">
+                    <label>班別</label>
+                    <input type="text" id="regClass" placeholder="例如：1C">
+                </div>
+                <div class="rmk-form-group">
+                    <label>學號</label>
+                    <input type="text" id="regID" placeholder="請輸入學號">
+                </div>
+                <button class="rmk-submit" onclick="registerPlayer()">✅ 提交報名</button>
+            </div>
+            <div id="scoreTab" style="display:none;">
+                <div class="rmk-form-group">
+                    <label>姓名</label>
+                    <input type="text" id="queryName" placeholder="請輸入姓名">
+                </div>
+                <div class="rmk-form-group">
+                    <label>班別</label>
+                    <input type="text" id="queryClass" placeholder="例如：1C">
+                </div>
+                <div class="rmk-form-group">
+                    <label>學號</label>
+                    <input type="text" id="queryID" placeholder="請輸入學號">
+                </div>
+                <button class="rmk-submit" onclick="queryScore()">🔍 查詢成績</button>
+                <div id="scoreResult" style="margin-top:16px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Teacher Login -->
+    <div id="teacherLogin" class="rmk-screen">
+        <button class="rmk-back" onclick="showScreen('menuScreen')">← 返回主目錄</button>
+        <div class="rmk-card">
+            <h2 class="yellow">👨‍🏫 老師登入</h2>
+            <div class="rmk-form-group">
+                <label>密碼</label>
+                <input type="password" id="teacherPassword" placeholder="請輸入密碼" onkeydown="if(event.key==='Enter')teacherLogin()">
+            </div>
+            <button class="rmk-submit" onclick="teacherLogin()">登入</button>
+            <p id="loginError" style="color:var(--danger);text-align:center;margin-top:10px;display:none;">密碼錯誤！</p>
+        </div>
+    </div>
+
+    <!-- Teacher Page -->
+    <div id="teacherPage" class="rmk-screen">
+        <button class="rmk-back" onclick="showScreen('menuScreen')">← 返回主目錄</button>
+        <div class="rmk-card">
+            <h2 class="yellow">👨‍🏫 老師頁面</h2>
+            <div class="rmk-tabs">
+                <button class="rmk-tab active" onclick="switchTeacherTab('participants', this)">📋 報名名單</button>
+                <button class="rmk-tab" onclick="switchTeacherTab('groups', this)">👥 分組</button>
+            </div>
+            <div id="participantsTab">
+                <p style="text-align:center;color:var(--text-light);padding:20px;">尚未有學生報名</p>
+            </div>
+            <div id="groupsTab" style="display:none;">
+                <button class="rmk-submit" style="background:var(--warning);" onclick="randomGroup()">🔀 隨機分組 (4人一組)</button>
+                <div id="groupsResult" style="margin-top:16px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Setup -->
+    <div id="setupScreen" class="rmk-screen">
+        <button class="rmk-back" onclick="showScreen('menuScreen')">← 返回主目錄</button>
+        <div class="rmk-card">
+            <h2 class="green">🎲 Rummikub 計時器</h2>
+            <div class="rmk-form-group">
+                <label>👥 玩家人數</label>
+                <div class="rmk-count-btns">
+                    <button class="rmk-count-btn" onclick="setPlayerCount(2)">2人</button>
+                    <button class="rmk-count-btn" onclick="setPlayerCount(3)">3人</button>
+                    <button class="rmk-count-btn active" onclick="setPlayerCount(4)">4人</button>
+                </div>
+            </div>
+            <div class="rmk-form-group">
+                <label>📝 玩家名稱</label>
+                <div id="playerInputs"></div>
+            </div>
+            <div class="rmk-form-group">
+                <label>⏱️ 每回合時間 (秒)</label>
+                <div style="display:flex;align-items:center;gap:10px;">
+                    <input type="number" id="turnTime" value="60" style="width:100px;text-align:center;">
+                    <span style="color:var(--text-light);">秒</span>
+                </div>
+            </div>
+            <div class="rmk-form-group">
+                <label>🎲 起始玩家</label>
+                <div id="startPlayerBtns" style="display:flex;gap:8px;"></div>
+            </div>
+            <button class="rmk-submit" style="background:var(--success);" onclick="startGame()">🚀 開始遊戲</button>
+        </div>
+    </div>
+
+    <!-- Game -->
+    <div id="gameScreen" class="rmk-screen">
+        <button class="rmk-back" onclick="if(confirm('確定要離開遊戲？'))showScreen('menuScreen')">← 返回</button>
+        <div class="rmk-card">
+            <div class="rmk-players-row" id="playersRow"></div>
+            <div class="rmk-current-name" id="currentPlayerName">玩家1</div>
+            <div class="rmk-timer-container">
+                <div class="rmk-timer-display" id="timerDisplay"><span>60</span></div>
+                <div class="rmk-timer-label">秒</div>
+            </div>
+            <div class="rmk-controls">
+                <button class="rmk-ctrl-btn pause" onclick="togglePause()">⏸️ 暫停</button>
+                <button class="rmk-ctrl-btn next" onclick="endTurn()">⏭️ 下一位</button>
+                <button class="rmk-ctrl-btn end" onclick="finishRound()">🏁 結束遊戲</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scoring -->
+    <div id="scoringScreen" class="rmk-screen">
+        <button class="rmk-back" onclick="showScreen('menuScreen')">← 返回主目錄</button>
+        <div class="rmk-card">
+            <h2 class="green">📊 輸入分數 — 第<span id="currentRound">1</span>回合</h2>
+            <div class="rmk-score-players" id="scoringPlayers"></div>
+            <div class="rmk-expression">
+                <div class="rmk-expression-text" id="currentExpression"></div>
+                <div class="rmk-expression-total" id="currentTotal">= 0</div>
+            </div>
+            <div class="rmk-keypad">
+                <button class="rmk-key" onclick="addTile(1)">1</button>
+                <button class="rmk-key" onclick="addTile(2)">2</button>
+                <button class="rmk-key" onclick="addTile(3)">3</button>
+                <button class="rmk-key" onclick="addTile(4)">4</button>
+                <button class="rmk-key" onclick="addTile(5)">5</button>
+                <button class="rmk-key" onclick="addTile(6)">6</button>
+                <button class="rmk-key" onclick="addTile(7)">7</button>
+                <button class="rmk-key" onclick="addTile(8)">8</button>
+                <button class="rmk-key" onclick="addTile(9)">9</button>
+                <button class="rmk-key" onclick="addTile(10)">10</button>
+                <button class="rmk-key special" onclick="addTile(11)">11</button>
+                <button class="rmk-key special" onclick="addTile(12)">12</button>
+                <button class="rmk-key special" onclick="addTile(13)">🃏</button>
+                <button class="rmk-key special" onclick="addTile(25)">25</button>
+                <button class="rmk-key rmk-key百" onclick="addTile(100)">百搭</button>
+            </div>
+            <div class="rmk-action-row">
+                <button class="rmk-undo" onclick="clearLast()">↩️ 取消</button>
+                <button class="rmk-clear" onclick="clearAll()">🗑️ 清除</button>
+                <button class="rmk-confirm" onclick="confirmScore()">✓ 確認</button>
+            </div>
+            <button class="rmk-next-btn" id="nextScoringBtn" onclick="showRoundResult()">
+                ✅ 確認並查看結果
+            </button>
+        </div>
+    </div>
+
+    <!-- Round Result -->
+    <div id="resultScreen" class="rmk-screen">
+        <button class="rmk-back" onclick="showScreen('menuScreen')">← 返回主目錄</button>
+        <div class="rmk-card">
+            <h2 class="blue">🏆 第<span id="resultRound">1</span>回合結果</h2>
+            <table class="rmk-result-table" id="resultTableBody">
+                <thead>
+                    <tr>
+                        <th>玩家</th>
+                        <th>今回扣分</th>
+                        <th>總分</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div style="display:flex;gap:8px;margin-top:16px;">
+                <button class="rmk-submit" style="background:var(--warning);flex:1;" onclick="nextRound()">🔄 下一回合</button>
+                <button class="rmk-submit" style="background:var(--danger);flex:1;" onclick="endGame()">🏁 結束遊戲</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final Result -->
+    <div id="finalResultScreen" class="rmk-screen">
+        <button class="rmk-back" onclick="showScreen('menuScreen')">← 返回主目錄</button>
+        <div class="rmk-card">
+            <h2 class="green" style="font-size:1.8rem;">🎉 最終結果</h2>
+            <table class="rmk-result-table" style="margin-top:16px;">
+                <thead>
+                    <tr>
+                        <th>排名</th>
+                        <th>玩家</th>
+                        <th>總分</th>
+                    </tr>
+                </thead>
+                <tbody id="finalResultBody"></tbody>
+            </table>
+            <button class="rmk-submit" style="margin-top:16px;" onclick="resetGame()">🔄 重新遊戲</button>
+        </div>
+    </div>
+
+</div>
+
+<footer class="footer" style="margin-top:20px;">
+    <div class="footer-logo">🧩 靈風中學 數學周 2026</div>
+</footer>
+
+<script>
+// ==================== Navigation ====================
+function showScreen(screenId) {
+    document.querySelectorAll('.rmk-screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(screenId).classList.add('active');
+}
+
+function switchStudentTab(tab, btn) {
+    document.querySelectorAll('#studentScreen .rmk-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('registerTab').style.display = tab === 'register' ? 'block' : 'none';
+    document.getElementById('scoreTab').style.display = tab === 'score' ? 'block' : 'none';
+}
+
+function switchTeacherTab(tab, btn) {
+    document.querySelectorAll('#teacherPage .rmk-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('participantsTab').style.display = tab === 'participants' ? 'block' : 'none';
+    document.getElementById('groupsTab').style.display = tab === 'groups' ? 'block' : 'none';
+}
+
+// ==================== Student ====================
+function registerPlayer() {
+    const name = document.getElementById('regName').value;
+    const cls = document.getElementById('regClass').value;
+    const id = document.getElementById('regID').value;
+    if (!name || !cls || !id) { alert('請填寫所有資料！'); return; }
+    alert('報名成功！\n姓名：' + name + '\n班別：' + cls + '\n學號：' + id);
+    document.getElementById('regName').value = '';
+    document.getElementById('regClass').value = '';
+    document.getElementById('regID').value = '';
+}
+function queryScore() {
+    document.getElementById('scoreResult').innerHTML =
+        '<div style="padding:16px;background:var(--bg);border-radius:var(--radius-sm);text-align:center;color:var(--text-light);">暫時未能找到成績<br><small>連接Google Sheets後即可查詢</small></div>';
+}
+
+// ==================== Teacher ====================
+function teacherLogin() {
+    if (document.getElementById('teacherPassword').value === 'math2026') {
+        document.getElementById('loginError').style.display = 'none';
+        showScreen('teacherPage');
+    } else {
+        document.getElementById('loginError').style.display = 'block';
+    }
+}
+function randomGroup() {
+    alert('請先在學生頁面收集報名資料，再進行分組。');
+}
+
+// ==================== Game Setup ====================
+let playerCount = 4, players = [], round = 1, currentScoringIndex = 0;
+let turnTime = 60, currentPlayer = 0, timerInterval = null, timeLeft = 60, isPaused = false;
+let currentTiles = [];
+
+function setPlayerCount(count) {
+    playerCount = count;
+    document.querySelectorAll('.rmk-count-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    generatePlayerInputs();
+}
+function generatePlayerInputs() {
+    let html = '';
+    for (let i = 1; i <= playerCount; i++) {
+        html += `<div class="rmk-player-row">
+            <div class="rmk-player-avatar">P${i}</div>
+            <input type="text" placeholder="玩家${i}名稱" id="player${i}Name">
+        </div>`;
+    }
+    document.getElementById('playerInputs').innerHTML = html;
+    let btns = '';
+    for (let i = 1; i <= playerCount; i++) {
+        btns += `<button class="rmk-count-btn" onclick="setStartPlayer(${i-1},this)">玩家${i}</button>`;
+    }
+    document.getElementById('startPlayerBtns').innerHTML = btns;
+}
+function setStartPlayer(idx, btn) {
+    currentPlayer = idx;
+    document.querySelectorAll('#startPlayerBtns .rmk-count-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+}
+function startGame() {
+    players = [];
+    for (let i = 1; i <= playerCount; i++) {
+        let name = document.getElementById('player' + i + 'Name').value || '玩家' + i;
+        players.push({ name, score: 0 });
+    }
+    turnTime = parseInt(document.getElementById('turnTime').value) || 60;
+    updateGameUI();
+    showScreen('gameScreen');
+    startTimer();
+}
+function updateGameUI() {
+    let html = '';
+    players.forEach((p, i) => {
+        html += `<div class="rmk-player-dot ${i === currentPlayer ? 'active' : ''}">${p.name.charAt(0)}</div>`;
+    });
+    document.getElementById('playersRow').innerHTML = html;
+    document.getElementById('currentPlayerName').textContent = players[currentPlayer].name;
+}
+function startTimer() {
+    timeLeft = turnTime;
+    isPaused = false;
+    updateTimerDisplay();
+    if (timerInterval) clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+        if (!isPaused) {
+            timeLeft--;
             updateTimerDisplay();
-            
-            timerInterval = setInterval(() => {
-                if (!isPaused) {
-                    timeLeft--;
-                    updateTimerDisplay();
-                    
-                    if (timeLeft <= 0) {
-                        clearInterval(timerInterval);
-                        // TODO: Play alarm sound
-                        alert('時間到！');
-                    } else if (timeLeft <= 10) {
-                        // TODO: Play warning beep
-                    }
-                }
-            }, 1000);
+            if (timeLeft <= 0) { clearInterval(timerInterval); alert('時間到！'); }
         }
-        
-        function updateTimerDisplay() {
-            const display = document.getElementById('timerDisplay');
-            display.querySelector('span').textContent = timeLeft;
-            
-            display.classList.remove('warning', 'danger');
-            if (timeLeft <= 10) {
-                display.classList.add('danger');
-            } else if (timeLeft <= 20) {
-                display.classList.add('warning');
-            }
-        }
-        
-        function togglePause() {
-            isPaused = !isPaused;
-            document.querySelector('.btn-pause').textContent = isPaused ? '▶️ 繼續' : '⏸️ 暫停';
-        }
-        
-        function endTurn() {
-            currentPlayer = (currentPlayer + 1) % playerCount;
-            updateGameUI();
-            startTimer();
-        }
-        
-        function finishRound() {
-            clearInterval(timerInterval);
-            currentScoringIndex = 0;
-            round = 1;
-            showScreen('scoringScreen');
-            updateScoringUI();
-        }
-        
-        // ==================== Scoring Functions ====================
-        let currentTiles = [];
-        
-        function updateScoringUI() {
-            const container = document.getElementById('scoringPlayers');
-            container.innerHTML = '';
-            for (let i = 0; i < players.length; i++) {
-                container.innerHTML += `
-                    <div onclick="selectScoringPlayer(${i})" style="padding: 15px; border-radius: 10px; background: ${i === currentScoringIndex ? 'var(--success)' : '#eee'}; color: ${i === currentScoringIndex ? 'white' : '#666'}; cursor: pointer; text-align: center;">
-                        <div style="font-weight: bold;">${players[i].name}</div>
-                        <div style="font-size: 0.9rem;">${players[i].score}分</div>
-                    </div>
-                `;
-            }
-            currentTiles = [];
-            updateTilesDisplay();
-            document.getElementById('currentRound').textContent = round;
-            document.getElementById('nextScoringBtn').style.display = 'none';
-        }
-        
-        function selectScoringPlayer(index) {
-            currentScoringIndex = index;
-            currentTiles = [];
-            updateScoringUI();
-        }
-        
-        function addTile(value) {
-            currentTiles.push(value);
-            updateTilesDisplay();
-        }
-        
-        function updateTilesDisplay() {
-            const expression = currentTiles.join(' + ');
-            const total = currentTiles.reduce((a, b) => a + b, 0);
-            document.getElementById('currentExpression').textContent = expression || '';
-            document.getElementById('currentTotal').textContent = total > 0 ? '= ' + total : '= 0';
-        }
-        
-        function clearLast() {
-            currentTiles.pop();
-            updateTilesDisplay();
-        }
-        
-        function clearAll() {
-            currentTiles = [];
-            updateTilesDisplay();
-        }
-        
-        function confirmScore() {
-            if (currentTiles.length === 0) return;
-            const total = currentTiles.reduce((a, b) => a + b, 0);
-            players[currentScoringIndex].score -= total;
-            
-            if (currentScoringIndex < players.length - 1) {
-                currentScoringIndex++;
-                currentTiles = [];
-                updateScoringUI();
-            } else {
-                document.getElementById('nextScoringBtn').style.display = 'block';
-            }
-        }
-        
-        function showRoundResult() {
-            document.getElementById('resultRound').textContent = round;
-            
-            const tbody = document.getElementById('resultTableBody');
-            tbody.innerHTML = '';
-            
-            // Calculate round scores
-            let minScore = Math.min(...players.map(p => p.score));
-            let roundScores = players.map(p => p.score - minScore);
-            
-            for (let i = 0; i < players.length; i++) {
-                let isWinner = players[i].score === Math.max(...players.map(p => p.score));
-                tbody.innerHTML += `
-                    <tr style="background: ${isWinner ? '#fff5f5' : 'white'}; ${isWinner ? 'border-left: 4px solid var(--success);' : ''}">
-                        <td style="padding: 15px; text-align: center;">${players[i].name}</td>
-                        <td style="padding: 15px; text-align: center; color: ${roundScores[i] > 0 ? 'var(--danger)' : 'var(--success)'};">
-                            ${roundScores[i] > 0 ? '-' : ''}${Math.abs(roundScores[i])}
-                        </td>
-                        <td style="padding: 15px; text-align: center; font-weight: bold;">${players[i].score}</td>
-                    </tr>
-                `;
-            }
-            
-            showScreen('resultScreen');
-        }
-        
-        function nextRound() {
-            round++;
-            currentPlayer = (currentPlayer + 1) % playerCount;
-            currentScoringIndex = 0;
-            showScreen('gameScreen');
-            updateGameUI();
-            startTimer();
-        }
-        
-        function endGame() {
-            const sorted = players.map((p, i) => ({name: p.name, score: p.score, index: i}))
-                .sort((a, b) => b.score - a.score);
-            
-            const tbody = document.getElementById('finalResultBody');
-            tbody.innerHTML = '';
-            sorted.forEach((p, i) => {
-                let medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '';
-                tbody.innerHTML += `
-                    <tr style="background: ${i === 0 ? '#fff9c4' : 'white'};">
-                        <td style="padding: 15px; text-align: center; font-size: 1.2rem;">${medal} ${i + 1}</td>
-                        <td style="padding: 15px; text-align: center;">${p.name}</td>
-                        <td style="padding: 15px; text-align: center; font-weight: bold; font-size: 1.1rem;">${p.score}</td>
-                    </tr>
-                `;
-            });
-            
-            showScreen('finalResultScreen');
-        }
-        
-        function resetGame() {
-            showScreen('menuScreen');
-        }
-        
-        // Initialize
-        generatePlayerInputs();
-    </script>
+    }, 1000);
+}
+function updateTimerDisplay() {
+    const d = document.getElementById('timerDisplay');
+    d.querySelector('span').textContent = timeLeft;
+    d.classList.remove('warning', 'danger');
+    if (timeLeft <= 10) d.classList.add('danger');
+    else if (timeLeft <= 20) d.classList.add('warning');
+}
+function togglePause() {
+    isPaused = !isPaused;
+    document.querySelector('.rmk-ctrl-btn.pause').textContent = isPaused ? '▶️ 繼續' : '⏸️ 暫停';
+}
+function endTurn() {
+    clearInterval(timerInterval);
+    currentPlayer = (currentPlayer + 1) % playerCount;
+    updateGameUI();
+    startTimer();
+}
+function finishRound() {
+    clearInterval(timerInterval);
+    currentScoringIndex = 0;
+    round = 1;
+    showScreen('scoringScreen');
+    updateScoringUI();
+}
+
+// ==================== Scoring ====================
+function updateScoringUI() {
+    let html = '';
+    players.forEach((p, i) => {
+        html += `<div class="rmk-score-player ${i === currentScoringIndex ? 'active' : ''}" onclick="selectScoringPlayer(${i})">
+            <div class="rmk-score-player-name">${p.name}</div>
+            <div class="rmk-score-player-pts">${p.score}分</div>
+        </div>`;
+    });
+    document.getElementById('scoringPlayers').innerHTML = html;
+    currentTiles = [];
+    updateTilesDisplay();
+    document.getElementById('currentRound').textContent = round;
+    document.getElementById('nextScoringBtn').style.display = 'none';
+}
+function selectScoringPlayer(index) {
+    currentScoringIndex = index;
+    currentTiles = [];
+    updateScoringUI();
+}
+function addTile(value) {
+    currentTiles.push(value);
+    updateTilesDisplay();
+}
+function updateTilesDisplay() {
+    const expr = currentTiles.join(' + ');
+    const total = currentTiles.reduce((a, b) => a + b, 0);
+    document.getElementById('currentExpression').textContent = expr || '';
+    document.getElementById('currentTotal').textContent = total > 0 ? '= ' + total : '= 0';
+}
+function clearLast() { currentTiles.pop(); updateTilesDisplay(); }
+function clearAll() { currentTiles = []; updateTilesDisplay(); }
+function
+function confirmScore() {
+    if (currentTiles.length === 0) return;
+    const total = currentTiles.reduce((a, b) => a + b, 0);
+    players[currentScoringIndex].score -= total;
+    if (currentScoringIndex < players.length - 1) {
+        currentScoringIndex++;
+        currentTiles = [];
+        updateScoringUI();
+    } else {
+        document.getElementById('nextScoringBtn').style.display = 'block';
+    }
+}
+function showRoundResult() {
+    document.getElementById('resultRound').textContent = round;
+    const tbody = document.querySelector('#resultTableBody tbody');
+    tbody.innerHTML = '';
+    players.forEach(p => {
+        const isWin = p.score === Math.max(...players.map(x => x.score));
+        tbody.innerHTML += `<tr class="${isWin ? 'rmk-result-row-win' : ''}">
+            <td>${p.name}</td>
+            <td>−${Math.abs(currentTiles.reduce((a,b)=>a+b,0))}</td>
+            <td style="font-weight:900;">${p.score}</td>
+        </tr>`;
+    });
+    showScreen('resultScreen');
+}
+function nextRound() {
+    round++;
+    currentPlayer = (currentPlayer + 1) % playerCount;
+    currentScoringIndex = 0;
+    showScreen('gameScreen');
+    updateGameUI();
+    startTimer();
+}
+function endGame() {
+    const sorted = players.map((p, i) => ({name: p.name, score: p.score, index: i})).sort((a, b) => b.score - a.score);
+    const tbody = document.getElementById('finalResultBody');
+    tbody.innerHTML = '';
+    sorted.forEach((p, i) => {
+        const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '';
+        tbody.innerHTML += `<tr ${i===0?'style="background:#fff9c4"':''}>
+            <td class="medal-row">${medal} ${i + 1}</td>
+            <td>${p.name}</td>
+            <td style="font-weight:900;">${p.score}</td>
+        </tr>`;
+    });
+    showScreen('finalResultScreen');
+}
+function resetGame() { showScreen('menuScreen'); }
+generatePlayerInputs();
+</script>
 </body>
 </html>

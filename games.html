@@ -3,143 +3,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎮 數學遊戲專區 - 數學周 2026</title>
+    <title>🎮 數學遊戲專區 | 靈風中學 數學周 2026</title>
+    <meta name="description" content="靈風中學數學周2026 數學遊戲專區 — 計算機大賽、公式配對、四則運算拉力賽，午休 iPad 站挑戰！">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        body { background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); min-height:100vh; }
-        .back-link { display:inline-flex; align-items:center; gap:8px; color:white; text-decoration:none; padding:15px 25px; margin:20px; background:rgba(255,255,255,0.2); border-radius:25px; font-weight:bold; }
-        .back-link:hover { background:rgba(255,255,255,0.3); }
-        .games-header { text-align:center; color:white; padding:30px 20px 10px; }
-        .games-header h1 { font-size:2.5rem; margin-bottom:10px; }
-        .games-header p { opacity:0.9; font-size:1.1rem; }
-        
-        .main-games { padding:20px; max-width:800px; margin:0 auto; }
-        .main-games h2 { color:white; text-align:center; margin:20px 0 15px; font-size:1.3rem; }
-        
-        .game-card-big { background:rgba(255,255,255,0.12); backdrop-filter:blur(10px); border-radius:20px; padding:25px; margin:15px 0; border:1px solid rgba(255,255,255,0.2); transition:transform 0.2s; cursor:pointer; text-decoration:none; display:block; color:white; }
-        .game-card-big:hover { transform:translateY(-3px); background:rgba(255,255,255,0.18); }
-        .game-card-big .icon { font-size:2.5rem; margin-bottom:10px; }
-        .game-card-big h3 { font-size:1.4rem; margin-bottom:8px; }
-        .game-card-big .desc { opacity:0.85; font-size:0.95rem; line-height:1.5; margin-bottom:12px; }
-        .game-card-big .tags { display:flex; flex-wrap:wrap; gap:8px; }
-        .game-card-big .tag { background:rgba(255,255,255,0.2); padding:4px 12px; border-radius:15px; font-size:0.75rem; font-weight:bold; }
-        
-        .scoring-section { background:rgba(0,0,0,0.2); border-radius:20px; padding:25px; margin:30px 20px; max-width:760px; margin-left:auto; margin-right:auto; color:white; }
-        .scoring-section h2 { text-align:center; margin-bottom:15px; }
-        .scoring-section table { width:100%; border-collapse:collapse; }
-        .scoring-section th, .scoring-section td { padding:10px; text-align:left; border-bottom:1px solid rgba(255,255,255,0.1); }
-        .scoring-section th { opacity:0.7; font-size:0.85rem; }
-        
-        .leaderboard-placeholder { background:rgba(255,255,255,0.08); border-radius:20px; padding:30px; margin:20px; max-width:760px; margin-left:auto; margin-right:auto; text-align:center; color:white; }
-        .leaderboard-placeholder h2 { margin-bottom:10px; }
-        .leaderboard-placeholder p { opacity:0.7; }
-        
-        .other-games { padding:20px; max-width:800px; margin:0 auto; }
-        .games-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:15px; }
-        .game-card-sm { background:rgba(255,255,255,0.1); border-radius:15px; padding:20px; text-align:center; cursor:pointer; transition:transform 0.2s; text-decoration:none; color:white; display:block; }
-        .game-card-sm:hover { transform:translateY(-2px); background:rgba(255,255,255,0.15); }
-        .game-card-sm .icon { font-size:2rem; }
-        .game-card-sm h4 { margin:8px 0 5px; }
-        .game-card-sm p { font-size:0.8rem; opacity:0.7; }
+        body { background: var(--bg); }
+        .games-hero {
+            background: var(--primary);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .games-hero h1 { margin-bottom: 10px; }
+        .games-hero p { opacity: 0.8; }
+        .games-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .games-section-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 16px;
+            padding-left: 14px;
+            border-left: 4px solid var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .main-game-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 28px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            display: block;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        .main-game-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+        .main-game-card-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 14px;
+        }
+        .main-game-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            background: var(--bg-alt);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+        .main-game-info h3 { margin-bottom: 4px; font-size: 1.2rem; }
+        .main-game-info p { color: var(--text-light); font-size: 0.88rem; }
+        .main-game-desc {
+            color: var(--text);
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        .game-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            background: var(--bg-alt);
+            color: var(--text-light);
+            margin-right: 6px;
+            margin-bottom: 4px;
+        }
+        .game-tag.highlight { background: #EBF8FF; color: var(--primary); }
+        .scoring-box {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin: 30px 0;
+            box-shadow: var(--shadow);
+        }
+        .scoring-box h3 {
+            margin-bottom: 16px;
+            font-size: 1rem;
+            color: var(--text);
+        }
+        .scoring-table { width: 100%; border-collapse: collapse; }
+        .scoring-table th {
+            background: var(--primary);
+            color: white;
+            padding: 10px 14px;
+            text-align: left;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+        .scoring-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--bg-alt);
+            font-size: 0.88rem;
+        }
+        .scoring-table tr:last-child td { border-bottom: none; }
+        .scoring-table tr:hover td { background: var(--bg); }
+        .other-games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 14px;
+            margin-top: 20px;
+        }
+        .other-game-card {
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            padding: 18px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            display: block;
+            transition: var(--transition);
+            color: var(--text);
+        }
+        .other-game-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+            background: var(--primary);
+            color: white;
+        }
+        .other-game-card .icon { font-size: 2rem; margin-bottom: 8px; }
+        .other-game-card h4 { font-size: 0.92rem; margin-bottom: 4px; }
+        .other-game-card p { font-size: 0.78rem; opacity: 0.7; }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: var(--white);
+            color: var(--primary);
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            margin: 20px;
+        }
+        .back-link:hover {
+            background: var(--primary);
+            color: white;
+        }
+        .leaderboard-preview {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 24px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            margin: 30px 0;
+        }
+        .leaderboard-preview h3 { margin-bottom: 8px; }
+        .leaderboard-preview p { color: var(--text-light); font-size: 0.9rem; margin-bottom: 16px; }
     </style>
 </head>
 <body>
-    <a href="index.html" class="back-link">← 返回數學周</a>
 
-    <div class="games-header">
-        <h1>🎮 數學遊戲專區</h1>
-        <p>午休 iPad 站｜每局 30秒 - 1分鐘｜鬥快鬥準！</p>
-    </div>
+<!-- Back -->
+<div style="position:sticky;top:0;z-index:100;">
+    <a href="index.html" class="back-link">← 返回首頁</a>
+</div>
 
-    <!-- 三大主力遊戲 -->
-    <div class="main-games">
-        <h2>⭐ 三大主力遊戲</h2>
-        
-        <a href="games/計算機大賽-CalculatorRace.html" class="game-card-big">
-            <div class="icon">🧮</div>
-            <h3>計算機大賽 Calculator Race</h3>
-            <div class="desc">用 CASIO fx-50FHII 計算機鬥快計數！題目涵蓋基礎運算、指數、對數、三角函數。答案取3位有效數字，答對+1分，答錯-1分。</div>
-            <div class="tags">
-                <span class="tag">⏱️ 60秒限時</span>
-                <span class="tag">🧮 需要計算機</span>
-                <span class="tag">📊 3位有效數字</span>
-                <span class="tag">💯 +1/-1 計分</span>
+<!-- Hero -->
+<div class="games-hero">
+    <h1>🎮 數學遊戲專區</h1>
+    <p>午休 iPad 站｜每局 30秒 - 1分鐘｜鬥快鬥準！</p>
+</div>
+
+<div class="games-content">
+
+    <!-- 三大了主力遊戲 -->
+    <div class="games-section-title">⭐ 三大主力遊戲</div>
+
+    <a href="games/計算機大賽-CalculatorRace.html" class="main-game-card">
+        <div class="main-game-card-header">
+            <div class="main-game-icon">🧮</div>
+            <div class="main-game-info">
+                <h3>計算機大賽 Calculator Race</h3>
+                <p>60秒限時挑戰 · CASIO fx-50FHII</p>
             </div>
-        </a>
-        
-        <a href="games/公式圖像配對-FormulaMatch.html" class="game-card-big">
-            <div class="icon">🃏</div>
-            <h3>公式圖像配對 Formula Match</h3>
-            <div class="desc">翻牌記憶遊戲！配對數學公式和對應的答案/名稱。考驗你的記憶力和數學知識。翻牌次數越少、時間越短越好！</div>
-            <div class="tags">
-                <span class="tag">🧠 記憶力</span>
-                <span class="tag">📐 公式知識</span>
-                <span class="tag">⏱️ 鬥快完成</span>
-                <span class="tag">📱 iPad 觸控</span>
+        </div>
+        <div class="main-game-desc">
+            用計算機鬥快計數！題目涵蓋基礎運算、指數、對數、三角函數。答案取3位有效數字，答對 +1 分，答錯 −1 分。
+        </div>
+        <div>
+            <span class="game-tag highlight">⏱️ 60秒</span>
+            <span class="game-tag">🧮 計算機</span>
+            <span class="game-tag">📊 3位有效數字</span>
+            <span class="game-tag">💯 +1/-1 計分</span>
+        </div>
+    </a>
+
+    <a href="games/公式圖像配對-FormulaMatch.html" class="main-game-card">
+        <div class="main-game-card-header">
+            <div class="main-game-icon">📐</div>
+            <div class="main-game-info">
+                <h3>公式圖像配對 Formula Match</h3>
+                <p>記憶力挑戰 · iPad 觸控</p>
             </div>
-        </a>
-        
-        <a href="games/四則運算拉力賽-TugOfWar.html" class="game-card-big">
-            <div class="icon">⚡</div>
-            <h3>四則運算拉力賽 Tug of War</h3>
-            <div class="desc">加減乘除拉力戰！每題5秒，答對向右拉1格，答錯向左被拉走。拉到底就贏！看你能不能撐住？</div>
-            <div class="tags">
-                <span class="tag">⚡ 5秒限時</span>
-                <span class="tag">➕➖✖️➗ 四則運算</span>
-                <span class="tag">🔥 連勝加分</span>
-                <span class="tag">📱 iPad 觸控</span>
+        </div>
+        <div class="main-game-desc">
+            翻牌記憶遊戲！配對數學公式和對應的答案/名稱。考驗你的記憶力和數學知識。翻牌次數越少、時間越短越好！
+        </div>
+        <div>
+            <span class="game-tag highlight">🧠 記憶力</span>
+            <span class="game-tag">📐 公式知識</span>
+            <span class="game-tag">⏱️ 鬥快完成</span>
+            <span class="game-tag">📱 iPad 觸控</span>
+        </div>
+    </a>
+
+    <a href="games/四則運算拉力賽-TugOfWar.html" class="main-game-card">
+        <div class="main-game-card-header">
+            <div class="main-game-icon">⚡</div>
+            <div class="main-game-info">
+                <h3>四則運算拉力賽 Tug of War</h3>
+                <p>5秒限時 · iPad 觸控</p>
             </div>
-        </a>
-    </div>
+        </div>
+        <div class="main-game-desc">
+            加減乘除拉力戰！每題5秒，答對向右拉1格，答錯向左被拉走。拉到底就贏！看你能不能撐住？
+        </div>
+        <div>
+            <span class="game-tag highlight">⚡ 5秒限時</span>
+            <span class="game-tag">➕➖✖️➗ 四則</span>
+            <span class="game-tag">🔥 連勝加分</span>
+            <span class="game-tag">📱 iPad 觸控</span>
+        </div>
+    </a>
 
     <!-- 計分說明 -->
-    <div class="scoring-section">
-        <h2>📊 計分方式</h2>
-        <table>
-            <tr><th>遊戲</th><th>計分</th><th>排名依據</th></tr>
-            <tr><td>🧮 計算機大賽</td><td>答對 +1、答錯 -1</td><td>得分 → 用時</td></tr>
-            <tr><td>🃏 公式配對</td><td>完成時間 + 翻牌次數</td><td>時間 → 次數</td></tr>
-            <tr><td>⚡ 拉力賽</td><td>答對 +1、答錯 -1</td><td>得分 → 連勝</td></tr>
+    <div class="scoring-box">
+        <h3>📊 計分方式</h3>
+        <table class="scoring-table">
+            <thead>
+                <tr>
+                    <th>遊戲</th>
+                    <th>計分規則</th>
+                    <th>排名依據</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>🧮 計算機大賽</td>
+                    <td>答對 +1、答錯 −1</td>
+                    <td>得分 → 用時</td>
+                </tr>
+                <tr>
+                    <td>📐 公式配對</td>
+                    <td>完成時間 + 翻牌次數</td>
+                    <td>時間 → 次數</td>
+                </tr>
+                <tr>
+                    <td>⚡ 四則拉力賽</td>
+                    <td>答對 +1、答錯 −1</td>
+                    <td>得分 → 連勝次數</td>
+                </tr>
+            </tbody>
         </table>
     </div>
 
     <!-- 龍虎榜 -->
-    <div class="leaderboard-placeholder">
-        <h2>🏆 龍虎榜</h2>
-        <p>排名將於數學周期間更新！</p>
-        <p style="font-size:0.85rem; margin-top:10px;">排名 | 姓名 | 班別 | 分數 | 時間 | 遊戲次數</p>
+    <div class="leaderboard-preview">
+        <h3>🏆 龍虎榜</h3>
+        <p>排名將於數學周期間每日更新！</p>
+        <a href="leaderboard/leaderboard.html" class="btn btn-primary">查看完整排名 →</a>
     </div>
 
     <!-- 其他遊戲 -->
-    <div class="other-games">
-        <h2 style="color:white; text-align:center; margin-bottom:15px;">🎲 其他數學遊戲</h2>
-        <div class="games-grid">
-            <a href="games/乘法拔河-MultiplicationBattle.html" class="game-card-sm">
-                <div class="icon">⚔️</div>
-                <h4>乘法拔河</h4>
-                <p>經典乘法拉力戰</p>
-            </a>
-            <a href="games/比例金庫-RatioSafe.html" class="game-card-sm">
-                <div class="icon">🔐</div>
-                <h4>比例金庫</h4>
-                <p>破解比例密碼</p>
-            </a>
-            <a href="games/矩陣爭奪戰-MatrixConquest.html" class="game-card-sm">
-                <div class="icon">🔢</div>
-                <h4>矩陣爭奪戰</h4>
-                <p>雙人最大公因數對戰</p>
-            </a>
-            <a href="games/12碼射門-座標挑戰.html" class="game-card-sm">
-                <div class="icon">⚽</div>
-                <h4>12碼射門</h4>
-                <p>座標射門挑戰</p>
-            </a>
-        </div>
+    <div class="games-section-title">🎲 其他數學遊戲</div>
+
+    <div class="other-games-grid">
+        <a href="games/乘法拔河-MultiplicationBattle.html" class="other-game-card">
+            <div class="icon">⚔️</div>
+            <h4>乘法拔河</h4>
+            <p>經典乘法拉力戰</p>
+        </a>
+        <a href="games/比例金庫-RatioSafe.html" class="other-game-card">
+            <div class="icon">🔐</div>
+            <h4>比例金庫</h4>
+            <p>破解比例密碼</p>
+        </a>
+        <a href="games/矩陣爭奪戰-MatrixConquest.html" class="other-game-card">
+            <div class="icon">🔢</div>
+            <h4>矩陣爭奪戰</h4>
+            <p>雙人最大公因數對戰</p>
+        </a>
+        <a href="games/12碼射門-座標挑戰.html" class="other-game-card">
+            <div class="icon">⚽</div>
+            <h4>12碼射門</h4>
+            <p>座標射門挑戰</p>
+        </a>
     </div>
 
-    <div style="text-align:center; padding:30px; color:rgba(255,255,255,0.5); font-size:0.8rem;">
-        靈風中學 數學周 2026 🎓
-    </div>
+</div>
+
+<footer class="footer" style="margin-top:40px;">
+    <div class="footer-logo">🎓 靈風中學 數學周 2026</div>
+    <p>探索數學的奇妙世界！</p>
+</footer>
+
 </body>
 </html>

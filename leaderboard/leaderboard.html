@@ -1,72 +1,140 @@
 <!--
   數學週2026 龍虎榜 - Embeddable Leaderboard
-  Reads from published Google Sheets CSV. No API key needed.
-  Include this via <iframe> or copy into games.html.
+  Reads from published Google Sheets CSV.
 -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>數學週2026 龍虎榜</title>
+<title>🏆 龍虎榜 | 靈風中學 數學周 2026</title>
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --gold: #FFD700; --silver: #C0C0C0; --bronze: #CD7F32;
-    --bg: #0f172a; --card: #1e293b; --text: #e2e8f0; --accent: #38bdf8;
+    --gold: #FFD700;
+    --silver: #C0C0C0;
+    --bronze: #CD7F32;
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #e2e8f0;
+    --accent: #38bdf8;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Noto Sans TC', system-ui, sans-serif; background: var(--bg); color: var(--text); padding: 1rem; }
-  h1 { text-align: center; font-size: 1.8rem; margin-bottom: 0.5rem; background: linear-gradient(90deg, var(--gold), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .subtitle { text-align: center; color: #94a3b8; margin-bottom: 1rem; font-size: 0.85rem; }
-  .tabs { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
-  .tab { padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; background: var(--card); border: 1px solid #334155; transition: all 0.2s; font-size: 0.9rem; }
-  .tab.active { background: var(--accent); color: #0f172a; font-weight: 700; border-color: var(--accent); }
+  body { font-family: var(--font); background: var(--bg); color: var(--text); padding: 0; }
+
+  .lb-header {
+    background: var(--primary-dark);
+    padding: 30px 20px;
+    text-align: center;
+    color: var(--white);
+  }
+  .lb-header h1 {
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    margin-bottom: 6px;
+    background: linear-gradient(90deg, var(--gold), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lb-header p { opacity: 0.7; font-size: 0.9rem; }
+
+  .lb-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: var(--transition);
+    margin: 16px 20px;
+  }
+  .lb-back:hover { background: rgba(255,255,255,0.2); }
+
+  .lb-content { max-width: 800px; margin: 0 auto; padding: 20px; }
+
+  .tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .tab {
+    padding: 8px 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    background: var(--card);
+    border: 2px solid #334155;
+    transition: all 0.2s;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text);
+    font-family: var(--font);
+  }
+  .tab.active { background: var(--accent); color: #0f172a; border-color: var(--accent); }
   .tab:hover:not(.active) { border-color: var(--accent); }
-  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; }
-  th { background: #334155; padding: 0.6rem 0.8rem; text-align: left; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
-  td { padding: 0.6rem 0.8rem; border-top: 1px solid #1e293b; font-size: 0.9rem; }
+
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: var(--radius); overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+  th {
+    background: #334155;
+    padding: 12px 14px;
+    text-align: left;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #94a3b8;
+    font-weight: 700;
+  }
+  td { padding: 12px 14px; border-top: 1px solid #263044; font-size: 0.9rem; }
   tr:hover td { background: #263044; }
   .rank-1 td:first-child { color: var(--gold); font-weight: 700; }
   .rank-2 td:first-child { color: var(--silver); font-weight: 700; }
   .rank-3 td:first-child { color: var(--bronze); font-weight: 700; }
-  .medal { font-size: 1.1rem; }
-  .loading { text-align: center; padding: 2rem; color: #64748b; }
-  .error { text-align: center; padding: 2rem; color: #f87171; }
-  .updated { text-align: center; color: #64748b; font-size: 0.75rem; margin-top: 0.5rem; }
-  @media (max-width: 600px) { td, th { padding: 0.4rem; font-size: 0.8rem; } }
+  td strong { color: var(--accent); }
+  .loading, .error { text-align: center; padding: 40px; color: #64748b; }
+  .error { color: #f87171; }
+  .updated { text-align: center; color: #475569; font-size: 0.75rem; margin-top: 12px; }
+
+  @media (max-width: 600px) {
+    td, th { padding: 8px 10px; font-size: 0.82rem; }
+    .tab { padding: 6px 12px; font-size: 0.8rem; }
+  }
 </style>
 </head>
 <body>
 
-<h1>🏆 數學週2026 龍虎榜</h1>
-<p class="subtitle">靈風中學 Math Week Leaderboard</p>
-
-<div class="tabs">
-  <div class="tab active" data-game="計算機大賽">🧮 計算機大賽</div>
-  <div class="tab" data-game="公式圖像配對">🔢 公式圖像配對</div>
-  <div class="tab" data-game="四則運算拉力賽">⚔️ 四則運算拉力賽</div>
+<div class="lb-header">
+    <h1>🏆 數學周 2026 龍虎榜</h1>
+    <p>靈風中學 Math Week Leaderboard</p>
 </div>
 
-<div id="leaderboard"><div class="loading">載入中...</div></div>
-<div class="updated" id="updated"></div>
+<div style="position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid #1e293b;">
+    <a href="../index.html" class="lb-back">← 返回首頁</a>
+</div>
+
+<div class="lb-content">
+    <div class="tabs">
+        <button class="tab active" data-game="計算機大賽">🧮 計算機大賽</button>
+        <button class="tab" data-game="公式圖像配對">🔢 公式圖像配對</button>
+        <button class="tab" data-game="四則運算拉力賽">⚔️ 四則運算拉力賽</button>
+    </div>
+
+    <div id="leaderboard"><div class="loading">載入中...</div></div>
+    <div class="updated" id="updated"></div>
+</div>
 
 <script>
 // ============================================================
 // CONFIG: Set your Google Sheet ID here
-// The sheet must be "Published to the web" (File → Share → Publish to web)
 // ============================================================
 const SHEET_ID = '1c-eAuLu2hLCdMZ02T7aiPZfQkmgoqHhN5G7zmn_Q4Tk';
 
 const GAMES = [
-  { name: '計算機大賽',     gid: '1841574299' },
-  { name: '公式圖像配對',  gid: '1163130944' },
+  { name: '計算機大賽',      gid: '1841574299' },
+  { name: '公式圖像配對',   gid: '1163130944' },
   { name: '四則運算拉力賽', gid: '921321371'  }
 ];
 const MEDALS = { 1: '🥇', 2: '🥈', 3: '🥉' };
 let cache = {};
 
 function csvUrl(game) {
-  // Uses "anyone with link" CSV export — no "publish to web" needed
   return `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${game.gid}`;
 }
 
@@ -83,14 +151,15 @@ function parseCSV(text) {
 }
 
 function parseLine(line) {
-  const result = []; let current = ''; let inQuotes = false;
+  const result = [], current = '';
+  let inQuotes = false, buf = '';
   for (let i = 0; i < line.length; i++) {
     const c = line[i];
-    if (c === '"') { if (inQuotes && line[i+1] === '"') { current += '"'; i++; } else { inQuotes = !inQuotes; } }
-    else if (c === ',' && !inQuotes) { result.push(current); current = ''; }
-    else { current += c; }
+    if (c === '"') { if (inQuotes && line[i+1] === '"') { buf += '"'; i++; } else { inQuotes = !inQuotes; } }
+    else if (c === ',' && !inQuotes) { result.push(buf); buf = ''; }
+    else { buf += c; }
   }
-  result.push(current);
+  result.push(buf);
   return result;
 }
 
@@ -101,28 +170,36 @@ async function loadGame(name) {
   try {
     const game = GAMES.find(g => g.name === name);
     const res = await fetch(csvUrl(game));
+    const text = await res.text();
+    const rows = parseCSV(text);
     rows.sort((a, b) => (parseFloat(b['總分']) || 0) - (parseFloat(a['總分']) || 0));
     rows.forEach((r, i) => r._rank = i + 1);
     cache[name] = rows;
     render(rows, el);
     document.getElementById('updated').textContent = '最後更新: ' + new Date().toLocaleString('zh-HK');
   } catch (e) {
-    el.innerHTML = '<div class="error">⚠️ 未能載入排行榜。請確認 Google Sheet 已發佈到網路。</div>';
+    el.innerHTML = '<div class="error">⚠️ 未能載入排行榜。<br><small>請確認 Google Sheet 已發佈到網路。</small></div>';
   }
 }
 
 function render(rows, el) {
-  if (!rows.length) { el.innerHTML = '<div class="loading">暫無數據</div>'; return; }
+  if (!rows.length) { el.innerHTML = '<div class="loading">暫無數據 — 數學周開始後將更新！</div>'; return; }
   let html = '<table><thead><tr><th>排名</th><th>姓名</th><th>班別</th><th>總分</th><th>次數</th><th>最佳紀錄</th></tr></thead><tbody>';
   rows.slice(0, 20).forEach(r => {
     const medal = MEDALS[r._rank] || '';
-    html += `<tr class="rank-${r._rank}"><td>${medal} ${r._rank}</td><td>${r['姓名']}</td><td>${r['班別']}</td><td><strong>${r['總分']}</strong></td><td>${r['遊戲次數'] || '-'}</td><td>${r['最佳紀錄'] || '-'}</td></tr>`;
+    html += `<tr class="rank-${r._rank}">
+      <td>${medal} ${r._rank}</td>
+      <td>${r['姓名'] || '—'}</td>
+      <td>${r['班別'] || '—'}</td>
+      <td><strong>${r['總分'] || '—'}</strong></td>
+      <td>${r['遊戲次數'] || '—'}</td>
+      <td>${r['最佳紀錄'] || '—'}</td>
+    </tr>`;
   });
   html += '</tbody></table>';
   el.innerHTML = html;
 }
 
-// Tab switching
 document.querySelectorAll('.tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -131,7 +208,6 @@ document.querySelectorAll('.tab').forEach(tab => {
   });
 });
 
-// Auto-refresh every 30s
 loadGame(GAMES[0].name);
 setInterval(() => {
   cache = {};
@@ -139,5 +215,6 @@ setInterval(() => {
   if (active) loadGame(active.dataset.game);
 }, 30000);
 </script>
+
 </body>
 </html>
