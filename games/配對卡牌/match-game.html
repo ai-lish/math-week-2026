@@ -130,6 +130,22 @@ body{font-family:'Noto Sans TC',sans-serif;background:linear-gradient(135deg,#1a
 // ============================================================
 // Chapter definitions — each chapter's HTML file and title
 // ============================================================
+// PNG files for chapter thumbnails
+var CHAPTER_PNG_FILES = {
+  ch1: 'png/ch1-基礎計算.png',
+  ch2: 'png/ch2-有向數.png',
+  ch3: 'png/ch3-代數式.png',
+  ch4: 'png/ch4-一元一次方程.png',
+  ch5: 'png/ch5-面積與體積.png',
+  ch6: 'png/ch6-多項式.png',
+  ch8: 'png/ch8-統計（一）.png',
+  ch9: 'png/ch9-百分法.png',
+  ch11: 'png/ch11-平行線與角.png',
+  ch12: 'png/ch12-全等三角形.png',
+  ch13: 'png/ch13-數值估算.png',
+  ch14: 'png/ch14-率、比及比例.png',
+};
+
 var CHAPTERS = {
  ch1:{title:"Ch1 — 基礎計算",file:"ch1-factor.html",pairs:4},
  ch2:{title:"Ch2 — 有向數",file:"ch2-directed.html",pairs:4},
@@ -231,7 +247,22 @@ function renderChapterButtons() {
     html += '</div></div>';
   });
 
-  container.innerHTML = html;
+  // Inject PNG thumbnails as background images on chapter buttons
+(function() {
+  Object.keys(CHAPTER_PNG_FILES).forEach(function(ch) {
+    var btn = document.getElementById('btn-' + ch);
+    if (btn && CHAPTER_PNG_FILES[ch]) {
+      btn.style.backgroundImage = 'url(' + CHAPTER_PNG_FILES[ch] + ')';
+      btn.style.backgroundSize = '100% auto';
+      btn.style.backgroundPosition = 'top center';
+      btn.style.backgroundRepeat = 'no-repeat';
+      btn.style.minHeight = '95px';
+      btn.style.paddingTop = '75px';
+    }
+  });
+})();
+
+container.innerHTML = html;
 }
 
 // ============================================================
