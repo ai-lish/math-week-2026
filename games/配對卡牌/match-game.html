@@ -197,7 +197,10 @@ async function loadAllChapters() {
           var imgEl = graphEl.querySelector('img');
           var svgData = svgEl ? svgEl.outerHTML : '';
           var imgSrc = imgEl ? imgEl.getAttribute('src') : '';
-          var imgTag = imgSrc ? '<img src="' + imgSrc + '" style="width:100%;height:auto;max-height:140px;object-fit:contain;">' : '';
+          // Resolve relative URLs against the match-game.html location
+          var base = new URL('.', location.href).href;
+          var absImgSrc = imgSrc.startsWith('http') ? imgSrc : base + imgSrc;
+          var imgTag = absImgSrc ? '<img src="' + absImgSrc + '" style="width:100%;height:auto;max-height:140px;object-fit:contain;border-radius:8px;">' : '';
           pairs.push({
             a: algebraEl.textContent.trim(),
             aL: algebraLabel ? algebraLabel.textContent.trim() : '代數',
@@ -350,7 +353,7 @@ function flipCard(id, el) {
   el.querySelector('.card-label').textContent = card.type === 'algebra' ? '代數' : '圖像';
   el.querySelector('.card-text').textContent = card.text;
   var svgWrap = el.querySelector('.card-svg-wrap');
-  if (svgWrap && card.svg) svgWrap.innerHTML = card.svg;
+  if (svgWrap && card.svg) { svgWrap.innerHTML = card.svg; 
 
   flipped.push({id:id, pairId:card.pairId, el:el});
 
