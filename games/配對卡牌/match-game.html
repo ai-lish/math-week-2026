@@ -194,10 +194,14 @@ async function loadAllChapters() {
         var graphEl = row.querySelector('.graph-card .card-graph');
         if (algebraEl && graphEl) {
           var svgEl = graphEl.querySelector('svg');
+          var imgEl = graphEl.querySelector('img');
+          var svgData = svgEl ? svgEl.outerHTML : '';
+          var imgSrc = imgEl ? imgEl.getAttribute('src') : '';
+          var imgTag = imgSrc ? '<img src="' + imgSrc + '" style="width:100%;height:auto;max-height:140px;object-fit:contain;">' : '';
           pairs.push({
             a: algebraEl.textContent.trim(),
             aL: algebraLabel ? algebraLabel.textContent.trim() : '代數',
-            s: svgEl ? svgEl.outerHTML : ''
+            s: svgData || imgTag
           });
         }
       });
