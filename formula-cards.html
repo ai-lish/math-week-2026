@@ -399,7 +399,7 @@ const CARDS = [
     svg:`<svg viewBox="0 0 100 100"><polygon points="26,16 74,16 88,84 12,84" fill="#99f6e4" stroke="#14B8A6" stroke-width="8" stroke-linejoin="round"/></svg>` },
   { id:10, cat:"area", num:"10", name:"菱形",           en:"Rhombus",           ask:"求 面積？", tag:"面積", fcn:"A = ½ × 對角線₁ × 對角線₂", fen:"A = ½d₁d₂",
     svg:`<svg viewBox="0 0 100 100"><polygon points="50,8 92,50 50,92 8,50" fill="#fce7f3" stroke="#EC4899" stroke-width="8" stroke-linejoin="round"/><line x1="8" y1="50" x2="92" y2="50" stroke="#EC4899" stroke-width="3" stroke-dasharray="5,4"/><line x1="50" y1="8" x2="50" y2="92" stroke="#EC4899" stroke-width="3" stroke-dasharray="5,4"/></svg>` },
-  { id:11, cat:"area", num:"11", name:"扇形",           en:"Sector",            ask:"求 面積？", tag:"面積", fcn:"A = ½ × 半徑² × 圓心角", fen:"A = ½r²θ",
+  { id:11, cat:"area", num:"11", name:"扇形",           en:"Sector",            ask:"求 面積？", tag:"面積", fcn:"A = (圓心角/360) × π × 半徑²", fen:"A = (θ/360)πr²",
     svg:`<svg viewBox="0 0 100 100"><path d="M50,50 L50,12 A38,38 0 0,1 88,50 Z" fill="#cffafe" stroke="#06B6D4" stroke-width="8" stroke-linejoin="round"/><line x1="50" y1="50" x2="50" y2="12" stroke="#06B6D4" stroke-width="4" stroke-dasharray="5,4"/><line x1="50" y1="50" x2="88" y2="50" stroke="#06B6D4" stroke-width="4" stroke-dasharray="5,4"/></svg>` },
   { id:12, cat:"area", num:"12", name:"環形",           en:"Annulus",            ask:"求 面積？", tag:"面積", fcn:"A = π × (外半徑² - 內半徑²)", fen:"A = π(R²-r²)",
     svg:`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="#dcfce7" stroke="#84CC16" stroke-width="8"/><circle cx="50" cy="50" r="22" fill="#fff" stroke="#84CC16" stroke-width="8"/></svg>` },
