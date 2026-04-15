@@ -2,7 +2,8 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<title>數學公式卡牌 — 面積、體積、周界</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>數學公式卡牌 — 幾何篇</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <style>
@@ -10,261 +11,578 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --blue:#3B82F6; --orange:#F59E0B; --purple:#8B5CF6;
-  --green:#10B981; --teal:#14B8A6; --navy:#1E40AF;
-  --red:#EF4444; --gold:#D97706; --brown:#92400E;
-  --pink:#EC4899; --cyan:#06B6D4; --lime:#84CC16;
-  --indigo:#6366F1; --rose:#F43F5E;
+  /* 幾何篇主色調：深空藍 + 金色 */
+  --g-base: #0a0e1a;
+  --g-card-bg: #111827;
+  --g-gold: #f59e0b;
+  --g-gold-light: #fcd34d;
+  --g-border: rgba(245,158,11,0.3);
+
+  /* 類別顔色 */
+  --cat-area-color: #3b82f6;
+  --cat-area-light: #93c5fd;
+  --cat-area-bg: #1e3a5f;
+
+  --cat-peri-color: #f59e0b;
+  --cat-peri-light: #fcd34d;
+  --cat-peri-bg: #3d2e00;
+
+  --cat-vol-color: #10b981;
+  --cat-vol-light: #6ee7b7;
+  --cat-vol-bg: #064e3b;
 }
 
-/* ════════════════════════════════════
-   SCREEN UI
-════════════════════════════════════ */
 body {
-  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",Arial,sans-serif;
-  background:#0f172a; color:#e2e8f0;
-  min-height:100vh;
+  font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",Arial,sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+  min-height: 100vh;
 }
 
-/* ── Header ── */
+/* ═══════════════════════════════════
+   HEADER
+═══════════════════════════════════ */
 .header {
-  background:#1e293b;
-  border-bottom:1px solid #334155;
-  padding:12px 24px;
-  display:flex; align-items:center; justify-content:space-between;
-  flex-wrap:wrap; gap:12px;
+  background: linear-gradient(135deg, #0a0e1a 0%, #1e293b 100%);
+  border-bottom: 1px solid rgba(245,158,11,0.2);
+  padding: 16px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
 }
+.header-left { display: flex; flex-direction: column; gap: 4px; }
 .header h1 {
-  font-size:18px; font-weight:700;
-  background:linear-gradient(135deg,#60a5fa,#a78bfa);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  font-size: 20px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #fcd34d 0%, #f59e0b 50%, #fcd34d 100%);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
 }
-.header-sub { font-size:12px; color:#94a3b8; }
+.header-sub {
+  font-size: 12px;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
+}
+.header-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(245,158,11,0.15);
+  border: 1px solid rgba(245,158,11,0.3);
+  color: #fcd34d;
+  letter-spacing: 1px;
+}
 
-/* ── Controls Bar ── */
+/* ═══════════════════════════════════
+   CONTROLS
+═══════════════════════════════════ */
 .controls {
-  background:#1e293b;
-  padding:12px 24px;
-  display:flex; align-items:center; gap:12px; flex-wrap:wrap;
-  border-bottom:1px solid #334155;
+  background: #111827;
+  padding: 12px 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #1e293b;
 }
-.ctrl-label { font-size:13px; color:#94a3b8; font-weight:600; }
+.ctrl-label { font-size: 13px; color: #64748b; font-weight: 600; }
 
-.tabs { display:flex; gap:4px; }
+.tabs { display: flex; gap: 4px; }
 .tab-btn {
-  padding:7px 16px; border-radius:8px;
-  border:1.5px solid #334155;
-  background:#0f172a; color:#94a3b8;
-  font-size:13px; font-weight:600;
-  cursor:pointer; transition:all 0.2s;
-  font-family:inherit;
+  padding: 7px 16px;
+  border-radius: 8px;
+  border: 1.5px solid #334155;
+  background: #0f172a;
+  color: #94a3b8;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
 }
-.tab-btn:hover { border-color:#60a5fa; color:#60a5fa; }
+.tab-btn:hover { border-color: #f59e0b; color: #f59e0b; }
 .tab-btn.active {
-  background:linear-gradient(135deg,#1d4ed8,#4f46e5);
-  border-color:#4f46e5; color:#fff;
-  box-shadow:0 2px 8px rgba(79,70,229,0.4);
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  border-color: #f59e0b;
+  color: #0a0e1a;
+  box-shadow: 0 2px 10px rgba(245,158,11,0.35);
 }
 
-.select-btns { display:flex; gap:6px; }
 .sel-btn {
-  padding:7px 12px; border-radius:8px;
-  border:1.5px solid #334155;
-  background:#0f172a; color:#94a3b8;
-  font-size:12px; font-weight:600; cursor:pointer;
-  font-family:inherit; transition:all 0.2s;
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 1.5px solid #334155;
+  background: #0f172a;
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
 }
-.sel-btn:hover { border-color:#60a5fa; color:#60a5fa; }
+.sel-btn:hover { border-color: #f59e0b; color: #f59e0b; }
 
-.counter { font-size:12px; color:#64748b; margin-left:8px; }
-.counter span { color:#60a5fa; font-weight:700; }
+.counter { font-size: 12px; color: #64748b; margin-left: 8px; }
+.counter span { color: #fcd34d; font-weight: 700; }
 
 .print-btn {
-  margin-left:auto;
-  padding:9px 24px; border-radius:10px;
-  background:linear-gradient(135deg,#10b981,#059669);
-  border:none; color:#fff; font-size:14px; font-weight:700;
-  cursor:pointer; box-shadow:0 4px 12px rgba(16,185,129,0.4);
-  font-family:inherit; transition:all 0.2s;
+  margin-left: auto;
+  padding: 10px 24px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(16,185,129,0.4);
+  font-family: inherit;
+  transition: all 0.2s;
 }
-.print-btn:hover { transform:translateY(-1px); box-shadow:0 6px 16px rgba(16,185,129,0.5); }
+.print-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(16,185,129,0.5); }
 
-/* ── Card Grid ── */
+/* ═══════════════════════════════════
+   CARD GRID
+═══════════════════════════════════ */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 180px);
-  gap: 12px;
-  padding: 20px 24px;
+  grid-template-columns: repeat(auto-fill, 200px);
+  gap: 16px;
+  padding: 24px 28px;
 }
 
-/* Card wrapper */
+/* ═══════════════════════════════════
+   CARD WRAPPER
+═══════════════════════════════════ */
 .card-wrap {
   position: relative;
-  width: 180px; height:252px;
-  cursor:pointer;
+  width: 200px;
+  height: 290px;
+  cursor: pointer;
+  perspective: 1000px;
 }
-.card-wrap.selected .card-inner { outline:3px solid #60a5fa; outline-offset:2px; }
-.card-wrap.hidden { display:none; }
+.card-wrap.hidden { display: none; }
 
-/* Special edition card — rainbow gradient border */
-.card-wrap.special .card-inner {
-  border: 2.5px solid transparent;
-  background:
-    linear-gradient(#fff, #fff) padding-box,
-    linear-gradient(135deg,#f59e0b,#f43f5e,#8b5cf6,#3B82F6,#10B981) border-box;
-  box-shadow:0 0 12px rgba(245,158,11,0.35), 0 0 4px rgba(0,0,0,0.15);
-}
-.card-wrap.special .special-badge {
-  position:absolute; bottom:4px; left:50%; transform:translateX(-50%);
-  z-index:10;
-  font-size:9px; font-weight:700;
-  padding:1px 8px; border-radius:8px;
-  background:linear-gradient(135deg,#fbbf24,#f59e0b);
-  color:#1e293b; letter-spacing:0.5mm;
-  box-shadow:0 1px 4px rgba(0,0,0,0.3);
+/* Selected outline */
+.card-wrap.selected .card-inner {
+  outline: 3px solid #fcd34d;
+  outline-offset: 3px;
+  box-shadow: 0 0 20px rgba(252,211,77,0.3);
 }
 
-/* Card inner */
+/* ═══════════════════════════════════
+   CARD INNER (3D container)
+═══════════════════════════════════ */
 .card-inner {
-  width:100%; height:100%;
-  position:relative;
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  transition: transform 0.5s cubic-bezier(0.4,0.1,0.2,1),
+              box-shadow 0.3s ease;
+  transform-style: preserve-3d;
 }
-.card-wrap:not(.flipped):hover .card-inner { box-shadow:0 8px 24px rgba(0,0,0,0.35); }
-
-/* Both faces */
-.front-face, .back-face {
-  position:absolute; inset:0;
-  border-radius:12px;
+.card-wrap:not(.flipped):hover .card-inner {
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
 }
-.back-face { opacity:0; }
 
-/* Toggle visibility */
-.card-wrap.flipped .front-face { opacity:0; }
-.card-wrap.flipped .back-face  { opacity:1; }
-
-/* Card selector */
-.card-selector {
-  position:absolute; top:6px; left:6px; z-index:20;
-  width:20px; height:20px;
-  border-radius:50%; border:2px solid rgba(255,255,255,0.7);
-  background:#334155;
-  display:flex; align-items:center; justify-content:center;
-  font-size:12px; color:#fff; font-weight:700;
-  box-shadow:0 2px 6px rgba(0,0,0,0.3);
-  transition:all 0.2s;
-  cursor:pointer;
+/* ═══════════════════════════════════
+   FRONT FACE
+   Premium trading card design
+═══════════════════════════════════ */
+.front-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--g-card-bg);
 }
-.card-wrap.selected .card-selector { background:#3B82F6; border-color:#3B82F6; }
+
+/* Geometric pattern overlay */
+.front-face::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(245,158,11,0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(59,130,246,0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Top bar */
+.card-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px 6px;
+  position: relative;
+  z-index: 2;
+}
+.card-set {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--g-gold);
+  opacity: 0.9;
+}
+.card-difficulty { display: flex; gap: 2px; }
+.star {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #334155;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+}
+.star.lit {
+  background: linear-gradient(135deg, #fcd34d, #f59e0b);
+  box-shadow: 0 0 4px rgba(252,211,77,0.6);
+}
 
 /* Category badge */
-.cat-badge {
-  position:absolute; top:6px; right:6px; z-index:10;
-  font-size:10px; font-weight:700;
-  padding:2px 8px; border-radius:10px;
-  color:#fff; letter-spacing:0.3mm;
+.card-cat-badge {
+  position: absolute;
+  top: 44px;
+  right: 10px;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  color: #fff;
+  z-index: 2;
 }
-.card-wrap[data-cat="area"]  .cat-badge { background:#3B82F6; }
-.card-wrap[data-cat="peri"]  .cat-badge { background:#F59E0B; color:#1e293b; }
-.card-wrap[data-cat="vol"]   .cat-badge { background:#10B981; }
+[data-cat="area"]  .card-cat-badge { background: var(--cat-area-color); }
+[data-cat="peri"]  .card-cat-badge { background: var(--cat-peri-color); color:#0a0e1a; }
+[data-cat="vol"]   .card-cat-badge { background: var(--cat-vol-color); }
 
-/* ── Face Styles ── */
-.cface {
-  width:100%; height:100%;
-  padding:10px 8px 8px;
-  display:flex; flex-direction:column;
-  align-items:center;
+/* Geometry icon area */
+.card-icon {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  position: relative;
+  z-index: 1;
 }
-.cface .shape-icon { flex:1; display:flex; align-items:center; justify-content:center; }
-.cface .shape-icon svg { width:90px; height:90px; }
-.cface .card-name { font-size:14px; font-weight:700; text-align:center; color:#1e293b; line-height:1.4; }
-.cface .card-en   { font-size:10px; color:#94a3b8; text-align:center; margin-top:2px; }
-.cface .card-ask {
-  font-size:11px; color:#cbd5e1; text-align:center;
-  border-top:1px dashed #e2e8f0; padding-top:6px; margin-top:6px; width:100%;
+.card-icon svg { width: 110px; height: 110px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); }
+
+/* Card name area */
+.card-name-area {
+  padding: 8px 12px 4px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
 }
-
-.cback {
-  width:100%; height:100%;
-  padding:10px 8px;
-  display:flex; flex-direction:column;
-  align-items:center; justify-content:center;
-  position:relative;
+.card-name {
+  font-size: 16px;
+  font-weight: 800;
+  color: #f1f5f9;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  line-height: 1.3;
 }
-.cback .back-tag { font-size:10px; color:rgba(255,255,255,0.7); font-weight:600; margin-bottom:6px; letter-spacing:0.3mm; }
-.cback .back-cn  { font-size:14px; font-weight:700; color:#fff; text-align:center; line-height:1.7; letter-spacing:0.2mm; }
-.cback .back-en  { font-size:11px; color:rgba(255,255,255,0.85); margin-top:6px; font-style:italic; }
-.cback .deco { position:absolute; bottom:-20px; right:-20px; width:60px; height:60px; border-radius:50%; background:rgba(255,255,255,0.06); }
-
-/* Back face LaTeX container */
-.cback .back-latex-wrap { display:flex; justify-content:center; }
-.cback .back-latex-wrap .katex { font-size:12px !important; }
-.cback .back-latex-wrap .katex .tfrac { font-size:1em; }
-
-/* ── Category face backgrounds ── */
-.card-wrap[data-cat="area"]  .cface  { background:linear-gradient(145deg,#eff6ff,#dbeafe); }
-.card-wrap[data-cat="area"]  .cback   { background:linear-gradient(145deg,#1e40af,#1d4ed8,#2563eb); }
-.card-wrap[data-cat="peri"]  .cface  { background:linear-gradient(145deg,#fffbeb,#fef3c7); }
-.card-wrap[data-cat="peri"]  .cback  { background:linear-gradient(145deg,#92400e,#b45309,#d97706); }
-.card-wrap[data-cat="vol"]   .cface   { background:linear-gradient(145deg,#ecfdf5,#d1fae5); }
-.card-wrap[data-cat="vol"]   .cback   { background:linear-gradient(145deg,#065f46,#047857,#059669); }
-
-/* Special edition: gold shimmer on front */
-.card-wrap.special .cface {
-  background:linear-gradient(145deg,#fffbeb,#fef9c3,#fef3c7) !important;
+.card-en {
+  font-size: 10px;
+  color: #64748b;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+  font-style: italic;
 }
 
-/* ════════════════════════════════════
-   PRINT LAYOUT
-════════════════════════════════════ */
+/* Bottom bar */
+.card-bottombar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px 10px;
+  position: relative;
+  z-index: 2;
+}
+.card-num {
+  font-size: 11px;
+  font-weight: 700;
+  color: #475569;
+  letter-spacing: 0.5px;
+}
+.card-ask {
+  font-size: 10px;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+/* Special edition front overlay */
+.card-wrap.special .front-face {
+  background: linear-gradient(145deg, #1a1a2e, #16213e, #0f3460);
+}
+.card-wrap.special .front-face::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--g-card-bg), var(--g-card-bg)) padding-box,
+    linear-gradient(135deg, #fcd34d, #f59e0b, #ef4444, #8b5cf6, #3b82f6, #10b981, #fcd34d) border-box;
+  background-size: 300% 300%;
+  animation: rainbow-border 4s linear infinite;
+  pointer-events: none;
+  z-index: 3;
+}
+@keyframes rainbow-border {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.special-star {
+  position: absolute;
+  top: 44px;
+  left: 10px;
+  font-size: 12px;
+  z-index: 5;
+  animation: pulse-star 2s ease-in-out infinite;
+}
+@keyframes pulse-star {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.7; transform: scale(1.2); }
+}
+.special-tag {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 10px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #fcd34d, #f59e0b);
+  color: #0a0e1a;
+  letter-spacing: 1px;
+  z-index: 5;
+  box-shadow: 0 2px 8px rgba(252,211,77,0.4);
+}
+
+/* ═══════════════════════════════════
+   BACK FACE
+   Study-optimized design
+═══════════════════════════════════ */
+.back-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Category-colored back */
+[data-cat="area"]  .back-face { background: linear-gradient(160deg, #1e3a5f 0%, #1e40af, #312e81); }
+[data-cat="peri"]  .back-face { background: linear-gradient(160deg, #3d2e00 0%, #92400e, #b45309); }
+[data-cat="vol"]   .back-face { background: linear-gradient(160deg, #064e3b 0%, #047857, #059669); }
+
+/* Subtle pattern on back */
+.back-face::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 10% 10%, rgba(255,255,255,0.06) 0%, transparent 40%),
+    radial-gradient(ellipse at 90% 90%, rgba(255,255,255,0.04) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+/* Back header */
+.back-header {
+  padding: 10px 14px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+}
+.back-tag {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+}
+.back-formula-num {
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  font-weight: 600;
+}
+
+/* Formula area */
+.back-formula {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 14px 8px;
+  gap: 8px;
+  position: relative;
+  z-index: 2;
+}
+.back-fcn {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.back-latex {
+  display: flex;
+  justify-content: center;
+  padding: 4px 0;
+}
+.back-latex .katex { font-size: 14px !important; }
+
+/* Back divider */
+.back-divider {
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  margin: 0 auto;
+}
+
+/* Quick recall tip */
+.back-tip {
+  padding: 6px 14px 8px;
+  position: relative;
+  z-index: 2;
+}
+.back-tip-text {
+  font-size: 10px;
+  color: rgba(255,255,255,0.65);
+  text-align: center;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* Back footer */
+.back-footer {
+  padding: 6px 14px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+}
+.back-cat-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+}
+.back-deco {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+/* ═══════════════════════════════════
+   FLIP ANIMATION
+═══════════════════════════════════ */
+.card-wrap.flipped .card-inner { transform: rotateY(180deg); }
+
+/* ═══════════════════════════════════
+   PRINT
+═══════════════════════════════════ */
 @media print {
-  body { background:#fff !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-  .header, .controls, .card-grid { display:none !important; }
+  body { background: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .header, .controls, .card-grid { display: none !important; }
 
-  @page { size:A4; margin:0; }
+  @page { size: A4; margin: 0; }
 
   .print-sheet {
-    width:210mm; height:297mm;
-    page-break-after:always;
-    position:relative; overflow:hidden;
-    background:#fff;
+    width: 210mm; height: 297mm;
+    page-break-after: always;
+    position: relative; overflow: hidden;
+    background: #fff;
   }
-  .print-sheet:last-child { page-break-after:avoid; }
+  .print-sheet:last-child { page-break-after: avoid; }
 
   .print-grid {
-    display:grid;
-    grid-template-columns:repeat(3,63mm);
-    grid-template-rows:repeat(3,88mm);
-    gap:3mm;
-    padding:6mm;
+    display: grid;
+    grid-template-columns: repeat(3, 63mm);
+    grid-template-rows: repeat(3, 88mm);
+    gap: 3mm;
+    padding: 6mm;
   }
 
-  .p-card {
-    width:63mm; height:88mm;
-    border-radius:6mm;
-    padding:3mm;
-    position:relative; overflow:hidden;
+  /* Front */
+  .p-card.front {
+    background: #111827 !important;
+    border-radius: 6mm;
+    padding: 3mm;
+    display: flex; flex-direction: column;
+    border: 0.3mm solid rgba(245,158,11,0.3);
   }
-  .p-card.front { background:#fff; border:0.25mm solid rgba(0,0,0,0.1); display:flex; flex-direction:column; }
-  .p-card.back  { background:#f8f9fc; border:0.25mm solid rgba(0,0,0,0.08); display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  /* Back */
+  .p-card.back {
+    border-radius: 6mm;
+    padding: 3mm;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
 
-  .p-card::before { content:""; position:absolute; top:0; left:0; right:0; height:40%; background:linear-gradient(180deg,rgba(255,255,255,0.22) 0%,transparent 100%); border-radius:6mm 6mm 0 0; pointer-events:none; }
+  /* Special front */
+  .p-card.front.special {
+    border: 0.4mm solid transparent;
+    background:
+      linear-gradient(#111827, #111827) padding-box,
+      linear-gradient(135deg,#fcd34d,#f59e0b,#ef4444,#8b5cf6,#3b82f6,#10b981,#fcd34d) border-box !important;
+    background-size: 300% 300% !important;
+  }
 
-  .p-tag { position:absolute; top:2mm; right:2mm; font-size:2.8mm; font-weight:700; padding:0.7mm 2mm; border-radius:2.5mm; color:#fff; letter-spacing:0.4mm; z-index:2; }
-  .p-icon-area { flex:1; display:flex; align-items:center; justify-content:center; margin-top:3mm; }
-  .p-icon-area svg { width:34mm; height:34mm; }
-  .p-cn { font-size:6.5mm; font-weight:700; text-align:center; color:#1e293b; line-height:1.35; letter-spacing:0.3mm; }
-  .p-en { font-size:3.3mm; text-align:center; color:#94a3b8; margin-top:0.5mm; }
-  .p-ask { font-size:3.8mm; color:#cbd5e1; text-align:center; border-top:0.4mm dashed #e2e8f0; padding-top:1.5mm; margin-top:1mm; }
+  /* Front elements */
+  .p-topbar { display:flex; align-items:center; justify-content:space-between; margin-bottom:2mm; }
+  .p-set { font-size:2.8mm; font-weight:800; color:#fcd34d; letter-spacing:1mm; }
+  .p-stars { display:flex; gap:1mm; }
+  .p-star { width:2.5mm; height:2.5mm; border-radius:50%; background:#334155; }
+  .p-star.lit { background:linear-gradient(135deg,#fcd34d,#f59e0b); }
+  .p-cat-badge { font-size:2.5mm; font-weight:800; padding:0.5mm 2mm; border-radius:2mm; color:#fff; margin-top:1mm; }
+  .p-icon { flex:1; display:flex; align-items:center; justify-content:center; }
+  .p-icon svg { width:32mm; height:32mm; }
+  .p-name { font-size:6mm; font-weight:800; color:#f1f5f9; text-align:center; letter-spacing:0.5mm; line-height:1.3; margin-top:2mm; }
+  .p-en { font-size:3mm; color:#64748b; text-align:center; margin-top:1mm; font-style:italic; }
+  .p-bottombar { display:flex; justify-content:space-between; align-items:center; margin-top:2mm; }
+  .p-num { font-size:3mm; color:#475569; font-weight:700; }
+  .p-ask { font-size:3mm; color:#94a3b8; font-weight:600; }
 
-  .p-fcenter { text-align:center; width:100%; }
-  .p-ftag { font-size:3mm; color:rgba(255,255,255,0.7); margin-bottom:1.5mm; font-weight:500; }
-  .p-fcn { font-size:6.2mm; font-weight:700; color:#fff; line-height:1.8; letter-spacing:0.3mm; }
-  .p-fen { font-size:3.8mm; color:rgba(255,255,255,0.82); margin-top:2mm; font-style:italic; }
-  .p-deco { position:absolute; bottom:-10mm; right:-10mm; width:28mm; height:28mm; border-radius:50%; background:rgba(255,255,255,0.06); }
+  /* Back elements */
+  .p-btag { font-size:2.5mm; color:rgba(255,255,255,0.6); font-weight:700; letter-spacing:0.5mm; text-align:center; margin-bottom:2mm; }
+  .p-bfcn { font-size:6mm; font-weight:800; color:#fff; text-align:center; line-height:1.8; letter-spacing:0.3mm; text-shadow:0 1mm 2mm rgba(0,0,0,0.3); }
+  .p-blatex { font-size:4mm; color:#fff; text-align:center; margin-top:2mm; }
+  .p-btip { font-size:2.8mm; color:rgba(255,255,255,0.6); text-align:center; font-style:italic; margin-top:3mm; line-height:1.6; }
 
+  /* Category back colors */
+  .pb-area { background:linear-gradient(160deg,#1e3a5f,#1e40af,#312e81) !important; }
+  .pb-peri { background:linear-gradient(160deg,#3d2e00,#92400e,#b45309) !important; }
+  .pb-vol  { background:linear-gradient(160deg,#064e3b,#047857,#059669) !important; }
+
+  /* Positioning */
   .pp1{left:6mm;   top:6mm;   position:absolute;}
   .pp2{left:72mm;  top:6mm;   position:absolute;}
   .pp3{left:138mm; top:6mm;   position:absolute;}
@@ -275,40 +593,8 @@ body {
   .pp8{left:72mm;  top:188mm; position:absolute;}
   .pp9{left:138mm; top:188mm; position:absolute;}
 
-  /* 顏色 */
-  .p01.front{background:linear-gradient(145deg,#eff6ff,#dbeafe);}.p01.back{background:linear-gradient(145deg,#1e40af,#1d4ed8,#2563eb);}.p01 .p-tag{background:#3B82F6;}
-  .p02.front{background:linear-gradient(145deg,#fffbeb,#fef3c7);}.p02.back{background:linear-gradient(145deg,#92400e,#b45309,#d97706);}.p02 .p-tag{background:#F59E0B;}
-  .p03.front{background:linear-gradient(145deg,#f5f3ff,#ede9fe);}.p03.back{background:linear-gradient(145deg,#5b21b6,#6d28d9,#7c3aed);}.p03 .p-tag{background:#8B5CF6;}
-  .p04.front{background:linear-gradient(145deg,#ecfdf5,#d1fae5);}.p04.back{background:linear-gradient(145deg,#065f46,#047857,#059669);}.p04 .p-tag{background:#10B981;}
-  .p05.front{background:linear-gradient(145deg,#f0fdfa,#ccfbf1);}.p05.back{background:linear-gradient(145deg,#0f766e,#0d9488,#14b8a6);}.p05 .p-tag{background:#14B8A6;}
-  .p06.front{background:linear-gradient(145deg,#eff6ff,#dbeafe);}.p06.back{background:linear-gradient(145deg,#1e3a8a,#1e40af,#2563eb);}.p06 .p-tag{background:#1E40AF;}
-  .p07.front{background:linear-gradient(145deg,#fef2f2,#fee2e2);}.p07.back{background:linear-gradient(145deg,#991b1b,#b91c1c,#dc2626);}.p07 .p-tag{background:#EF4444;}
-  .p08.front{background:linear-gradient(145deg,#fffbeb,#fef3c7);}.p08.back{background:linear-gradient(145deg,#78350f,#92400e,#b45309);}.p08 .p-tag{background:#D97706;}
-  .p09.front{background:linear-gradient(145deg,#fefce8,#fef9c3);}.p09.back{background:linear-gradient(145deg,#451a03,#78350f,#92400e);}.p09 .p-tag{background:#92400E;}
-  .p10.front{background:linear-gradient(145deg,#fffbeb,#fef3c7);}.p10.back{background:linear-gradient(145deg,#9f1239,#be185d,#db2777);}.p10 .p-tag{background:#EC4899;}
-  .p11.front{background:linear-gradient(145deg,#ecfeff,#cffafe);}.p11.back{background:linear-gradient(145deg,#0e7490,#0891b2,#06b6d4);}.p11 .p-tag{background:#06B6D4;}
-  .p12.front{background:linear-gradient(145deg,#f0fdf4,#dcfce7);}.p12.back{background:linear-gradient(145deg,#365314,#4d7c0f,#65a30d);}.p12 .p-tag{background:#84CC16;}
-  .p13.front{background:linear-gradient(145deg,#f5f3ff,#ede9fe);}.p13.back{background:linear-gradient(145deg,#4c1d95,#6d28d9,#7c3aed);}.p13 .p-tag{background:#8B5CF6;}
-  .p14.front{background:linear-gradient(145deg,#fff1f2,#ffe4e6);}.p14.back{background:linear-gradient(145deg,#881337,#9f1239,#e11d48);}.p14 .p-tag{background:#E11D48;}
-  .p15.front{background:linear-gradient(145deg,#f0f9ff,#e0f2fe);}.p15.back{background:linear-gradient(145deg,#075985,#0369a1,#0284c7);}.p15 .p-tag{background:#0EA5E9;}
-  .p16.front{background:linear-gradient(145deg,#fefce8,#fef3c7);}.p16.back{background:linear-gradient(145deg,#713f12,#854d0e,#a16207);}.p16 .p-tag{background:#CA8A04;}
-  .p17.front{background:linear-gradient(145deg,#f5f3ff,#ede9fe);}.p17.back{background:linear-gradient(145deg,#4c1d95,#5b21b6,#6d28d9);}.p17 .p-tag{background:#7C3AED;}
-  .p18.front{background:linear-gradient(145deg,#ecfdf5,#d1fae5);}.p18.back{background:linear-gradient(145deg,#14532d,#166534,#15803d);}.p18 .p-tag{background:#16A34A;}
-  .p19.front{background:linear-gradient(145deg,#fdf2f8,#fce7f3);}.p19.back{background:linear-gradient(145deg,#831843,#9f1744,#be185d);}.p19 .p-tag{background:#E11D48;}
-  .p20.front{background:linear-gradient(145deg,#fff1f2,#ffe4e6);}.p20.back{background:linear-gradient(145deg,#881337,#9f1239,#dc2626);}.p20 .p-tag{background:#EF4444;}
-  .p21.front{background:linear-gradient(145deg,#f0fdf4,#dcfce7);}.p21.back{background:linear-gradient(145deg,#14532d,#166534,#22c55e);}.p21 .p-tag{background:#22C55E;}
-  .p22.front{background:linear-gradient(145deg,#eff6ff,#dbeafe);}.p22.back{background:linear-gradient(145deg,#1e3a8a,#1d4ed8,#3b82f6);}.p22 .p-tag{background:#3B82F6;}
-
-  /* Special print */
-  .p10.front,.p12.front,.p13.front,.p16.front {
-    background:linear-gradient(145deg,#fffbeb,#fef9c3,#fef3c7) !important;
-  }
-  .p10.front::before,.p12.front::before,.p13.front::before,.p16.front::before {
-    background:linear-gradient(135deg,#fbbf24,#f59e0b) !important;
-  }
-
-  .print-sheets { display:none !important; }
-  .print-sheets.show { display:block !important; }
+  .print-sheets { display: none !important; }
+  .print-sheets.show { display: block !important; }
 }
 </style>
 </head>
@@ -316,27 +602,28 @@ body {
 
 <!-- HEADER -->
 <div class="header">
-  <div>
+  <div class="header-left">
     <h1>📐 數學公式卡牌</h1>
-    <div class="header-sub">面積 · 周界 · 體積　|　選擇想列印的卡牌，再按「列印所選」</div>
+    <div class="header-sub">幾何篇 · Geometry Set · 2026</div>
   </div>
+  <div class="header-badge">GEOMETRY · G-Series</div>
 </div>
 
 <!-- CONTROLS -->
 <div class="controls">
-  <span class="ctrl-label">分類：</span>
+  <span class="ctrl-label">分類</span>
   <div class="tabs">
     <button class="tab-btn active" data-tab="all">全部</button>
     <button class="tab-btn" data-tab="area">面積</button>
     <button class="tab-btn" data-tab="peri">周界</button>
     <button class="tab-btn" data-tab="vol">體積</button>
   </div>
-  <span class="ctrl-label" style="margin-left:12px;">範圍：</span>
+  <span class="ctrl-label" style="margin-left:12px;">選擇</span>
   <div class="select-btns">
     <button class="sel-btn" onclick="selectAll()">全選</button>
     <button class="sel-btn" onclick="selectNone()">全取消</button>
   </div>
-  <span class="counter"><span id="sel-count">0</span> / <span id="total-count">0</span> 張已選</span>
+  <span class="counter"><span id="sel-count">0</span> / <span id="total-count">0</span></span>
   <button class="print-btn" onclick="printSelected()">🖨️ 列印所選</button>
 </div>
 
@@ -349,98 +636,428 @@ body {
 <script>
 const CARDS = [
   /* ══ 面積 AREA ══ */
-  { id:1,  cat:"area", name:"長方形",        en:"Rectangle",      ask:"求 面積？", tag:"面積",
-    fcn:"A = 長 × 寬", latex:"A = \\text{長} \\times \\text{寬}",
-    svg:`<svg viewBox="0 0 100 100"><rect x="10" y="25" width="80" height="55" rx="3" fill="#bfdbfe" stroke="#3B82F6" stroke-width="8"/></svg>` },
+  { id:1,  cat:"area", name:"長方形",        en:"Rectangle",      ask:"求面積",   tag:"面積",
+    num:"G-01", difficulty:1, special:false,
+    fcn:"面積 = 長 × 寬", latex:"A = \\text{長} \\times \\text{寬}",
+    tip:"長闊分清楚，記緊兩邊都要用！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="12" y="28" width="86" height="58" rx="6" fill="url(#g1)" stroke="#60a5fa" stroke-width="9"/>
+      <line x1="12" y1="28" x2="24" y2="16" stroke="#93c5fd" stroke-width="5" stroke-linecap="round"/>
+      <line x1="24" y1="16" x2="46" y2="16" stroke="#93c5fd" stroke-width="5" stroke-linecap="round"/>
+      <text x="26" y="13" font-size="12" fill="#93c5fd" font-weight="bold" font-family="sans-serif">長</text>
+      <line x1="98" y1="28" x2="108" y2="44" stroke="#93c5fd" stroke-width="5" stroke-linecap="round"/>
+      <line x1="108" y1="44" x2="108" y2="66" stroke="#93c5fd" stroke-width="5" stroke-linecap="round"/>
+      <text x="101" y="56" font-size="12" fill="#93c5fd" font-weight="bold" font-family="sans-serif">闊</text>
+    </svg>` },
 
-  { id:2,  cat:"area", name:"三角形",        en:"Triangle",       ask:"求 面積？", tag:"面積",
-    fcn:"A = ½ × 底 × 高", latex:"A = \\frac{1}{2} \\times \\text{底} \\times \\text{高}",
-    svg:`<svg viewBox="0 0 100 100"><polygon points="50,10 10,90 90,90" fill="#fde68a" stroke="#F59E0B" stroke-width="8" stroke-linejoin="round"/></svg>` },
+  { id:2,  cat:"area", name:"三角形",        en:"Triangle",       ask:"求面積",   tag:"面積",
+    num:"G-02", difficulty:1, special:false,
+    fcn:"面積 = ½ × 底 × 高", latex:"A = \\frac{1}{2} \\times \\text{底} \\times \\text{高}",
+    tip:"高要垂直於底，唔好誤用斜邊！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <polygon points="55,12 10,96 100,96" fill="url(#g2)" stroke="#f59e0b" stroke-width="9" stroke-linejoin="round"/>
+      <line x1="55" y1="96" x2="55" y2="12" stroke="#fcd34d" stroke-width="4" stroke-dasharray="6,4"/>
+      <text x="57" y="56" font-size="11" fill="#fcd34d" font-weight="bold" font-family="sans-serif">高</text>
+      <line x1="10" y1="96" x2="100" y2="96" stroke="#f59e0b" stroke-width="4"/>
+      <text x="51" y="107" font-size="10" fill="#f59e0b" font-weight="bold" font-family="sans-serif">底</text>
+    </svg>` },
 
-  { id:3,  cat:"area", name:"圓形",          en:"Circle",         ask:"求 面積？", tag:"面積",
-    fcn:"A = π × 半徑²", latex:"A = \\pi \\times \\text{半徑}^2",
-    svg:`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="#ddd6fe" stroke="#8B5CF6" stroke-width="8"/></svg>` },
+  { id:3,  cat:"area", name:"圓形",          en:"Circle",         ask:"求面積",   tag:"面積",
+    num:"G-03", difficulty:1, special:false,
+    fcn:"面積 = π × 半徑²", latex:"A = \\pi \\times \\text{半徑}^2",
+    tip:"半徑係直徑嘅一半，別混淆！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <radialGradient id="g3" cx="35%" cy="35%">
+          <stop offset="0%" style="stop-color:#c4b5fd;stop-opacity:0.4"/>
+          <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0.15"/>
+        </radialGradient>
+      </defs>
+      <circle cx="55" cy="55" r="45" fill="url(#g3)" stroke="#8b5cf6" stroke-width="9"/>
+      <line x1="55" y1="55" x2="55" y2="10" stroke="#a78bfa" stroke-width="5" stroke-linecap="round" stroke-dasharray="5,4"/>
+      <circle cx="55" cy="55" r="4" fill="#a78bfa"/>
+      <text x="59" y="34" font-size="12" fill="#a78bfa" font-weight="bold" font-family="sans-serif">r</text>
+    </svg>` },
 
-  { id:4,  cat:"area", name:"平行四邊形",    en:"Parallelogram",   ask:"求 面積？", tag:"面積",
-    fcn:"A = 底 × 高", latex:"A = \\text{底} \\times \\text{高}",
-    svg:`<svg viewBox="0 0 100 100"><polygon points="20,28 80,28 72,82 12,82" fill="#a7f3d0" stroke="#10B981" stroke-width="8" stroke-linejoin="round"/></svg>` },
+  { id:4,  cat:"area", name:"平行四邊形",    en:"Parallelogram",   ask:"求面積",   tag:"面積",
+    num:"G-04", difficulty:2, special:false,
+    fcn:"面積 = 底 × 高", latex:"A = \\text{底} \\times \\text{高}",
+    tip:"高要向「斜」度方向量度，唔係斜邊！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="g4" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#34d399;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#10b981;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <polygon points="22,30 88,30 78,86 12,86" fill="url(#g4)" stroke="#10b981" stroke-width="9" stroke-linejoin="round"/>
+      <line x1="22" y1="86" x2="22" y2="30" stroke="#6ee7b7" stroke-width="4" stroke-dasharray="5,4"/>
+      <text x="8" y="60" font-size="12" fill="#6ee7b7" font-weight="bold" font-family="sans-serif">高</text>
+      <text x="40" y="24" font-size="10" fill="#6ee7b7" font-weight="bold" font-family="sans-serif">底</text>
+    </svg>` },
 
-  { id:5,  cat:"area", name:"梯形",          en:"Trapezoid",      ask:"求 面積？", tag:"面積",
-    fcn:"A = ½ × (上底+下底) × 高", latex:"A = \\frac{1}{2}(a+b)h",
-    svg:`<svg viewBox="0 0 100 100"><polygon points="26,16 74,16 88,84 12,84" fill="#99f6e4" stroke="#14B8A6" stroke-width="8" stroke-linejoin="round"/></svg>` },
+  { id:5,  cat:"area", name:"梯形",          en:"Trapezoid",      ask:"求面積",   tag:"面積",
+    num:"G-05", difficulty:2, special:false,
+    fcn:"面積 = ½ × (上底+下底) × 高", latex:"A = \\frac{1}{2}(a+b)h",
+    tip:"上下底要平行，高要垂直於兩底！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="g5" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#5eead4;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#14b8a6;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <polygon points="28,18 82,18 96,90 14,90" fill="url(#g5)" stroke="#14b8a6" stroke-width="9" stroke-linejoin="round"/>
+      <text x="49" y="14" font-size="9" fill="#5eead4" font-weight="bold" font-family="sans-serif">上底</text>
+      <text x="47" y="104" font-size="9" fill="#5eead4" font-weight="bold" font-family="sans-serif">下底</text>
+      <line x1="82" y1="18" x2="96" y2="90" stroke="#5eead4" stroke-width="3" stroke-dasharray="4,3"/>
+      <text x="86" y="56" font-size="10" fill="#5eead4" font-weight="bold" font-family="sans-serif">高</text>
+    </svg>` },
 
-  { id:10, cat:"area", name:"菱形",          en:"Rhombus",        ask:"求 面積？", tag:"面積", special:true,
-    fcn:"A = ½ × 對角線₁ × 對角線₂", latex:"A = \\frac{1}{2}d_1 d_2",
-    svg:`<svg viewBox="0 0 100 100"><polygon points="50,8 92,50 50,92 8,50" fill="#fce7f3" stroke="#EC4899" stroke-width="8" stroke-linejoin="round"/><line x1="8" y1="50" x2="92" y2="50" stroke="#EC4899" stroke-width="3" stroke-dasharray="5,4"/><line x1="50" y1="8" x2="50" y2="92" stroke="#EC4899" stroke-width="3" stroke-dasharray="5,4"/><text x="14" y="46" font-size="9" fill="#EC4899" font-family="sans-serif" font-weight="bold">d₁</text><text x="74" y="46" font-size="9" fill="#EC4899" font-family="sans-serif" font-weight="bold">d₂</text></svg>` },
+  { id:10, cat:"area", name:"菱形",          en:"Rhombus",        ask:"求面積",   tag:"面積",
+    num:"G-06", difficulty:2, special:true,
+    fcn:"面積 = ½ × 對角線₁ × 對角線₂", latex:"A = \\frac{1}{2}d_1 d_2",
+    tip:"對角線係最長嘅兩條線，互相垂直！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="g10" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#f9a8d4;stop-opacity:0.4"/>
+          <stop offset="100%" style="stop-color:#ec4899;stop-opacity:0.15"/>
+        </linearGradient>
+      </defs>
+      <polygon points="55,10 100,55 55,100 10,55" fill="url(#g10)" stroke="#ec4899" stroke-width="9" stroke-linejoin="round"/>
+      <line x1="10" y1="55" x2="100" y2="55" stroke="#f9a8d4" stroke-width="4" stroke-dasharray="6,5"/>
+      <line x1="55" y1="10" x2="55" y2="100" stroke="#f9a8d4" stroke-width="4" stroke-dasharray="6,5"/>
+      <text x="14" y="49" font-size="11" fill="#f9a8d4" font-weight="bold" font-family="sans-serif">d₁</text>
+      <text x="74" y="49" font-size="11" fill="#f9a8d4" font-weight="bold" font-family="sans-serif">d₂</text>
+    </svg>` },
 
-  { id:11, cat:"area", name:"扇形",          en:"Sector",         ask:"求 面積？", tag:"面積",
-    fcn:"A = (θ/360) × π × 半徑²", latex:"A = \\frac{\\theta}{360}\\pi r^2",
-    svg:`<svg viewBox="0 0 100 100"><path d="M50,50 L50,12 A38,38 0 0,1 88,50 Z" fill="#cffafe" stroke="#06B6D4" stroke-width="8" stroke-linejoin="round"/><line x1="50" y1="50" x2="50" y2="12" stroke="#06B6D4" stroke-width="4" stroke-dasharray="5,4"/><line x1="50" y1="50" x2="88" y2="50" stroke="#06B6D4" stroke-width="4" stroke-dasharray="5,4"/><text x="62" y="28" font-size="9" fill="#06B6D4" font-family="sans-serif" font-weight="bold">r</text><text x="46" y="8" font-size="8" fill="#06B6D4" font-family="sans-serif" font-weight="bold">θ°</text></svg>` },
+  { id:11, cat:"area", name:"扇形",          en:"Sector",         ask:"求面積",   tag:"面積",
+    num:"G-07", difficulty:2, special:false,
+    fcn:"面積 = (θ/360) × π × 半徑²", latex:"A = \\frac{\\theta}{360}\\pi r^2",
+    tip:"θ 係圓心角，用角度制，唔係弧度！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="g11" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#67e8f9;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <path d="M55,55 L55,10 A45,45 0 0,1 100,55 Z" fill="url(#g11)" stroke="#06b6d4" stroke-width="9" stroke-linejoin="round"/>
+      <line x1="55" y1="55" x2="55" y2="10" stroke="#22d3ee" stroke-width="4" stroke-dasharray="5,4"/>
+      <line x1="55" y1="55" x2="100" y2="55" stroke="#22d3ee" stroke-width="4" stroke-dasharray="5,4"/>
+      <text x="60" y="30" font-size="11" fill="#22d3ee" font-weight="bold" font-family="sans-serif">r</text>
+      <text x="38" y="6" font-size="9" fill="#22d3ee" font-weight="bold" font-family="sans-serif">θ°</text>
+      <circle cx="55" cy="55" r="4" fill="#22d3ee"/>
+    </svg>` },
 
-  { id:12, cat:"area", name:"環形",          en:"Annulus",        ask:"求 面積？", tag:"面積", special:true,
-    fcn:"A = π × (外半徑² − 內半徑²)", latex:"A = \\pi(R^2 - r^2)",
-    svg:`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="#dcfce7" stroke="#84CC16" stroke-width="8"/><circle cx="50" cy="50" r="22" fill="#fff" stroke="#84CC16" stroke-width="8"/><text x="54" y="26" font-size="8" fill="#84CC16" font-family="sans-serif" font-weight="bold">R</text><text x="38" y="50" font-size="8" fill="#84CC16" font-family="sans-serif" font-weight="bold">r</text></svg>` },
+  { id:12, cat:"area", name:"環形",          en:"Annulus",        ask:"求面積",   tag:"面積",
+    num:"G-08", difficulty:2, special:true,
+    fcn:"面積 = π × (外半徑² − 內半徑²)", latex:"A = \\pi(R^2 - r^2)",
+    tip:"外圓面積 − 內圓面積 = 甜甜圈形狀！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <radialGradient id="g12" cx="40%" cy="40%">
+          <stop offset="0%" style="stop-color:#bef264;stop-opacity:0.35"/>
+          <stop offset="60%" style="stop-color:#84cc16;stop-opacity:0.15"/>
+          <stop offset="100%" style="stop-color:#65a30d;stop-opacity:0.2"/>
+        </radialGradient>
+      </defs>
+      <circle cx="55" cy="55" r="46" fill="url(#g12)" stroke="#84cc16" stroke-width="9"/>
+      <circle cx="55" cy="55" r="24" fill="#111827" stroke="#84cc16" stroke-width="9"/>
+      <text x="60" y="24" font-size="10" fill="#bef264" font-weight="bold" font-family="sans-serif">R</text>
+      <text x="40" y="52" font-size="10" fill="#bef264" font-weight="bold" font-family="sans-serif">r</text>
+    </svg>` },
 
-  { id:13, cat:"area", name:"複合圖形",      en:"Composite",      ask:"求 面積？", tag:"面積", special:true,
-    fcn:"A = 分割法 / 填補法", latex:"A = \\sum A_i",
-    svg:`<svg viewBox="0 0 100 100"><rect x="10" y="25" width="80" height="55" rx="3" fill="#ddd6fe" stroke="#8B5CF6" stroke-width="7"/><line x1="10" y1="52" x2="90" y2="52" stroke="#8B5CF6" stroke-width="4" stroke-dasharray="6,4"/><text x="30" y="42" font-size="11" fill="#8B5CF6" font-family="sans-serif" font-weight="bold">A</text><text x="30" y="72" font-size="11" fill="#8B5CF6" font-family="sans-serif" font-weight="bold">B</text></svg>` },
+  { id:13, cat:"area", name:"複合圖形",      en:"Composite",      ask:"求面積",   tag:"面積",
+    num:"G-09", difficulty:3, special:true,
+    fcn:"面積 = 分割法 / 填補法", latex:"A = \\sum A_i",
+    tip:"複雜形狀拆成熟悉圖形，逐個計再相加！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="g13" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#c4b5fd;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0.15"/>
+        </linearGradient>
+      </defs>
+      <rect x="10" y="20" width="90" height="70" rx="4" fill="url(#g13)" stroke="#8b5cf6" stroke-width="8"/>
+      <line x1="10" y1="55" x2="100" y2="55" stroke="#8b5cf6" stroke-width="5" stroke-dasharray="8,5"/>
+      <rect x="10" y="20" width="45" height="35" fill="none" stroke="#c4b5fd" stroke-width="2" stroke-dasharray="4,3"/>
+      <rect x="55" y="55" width="45" height="35" fill="none" stroke="#c4b5fd" stroke-width="2" stroke-dasharray="4,3"/>
+      <text x="20" y="40" font-size="11" fill="#c4b5fd" font-weight="bold" font-family="sans-serif">A</text>
+      <text x="68" y="74" font-size="11" fill="#c4b5fd" font-weight="bold" font-family="sans-serif">B</text>
+    </svg>` },
 
   /* ══ 周界 PERIMETER ══ */
-  { id:6,  cat:"peri", name:"長方形",        en:"Rectangle",      ask:"求 周界？", tag:"周界",
-    fcn:"P = 2 × (長 + 寬)", latex:"P = 2(l + w)",
-    svg:`<svg viewBox="0 0 100 100"><rect x="10" y="25" width="80" height="55" rx="3" fill="none" stroke="#F59E0B" stroke-width="9"/><line x1="10" y1="25" x2="24" y2="13" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/><line x1="24" y1="13" x2="46" y2="13" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/><text x="25" y="11" font-size="10" fill="#F59E0B" font-family="sans-serif" font-weight="bold">l</text><line x1="90" y1="25" x2="100" y2="40" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/><line x1="100" y1="40" x2="100" y2="62" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/><text x="93" y="57" font-size="10" fill="#F59E0B" font-family="sans-serif" font-weight="bold">w</text></svg>` },
+  { id:6,  cat:"peri", name:"長方形",        en:"Rectangle",      ask:"求周界",   tag:"周界",
+    num:"G-10", difficulty:1, special:false,
+    fcn:"周界 = 2 × (長 + 寬)", latex:"P = 2(l + w)",
+    tip:"長同闊各出現兩次！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="g6" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#fde68a;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="12" y="28" width="86" height="58" rx="4" fill="url(#g6)" stroke="#f59e0b" stroke-width="9"/>
+      <line x1="12" y1="28" x2="24" y2="16" stroke="#fcd34d" stroke-width="5" stroke-linecap="round"/>
+      <line x1="24" y1="16" x2="46" y2="16" stroke="#fcd34d" stroke-width="5" stroke-linecap="round"/>
+      <text x="26" y="13" font-size="11" fill="#fcd34d" font-weight="bold" font-family="sans-serif">l</text>
+      <line x1="98" y1="28" x2="108" y2="40" stroke="#fcd34d" stroke-width="5" stroke-linecap="round"/>
+      <line x1="108" y1="40" x2="108" y2="66" stroke="#fcd34d" stroke-width="5" stroke-linecap="round"/>
+      <text x="100" y="54" font-size="11" fill="#fcd34d" font-weight="bold" font-family="sans-serif">w</text>
+    </svg>` },
 
-  { id:7,  cat:"peri", name:"圓形",          en:"Circle",         ask:"求 周界？", tag:"周界",
-    fcn:"C = 2πr = πd", latex:"C = 2\\pi r = \\pi d",
-    svg:`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="#EF4444" stroke-width="9"/><line x1="50" y1="50" x2="92" y2="50" stroke="#EF4444" stroke-width="4" stroke-dasharray="6,4"/><text x="70" y="44" font-size="11" fill="#EF4444" font-family="sans-serif" font-weight="bold">r</text></svg>` },
+  { id:7,  cat:"peri", name:"圓形",          en:"Circle",         ask:"求周界",   tag:"周界",
+    num:"G-11", difficulty:1, special:false,
+    fcn:"周界 = 2πr = πd", latex:"C = 2\\pi r = \\pi d",
+    tip:"記住 π ≈ 3.1416，半徑×2=直徑！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <radialGradient id="g7" cx="35%" cy="35%">
+          <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.1"/>
+        </radialGradient>
+      </defs>
+      <circle cx="55" cy="55" r="44" fill="url(#g7)" stroke="#ef4444" stroke-width="9"/>
+      <line x1="55" y1="55" x2="99" y2="55" stroke="#f87171" stroke-width="4" stroke-dasharray="6,5"/>
+      <line x1="55" y1="11" x2="99" y2="11" stroke="#f87171" stroke-width="4"/>
+      <line x1="99" y1="11" x2="99" y2="55" stroke="#f87171" stroke-width="4"/>
+      <text x="75" y="48" font-size="12" fill="#f87171" font-weight="bold" font-family="sans-serif">r</text>
+      <circle cx="55" cy="55" r="4" fill="#f87171"/>
+    </svg>` },
 
-  { id:14, cat:"peri", name:"三角形",        en:"Triangle",       ask:"求 周界？", tag:"周界",
-    fcn:"P = 邊₁ + 邊₂ + 邊₃", latex:"P = a + b + c",
-    svg:`<svg viewBox="0 0 100 100"><polygon points="50,10 10,90 90,90" fill="none" stroke="#E11D48" stroke-width="9" stroke-linejoin="round"/><line x1="10" y1="90" x2="30" y2="90" stroke="#E11D48" stroke-width="4" stroke-linecap="round"/><line x1="30" y1="90" x2="44" y2="90" stroke="#E11D48" stroke-width="4" stroke-linecap="round"/><text x="20" y="98" font-size="10" fill="#E11D48" font-family="sans-serif" font-weight="bold">a</text><line x1="90" y1="90" x2="70" y2="90" stroke="#E11D48" stroke-width="4" stroke-linecap="round"/><line x1="70" y1="90" x2="58" y2="90" stroke="#E11D48" stroke-width="4" stroke-linecap="round"/><text x="72" y="98" font-size="10" fill="#E11D48" font-family="sans-serif" font-weight="bold">b</text></svg>` },
+  { id:14, cat:"peri", name:"三角形",        en:"Triangle",       ask:"求周界",   tag:"周界",
+    num:"G-12", difficulty:1, special:false,
+    fcn:"周界 = 邊₁ + 邊₂ + 邊₃", latex:"P = a + b + c",
+    tip:"三邊相加，唔需要任何高或角！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="g14" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#fda4af;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#e11d48;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <polygon points="55,12 10,96 100,96" fill="url(#g14)" stroke="#e11d48" stroke-width="9" stroke-linejoin="round"/>
+      <line x1="10" y1="96" x2="55" y2="96" stroke="#fb7185" stroke-width="5" stroke-linecap="round"/>
+      <line x1="55" y1="96" x2="55" y2="96" stroke="#fb7185" stroke-width="5" stroke-linecap="round"/>
+      <text x="26" y="106" font-size="10" fill="#fb7185" font-weight="bold" font-family="sans-serif">a</text>
+      <line x1="55" y1="96" x2="100" y2="96" stroke="#fb7185" stroke-width="5" stroke-linecap="round"/>
+      <text x="76" y="106" font-size="10" fill="#fb7185" font-weight="bold" font-family="sans-serif">b</text>
+      <line x1="100" y1="96" x2="55" y2="12" stroke="#fb7185" stroke-width="4" stroke-dasharray="4,3"/>
+      <text x="76" y="56" font-size="10" fill="#fb7185" font-weight="bold" font-family="sans-serif">c</text>
+    </svg>` },
 
-  { id:15, cat:"peri", name:"正方形",         en:"Square",         ask:"求 周界？", tag:"周界",
-    fcn:"P = 4 × 邊長", latex:"P = 4a",
-    svg:`<svg viewBox="0 0 100 100"><rect x="18" y="18" width="64" height="64" rx="2" fill="none" stroke="#0EA5E9" stroke-width="9"/><line x1="18" y1="18" x2="30" y2="6" stroke="#0EA5E9" stroke-width="5" stroke-linecap="round"/><line x1="30" y1="6" x2="50" y2="6" stroke="#0EA5E9" stroke-width="5" stroke-linecap="round"/><text x="30" y="4" font-size="10" fill="#0EA5E9" font-family="sans-serif" font-weight="bold">a</text></svg>` },
+  { id:15, cat:"peri", name:"正方形",         en:"Square",         ask:"求周界",   tag:"周界",
+    num:"G-13", difficulty:1, special:false,
+    fcn:"周界 = 4 × 邊長", latex:"P = 4a",
+    tip:"四邊相等，一邊×4就搞掂！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="g15" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#7dd3fc;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#0ea5e9;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="20" y="20" width="70" height="70" rx="4" fill="url(#g15)" stroke="#0ea5e9" stroke-width="9"/>
+      <line x1="20" y1="20" x2="32" y2="8" stroke="#38bdf8" stroke-width="5" stroke-linecap="round"/>
+      <line x1="32" y1="8" x2="52" y2="8" stroke="#38bdf8" stroke-width="5" stroke-linecap="round"/>
+      <text x="33" y="6" font-size="12" fill="#38bdf8" font-weight="bold" font-family="sans-serif">a</text>
+    </svg>` },
 
-  { id:16, cat:"peri", name:"多邊形",         en:"Polygon",        ask:"求 周界？", tag:"周界", special:true,
-    fcn:"P = 邊₁ + 邊₂ + … + 邊ₙ", latex:"P = \\sum_{i=1}^{n} l_i",
-    svg:`<svg viewBox="0 0 100 100"><polygon points="50,10 88,38 74,82 26,82 12,38" fill="none" stroke="#CA8A04" stroke-width="8" stroke-linejoin="round"/><circle cx="50" cy="10" r="4" fill="#CA8A04"/><circle cx="88" cy="38" r="4" fill="#CA8A04"/><circle cx="74" cy="82" r="4" fill="#CA8A04"/><circle cx="26" cy="82" r="4" fill="#CA8A04"/><circle cx="12" cy="38" r="4" fill="#CA8A04"/></svg>` },
+  { id:16, cat:"peri", name:"多邊形",         en:"Polygon",        ask:"求周界",   tag:"周界",
+    num:"G-14", difficulty:2, special:true,
+    fcn:"周界 = 邊₁ + 邊₂ + … + 邊ₙ", latex:"P = \\sum_{i=1}^{n} l_i",
+    tip:"有多少邊就數多少次，總和就係周界！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="g16" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#fde047;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#ca8a04;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <polygon points="55,12 94,38 78,84 32,84 16,38" fill="url(#g16)" stroke="#ca8a04" stroke-width="8" stroke-linejoin="round"/>
+      <circle cx="55" cy="12" r="5" fill="#eab308"/>
+      <circle cx="94" cy="38" r="5" fill="#eab308"/>
+      <circle cx="78" cy="84" r="5" fill="#eab308"/>
+      <circle cx="32" cy="84" r="5" fill="#eab308"/>
+      <circle cx="16" cy="38" r="5" fill="#eab308"/>
+      <line x1="55" y1="12" x2="94" y2="38" stroke="#fde047" stroke-width="3" stroke-dasharray="4,3"/>
+      <line x1="94" y1="38" x2="78" y2="84" stroke="#fde047" stroke-width="3" stroke-dasharray="4,3"/>
+      <text x="56" y="70" font-size="9" fill="#fde047" font-weight="bold" font-family="sans-serif">×5</text>
+    </svg>` },
 
   /* ══ 體積 VOLUME ══ */
-  { id:8,  cat:"vol", name:"正方體",         en:"Cube",           ask:"求 體積？", tag:"體積",
-    fcn:"V = 邊長³", latex:"V = a^3",
-    svg:`<svg viewBox="0 0 100 100"><polygon points="50,8 90,26 90,70 50,88 10,70 10,26" fill="#fde68a" stroke="#D97706" stroke-width="8" stroke-linejoin="round"/><line x1="50" y1="8" x2="50" y2="46" stroke="#D97706" stroke-width="6"/><line x1="50" y1="46" x2="90" y2="26" stroke="#D97706" stroke-width="6"/><line x1="50" y1="46" x2="10" y2="26" stroke="#D97706" stroke-width="6"/><line x1="50" y1="46" x2="50" y2="88" stroke="#D97706" stroke-width="6"/><text x="52" y="52" font-size="11" fill="#D97706" font-family="sans-serif" font-weight="bold">a</text></svg>` },
+  { id:8,  cat:"vol", name:"正方體",         en:"Cube",           ask:"求體積",   tag:"體積",
+    num:"G-15", difficulty:1, special:false,
+    fcn:"體積 = 邊長³", latex:"V = a^3",
+    tip:"三條邊相等，全部係邊長 a！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="g8" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#fde68a;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#d97706;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <polygon points="55,10 96,28 96,72 55,90 14,72 14,28" fill="url(#g8)" stroke="#d97706" stroke-width="8" stroke-linejoin="round"/>
+      <line x1="55" y1="10" x2="55" y2="48" stroke="#f59e0b" stroke-width="6"/>
+      <line x1="55" y1="48" x2="96" y2="28" stroke="#f59e0b" stroke-width="6"/>
+      <line x1="55" y1="48" x2="14" y2="28" stroke="#f59e0b" stroke-width="6"/>
+      <line x1="55" y1="48" x2="55" y2="90" stroke="#f59e0b" stroke-width="6"/>
+      <text x="57" y="54" font-size="13" fill="#f59e0b" font-weight="bold" font-family="sans-serif">a</text>
+    </svg>` },
 
-  { id:9,  cat:"vol", name:"圓柱體",         en:"Cylinder",       ask:"求 體積？", tag:"體積",
-    fcn:"V = π × 半徑² × 高", latex:"V = \\pi r^2 h",
-    svg:`<svg viewBox="0 0 100 100"><ellipse cx="50" cy="22" rx="38" ry="14" fill="#fef9c3" stroke="#92400E" stroke-width="8"/><line x1="12" y1="22" x2="12" y2="80" stroke="#92400E" stroke-width="8"/><line x1="88" y1="22" x2="88" y2="80" stroke="#92400E" stroke-width="8"/><ellipse cx="50" cy="80" rx="38" ry="14" fill="#fef9c3" stroke="#92400E" stroke-width="8"/><line x1="50" y1="22" x2="50" y2="80" stroke="#92400E" stroke-width="4" stroke-dasharray="6,4"/><text x="42" y="54" font-size="10" fill="#92400E" font-family="sans-serif" font-weight="bold">h</text><text x="56" y="16" font-size="10" fill="#92400E" font-family="sans-serif" font-weight="bold">r</text></svg>` },
+  { id:9,  cat:"vol", name:"圓柱體",         en:"Cylinder",       ask:"求體積",   tag:"體積",
+    num:"G-16", difficulty:2, special:false,
+    fcn:"體積 = π × 半徑² × 高", latex:"V = \\pi r^2 h",
+    tip:"底面積係圓形，再乘高度！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="g9" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#fef08a;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#92400e;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <ellipse cx="55" cy="24" rx="40" ry="14" fill="url(#g9)" stroke="#92400e" stroke-width="8"/>
+      <line x1="15" y1="24" x2="15" y2="84" stroke="#b45309" stroke-width="8"/>
+      <line x1="95" y1="24" x2="95" y2="84" stroke="#b45309" stroke-width="8"/>
+      <ellipse cx="55" cy="84" rx="40" ry="14" fill="url(#g9)" stroke="#92400e" stroke-width="8"/>
+      <line x1="55" y1="24" x2="55" y2="84" stroke="#d97706" stroke-width="4" stroke-dasharray="6,4"/>
+      <text x="44" y="56" font-size="11" fill="#d97706" font-weight="bold" font-family="sans-serif">h</text>
+      <text x="58" y="18" font-size="10" fill="#d97706" font-weight="bold" font-family="sans-serif">r</text>
+    </svg>` },
 
-  { id:17, cat:"vol", name:"長方體",         en:"Cuboid",         ask:"求 體積？", tag:"體積",
-    fcn:"V = 長 × 寬 × 高", latex:"V = l \\times w \\times h",
-    svg:`<svg viewBox="0 0 100 100"><polygon points="50,10 90,28 90,68 50,86 10,68 10,28" fill="#ddd6fe" stroke="#7C3AED" stroke-width="8" stroke-linejoin="round"/><line x1="50" y1="10" x2="50" y2="46" stroke="#7C3AED" stroke-width="6"/><line x1="50" y1="46" x2="90" y2="28" stroke="#7C3AED" stroke-width="6"/><line x1="50" y1="46" x2="10" y2="28" stroke="#7C3AED" stroke-width="6"/><line x1="50" y1="46" x2="50" y2="86" stroke="#7C3AED" stroke-width="6"/><text x="52" y="52" font-size="9" fill="#7C3AED" font-family="sans-serif" font-weight="bold">h</text><text x="72" y="24" font-size="8" fill="#7C3AED" font-family="sans-serif" font-weight="bold">l</text><text x="4" y="52" font-size="8" fill="#7C3AED" font-family="sans-serif" font-weight="bold">w</text></svg>` },
+  { id:17, cat:"vol", name:"長方體",         en:"Cuboid",         ask:"求體積",   tag:"體積",
+    num:"G-17", difficulty:1, special:false,
+    fcn:"體積 = 長 × 寬 × 高", latex:"V = l \\times w \\times h",
+    tip:"三個維度相乘，缺一不可！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="g17" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#ddd6fe;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <polygon points="55,12 96,28 96,70 55,88 14,70 14,28" fill="url(#g17)" stroke="#7c3aed" stroke-width="8" stroke-linejoin="round"/>
+      <line x1="55" y1="12" x2="55" y2="48" stroke="#8b5cf6" stroke-width="6"/>
+      <line x1="55" y1="48" x2="96" y2="28" stroke="#8b5cf6" stroke-width="6"/>
+      <line x1="55" y1="48" x2="14" y2="28" stroke="#8b5cf6" stroke-width="6"/>
+      <line x1="55" y1="48" x2="55" y2="88" stroke="#8b5cf6" stroke-width="6"/>
+      <text x="57" y="54" font-size="9" fill="#8b5cf6" font-weight="bold" font-family="sans-serif">h</text>
+      <text x="74" y="24" font-size="9" fill="#8b5cf6" font-weight="bold" font-family="sans-serif">l</text>
+      <text x="4" y="52" font-size="9" fill="#8b5cf6" font-weight="bold" font-family="sans-serif">w</text>
+    </svg>` },
 
-  { id:18, cat:"vol", name:"圓錐體",         en:"Cone",            ask:"求 體積？", tag:"體積",
-    fcn:"V = ⅓ × π × 半徑² × 高", latex:"V = \\frac{1}{3}\\pi r^2 h",
-    svg:`<svg viewBox="0 0 100 100"><ellipse cx="50" cy="80" rx="36" ry="12" fill="#d1fae5" stroke="#16A34A" stroke-width="8"/><line x1="50" y1="12" x2="14" y2="80" stroke="#16A34A" stroke-width="8"/><line x1="50" y1="12" x2="86" y2="80" stroke="#16A34A" stroke-width="8"/><line x1="50" y1="12" x2="50" y2="80" stroke="#16A34A" stroke-width="4" stroke-dasharray="5,4"/><text x="54" y="50" font-size="9" fill="#16A34A" font-family="sans-serif" font-weight="bold">h</text><text x="56" y="8" font-size="9" fill="#16A34A" font-family="sans-serif" font-weight="bold">r</text></svg>` },
+  { id:18, cat:"vol", name:"圓錐體",         en:"Cone",            ask:"求體積",   tag:"體積",
+    num:"G-18", difficulty:2, special:false,
+    fcn:"體積 = ⅓ × π × 半徑² × 高", latex:"V = \\frac{1}{3}\\pi r^2 h",
+    tip:"三分一底面積，別忘記除以3！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="g18" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#bbf7d0;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#16a34a;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <ellipse cx="55" cy="84" rx="38" ry="13" fill="url(#g18)" stroke="#16a34a" stroke-width="8"/>
+      <line x1="55" y1="14" x2="17" y2="84" stroke="#22c55e" stroke-width="8" stroke-linecap="round"/>
+      <line x1="55" y1="14" x2="93" y2="84" stroke="#22c55e" stroke-width="8" stroke-linecap="round"/>
+      <line x1="55" y1="14" x2="55" y2="84" stroke="#22c55e" stroke-width="4" stroke-dasharray="5,4"/>
+      <text x="57" y="52" font-size="10" fill="#22c55e" font-weight="bold" font-family="sans-serif">h</text>
+      <text x="58" y="10" font-size="10" fill="#22c55e" font-weight="bold" font-family="sans-serif">r</text>
+    </svg>` },
 
-  { id:19, cat:"vol", name:"球體",           en:"Sphere",          ask:"求 體積？", tag:"體積",
-    fcn:"V = ⅔ × π × 半徑³", latex:"V = \\frac{4}{3}\\pi r^3",
-    svg:`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="#fce7f3" stroke="#E11D48" stroke-width="8"/><ellipse cx="50" cy="50" rx="42" ry="12" fill="none" stroke="#E11D48" stroke-width="4" stroke-dasharray="5,4"/><line x1="50" y1="8" x2="50" y2="92" stroke="#E11D48" stroke-width="3" stroke-dasharray="5,4"/><text x="62" y="46" font-size="10" fill="#E11D48" font-family="sans-serif" font-weight="bold">r</text></svg>` },
+  { id:19, cat:"vol", name:"球體",           en:"Sphere",          ask:"求體積",   tag:"體積",
+    num:"G-19", difficulty:2, special:false,
+    fcn:"體積 = ⅘ × π × 半徑³", latex:"V = \\frac{4}{3}\\pi r^3",
+    tip:"球形最完美，所有方向半徑相同！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <radialGradient id="g19" cx="35%" cy="35%">
+          <stop offset="0%" style="stop-color:#fbcfe8;stop-opacity:0.4"/>
+          <stop offset="100%" style="stop-color:#e11d48;stop-opacity:0.15"/>
+        </radialGradient>
+      </defs>
+      <circle cx="55" cy="55" r="45" fill="url(#g19)" stroke="#e11d48" stroke-width="8"/>
+      <ellipse cx="55" cy="55" rx="45" ry="12" fill="none" stroke="#fb7185" stroke-width="3" stroke-dasharray="5,4"/>
+      <line x1="55" y1="10" x2="55" y2="100" stroke="#fb7185" stroke-width="3" stroke-dasharray="5,4"/>
+      <text x="64" y="48" font-size="13" fill="#fb7185" font-weight="bold" font-family="sans-serif">r</text>
+    </svg>` },
 
-  { id:20, cat:"vol", name:"三角柱體",        en:"Tri. Prism",      ask:"求 體積？", tag:"體積",
-    fcn:"V = ½ × 底 × 高 × 柱高", latex:"V = \\frac{1}{2}bh \\times H",
-    svg:`<svg viewBox="0 0 100 100"><polygon points="20,30 80,30 50,80" fill="#cffafe" stroke="#06B6D4" stroke-width="7"/><line x1="20" y1="30" x2="20" y2="76" stroke="#06B6D4" stroke-width="7"/><line x1="80" y1="30" x2="80" y2="76" stroke="#06B6D4" stroke-width="7"/><line x1="50" y1="80" x2="50" y2="88" stroke="#06B6D4" stroke-width="7"/><polygon points="20,76 80,76 50,88" fill="#a5f3fc" stroke="#06B6D4" stroke-width="7"/><text x="42" y="58" font-size="8" fill="#06B6D4" font-family="sans-serif" font-weight="bold">h</text><text x="10" y="24" font-size="8" fill="#06B6D4" font-family="sans-serif" font-weight="bold">b</text><text x="56" y="70" font-size="8" fill="#06B6D4" font-family="sans-serif" font-weight="bold">H</text></svg>` },
+  { id:20, cat:"vol", name:"三角柱體",        en:"Triangular Prism", ask:"求體積", tag:"體積",
+    num:"G-20", difficulty:2, special:false,
+    fcn:"體積 = ½ × 底 × 高 × 柱高", latex:"V = \\frac{1}{2}bh \\times H",
+    tip:"三角底面積 × 柱高 = 整體積！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="g20" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#a5f3fc;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#0891b2;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <polygon points="22,30 88,30 55,80" fill="url(#g20)" stroke="#0891b2" stroke-width="8"/>
+      <line x1="22" y1="30" x2="22" y2="76" stroke="#06b6d4" stroke-width="8"/>
+      <line x1="88" y1="30" x2="88" y2="76" stroke="#06b6d4" stroke-width="8"/>
+      <line x1="55" y1="80" x2="55" y2="90" stroke="#06b6d4" stroke-width="8"/>
+      <polygon points="22,76 88,76 55,90" fill="url(#g20)" stroke="#0891b2" stroke-width="8"/>
+      <text x="44" y="58" font-size="9" fill="#06b6d4" font-weight="bold" font-family="sans-serif">h</text>
+      <text x="10" y="24" font-size="9" fill="#06b6d4" font-weight="bold" font-family="sans-serif">b</text>
+      <text x="57" y="70" font-size="9" fill="#06b6d4" font-weight="bold" font-family="sans-serif">H</text>
+    </svg>` },
 
-  { id:21, cat:"vol", name:"正四面體",        en:"Tetrahedron",     ask:"求 體積？", tag:"體積", special:true,
-    fcn:"V = √2/12 × 邊長³", latex:"V = \\frac{\\sqrt{2}}{12}a^3",
-    svg:`<svg viewBox="0 0 100 100"><polygon points="50,10 90,75 10,75" fill="#d1fae5" stroke="#22C55E" stroke-width="7" stroke-linejoin="round"/><line x1="50" y1="10" x2="50" y2="75" stroke="#22C55E" stroke-width="5" stroke-dasharray="5,4"/><line x1="10" y1="75" x2="50" y2="75" stroke="#22C55E" stroke-width="7"/><line x1="90" y1="75" x2="50" y2="75" stroke="#22C55E" stroke-width="7"/><text x="53" y="46" font-size="9" fill="#22C55E" font-family="sans-serif" font-weight="bold">a</text><text x="53" y="66" font-size="8" fill="#22C55E" font-family="sans-serif" font-weight="bold">/</text><text x="50" y="78" font-size="7" fill="#22C55E" font-family="sans-serif" font-weight="bold">2</text></svg>` },
+  { id:21, cat:"vol", name:"正四面體",        en:"Tetrahedron",     ask:"求體積",   tag:"體積",
+    num:"G-21", difficulty:3, special:true,
+    fcn:"體積 = √2/12 × 邊長³", latex:"V = \\frac{\\sqrt{2}}{12}a^3",
+    tip:"正四面體係最完美嘅三角錐，四面皆正三角形！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="g21" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#bbf7d0;stop-opacity:0.35"/>
+          <stop offset="100%" style="stop-color:#22c55e;stop-opacity:0.15"/>
+        </linearGradient>
+      </defs>
+      <polygon points="55,12 96,80 14,80" fill="url(#g21)" stroke="#22c55e" stroke-width="8" stroke-linejoin="round"/>
+      <line x1="55" y1="12" x2="55" y2="80" stroke="#4ade80" stroke-width="4" stroke-dasharray="5,4"/>
+      <line x1="14" y1="80" x2="96" y2="80" stroke="#22c55e" stroke-width="8"/>
+      <line x1="96" y1="80" x2="55" y2="12" stroke="#4ade80" stroke-width="3" stroke-dasharray="4,3"/>
+      <line x1="14" y1="80" x2="55" y2="12" stroke="#4ade80" stroke-width="3" stroke-dasharray="4,3"/>
+      <text x="57" y="48" font-size="11" fill="#4ade80" font-weight="bold" font-family="sans-serif">a</text>
+    </svg>` },
 
-  { id:22, cat:"vol", name:"四角錐體",        en:"Sq. Pyramid",     ask:"求 體積？", tag:"體積",
-    fcn:"V = ⅓ × 底邊² × 高", latex:"V = \\frac{1}{3}a^2 h",
-    svg:`<svg viewBox="0 0 100 100"><polygon points="50,10 88,38 50,88 12,38" fill="#dbeafe" stroke="#3B82F6" stroke-width="7" stroke-linejoin="round"/><line x1="12" y1="38" x2="88" y2="38" stroke="#3B82F6" stroke-width="5"/><line x1="50" y1="10" x2="50" y2="88" stroke="#3B82F6" stroke-width="4" stroke-dasharray="5,4"/><text x="53" y="52" font-size="9" fill="#3B82F6" font-family="sans-serif" font-weight="bold">h</text><text x="44" y="22" font-size="8" fill="#3B82F6" font-family="sans-serif" font-weight="bold">a</text></svg>` },
+  { id:22, cat:"vol", name:"四角錐體",        en:"Square Pyramid",   ask:"求體積",   tag:"體積",
+    num:"G-22", difficulty:2, special:false,
+    fcn:"體積 = ⅓ × 底邊² × 高", latex:"V = \\frac{1}{3}a^2 h",
+    tip:"正方形底 × 高 ÷ 3，圓錐都係呢個原理！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="g22" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#bfdbfe;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <polygon points="55,12 94,40 55,90 16,40" fill="url(#g22)" stroke="#3b82f6" stroke-width="8" stroke-linejoin="round"/>
+      <line x1="16" y1="40" x2="94" y2="40" stroke="#60a5fa" stroke-width="5"/>
+      <line x1="55" y1="12" x2="55" y2="90" stroke="#60a5fa" stroke-width="4" stroke-dasharray="5,4"/>
+      <text x="57" y="54" font-size="10" fill="#60a5fa" font-weight="bold" font-family="sans-serif">h</text>
+      <text x="44" y="24" font-size="9" fill="#60a5fa" font-weight="bold" font-family="sans-serif">a</text>
+    </svg>` },
 ];
 
 let selected = new Set(CARDS.map(c => c.id));
+let currentTab = 'all';
 
 function renderLatex(el, formula) {
   try {
@@ -450,10 +1067,25 @@ function renderLatex(el, formula) {
   }
 }
 
+function stars(n) {
+  return Array.from({length:3},(_,i) =>
+    `<span class="star${i < n ? ' lit' : ''}"></span>`
+  ).join('');
+}
+
+function catLabel(cat) {
+  return cat === 'area' ? '面積' : cat === 'peri' ? '周界' : '體積';
+}
+function catEmoji(cat) {
+  return cat === 'area' ? '⬡' : cat === 'peri' ? '◯' : '◈';
+}
+
 function renderCards(filter = 'all') {
   const grid = document.getElementById('cardGrid');
   grid.innerHTML = '';
-  CARDS.filter(c => filter === 'all' || c.cat === filter).forEach(card => {
+  const filtered = CARDS.filter(c => filter === 'all' || c.cat === filter);
+
+  filtered.forEach(card => {
     const wrap = document.createElement('div');
     wrap.className = `card-wrap${selected.has(card.id) ? ' selected' : ''}${card.special ? ' special' : ''}`;
     wrap.dataset.cat = card.cat;
@@ -475,28 +1107,48 @@ function renderCards(filter = 'all') {
 
     wrap.innerHTML = `
       <div class="card-selector">${selected.has(card.id) ? '✓' : ''}</div>
-      <span class="cat-badge ${card.cat}">${card.tag}</span>
+      ${card.special ? '<span class="special-star">★</span>' : ''}
       <div class="card-inner">
-        <div class="front-face cface">
-          <div class="shape-icon">${card.svg}</div>
-          <div class="card-name">${card.name}</div>
-          <div class="card-en">${card.en}</div>
-          <div class="card-ask">${card.ask}</div>
-        </div>
-        <div class="back-face cback">
-          <div class="back-tag">${card.name} ${card.tag}</div>
-          <div class="back-cn">${card.fcn}</div>
-          <div class="back-latex-wrap">
-            <span class="back-latex latex-cn" data-latex="${card.latex}"></span>
+        <div class="front-face">
+          <div class="card-topbar">
+            <span class="card-set">GEOMETRY</span>
+            <div class="card-difficulty">${stars(card.difficulty)}</div>
           </div>
-          <div class="deco"></div>
+          <span class="card-cat-badge">${catLabel(card.cat)}</span>
+          <div class="card-icon">${card.svg}</div>
+          <div class="card-name-area">
+            <div class="card-name">${card.name}</div>
+            <div class="card-en">${card.en}</div>
+          </div>
+          <div class="card-bottombar">
+            <span class="card-num">${card.num}</span>
+            <span class="card-ask">${card.ask}</span>
+          </div>
         </div>
-      </div>${card.special ? '<span class="special-badge">★ 特別版</span>' : ''}`;
+        <div class="back-face">
+          <div class="back-header">
+            <span class="back-tag">${card.name} · ${catLabel(card.cat)}</span>
+            <span class="back-formula-num">${card.num}</span>
+          </div>
+          <div class="back-formula">
+            <div class="back-fcn">${card.fcn}</div>
+            <div class="back-divider"></div>
+            <div class="back-latex"><span class="latex-el" data-latex="${card.latex}"></span></div>
+          </div>
+          <div class="back-tip">
+            <div class="back-tip-text">💡 ${card.tip}</div>
+          </div>
+          <div class="back-footer">
+            <span class="back-cat-label">${catEmoji(card.cat)} ${catLabel(card.cat)}</span>
+            <div class="back-deco">${catEmoji(card.cat)}</div>
+          </div>
+        </div>
+      </div>
+      ${card.special ? '<span class="special-tag">★ 特別版</span>' : ''}`;
     grid.appendChild(wrap);
 
-    // Render LaTeX after appending
-    const latexEl = wrap.querySelector('.latex-cn');
-    if (latexEl) renderLatex(latexEl, card.latex);
+    // Render LaTeX on back
+    wrap.querySelectorAll('.latex-el').forEach(el => renderLatex(el, card.latex));
   });
   updateCount();
 }
@@ -509,7 +1161,6 @@ function updateCount() {
   document.getElementById('total-count').textContent = CARDS.length;
 }
 
-let currentTab = 'all';
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.onclick = () => {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -531,51 +1182,51 @@ function printSelected() {
   for (let i = 0; i < cards.length; i += 9) pages.push(cards.slice(i, i + 9));
 
   pages.forEach((pageCards) => {
-    // Front
+    // Front sheet
     const sheet = document.createElement('div');
     sheet.className = 'print-sheet';
     sheet.innerHTML = `<div class="print-grid"></div>`;
     const grid = sheet.querySelector('.print-grid');
     pageCards.forEach((card, i) => {
       grid.innerHTML += `
-        <div class="p-card front p${card.id} pp${i + 1}${card.special ? ' special' : ''}">
-          <span class="p-tag" style="background:${tagColor(card.cat)}">${card.tag}</span>
-          <div class="p-icon-area">${card.svg}</div>
-          <div class="p-cn">${card.name}</div>
-          <div class="p-en">${card.en}</div>
-          <div class="p-ask">${card.ask}</div>
+        <div class="p-card front pp${i+1}${card.special ? ' special' : ''}" style="background:#111827;">
+          <div class="p-topbar">
+            <span class="p-set">GEOMETRY</span>
+            <div class="p-stars">${stars(card.difficulty)}</div>
+          </div>
+          <div style="text-align:right;"><span class="p-cat-badge" style="display:inline-block;background:${card.cat==='area'?'#3b82f6':card.cat==='peri'?'#f59e0b':'#10b981'};padding:1mm 2mm;border-radius:2mm;font-size:2.5mm;font-weight:bold;color:${card.cat==='peri'?'#0a0e1a':'#fff'};letter-spacing:0.5mm;">${catLabel(card.cat)}</span></div>
+          <div class="p-icon">${card.svg}</div>
+          <div class="p-name">${card.name}</div>
+          <div class="p-en" style="font-size:3mm;color:#64748b;text-align:center;font-style:italic;">${card.en}</div>
+          <div class="p-bottombar">
+            <span class="p-num">${card.num}</span>
+            <span class="p-ask">${card.ask}</span>
+          </div>
         </div>`;
     });
     printArea.appendChild(sheet);
 
-    // Back
+    // Back sheet
     const sheetB = document.createElement('div');
     sheetB.className = 'print-sheet';
     sheetB.innerHTML = `<div class="print-grid"></div>`;
     const gridB = sheetB.querySelector('.print-grid');
     pageCards.forEach((card, i) => {
+      const catClass = card.cat === 'area' ? 'pb-area' : card.cat === 'peri' ? 'pb-peri' : 'pb-vol';
       gridB.innerHTML += `
-        <div class="p-card back p${card.id} pp${i + 1}">
-          <span class="p-tag" style="background:${tagColor(card.cat)}">${card.tag}</span>
-          <div class="p-fcenter">
-            <div class="p-ftag">${card.name} ${card.tag}</div>
-            <div class="p-fcn">${card.fcn}</div>
-            <div class="p-fen latex-print">${card.latex}</div>
-          </div>
-          <div class="p-deco"></div>
+        <div class="p-card back pp${i+1} ${catClass}" style="border-radius:6mm;padding:3mm;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2mm;">
+          <div class="p-btag" style="font-size:2.5mm;color:rgba(255,255,255,0.6);font-weight:700;letter-spacing:0.5mm;">${card.name} · ${catLabel(card.cat)}</div>
+          <div class="p-bfcn" style="font-size:5.5mm;font-weight:800;color:#fff;text-align:center;line-height:1.8;letter-spacing:0.3mm;text-shadow:0 1mm 2mm rgba(0,0,0,0.3);">${card.fcn}</div>
+          <div class="p-blatex" style="font-size:3.5mm;color:#fff;text-align:center;margin-top:2mm;">\\[${card.latex}\\]</div>
+          <div class="p-btip" style="font-size:2.8mm;color:rgba(255,255,255,0.6);text-align:center;font-style:italic;margin-top:3mm;line-height:1.6;">💡 ${card.tip}</div>
         </div>`;
     });
     printArea.appendChild(sheetB);
   });
 
-  document.querySelector('.print-sheets').style.display = 'block';
-  document.querySelector('.print-sheets').classList.add('show');
-  setTimeout(() => window.print(), 300);
-  setTimeout(() => { printArea.innerHTML = ''; printArea.classList.remove('show'); }, 600);
-}
-
-function tagColor(cat) {
-  return cat === 'area' ? '#3B82F6' : cat === 'peri' ? '#F59E0B' : '#10B981';
+  printArea.classList.add('show');
+  setTimeout(() => window.print(), 400);
+  setTimeout(() => { printArea.innerHTML = ''; printArea.classList.remove('show'); }, 800);
 }
 
 renderCards();
