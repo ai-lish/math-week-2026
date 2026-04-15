@@ -4,12 +4,6 @@
 <meta charset="UTF-8">
 <title>數學公式卡牌 — 面積、體積、周界</title>
 <style>
-/* ════════════════════════════════════
-   頁面尺寸：A4 210×297mm
-   可用區域（mm）：左右 6mm 邊距 → 198mm
-   計算：63×3 + 3×2 = 195mm
-   左側起始：(198-195)/2 = 1.5mm
-════════════════════════════════════ */
 @page {
   size: A4;
   margin: 0;
@@ -18,270 +12,210 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --blue:   #3B82F6; --orange: #F59E0B; --purple: #8B5CF6;
-  --green:  #10B981; --teal:   #14B8A6; --navy:   #1E40AF;
-  --red:    #EF4444; --gold:   #D97706; --brown:  #92400E;
-  --w: 63mm; --h: 88mm; --r: 6mm;
-  --gap-x: 3mm; --gap-y: 3mm;
-  /* 定位基準：3列×3行，精確計算 */
-  --page-l: 6mm;   /* 左邊距 */
-  --page-t: 6mm;   /* 上邊距 */
+  --blue:#3B82F6; --orange:#F59E0B; --purple:#8B5CF6;
+  --green:#10B981; --teal:#14B8A6; --navy:#1E40AF;
+  --red:#EF4444; --gold:#D97706; --brown:#92400E;
+  --w:63mm; --h:88mm; --r:6mm;
+  /* 9宮格定位：左6mm，上6mm，卡距3mm */
   /* 列1 left=6mm, 列2=72mm, 列3=138mm */
   /* 行1 top=6mm,  行2=97mm,  行3=188mm */
 }
 
 body {
-  font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",Arial,sans-serif;
-  background: #1e293b;
-  color: #1e293b;
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",Arial,sans-serif;
+  background:#1e293b; color:#1e293b;
 }
 
 /* ════════════════════════════════════
-   頁面框架
+   頁面
 ════════════════════════════════════ */
 .page {
-  width: 210mm;
-  height: 297mm;
-  position: relative;
-  background: #fff;
-  overflow: hidden;
-  page-break-after: always;
+  width:210mm; height:297mm;
+  position:relative; background:#fff;
+  overflow:hidden;
+  page-break-after:always;
 }
-.page:last-child { page-break-after: avoid; }
+.page:last-child { page-break-after:avoid; }
 
-/* 切割線輔助（列印時可見） */
-.page::before {
-  content: "";
-  position: absolute;
-  inset: 6mm;
-  border: 0.15mm dashed #e2e8f0;
-  pointer-events: none;
-  z-index: 0;
+/* 切割邊框 */
+.page {
+  border: 0.3mm dashed #e2e8f0;
 }
-
-/* 十字對位線 */
-.cross {
-  position: absolute;
-  background: #f97316;
-  opacity: 0.5;
-  z-index: 100;
-}
-/* 垂直線 */
-.cross.v { width: 0.3mm; height: 100%; top: 0; }
-.cross.v.v1 { left: calc(6mm + 63mm/2); }
-.cross.v.v2 { left: calc(6mm + 63mm + 3mm + 63mm/2); }
-.cross.v.v3 { left: calc(6mm + 63mm*2 + 6mm + 63mm/2); }
-/* 水平線 */
-.cross.h { height: 0.3mm; width: 100%; left: 0; }
-.cross.h.h1 { top: calc(6mm + 88mm/2); }
-.cross.h.h2 { top: calc(6mm + 88mm + 3mm + 88mm/2); }
-.cross.h.h3 { top: calc(6mm + 88mm*2 + 6mm + 88mm/2); }
-
-/* 邊角切割標記 */
-.crop-mark {
-  position: absolute;
-  width: 8mm; height: 8mm;
-  z-index: 100;
-}
-.crop-mark::before, .crop-mark::after {
-  content: "";
-  position: absolute;
-  background: #f97316;
-  opacity: 0.6;
-}
-.crop-mark.tl { top: 5mm; left: 5mm; }
-.crop-mark.tl::before { width: 8mm; height: 0.4mm; top: 0; left: 0; }
-.crop-mark.tl::after  { width: 0.4mm; height: 8mm; top: 0; left: 0; }
-.crop-mark.tr { top: 5mm; right: 5mm; }
-.crop-mark.tr::before { width: 8mm; height: 0.4mm; top: 0; right: 0; }
-.crop-mark.tr::after  { width: 0.4mm; height: 8mm; top: 0; right: 0; }
-.crop-mark.bl { bottom: 5mm; left: 5mm; }
-.crop-mark.bl::before { width: 8mm; height: 0.4mm; bottom: 0; left: 0; }
-.crop-mark.bl::after  { width: 0.4mm; height: 8mm; bottom: 0; left: 0; }
-.crop-mark.br { bottom: 5mm; right: 5mm; }
-.crop-mark.br::before { width: 8mm; height: 0.4mm; bottom: 0; right: 0; }
-.crop-mark.br::after  { width: 0.4mm; height: 8mm; bottom: 0; right: 0; }
 
 /* ════════════════════════════════════
-   卡片公用
+   卡片
 ════════════════════════════════════ */
 .card {
-  width: var(--w);
-  height: var(--h);
-  border-radius: var(--r);
-  padding: 3mm;
-  position: absolute;
-  overflow: hidden;
-  box-shadow: 0 1.5px 6px rgba(0,0,0,0.12), 0 0.5px 2px rgba(0,0,0,0.08);
-  z-index: 1;
+  width:var(--w); height:var(--h);
+  border-radius:var(--r);
+  padding:3mm;
+  position:absolute;
+  overflow:hidden;
+  box-shadow:0 1px 4px rgba(0,0,0,0.1);
 }
 
 /* 光澤 */
 .card::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 40%;
-  background: linear-gradient(180deg, rgba(255,255,255,0.25) 0%, transparent 100%);
-  border-radius: var(--r) var(--r) 0 0;
-  pointer-events: none;
+  content:"";
+  position:absolute; top:0; left:0; right:0;
+  height:40%;
+  background:linear-gradient(180deg,rgba(255,255,255,0.22) 0%,transparent 100%);
+  border-radius:var(--r) var(--r) 0 0;
+  pointer-events:none;
+  z-index:1;
 }
 
 /* ════════════════════════════════════
-   正面公用
+   正面
 ════════════════════════════════════ */
 .card.front {
-  background: #fff;
-  border: 0.25mm solid rgba(0,0,0,0.1);
-  display: flex; flex-direction: column;
+  background:#fff;
+  border:0.25mm solid rgba(0,0,0,0.1);
+  display:flex; flex-direction:column;
 }
 
 .tag {
-  position: absolute; top: 2mm; right: 2mm;
-  font-size: 2.8mm; font-weight: 700;
-  padding: 0.7mm 2mm;
-  border-radius: 2.5mm;
-  color: #fff;
-  letter-spacing: 0.4mm;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.18);
+  position:absolute; top:2mm; right:2mm;
+  font-size:2.8mm; font-weight:700;
+  padding:0.7mm 2mm; border-radius:2.5mm;
+  color:#fff; letter-spacing:0.4mm;
+  box-shadow:0 1px 3px rgba(0,0,0,0.18);
+  z-index:2;
 }
 
 .icon-area {
-  flex: 1;
-  display: flex; align-items: center; justify-content: center;
-  margin-top: 3mm;
+  flex:1; display:flex; align-items:center; justify-content:center;
+  margin-top:3mm;
 }
-
-.icon-area svg { width: 34mm; height: 34mm; }
+.icon-area svg { width:34mm; height:34mm; }
 
 .cn-name {
-  font-size: 6.5mm; font-weight: 700;
-  text-align: center; line-height: 1.35;
-  color: #1e293b; letter-spacing: 0.3mm;
+  font-size:6.5mm; font-weight:700;
+  text-align:center; line-height:1.35;
+  color:#1e293b; letter-spacing:0.3mm;
 }
-
 .en-name {
-  font-size: 3.3mm; text-align: center;
-  color: #94a3b8; font-weight: 500; margin-top: 0.5mm;
+  font-size:3.3mm; text-align:center;
+  color:#94a3b8; font-weight:500; margin-top:0.5mm;
 }
-
 .ask {
-  font-size: 3.8mm; color: #cbd5e1; text-align: center;
-  border-top: 0.4mm dashed #e2e8f0;
-  padding-top: 1.5mm; margin-top: 1mm;
+  font-size:3.8mm; color:#cbd5e1; text-align:center;
+  border-top:0.4mm dashed #e2e8f0;
+  padding-top:1.5mm; margin-top:1mm;
 }
 
 /* ════════════════════════════════════
-   背面公用
+   背面
 ════════════════════════════════════ */
 .card.back {
-  background: #f8f9fc;
-  border: 0.25mm solid rgba(0,0,0,0.08);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
+  background:#f8f9fc;
+  border:0.25mm solid rgba(0,0,0,0.08);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
 }
-
-.card.back .tag { top: 2mm; right: 2mm; }
+.card.back .tag { top:2mm; right:2mm; z-index:2; }
 
 .formula-center {
-  text-align: center; width: 100%;
-  padding: 1mm;
+  text-align:center; width:100%; padding:1mm;
 }
-
 .formula-tag {
-  font-size: 3mm; color: rgba(255,255,255,0.7);
-  margin-bottom: 1.5mm; font-weight: 500; letter-spacing: 0.3mm;
+  font-size:3mm; color:rgba(255,255,255,0.7);
+  margin-bottom:1.5mm; font-weight:500; letter-spacing:0.3mm;
 }
-
 .formula-cn {
-  font-size: 6.2mm; font-weight: 700;
-  color: #fff; line-height: 1.8; letter-spacing: 0.3mm;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  font-size:6.2mm; font-weight:700;
+  color:#fff; line-height:1.8; letter-spacing:0.3mm;
+  text-shadow:0 1px 3px rgba(0,0,0,0.12);
 }
-
 .formula-en {
-  font-size: 3.8mm; color: rgba(255,255,255,0.82);
-  margin-top: 2mm; font-style: italic; letter-spacing: 0.2mm;
+  font-size:3.8mm; color:rgba(255,255,255,0.82);
+  margin-top:2mm; font-style:italic; letter-spacing:0.2mm;
 }
-
 .deco-ring {
-  position: absolute;
-  bottom: -10mm; right: -10mm;
-  width: 28mm; height: 28mm;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.06);
+  position:absolute;
+  bottom:-10mm; right:-10mm;
+  width:28mm; height:28mm; border-radius:50%;
+  background:rgba(255,255,255,0.06);
 }
 
 /* ════════════════════════════════════
-   9張卡位置（絕對定位，兩面相同座標）
-   列1: left=6mm, 列2: left=72mm, 列3: left=138mm
-   行1: top=6mm,  行2: top=97mm,  行3: top=188mm
+   9個位置（列1=6mm,列2=72mm,列3=138mm / 行1=6mm,行2=97mm,行3=188mm）
 ════════════════════════════════════ */
+.p1{left:6mm;   top:6mm;}
+.p2{left:72mm;  top:6mm;}
+.p3{left:138mm; top:6mm;}
+.p4{left:6mm;   top:97mm;}
+.p5{left:72mm;  top:97mm;}
+.p6{left:138mm; top:97mm;}
+.p7{left:6mm;   top:188mm;}
+.p8{left:72mm;  top:188mm;}
+.p9{left:138mm; top:188mm;}
 
-/* 位置class */
-.p1 { left: 6mm;   top: 6mm; }
-.p2 { left: 72mm;  top: 6mm; }
-.p3 { left: 138mm; top: 6mm; }
-.p4 { left: 6mm;   top: 97mm; }
-.p5 { left: 72mm;  top: 97mm; }
-.p6 { left: 138mm; top: 97mm; }
-.p7 { left: 6mm;   top: 188mm; }
-.p8 { left: 72mm;  top: 188mm; }
-.p9 { left: 138mm; top: 188mm; }
+/* ════════════════════════════════════
+   顏色
+════════════════════════════════════ */
+.c01.front{background:linear-gradient(145deg,#eff6ff,#dbeafe); border-color:#bfdbfe;}
+.c01.back{background:linear-gradient(145deg,#1e40af,#1d4ed8,#2563eb);}
+.c01 svg,.c01 svg-bg{fill:var(--blue);}
+.c01 .tag{background:var(--blue);}
 
-/* 顏色 */
-.c01.front { background: linear-gradient(145deg,#eff6ff,#dbeafe); border-color: #bfdbfe; }
-.c01.back  { background: linear-gradient(145deg,#1e40af,#1d4ed8,#2563eb); }
-.c01 svg, .c01 svg-bg { fill: var(--blue); }
-.c01 .tag  { background: var(--blue); }
+.c02.front{background:linear-gradient(145deg,#fffbeb,#fef3c7); border-color:#fde68a;}
+.c02.back{background:linear-gradient(145deg,#92400e,#b45309,#d97706);}
+.c02 svg,.c02 svg-bg{fill:var(--orange);}
+.c02 .tag{background:var(--orange);}
 
-.c02.front { background: linear-gradient(145deg,#fffbeb,#fef3c7); border-color: #fde68a; }
-.c02.back  { background: linear-gradient(145deg,#92400e,#b45309,#d97706); }
-.c02 svg, .c02 svg-bg { fill: var(--orange); }
-.c02 .tag  { background: var(--orange); }
+.c03.front{background:linear-gradient(145deg,#f5f3ff,#ede9fe); border-color:#ddd6fe;}
+.c03.back{background:linear-gradient(145deg,#5b21b6,#6d28d9,#7c3aed);}
+.c03 svg,.c03 svg-bg{fill:var(--purple);}
+.c03 .tag{background:var(--purple);}
 
-.c03.front { background: linear-gradient(145deg,#f5f3ff,#ede9fe); border-color: #ddd6fe; }
-.c03.back  { background: linear-gradient(145deg,#5b21b6,#6d28d9,#7c3aed); }
-.c03 svg, .c03 svg-bg { fill: var(--purple); }
-.c03 .tag  { background: var(--purple); }
+.c04.front{background:linear-gradient(145deg,#ecfdf5,#d1fae5); border-color:#a7f3d0;}
+.c04.back{background:linear-gradient(145deg,#065f46,#047857,#059669);}
+.c04 svg,.c04 svg-bg{fill:var(--green);}
+.c04 .tag{background:var(--green);}
 
-.c04.front { background: linear-gradient(145deg,#ecfdf5,#d1fae5); border-color: #a7f3d0; }
-.c04.back  { background: linear-gradient(145deg,#065f46,#047857,#059669); }
-.c04 svg, .c04 svg-bg { fill: var(--green); }
-.c04 .tag  { background: var(--green); }
+.c05.front{background:linear-gradient(145deg,#f0fdfa,#ccfbf1); border-color:#99f6e4;}
+.c05.back{background:linear-gradient(145deg,#0f766e,#0d9488,#14b8a6);}
+.c05 svg,.c05 svg-bg{fill:var(--teal);}
+.c05 .tag{background:var(--teal);}
 
-.c05.front { background: linear-gradient(145deg,#f0fdfa,#ccfbf1); border-color: #99f6e4; }
-.c05.back  { background: linear-gradient(145deg,#0f766e,#0d9488,#14b8a6); }
-.c05 svg, .c05 svg-bg { fill: var(--teal); }
-.c05 .tag  { background: var(--teal); }
+.c06.front{background:linear-gradient(145deg,#eff6ff,#dbeafe); border-color:#bfdbfe;}
+.c06.back{background:linear-gradient(145deg,#1e3a8a,#1e40af,#2563eb);}
+.c06 svg,.c06 svg-bg{fill:var(--navy);}
+.c06 .tag{background:var(--navy);}
 
-.c06.front { background: linear-gradient(145deg,#eff6ff,#dbeafe); border-color: #bfdbfe; }
-.c06.back  { background: linear-gradient(145deg,#1e3a8a,#1e40af,#2563eb); }
-.c06 svg, .c06 svg-bg { fill: var(--navy); }
-.c06 .tag  { background: var(--navy); }
+.c07.front{background:linear-gradient(145deg,#fef2f2,#fee2e2); border-color:#fecaca;}
+.c07.back{background:linear-gradient(145deg,#991b1b,#b91c1c,#dc2626);}
+.c07 svg,.c07 svg-bg{fill:var(--red);}
+.c07 .tag{background:var(--red);}
 
-.c07.front { background: linear-gradient(145deg,#fef2f2,#fee2e2); border-color: #fecaca; }
-.c07.back  { background: linear-gradient(145deg,#991b1b,#b91c1c,#dc2626); }
-.c07 svg, .c07 svg-bg { fill: var(--red); }
-.c07 .tag  { background: var(--red); }
+.c08.front{background:linear-gradient(145deg,#fffbeb,#fef3c7); border-color:#fde68a;}
+.c08.back{background:linear-gradient(145deg,#78350f,#92400e,#b45309);}
+.c08 svg,.c08 svg-bg{fill:var(--gold);}
+.c08 .tag{background:var(--gold);}
 
-.c08.front { background: linear-gradient(145deg,#fffbeb,#fef3c7); border-color: #fde68a; }
-.c08.back  { background: linear-gradient(145deg,#78350f,#92400e,#b45309); }
-.c08 svg, .c08 svg-bg { fill: var(--gold); }
-.c08 .tag  { background: var(--gold); }
+.c09.front{background:linear-gradient(145deg,#fefce8,#fef9c3); border-color:#fef08a;}
+.c09.back{background:linear-gradient(145deg,#451a03,#78350f,#92400e);}
+.c09 svg,.c09 svg-bg{fill:var(--brown);}
+.c09 .tag{background:var(--brown);}
 
-.c09.front { background: linear-gradient(145deg,#fefce8,#fef9c3); border-color: #fef08a; }
-.c09.back  { background: linear-gradient(145deg,#451a03,#78350f,#92400e); }
-.c09 svg, .c09 svg-bg { fill: var(--brown); }
-.c09 .tag  { background: var(--brown); }
-
-/* 螢幕預覽增強 */
+/* ════════════════════════════════════
+   螢幕預覽
+════════════════════════════════════ */
 @media screen {
-  body { background: #1e293b; padding: 8mm; }
-  .page {
-    margin: 0 auto 8mm auto;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-    border-radius: 3mm;
+  body{padding:8mm;background:#1e293b;}
+  .page{
+    margin:0 auto 8mm auto;
+    box-shadow:0 12px 40px rgba(0,0,0,0.5);
+    border-radius:3mm;
+    border:none;
+  }
+  /* 螢幕時顯示頁碼方便確認 */
+  .page::after{
+    content:attr(data-page);
+    position:absolute; bottom:2mm; left:50%; transform:translateX(-50%);
+    font-size:4mm; color:#94a3b8; font-weight:600;
+    letter-spacing:1mm;
   }
 }
 </style>
@@ -291,19 +225,7 @@ body {
 <!-- ═══════════════════════════════════════
      PAGE 1 — 正面（問題面）
 ═══════════════════════════════════════ -->
-<div class="page">
-  <!-- 切割標記 -->
-  <div class="crop-mark tl"></div>
-  <div class="crop-mark tr"></div>
-  <div class="crop-mark bl"></div>
-  <div class="crop-mark br"></div>
-  <!-- 十字對位線 -->
-  <div class="cross v v1"></div>
-  <div class="cross v v2"></div>
-  <div class="cross v v3"></div>
-  <div class="cross h h1"></div>
-  <div class="cross h h2"></div>
-  <div class="cross h h3"></div>
+<div class="page" data-page="◀ 正面 ▶">
 
   <!-- ① 長方形面積 -->
   <div class="card front c01 p1">
@@ -467,20 +389,9 @@ body {
 
 <!-- ═══════════════════════════════════════
      PAGE 2 — 背面（答案面）
+     長邊翻頁：水平鏡像，確保打印後正背對齊
 ═══════════════════════════════════════ -->
-<div class="page">
-  <!-- 切割標記 -->
-  <div class="crop-mark tl"></div>
-  <div class="crop-mark tr"></div>
-  <div class="crop-mark bl"></div>
-  <div class="crop-mark br"></div>
-  <!-- 十字對位線 -->
-  <div class="cross v v1"></div>
-  <div class="cross v v2"></div>
-  <div class="cross v v3"></div>
-  <div class="cross h h1"></div>
-  <div class="cross h h2"></div>
-  <div class="cross h h3"></div>
+<div class="page back-page" data-page="◀ 背面 ▶">
 
   <!-- ① 長方形面積 -->
   <div class="card back c01 p1">
@@ -582,6 +493,23 @@ body {
   </div>
 
 </div>
+
+<style>
+/* ════════════════════════════════════
+   長邊翻頁鏡像：Page 2 水平翻轉
+   這樣打印後翻紙，圖像正背會對齊
+════════════════════════════════════ */
+@media print {
+  /* 列印時：Page 2（背面）水平翻轉 */
+  .back-page {
+    transform: scaleX(-1) !important;
+    -webkit-transform: scaleX(-1) !important;
+  }
+  /* 確保 page-break 正確 */
+  .page { page-break-after: always; }
+  .page:last-child { page-break-after: avoid; }
+}
+</style>
 
 </body>
 </html>
