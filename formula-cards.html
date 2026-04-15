@@ -138,6 +138,8 @@ body {
   transform-style:preserve-3d;
   transition:transform 0.45s cubic-bezier(0.4,0.2,0.2,1);
   border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
 }
 .card-wrap.flipped .card-inner { transform:rotateY(180deg); }
 
@@ -185,13 +187,7 @@ body {
 .cat-badge.peri { background:#F59E0B; color:#1e293b; }
 .cat-badge.vol { background:#10B981; }
 
-/* Card inner */
-.card-inner {
-  width:180px; height:252px;
-  border-radius:12px; overflow:hidden;
-  transition:box-shadow 0.2s;
-  background:#fff;
-}
+/* Card inner（已包含在上面 .card-inner 規則）*/
 
 /* Front face */
 .cface {
@@ -222,8 +218,8 @@ body {
 .cback .back-en  { font-size:11px; color:rgba(255,255,255,0.85); margin-top:8px; font-style:italic; }
 .cback .deco { position:absolute; bottom:-20px; right:-20px; width:60px; height:60px; border-radius:50%; background:rgba(255,255,255,0.06); }
 
-/* Hover flip */
-.card-wrap:hover .card-inner { transform:scale(1.02); }
+/* Hover flip（只在未翻轉時） */
+.card-wrap:not(.flipped):hover .card-inner { transform:scale(1.03); box-shadow:0 8px 24px rgba(0,0,0,0.3); }
 
 /* ════════════════════════════════════
    PRINT LAYOUT（列印時：3×3緊密排列）
