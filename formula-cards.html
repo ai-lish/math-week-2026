@@ -389,9 +389,9 @@ body {
 
 <!-- ═══════════════════════════════════════
      PAGE 2 — 背面（答案面）
-     長邊翻頁：水平鏡像，確保打印後正背對齊
+     座標與 Page 1 完全相同（短邊翻頁正背自然對齊）
 ═══════════════════════════════════════ -->
-<div class="page back-page" data-page="◀ 背面 ▶">
+<div class="page" data-page="◀ 背面 ▶">
 
   <!-- ① 長方形面積 -->
   <div class="card back c01 p1">
@@ -493,23 +493,6 @@ body {
   </div>
 
 </div>
-
-<style>
-/* ════════════════════════════════════
-   長邊翻頁鏡像：Page 2 水平翻轉
-   這樣打印後翻紙，圖像正背會對齊
-════════════════════════════════════ */
-@media print {
-  /* 列印時：Page 2（背面）水平翻轉 */
-  .back-page {
-    transform: scaleX(-1) !important;
-    -webkit-transform: scaleX(-1) !important;
-  }
-  /* 確保 page-break 正確 */
-  .page { page-break-after: always; }
-  .page:last-child { page-break-after: avoid; }
-}
-</style>
 
 </body>
 </html>
