@@ -121,26 +121,56 @@ body {
   padding: 10px 12px;
 }
 
-/* ── Card Wrapper ── */
+/* Card wrapper */
 .card-wrap {
   position: relative;
-  width: 180px;
+  width: 180px; height:252px;
   cursor:pointer;
+  perspective: 800px;
 }
-.card-wrap:hover .card-inner { box-shadow:0 8px 24px rgba(0,0,0,0.4); }
 .card-wrap.selected .card-inner { outline:3px solid #60a5fa; outline-offset:2px; }
 .card-wrap.hidden { display:none; }
 
+/* 3D flip */
+.card-inner {
+  width:100%; height:100%;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:transform 0.45s cubic-bezier(0.4,0.2,0.2,1);
+  border-radius:12px;
+}
+.card-wrap.flipped .card-inner { transform:rotateY(180deg); }
+
+/* Front face */
+.card-inner .front-face {
+  position:absolute; inset:0;
+  backface-visibility:hidden;
+  border-radius:12px;
+  overflow:hidden;
+}
+/* Back face */
+.card-inner .back-face {
+  position:absolute; inset:0;
+  backface-visibility:hidden;
+  border-radius:12px;
+  overflow:hidden;
+  transform:rotateY(180deg);
+}
+
+/* Hover shadow */
+.card-wrap:not(.flipped):hover .card-inner { box-shadow:0 8px 24px rgba(0,0,0,0.35); }
+
 /* Card selector */
 .card-selector {
-  position:absolute; top:6px; left:6px; z-index:10;
+  position:absolute; top:6px; left:6px; z-index:20;
   width:20px; height:20px;
-  border-radius:50%; border:2px solid #fff;
+  border-radius:50%; border:2px solid rgba(255,255,255,0.7);
   background:#334155;
   display:flex; align-items:center; justify-content:center;
   font-size:12px; color:#fff; font-weight:700;
   box-shadow:0 2px 6px rgba(0,0,0,0.3);
   transition:all 0.2s;
+  pointer-events:none;
 }
 .card-wrap.selected .card-selector { background:#3B82F6; border-color:#3B82F6; }
 
@@ -420,18 +450,27 @@ function renderCards(filter = 'all') {
     wrap.className = `card-wrap${selected.has(card.id) ? ' selected' : ''}`;
     wrap.dataset.cat = card.cat;
     wrap.dataset.id = card.id;
-    wrap.onclick = () => toggleCard(card.id);
+
+    // 點擊翻面（與選擇分開）
+    wrap.addEventListener('click', (e) => {
+      // 如果點的是選擇器，不翻面
+      if (e.target.closest('.card-selector')) return;
+      e.stopPropagation();
+      wrap.classList.toggle('flipped');
+    });
+
+    // 選擇按鈕（右上角鈎）
     wrap.innerHTML = `
-      <div class="card-selector">${selected.has(card.id) ? '✓' : ''}</div>
+      <div class="card-selector" data-sel-id="${card.id}" onclick="toggleCard(${card.id})">${selected.has(card.id) ? '✓' : ''}</div>
       <span class="cat-badge ${card.cat}">${card.tag}</span>
       <div class="card-inner">
-        <div class="cface">
+        <div class="front-face cface">
           <div class="shape-icon">${card.svg}</div>
           <div class="card-name">${card.name}</div>
           <div class="card-en">${card.en}</div>
           <div class="card-ask">${card.ask}</div>
         </div>
-        <div class="cback">
+        <div class="back-face cback">
           <div class="back-tag">${card.name} ${card.tag}</div>
           <div class="back-cn">${card.fcn}</div>
           <div class="back-en">${card.fen}</div>
@@ -446,7 +485,13 @@ function renderCards(filter = 'all') {
 function toggleCard(id) {
   if (selected.has(id)) selected.delete(id);
   else selected.add(id);
-  renderCards(currentTab);
+  // 只更新UI，不重新渲染整個grid（保持flip狀態）
+  const wrap = document.querySelector(`.card-wrap[data-id="${id}"]`);
+  if (wrap) {
+    wrap.classList.toggle('selected', selected.has(id));
+    const sel = wrap.querySelector('.card-selector');
+    if (sel) sel.textContent = selected.has(id) ? '✓' : '';
+  }
   updateCount();
 }
 
