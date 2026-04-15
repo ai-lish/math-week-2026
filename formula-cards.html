@@ -146,23 +146,17 @@ body {
 }
 .card-wrap:not(.flipped):hover .card-inner { box-shadow:0 8px 24px rgba(0,0,0,0.35); }
 
-/* 翻面：scale + opacity 過渡 */
-.card-inner {
-  transition: transform 0.45s cubic-bezier(0.4,0.2,0.2,1), box-shadow 0.2s;
-  transform-origin: center center;
-}
-.card-wrap.flipped .card-inner {
-  transform: scaleX(-1);
-}
-
 /* Both faces */
 .front-face, .back-face {
   position:absolute; inset:0;
   border-radius:12px;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }
-.back-face { transform: scaleX(-1); }
+.back-face { opacity:0; transform: scaleX(-1); }
+
+/* Flip animation */
+.card-wrap.flipped .front-face { opacity:0; transform: scaleX(1); }
+.card-wrap.flipped .back-face  { opacity:1; transform: scaleX(-1); }
 
 /* Card selector */
 .card-selector {
