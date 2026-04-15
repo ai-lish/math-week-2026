@@ -447,17 +447,26 @@ function renderCards(filter = 'all') {
     wrap.dataset.cat = card.cat;
     wrap.dataset.id = card.id;
 
-    // 點擊翻面（與選擇分開）
+    // 點擊：選擇器→選擇；其他地方→翻面
     wrap.addEventListener('click', (e) => {
-      // 如果點的是選擇器，不翻面
-      if (e.target.closest('.card-selector')) return;
-      e.stopPropagation();
-      wrap.classList.toggle('flipped');
+      if (e.target.closest('.card-selector')) {
+        // 點選擇器：切換選擇狀態
+        e.stopPropagation();
+        if (selected.has(card.id)) selected.delete(card.id);
+        else selected.add(card.id);
+        wrap.classList.toggle('selected', selected.has(card.id));
+        const sel = wrap.querySelector('.card-selector');
+        if (sel) sel.textContent = selected.has(card.id) ? '✓' : '';
+        updateCount();
+      } else {
+        // 點卡牌其他位置：翻面
+        wrap.classList.toggle('flipped');
+      }
     });
 
-    // 選擇按鈕（右上角鈎）
+    // 選擇按鈕（左上角鈎）- 點擊不翻面，只切換選擇
     wrap.innerHTML = `
-      <div class="card-selector" data-sel-id="${card.id}" onclick="toggleCard(${card.id})">${selected.has(card.id) ? '✓' : ''}</div>
+      <div class="card-selector" data-sel-id="${card.id}">${selected.has(card.id) ? '✓' : ''}</div>
       <span class="cat-badge ${card.cat}">${card.tag}</span>
       <div class="card-inner">
         <div class="front-face cface">
