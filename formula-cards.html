@@ -142,7 +142,6 @@ body {
   border-radius:12px;
   overflow:hidden;
   box-shadow:0 4px 12px rgba(0,0,0,0.1);
-  transition: box-shadow 0.2s;
 }
 .card-wrap:not(.flipped):hover .card-inner { box-shadow:0 8px 24px rgba(0,0,0,0.35); }
 
@@ -150,13 +149,12 @@ body {
 .front-face, .back-face {
   position:absolute; inset:0;
   border-radius:12px;
-  transition: opacity 0.35s ease, transform 0.35s ease;
 }
-.back-face { opacity:0; transform: scaleX(-1); }
+.back-face { opacity:0; }
 
-/* Flip animation */
-.card-wrap.flipped .front-face { opacity:0; transform: scaleX(1); }
-.card-wrap.flipped .back-face  { opacity:1; transform: scaleX(-1); }
+/* Toggle visibility */
+.card-wrap.flipped .front-face { opacity:0; }
+.card-wrap.flipped .back-face  { opacity:1; }
 
 /* Card selector */
 .card-selector {
