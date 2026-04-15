@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>數學公式卡牌 — 面積、體積、周界</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <style>
 @page { size: A4; margin: 0; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -12,7 +14,7 @@
   --green:#10B981; --teal:#14B8A6; --navy:#1E40AF;
   --red:#EF4444; --gold:#D97706; --brown:#92400E;
   --pink:#EC4899; --cyan:#06B6D4; --lime:#84CC16;
-  --w:63mm; --h:88mm; --r:6mm;
+  --indigo:#6366F1; --rose:#F43F5E;
 }
 
 /* ════════════════════════════════════
@@ -48,7 +50,6 @@ body {
 }
 .ctrl-label { font-size:13px; color:#94a3b8; font-weight:600; }
 
-/* Tabs */
 .tabs { display:flex; gap:4px; }
 .tab-btn {
   padding:7px 16px; border-radius:8px;
@@ -65,7 +66,6 @@ body {
   box-shadow:0 2px 8px rgba(79,70,229,0.4);
 }
 
-/* Select all / none */
 .select-btns { display:flex; gap:6px; }
 .sel-btn {
   padding:7px 12px; border-radius:8px;
@@ -76,23 +76,9 @@ body {
 }
 .sel-btn:hover { border-color:#60a5fa; color:#60a5fa; }
 
-/* Category filter */
-.cat-filter { display:flex; gap:6px; align-items:center; }
-.cat-chip {
-  padding:5px 12px; border-radius:20px;
-  border:1.5px solid; font-size:12px; font-weight:600;
-  cursor:pointer; transition:all 0.2s;
-  background:transparent; font-family:inherit;
-}
-.cat-chip.area   { border-color:#3B82F6; color:#3B82F6; }
-.cat-chip.peri   { border-color:#F59E0B; color:#F59E0B; }
-.cat-chip.vol    { border-color:#10B981; color:#10B981; }
-.cat-chip.active { box-shadow:0 0 0 3px rgba(255,255,255,0.1); }
-.cat-chip.area.active   { background:#3B82F6; color:#fff; }
-.cat-chip.peri.active   { background:#F59E0B; color:#fff; }
-.cat-chip.vol.active    { background:#10B981; color:#fff; }
+.counter { font-size:12px; color:#64748b; margin-left:8px; }
+.counter span { color:#60a5fa; font-weight:700; }
 
-/* Print button */
 .print-btn {
   margin-left:auto;
   padding:9px 24px; border-radius:10px;
@@ -102,11 +88,6 @@ body {
   font-family:inherit; transition:all 0.2s;
 }
 .print-btn:hover { transform:translateY(-1px); box-shadow:0 6px 16px rgba(16,185,129,0.5); }
-.print-btn:active { transform:translateY(0); }
-
-/* Card counter */
-.counter { font-size:12px; color:#64748b; margin-left:8px; }
-.counter span { color:#60a5fa; font-weight:700; }
 
 /* ── Card Grid ── */
 .card-grid {
@@ -115,13 +96,8 @@ body {
   gap: 12px;
   padding: 20px 24px;
 }
-.card-grid.tight {
-  grid-template-columns: repeat(auto-fill, 180px);
-  gap: 10px;
-  padding: 10px 12px;
-}
 
-/* Card wrapper */
+/* ── Card Wrapper ── */
 .card-wrap {
   position: relative;
   width: 180px; height:252px;
@@ -129,6 +105,34 @@ body {
 }
 .card-wrap.selected .card-inner { outline:3px solid #60a5fa; outline-offset:2px; }
 .card-wrap.hidden { display:none; }
+
+/* Special edition card */
+.card-wrap.special .card-inner {
+  border: 2.5px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+}
+.card-wrap.special .card-inner::after {
+  content:"";
+  position:absolute; inset:-2.5px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#fbbf24,#f59e0b,#d97706,#f43f5e,#ec4899,#8b5cf6);
+  z-index:-1;
+  animation: special-glow 3s linear infinite;
+}
+@keyframes special-glow {
+  0%   { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+.card-wrap.special .special-badge {
+  position:absolute; bottom:4px; left:50%; transform:translateX(-50%);
+  z-index:10;
+  font-size:9px; font-weight:700;
+  padding:1px 8px; border-radius:8px;
+  background:linear-gradient(135deg,#fbbf24,#f59e0b);
+  color:#1e293b; letter-spacing:0.5mm;
+  box-shadow:0 1px 4px rgba(0,0,0,0.3);
+}
 
 /* Card inner */
 .card-inner {
@@ -139,11 +143,9 @@ body {
   box-shadow:0 4px 12px rgba(0,0,0,0.1);
   transition:box-shadow 0.2s;
 }
-
-/* Hover shadow */
 .card-wrap:not(.flipped):hover .card-inner { box-shadow:0 8px 24px rgba(0,0,0,0.35); }
 
-/* 翻面：front/back 可見性切換 */
+/* 翻面 */
 .card-inner .front-face {
   position:absolute; inset:0;
   opacity:1;
@@ -176,13 +178,11 @@ body {
   padding:2px 8px; border-radius:10px;
   color:#fff; letter-spacing:0.3mm;
 }
-.cat-badge.area { background:#3B82F6; }
-.cat-badge.peri { background:#F59E0B; color:#1e293b; }
-.cat-badge.vol { background:#10B981; }
+.card-wrap[data-cat="area"]  .cat-badge { background:#3B82F6; }
+.card-wrap[data-cat="peri"]  .cat-badge { background:#F59E0B; color:#1e293b; }
+.card-wrap[data-cat="vol"]   .cat-badge { background:#10B981; }
 
-/* Card inner（已包含在上面 .card-inner 規則）*/
-
-/* Front face */
+/* ── Face Styles ── */
 .cface {
   width:100%; height:100%;
   padding:10px 8px 8px;
@@ -198,7 +198,6 @@ body {
   border-top:1px dashed #e2e8f0; padding-top:6px; margin-top:6px; width:100%;
 }
 
-/* Back face */
 .cback {
   width:100%; height:100%;
   padding:10px 8px;
@@ -207,19 +206,34 @@ body {
   position:relative;
 }
 .cback .back-tag { font-size:10px; color:rgba(255,255,255,0.7); font-weight:600; margin-bottom:6px; letter-spacing:0.3mm; }
-.cback .back-cn  { font-size:16px; font-weight:700; color:#fff; text-align:center; line-height:1.7; letter-spacing:0.2mm; }
-.cback .back-en  { font-size:11px; color:rgba(255,255,255,0.85); margin-top:8px; font-style:italic; }
+.cback .back-cn  { font-size:14px; font-weight:700; color:#fff; text-align:center; line-height:1.7; letter-spacing:0.2mm; }
+.cback .back-en  { font-size:11px; color:rgba(255,255,255,0.85); margin-top:6px; font-style:italic; }
 .cback .deco { position:absolute; bottom:-20px; right:-20px; width:60px; height:60px; border-radius:50%; background:rgba(255,255,255,0.06); }
 
-/* Hover flip（只在未翻轉時） */
-.card-wrap:not(.flipped):hover .card-inner { transform:scale(1.03); box-shadow:0 8px 24px rgba(0,0,0,0.3); }
+/* Back face LaTeX container */
+.cback .katex-wrap { display:flex; flex-direction:column; align-items:center; gap:4px; }
+.cback .katex-wrap .katex { font-size:13px !important; }
+.cback .katex-wrap .katex .tfrac { font-size:1em; }
+
+/* ── Category face backgrounds ── */
+.card-wrap[data-cat="area"]  .cface  { background:linear-gradient(145deg,#eff6ff,#dbeafe); }
+.card-wrap[data-cat="area"]  .cback   { background:linear-gradient(145deg,#1e40af,#1d4ed8,#2563eb); }
+.card-wrap[data-cat="peri"]  .cface  { background:linear-gradient(145deg,#fffbeb,#fef3c7); }
+.card-wrap[data-cat="peri"]  .cback  { background:linear-gradient(145deg,#92400e,#b45309,#d97706); }
+.card-wrap[data-cat="vol"]   .cface   { background:linear-gradient(145deg,#ecfdf5,#d1fae5); }
+.card-wrap[data-cat="vol"]   .cback   { background:linear-gradient(145deg,#065f46,#047857,#059669); }
+
+/* Special edition: gold shimmer on front */
+.card-wrap.special .cface {
+  background:linear-gradient(145deg,#fffbeb,#fef9c3,#fef3c7) !important;
+}
 
 /* ════════════════════════════════════
-   PRINT LAYOUT（列印時：3×3緊密排列）
+   PRINT LAYOUT
 ════════════════════════════════════ */
 @media print {
   body { background:#fff !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-  .header, .controls, .card-grid, .card-wrap { display:none !important; }
+  .header, .controls, .card-grid { display:none !important; }
 
   @page { size:A4; margin:0; }
 
@@ -248,7 +262,6 @@ body {
   .p-card.front { background:#fff; border:0.25mm solid rgba(0,0,0,0.1); display:flex; flex-direction:column; }
   .p-card.back  { background:#f8f9fc; border:0.25mm solid rgba(0,0,0,0.08); display:flex; flex-direction:column; align-items:center; justify-content:center; }
 
-  /* 光澤 */
   .p-card::before { content:""; position:absolute; top:0; left:0; right:0; height:40%; background:linear-gradient(180deg,rgba(255,255,255,0.22) 0%,transparent 100%); border-radius:6mm 6mm 0 0; pointer-events:none; }
 
   .p-tag { position:absolute; top:2mm; right:2mm; font-size:2.8mm; font-weight:700; padding:0.7mm 2mm; border-radius:2.5mm; color:#fff; letter-spacing:0.4mm; z-index:2; }
@@ -264,7 +277,6 @@ body {
   .p-fen { font-size:3.8mm; color:rgba(255,255,255,0.82); margin-top:2mm; font-style:italic; }
   .p-deco { position:absolute; bottom:-10mm; right:-10mm; width:28mm; height:28mm; border-radius:50%; background:rgba(255,255,255,0.06); }
 
-  /* 位置 */
   .pp1{left:6mm;   top:6mm;   position:absolute;}
   .pp2{left:72mm;  top:6mm;   position:absolute;}
   .pp3{left:138mm; top:6mm;   position:absolute;}
@@ -276,71 +288,45 @@ body {
   .pp9{left:138mm; top:188mm; position:absolute;}
 
   /* 顏色 */
-  .p01.front{background:linear-gradient(145deg,#eff6ff,#dbeafe);}.p01.back{background:linear-gradient(145deg,#1e40af,#1d4ed8,#2563eb);}.p01 .p-tag,.p01 .cat-badge{background:#3B82F6;}
-  .p02.front{background:linear-gradient(145deg,#fffbeb,#fef3c7);}.p02.back{background:linear-gradient(145deg,#92400e,#b45309,#d97706);}.p02 .p-tag,.p02 .cat-badge{background:#F59E0B;}
-  .p03.front{background:linear-gradient(145deg,#f5f3ff,#ede9fe);}.p03.back{background:linear-gradient(145deg,#5b21b6,#6d28d9,#7c3aed);}.p03 .p-tag,.p03 .cat-badge{background:#8B5CF6;}
-  .p04.front{background:linear-gradient(145deg,#ecfdf5,#d1fae5);}.p04.back{background:linear-gradient(145deg,#065f46,#047857,#059669);}.p04 .p-tag,.p04 .cat-badge{background:#10B981;}
-  .p05.front{background:linear-gradient(145deg,#f0fdfa,#ccfbf1);}.p05.back{background:linear-gradient(145deg,#0f766e,#0d9488,#14b8a6);}.p05 .p-tag,.p05 .cat-badge{background:#14B8A6;}
-  .p06.front{background:linear-gradient(145deg,#eff6ff,#dbeafe);}.p06.back{background:linear-gradient(145deg,#1e3a8a,#1e40af,#2563eb);}.p06 .p-tag,.p06 .cat-badge{background:#1E40AF;}
-  .p07.front{background:linear-gradient(145deg,#fef2f2,#fee2e2);}.p07.back{background:linear-gradient(145deg,#991b1b,#b91c1c,#dc2626);}.p07 .p-tag,.p07 .cat-badge{background:#EF4444;}
-  .p08.front{background:linear-gradient(145deg,#fffbeb,#fef3c7);}.p08.back{background:linear-gradient(145deg,#78350f,#92400e,#b45309);}.p08 .p-tag,.p08 .cat-badge{background:#D97706;}
-  .p09.front{background:linear-gradient(145deg,#fefce8,#fef9c3);}.p09.back{background:linear-gradient(145deg,#451a03,#78350f,#92400e);}.p09 .p-tag,.p09 .cat-badge{background:#92400E;}
-  .p10.front{background:linear-gradient(145deg,#fdf2f8,#fce7f3);}.p10.back{background:linear-gradient(145deg,#9f1239,#be185d,#db2777);}.p10 .p-tag,.p10 .cat-badge{background:#EC4899;}
-  .p11.front{background:linear-gradient(145deg,#ecfeff,#cffafe);}.p11.back{background:linear-gradient(145deg,#0e7490,#0891b2,#06b6d4);}.p11 .p-tag,.p11 .cat-badge{background:#06B6D4;}
-  .p12.front{background:linear-gradient(145deg,#f0fdf4,#dcfce7);}.p12.back{background:linear-gradient(145deg,#365314,#4d7c0f,#65a30d);}.p12 .p-tag,.p12 .cat-badge{background:#84CC16;}
-  .p13.front{background:linear-gradient(145deg,#faf5ff,#ede9fe);}.p13.back{background:linear-gradient(145deg,#4c1d95,#6d28d9,#7c3aed);}.p13 .p-tag,.p13 .cat-badge{background:#8B5CF6;}
-  .p14.front{background:linear-gradient(145deg,#fff1f2,#ffe4e6);}.p14.back{background:linear-gradient(145deg,#881337,#9f1239,#e11d48);}.p14 .p-tag,.p14 .cat-badge{background:#E11D48;}
-  .p15.front{background:linear-gradient(145deg,#f0f9ff,#e0f2fe);}.p15.back{background:linear-gradient(145deg,#075985,#0369a1,#0284c7);}.p15 .p-tag,.p15 .cat-badge{background:#0EA5E9;}
-  .p16.front{background:linear-gradient(145deg,#fefce8,#fef3c7);}.p16.back{background:linear-gradient(145deg,#713f12,#854d0e,#a16207);}.p16 .p-tag,.p16 .cat-badge{background:#CA8A04;}
-  .p17.front{background:linear-gradient(145deg,#f5f3ff,#ede9fe);}.p17.back{background:linear-gradient(145deg,#4c1d95,#5b21b6,#6d28d9);}.p17 .p-tag,.p17 .cat-badge{background:#7C3AED;}
-  .p18.front{background:linear-gradient(145deg,#ecfdf5,#d1fae5);}.p18.back{background:linear-gradient(145deg,#14532d,#166534,#15803d);}.p18 .p-tag,.p18 .cat-badge{background:#16A34A;}
+  .p01.front{background:linear-gradient(145deg,#eff6ff,#dbeafe);}.p01.back{background:linear-gradient(145deg,#1e40af,#1d4ed8,#2563eb);}.p01 .p-tag{background:#3B82F6;}
+  .p02.front{background:linear-gradient(145deg,#fffbeb,#fef3c7);}.p02.back{background:linear-gradient(145deg,#92400e,#b45309,#d97706);}.p02 .p-tag{background:#F59E0B;}
+  .p03.front{background:linear-gradient(145deg,#f5f3ff,#ede9fe);}.p03.back{background:linear-gradient(145deg,#5b21b6,#6d28d9,#7c3aed);}.p03 .p-tag{background:#8B5CF6;}
+  .p04.front{background:linear-gradient(145deg,#ecfdf5,#d1fae5);}.p04.back{background:linear-gradient(145deg,#065f46,#047857,#059669);}.p04 .p-tag{background:#10B981;}
+  .p05.front{background:linear-gradient(145deg,#f0fdfa,#ccfbf1);}.p05.back{background:linear-gradient(145deg,#0f766e,#0d9488,#14b8a6);}.p05 .p-tag{background:#14B8A6;}
+  .p06.front{background:linear-gradient(145deg,#eff6ff,#dbeafe);}.p06.back{background:linear-gradient(145deg,#1e3a8a,#1e40af,#2563eb);}.p06 .p-tag{background:#1E40AF;}
+  .p07.front{background:linear-gradient(145deg,#fef2f2,#fee2e2);}.p07.back{background:linear-gradient(145deg,#991b1b,#b91c1c,#dc2626);}.p07 .p-tag{background:#EF4444;}
+  .p08.front{background:linear-gradient(145deg,#fffbeb,#fef3c7);}.p08.back{background:linear-gradient(145deg,#78350f,#92400e,#b45309);}.p08 .p-tag{background:#D97706;}
+  .p09.front{background:linear-gradient(145deg,#fefce8,#fef9c3);}.p09.back{background:linear-gradient(145deg,#451a03,#78350f,#92400e);}.p09 .p-tag{background:#92400E;}
+  .p10.front{background:linear-gradient(145deg,#fffbeb,#fef3c7);}.p10.back{background:linear-gradient(145deg,#9f1239,#be185d,#db2777);}.p10 .p-tag{background:#EC4899;}
+  .p11.front{background:linear-gradient(145deg,#ecfeff,#cffafe);}.p11.back{background:linear-gradient(145deg,#0e7490,#0891b2,#06b6d4);}.p11 .p-tag{background:#06B6D4;}
+  .p12.front{background:linear-gradient(145deg,#f0fdf4,#dcfce7);}.p12.back{background:linear-gradient(145deg,#365314,#4d7c0f,#65a30d);}.p12 .p-tag{background:#84CC16;}
+  .p13.front{background:linear-gradient(145deg,#f5f3ff,#ede9fe);}.p13.back{background:linear-gradient(145deg,#4c1d95,#6d28d9,#7c3aed);}.p13 .p-tag{background:#8B5CF6;}
+  .p14.front{background:linear-gradient(145deg,#fff1f2,#ffe4e6);}.p14.back{background:linear-gradient(145deg,#881337,#9f1239,#e11d48);}.p14 .p-tag{background:#E11D48;}
+  .p15.front{background:linear-gradient(145deg,#f0f9ff,#e0f2fe);}.p15.back{background:linear-gradient(145deg,#075985,#0369a1,#0284c7);}.p15 .p-tag{background:#0EA5E9;}
+  .p16.front{background:linear-gradient(145deg,#fefce8,#fef3c7);}.p16.back{background:linear-gradient(145deg,#713f12,#854d0e,#a16207);}.p16 .p-tag{background:#CA8A04;}
+  .p17.front{background:linear-gradient(145deg,#f5f3ff,#ede9fe);}.p17.back{background:linear-gradient(145deg,#4c1d95,#5b21b6,#6d28d9);}.p17 .p-tag{background:#7C3AED;}
+  .p18.front{background:linear-gradient(145deg,#ecfdf5,#d1fae5);}.p18.back{background:linear-gradient(145deg,#14532d,#166534,#15803d);}.p18 .p-tag{background:#16A34A;}
+  .p19.front{background:linear-gradient(145deg,#fdf2f8,#fce7f3);}.p19.back{background:linear-gradient(145deg,#831843,#9f1744,#be185d);}.p19 .p-tag{background:#E11D48;}
+  .p20.front{background:linear-gradient(145deg,#fff1f2,#ffe4e6);}.p20.back{background:linear-gradient(145deg,#881337,#9f1239,#dc2626);}.p20 .p-tag{background:#EF4444;}
+  .p21.front{background:linear-gradient(145deg,#f0fdf4,#dcfce7);}.p21.back{background:linear-gradient(145deg,#14532d,#166534,#22c55e);}.p21 .p-tag{background:#22C55E;}
+  .p22.front{background:linear-gradient(145deg,#eff6ff,#dbeafe);}.p22.back{background:linear-gradient(145deg,#1e3a8a,#1d4ed8,#3b82f6);}.p22 .p-tag{background:#3B82F6;}
+
+  /* Special print */
+  .p10.front,.p12.front,.p13.front,.p16.front {
+    background:linear-gradient(145deg,#fffbeb,#fef9c3,#fef3c7) !important;
+  }
+  .p10.front::before,.p12.front::before,.p13.front::before,.p16.front::before {
+    background:linear-gradient(135deg,#fbbf24,#f59e0b) !important;
+  }
 
   .print-sheets { display:none !important; }
   .print-sheets.show { display:block !important; }
-}
-
-/* ════════════════════════════════════
-   CATEGORY COLORS（螢幕卡牌）
-════════════════════════════════════ */
-/* 面積 - 藍系 */
-.card-wrap[data-cat="area"] .card-inner.front-face { border-top:3px solid #3B82F6; }
-/* 周界 - 橙系 */
-.card-wrap[data-cat="peri"] .card-inner.front-face { border-top:3px solid #F59E0B; }
-/* 體積 - 綠系 */
-.card-wrap[data-cat="vol"] .card-inner.front-face { border-top:3px solid #10B981; }
-
-/* 面積卡：淺色底 */
-.card-wrap[data-cat="area"] .cface  { background:linear-gradient(145deg,#eff6ff,#dbeafe); }
-.card-wrap[data-cat="area"] .cback   { background:linear-gradient(145deg,#1e40af,#1d4ed8,#2563eb); }
-/* 周界卡：淺橙底 */
-.card-wrap[data-cat="peri"] .cface  { background:linear-gradient(145deg,#fffbeb,#fef3c7); }
-.card-wrap[data-cat="peri"] .cback  { background:linear-gradient(145deg,#92400e,#b45309,#d97706); }
-/* 體積卡：淺綠底 */
-.card-wrap[data-cat="vol"] .cface   { background:linear-gradient(145deg,#ecfdf5,#d1fae5); }
-.card-wrap[data-cat="vol"] .cback   { background:linear-gradient(145deg,#065f46,#047857,#059669); }
-
-/* ════════════════════════════════════
-   CATEGORY BADGE（螢幕）
-════════════════════════════════════ */
-.card-wrap[data-cat="area"]  .cat-badge { background:#3B82F6; }
-.card-wrap[data-cat="peri"]  .cat-badge { background:#F59E0B; color:#1e293b; }
-.card-wrap[data-cat="vol"]   .cat-badge { background:#10B981; }
-
-/* 分類標題 */
-.section-title {
-  padding:12px 24px 4px;
-  font-size:13px; font-weight:700;
-  color:#64748b; letter-spacing:1mm;
-  text-transform:uppercase;
-  border-bottom:1px solid #1e293b;
 }
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════
-     HEADER
-═══════════════════════════════════════ -->
+<!-- HEADER -->
 <div class="header">
   <div>
     <h1>📐 數學公式卡牌</h1>
@@ -348,9 +334,7 @@ body {
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     CONTROLS
-═══════════════════════════════════════ -->
+<!-- CONTROLS -->
 <div class="controls">
   <span class="ctrl-label">分類：</span>
   <div class="tabs">
@@ -359,91 +343,137 @@ body {
     <button class="tab-btn" data-tab="peri">周界</button>
     <button class="tab-btn" data-tab="vol">體積</button>
   </div>
-
   <span class="ctrl-label" style="margin-left:12px;">範圍：</span>
   <div class="select-btns">
     <button class="sel-btn" onclick="selectAll()">全選</button>
     <button class="sel-btn" onclick="selectNone()">全取消</button>
   </div>
-
   <span class="counter"><span id="sel-count">0</span> / <span id="total-count">0</span> 張已選</span>
-
   <button class="print-btn" onclick="printSelected()">🖨️ 列印所選</button>
 </div>
 
-<!-- ═══════════════════════════════════════
-     CARD GRID
-═══════════════════════════════════════ -->
+<!-- CARD GRID -->
 <div class="card-grid" id="cardGrid"></div>
 
-<!-- ═══════════════════════════════════════
-     PRINT OUTPUT（列印時隱藏，JS填充）
-═══════════════════════════════════════ -->
+<!-- PRINT OUTPUT -->
 <div class="print-sheets" id="printArea"></div>
 
-<!-- ═══════════════════════════════════════
-     CARD DATA
-═══════════════════════════════════════ -->
 <script>
 const CARDS = [
-  /* ── 面積 AREA ── */
-  { id:1,  cat:"area", num:"1",  name:"長方形",         en:"Rectangle",        ask:"求 面積？", tag:"面積", fcn:"A = 長 × 寬", fen:"A = l × w",
+  /* ══ 面積 AREA ══ */
+  { id:1,  cat:"area", name:"長方形",        en:"Rectangle",      ask:"求 面積？", tag:"面積",
+    latex:"A = \\text{長} \\times \\text{寬}", latexEn:"A = l \\times w",
     svg:`<svg viewBox="0 0 100 100"><rect x="10" y="25" width="80" height="55" rx="3" fill="#bfdbfe" stroke="#3B82F6" stroke-width="8"/></svg>` },
-  { id:2,  cat:"area", num:"2",  name:"三角形",         en:"Triangle",         ask:"求 面積？", tag:"面積", fcn:"A = ½ × 底 × 高", fen:"A = ½bh",
+
+  { id:2,  cat:"area", name:"三角形",        en:"Triangle",       ask:"求 面積？", tag:"面積",
+    latex:"A = \\frac{1}{2} \\times \\text{底} \\times \\text{高}", latexEn:"A = \\frac{1}{2}bh",
     svg:`<svg viewBox="0 0 100 100"><polygon points="50,10 10,90 90,90" fill="#fde68a" stroke="#F59E0B" stroke-width="8" stroke-linejoin="round"/></svg>` },
-  { id:3,  cat:"area", num:"3",  name:"圓形",           en:"Circle",            ask:"求 面積？", tag:"面積", fcn:"A = π × 半徑²", fen:"A = πr²",
+
+  { id:3,  cat:"area", name:"圓形",          en:"Circle",         ask:"求 面積？", tag:"面積",
+    latex:"A = \\pi \\times \\text{半徑}^2", latexEn:"A = \\pi r^2",
     svg:`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="#ddd6fe" stroke="#8B5CF6" stroke-width="8"/></svg>` },
-  { id:4,  cat:"area", num:"4",  name:"平行四邊形",     en:"Parallelogram",     ask:"求 面積？", tag:"面積", fcn:"A = 底 × 高", fen:"A = b × h",
+
+  { id:4,  cat:"area", name:"平行四邊形",    en:"Parallelogram",   ask:"求 面積？", tag:"面積",
+    latex:"A = \\text{底} \\times \\text{高}", latexEn:"A = b \\times h",
     svg:`<svg viewBox="0 0 100 100"><polygon points="20,28 80,28 72,82 12,82" fill="#a7f3d0" stroke="#10B981" stroke-width="8" stroke-linejoin="round"/></svg>` },
-  { id:5,  cat:"area", num:"5",  name:"梯形",           en:"Trapezoid",         ask:"求 面積？", tag:"面積", fcn:"A = ½ × (上底+下底) × 高", fen:"A = ½(a+b)h",
+
+  { id:5,  cat:"area", name:"梯形",          en:"Trapezoid",      ask:"求 面積？", tag:"面積",
+    latex:"A = \\frac{1}{2}(a+b)h", latexEn:"A = \\frac{1}{2}(a+b)h",
     svg:`<svg viewBox="0 0 100 100"><polygon points="26,16 74,16 88,84 12,84" fill="#99f6e4" stroke="#14B8A6" stroke-width="8" stroke-linejoin="round"/></svg>` },
-  { id:10, cat:"area", num:"10", name:"菱形",           en:"Rhombus",           ask:"求 面積？", tag:"面積", fcn:"A = ½ × 對角線₁ × 對角線₂", fen:"A = ½d₁d₂",
-    svg:`<svg viewBox="0 0 100 100"><polygon points="50,8 92,50 50,92 8,50" fill="#fce7f3" stroke="#EC4899" stroke-width="8" stroke-linejoin="round"/><line x1="8" y1="50" x2="92" y2="50" stroke="#EC4899" stroke-width="3" stroke-dasharray="5,4"/><line x1="50" y1="8" x2="50" y2="92" stroke="#EC4899" stroke-width="3" stroke-dasharray="5,4"/></svg>` },
-  { id:11, cat:"area", num:"11", name:"扇形",           en:"Sector",            ask:"求 面積？", tag:"面積", fcn:"A = (圓心角/360) × π × 半徑²", fen:"A = (θ/360)πr²",
-    svg:`<svg viewBox="0 0 100 100"><path d="M50,50 L50,12 A38,38 0 0,1 88,50 Z" fill="#cffafe" stroke="#06B6D4" stroke-width="8" stroke-linejoin="round"/><line x1="50" y1="50" x2="50" y2="12" stroke="#06B6D4" stroke-width="4" stroke-dasharray="5,4"/><line x1="50" y1="50" x2="88" y2="50" stroke="#06B6D4" stroke-width="4" stroke-dasharray="5,4"/></svg>` },
-  { id:12, cat:"area", num:"12", name:"環形",           en:"Annulus",            ask:"求 面積？", tag:"面積", fcn:"A = π × (外半徑² - 內半徑²)", fen:"A = π(R²-r²)",
-    svg:`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="#dcfce7" stroke="#84CC16" stroke-width="8"/><circle cx="50" cy="50" r="22" fill="#fff" stroke="#84CC16" stroke-width="8"/></svg>` },
-  { id:13, cat:"area", num:"13", name:"複合圖形",       en:"Composite Shape",   ask:"求 面積？", tag:"面積", fcn:"A = 分割法 / 填補法", fen:"A = ΣAᵢ",
+
+  { id:10, cat:"area", name:"菱形",          en:"Rhombus",        ask:"求 面積？", tag:"面積", special:true,
+    latex:"A = \\frac{1}{2}d_1 d_2", latexEn:"A = \\frac{1}{2}d_1 d_2",
+    svg:`<svg viewBox="0 0 100 100"><polygon points="50,8 92,50 50,92 8,50" fill="#fce7f3" stroke="#EC4899" stroke-width="8" stroke-linejoin="round"/><line x1="8" y1="50" x2="92" y2="50" stroke="#EC4899" stroke-width="3" stroke-dasharray="5,4"/><line x1="50" y1="8" x2="50" y2="92" stroke="#EC4899" stroke-width="3" stroke-dasharray="5,4"/><text x="14" y="46" font-size="9" fill="#EC4899" font-family="sans-serif" font-weight="bold">d₁</text><text x="74" y="46" font-size="9" fill="#EC4899" font-family="sans-serif" font-weight="bold">d₂</text></svg>` },
+
+  { id:11, cat:"area", name:"扇形",          en:"Sector",         ask:"求 面積？", tag:"面積",
+    latex:"A = \\frac{\\theta}{360}\\pi r^2", latexEn:"A = \\frac{\\theta}{360}\\pi r^2",
+    svg:`<svg viewBox="0 0 100 100"><path d="M50,50 L50,12 A38,38 0 0,1 88,50 Z" fill="#cffafe" stroke="#06B6D4" stroke-width="8" stroke-linejoin="round"/><line x1="50" y1="50" x2="50" y2="12" stroke="#06B6D4" stroke-width="4" stroke-dasharray="5,4"/><line x1="50" y1="50" x2="88" y2="50" stroke="#06B6D4" stroke-width="4" stroke-dasharray="5,4"/><text x="62" y="28" font-size="9" fill="#06B6D4" font-family="sans-serif" font-weight="bold">r</text><text x="46" y="8" font-size="8" fill="#06B6D4" font-family="sans-serif" font-weight="bold">θ°</text></svg>` },
+
+  { id:12, cat:"area", name:"環形",          en:"Annulus",        ask:"求 面積？", tag:"面積", special:true,
+    latex:"A = \\pi(R^2 - r^2)", latexEn:"A = \\pi(R^2 - r^2)",
+    svg:`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="#dcfce7" stroke="#84CC16" stroke-width="8"/><circle cx="50" cy="50" r="22" fill="#fff" stroke="#84CC16" stroke-width="8"/><text x="54" y="26" font-size="8" fill="#84CC16" font-family="sans-serif" font-weight="bold">R</text><text x="38" y="50" font-size="8" fill="#84CC16" font-family="sans-serif" font-weight="bold">r</text></svg>` },
+
+  { id:13, cat:"area", name:"複合圖形",      en:"Composite",      ask:"求 面積？", tag:"面積", special:true,
+    latex:"A = \\sum A_i", latexEn:"A = \\sum A_i",
     svg:`<svg viewBox="0 0 100 100"><rect x="10" y="25" width="80" height="55" rx="3" fill="#ddd6fe" stroke="#8B5CF6" stroke-width="7"/><line x1="10" y1="52" x2="90" y2="52" stroke="#8B5CF6" stroke-width="4" stroke-dasharray="6,4"/><text x="30" y="42" font-size="11" fill="#8B5CF6" font-family="sans-serif" font-weight="bold">A</text><text x="30" y="72" font-size="11" fill="#8B5CF6" font-family="sans-serif" font-weight="bold">B</text></svg>` },
 
-  /* ── 周界 PERIMETER ── */
-  { id:6,  cat:"peri", num:"6",  name:"長方形",         en:"Rectangle",         ask:"求 周界？", tag:"周界", fcn:"P = 2 × (長 + 寬)", fen:"P = 2(l+w)",
+  /* ══ 周界 PERIMETER ══ */
+  { id:6,  cat:"peri", name:"長方形",        en:"Rectangle",      ask:"求 周界？", tag:"周界",
+    latex:"P = 2(l + w)", latexEn:"P = 2(l + w)",
     svg:`<svg viewBox="0 0 100 100"><rect x="10" y="25" width="80" height="55" rx="3" fill="none" stroke="#F59E0B" stroke-width="9"/><line x1="10" y1="25" x2="24" y2="13" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/><line x1="24" y1="13" x2="46" y2="13" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/><text x="25" y="11" font-size="10" fill="#F59E0B" font-family="sans-serif" font-weight="bold">l</text><line x1="90" y1="25" x2="100" y2="40" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/><line x1="100" y1="40" x2="100" y2="62" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/><text x="93" y="57" font-size="10" fill="#F59E0B" font-family="sans-serif" font-weight="bold">w</text></svg>` },
-  { id:7,  cat:"peri", num:"7",  name:"圓形",           en:"Circle",            ask:"求 周界？", tag:"周界", fcn:"C = 2 × π × 半徑", fen:"C = 2πr = πd",
+
+  { id:7,  cat:"peri", name:"圓形",          en:"Circle",         ask:"求 周界？", tag:"周界",
+    latex:"C = 2\\pi r = \\pi d", latexEn:"C = 2\\pi r = \\pi d",
     svg:`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="#EF4444" stroke-width="9"/><line x1="50" y1="50" x2="92" y2="50" stroke="#EF4444" stroke-width="4" stroke-dasharray="6,4"/><text x="70" y="44" font-size="11" fill="#EF4444" font-family="sans-serif" font-weight="bold">r</text></svg>` },
-  { id:14, cat:"peri", num:"14", name:"三角形",         en:"Triangle",          ask:"求 周界？", tag:"周界", fcn:"P = 邊₁ + 邊₂ + 邊₃", fen:"P = a + b + c",
+
+  { id:14, cat:"peri", name:"三角形",        en:"Triangle",       ask:"求 周界？", tag:"周界",
+    latex:"P = a + b + c", latexEn:"P = a + b + c",
     svg:`<svg viewBox="0 0 100 100"><polygon points="50,10 10,90 90,90" fill="none" stroke="#E11D48" stroke-width="9" stroke-linejoin="round"/><line x1="10" y1="90" x2="30" y2="90" stroke="#E11D48" stroke-width="4" stroke-linecap="round"/><line x1="30" y1="90" x2="44" y2="90" stroke="#E11D48" stroke-width="4" stroke-linecap="round"/><text x="20" y="98" font-size="10" fill="#E11D48" font-family="sans-serif" font-weight="bold">a</text><line x1="90" y1="90" x2="70" y2="90" stroke="#E11D48" stroke-width="4" stroke-linecap="round"/><line x1="70" y1="90" x2="58" y2="90" stroke="#E11D48" stroke-width="4" stroke-linecap="round"/><text x="72" y="98" font-size="10" fill="#E11D48" font-family="sans-serif" font-weight="bold">b</text></svg>` },
-  { id:15, cat:"peri", num:"15", name:"正方形",         en:"Square",             ask:"求 周界？", tag:"周界", fcn:"P = 4 × 邊長", fen:"P = 4a",
+
+  { id:15, cat:"peri", name:"正方形",         en:"Square",         ask:"求 周界？", tag:"周界",
+    latex:"P = 4a", latexEn:"P = 4a",
     svg:`<svg viewBox="0 0 100 100"><rect x="18" y="18" width="64" height="64" rx="2" fill="none" stroke="#0EA5E9" stroke-width="9"/><line x1="18" y1="18" x2="30" y2="6" stroke="#0EA5E9" stroke-width="5" stroke-linecap="round"/><line x1="30" y1="6" x2="50" y2="6" stroke="#0EA5E9" stroke-width="5" stroke-linecap="round"/><text x="30" y="4" font-size="10" fill="#0EA5E9" font-family="sans-serif" font-weight="bold">a</text></svg>` },
-  { id:16, cat:"peri", num:"16", name:"多邊形",         en:"Polygon",            ask:"求 周界？", tag:"周界", fcn:"P = 邊₁ + 邊₂ + … + 邊ₙ", fen:"P = Σlᵢ",
+
+  { id:16, cat:"peri", name:"多邊形",         en:"Polygon",        ask:"求 周界？", tag:"周界", special:true,
+    latex:"P = \\sum_{i=1}^{n} l_i", latexEn:"P = \\sum_{i=1}^{n} l_i",
     svg:`<svg viewBox="0 0 100 100"><polygon points="50,10 88,38 74,82 26,82 12,38" fill="none" stroke="#CA8A04" stroke-width="8" stroke-linejoin="round"/><circle cx="50" cy="10" r="4" fill="#CA8A04"/><circle cx="88" cy="38" r="4" fill="#CA8A04"/><circle cx="74" cy="82" r="4" fill="#CA8A04"/><circle cx="26" cy="82" r="4" fill="#CA8A04"/><circle cx="12" cy="38" r="4" fill="#CA8A04"/></svg>` },
 
-  /* ── 體積 VOLUME ── */
-  { id:8,  cat:"vol", num:"8",  name:"正方體",         en:"Cube",               ask:"求 體積？", tag:"體積", fcn:"V = 邊長³", fen:"V = a³",
+  /* ══ 體積 VOLUME ══ */
+  { id:8,  cat:"vol", name:"正方體",         en:"Cube",           ask:"求 體積？", tag:"體積",
+    latex:"V = a^3", latexEn:"V = a^3",
     svg:`<svg viewBox="0 0 100 100"><polygon points="50,8 90,26 90,70 50,88 10,70 10,26" fill="#fde68a" stroke="#D97706" stroke-width="8" stroke-linejoin="round"/><line x1="50" y1="8" x2="50" y2="46" stroke="#D97706" stroke-width="6"/><line x1="50" y1="46" x2="90" y2="26" stroke="#D97706" stroke-width="6"/><line x1="50" y1="46" x2="10" y2="26" stroke="#D97706" stroke-width="6"/><line x1="50" y1="46" x2="50" y2="88" stroke="#D97706" stroke-width="6"/><text x="52" y="52" font-size="11" fill="#D97706" font-family="sans-serif" font-weight="bold">a</text></svg>` },
-  { id:9,  cat:"vol", num:"9",  name:"圓柱體",         en:"Cylinder",           ask:"求 體積？", tag:"體積", fcn:"V = π × 半徑² × 高", fen:"V = πr²h",
+
+  { id:9,  cat:"vol", name:"圓柱體",         en:"Cylinder",       ask:"求 體積？", tag:"體積",
+    latex:"V = \\pi r^2 h", latexEn:"V = \\pi r^2 h",
     svg:`<svg viewBox="0 0 100 100"><ellipse cx="50" cy="22" rx="38" ry="14" fill="#fef9c3" stroke="#92400E" stroke-width="8"/><line x1="12" y1="22" x2="12" y2="80" stroke="#92400E" stroke-width="8"/><line x1="88" y1="22" x2="88" y2="80" stroke="#92400E" stroke-width="8"/><ellipse cx="50" cy="80" rx="38" ry="14" fill="#fef9c3" stroke="#92400E" stroke-width="8"/><line x1="50" y1="22" x2="50" y2="80" stroke="#92400E" stroke-width="4" stroke-dasharray="6,4"/><text x="42" y="54" font-size="10" fill="#92400E" font-family="sans-serif" font-weight="bold">h</text><text x="56" y="16" font-size="10" fill="#92400E" font-family="sans-serif" font-weight="bold">r</text></svg>` },
-  { id:17, cat:"vol", num:"17", name:"長方體",         en:"Cuboid",              ask:"求 體積？", tag:"體積", fcn:"V = 長 × 寬 × 高", fen:"V = l × w × h",
+
+  { id:17, cat:"vol", name:"長方體",         en:"Cuboid",         ask:"求 體積？", tag:"體積",
+    latex:"V = l \\times w \\times h", latexEn:"V = l \\times w \\times h",
     svg:`<svg viewBox="0 0 100 100"><polygon points="50,10 90,28 90,68 50,86 10,68 10,28" fill="#ddd6fe" stroke="#7C3AED" stroke-width="8" stroke-linejoin="round"/><line x1="50" y1="10" x2="50" y2="46" stroke="#7C3AED" stroke-width="6"/><line x1="50" y1="46" x2="90" y2="28" stroke="#7C3AED" stroke-width="6"/><line x1="50" y1="46" x2="10" y2="28" stroke="#7C3AED" stroke-width="6"/><line x1="50" y1="46" x2="50" y2="86" stroke="#7C3AED" stroke-width="6"/><text x="52" y="52" font-size="9" fill="#7C3AED" font-family="sans-serif" font-weight="bold">h</text><text x="72" y="24" font-size="8" fill="#7C3AED" font-family="sans-serif" font-weight="bold">l</text><text x="4" y="52" font-size="8" fill="#7C3AED" font-family="sans-serif" font-weight="bold">w</text></svg>` },
-  { id:18, cat:"vol", num:"18", name:"圓錐體",         en:"Cone",                ask:"求 體積？", tag:"體積", fcn:"V = ⅓ × π × 半徑² × 高", fen:"V = ⅓πr²h",
+
+  { id:18, cat:"vol", name:"圓錐體",         en:"Cone",            ask:"求 體積？", tag:"體積",
+    latex:"V = \\frac{1}{3}\\pi r^2 h", latexEn:"V = \\frac{1}{3}\\pi r^2 h",
     svg:`<svg viewBox="0 0 100 100"><ellipse cx="50" cy="80" rx="36" ry="12" fill="#d1fae5" stroke="#16A34A" stroke-width="8"/><line x1="50" y1="12" x2="14" y2="80" stroke="#16A34A" stroke-width="8"/><line x1="50" y1="12" x2="86" y2="80" stroke="#16A34A" stroke-width="8"/><line x1="50" y1="12" x2="50" y2="80" stroke="#16A34A" stroke-width="4" stroke-dasharray="5,4"/><text x="54" y="50" font-size="9" fill="#16A34A" font-family="sans-serif" font-weight="bold">h</text><text x="56" y="8" font-size="9" fill="#16A34A" font-family="sans-serif" font-weight="bold">r</text></svg>` },
+
+  /* ══ 新增 3D 體積 ══ */
+  { id:19, cat:"vol", name:"球體",           en:"Sphere",          ask:"求 體積？", tag:"體積",
+    latex:"V = \\frac{4}{3}\\pi r^3", latexEn:"V = \\frac{4}{3}\\pi r^3",
+    svg:`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="#fce7f3" stroke="#E11D48" stroke-width="8"/><ellipse cx="50" cy="50" rx="42" ry="12" fill="none" stroke="#E11D48" stroke-width="4" stroke-dasharray="5,4"/><line x1="50" y1="8" x2="50" y2="92" stroke="#E11D48" stroke-width="3" stroke-dasharray="5,4"/><text x="62" y="46" font-size="10" fill="#E11D48" font-family="sans-serif" font-weight="bold">r</text></svg>` },
+
+  { id:20, cat:"vol", name:"三角柱體",        en:"Tri. Prism",      ask:"求 體積？", tag:"體積",
+    latex:"V = \\frac{1}{2}bh \\times H", latexEn:"V = \\frac{1}{2}bh \\times H",
+    svg:`<svg viewBox="0 0 100 100"><polygon points="20,30 80,30 50,80" fill="#cffafe" stroke="#06B6D4" stroke-width="7"/><line x1="20" y1="30" x2="20" y2="76" stroke="#06B6D4" stroke-width="7"/><line x1="80" y1="30" x2="80" y2="76" stroke="#06B6D4" stroke-width="7"/><line x1="50" y1="80" x2="50" y2="88" stroke="#06B6D4" stroke-width="7"/><polygon points="20,76 80,76 50,88" fill="#a5f3fc" stroke="#06B6D4" stroke-width="7"/><text x="42" y="58" font-size="8" fill="#06B6D4" font-family="sans-serif" font-weight="bold">h</text><text x="10" y="24" font-size="8" fill="#06B6D4" font-family="sans-serif" font-weight="bold">b</text><text x="56" y="70" font-size="8" fill="#06B6D4" font-family="sans-serif" font-weight="bold">H</text></svg>` },
+
+  { id:21, cat:"vol", name:"正四面體",        en:"Tetrahedron",     ask:"求 體積？", tag:"體積",
+    latex:"V = \\frac{\\sqrt{2}}{12}a^3", latexEn:"V = \\frac{\\sqrt{2}}{12}a^3",
+    svg:`<svg viewBox="0 0 100 100"><polygon points="50,10 90,75 10,75" fill="#d1fae5" stroke="#22C55E" stroke-width="7" stroke-linejoin="round"/><line x1="50" y1="10" x2="50" y2="75" stroke="#22C55E" stroke-width="5" stroke-dasharray="5,4"/><line x1="10" y1="75" x2="50" y2="75" stroke="#22C55E" stroke-width="7"/><line x1="90" y1="75" x2="50" y2="75" stroke="#22C55E" stroke-width="7"/><text x="53" y="46" font-size="9" fill="#22C55E" font-family="sans-serif" font-weight="bold">a</text><text x="53" y="66" font-size="8" fill="#22C55E" font-family="sans-serif" font-weight="bold">/</text><text x="50" y="78" font-size="7" fill="#22C55E" font-family="sans-serif" font-weight="bold">2</text></svg>` },
+
+  { id:22, cat:"vol", name:"四角錐體",        en:"Sq. Pyramid",     ask:"求 體積？", tag:"體積",
+    latex:"V = \\frac{1}{3}a^2 h", latexEn:"V = \\frac{1}{3}a^2 h",
+    svg:`<svg viewBox="0 0 100 100"><polygon points="50,10 88,38 50,88 12,38" fill="#dbeafe" stroke="#3B82F6" stroke-width="7" stroke-linejoin="round"/><line x1="12" y1="38" x2="88" y2="38" stroke="#3B82F6" stroke-width="5"/><line x1="50" y1="10" x2="50" y2="88" stroke="#3B82F6" stroke-width="4" stroke-dasharray="5,4"/><text x="53" y="52" font-size="9" fill="#3B82F6" font-family="sans-serif" font-weight="bold">h</text><text x="44" y="22" font-size="8" fill="#3B82F6" font-family="sans-serif" font-weight="bold">a</text></svg>` },
 ];
 
 let selected = new Set(CARDS.map(c => c.id));
+
+function renderLatex(el, formula) {
+  try {
+    katex.render(formula, el, { throwOnError: false, displayMode: false });
+  } catch(e) {
+    el.textContent = formula;
+  }
+}
 
 function renderCards(filter = 'all') {
   const grid = document.getElementById('cardGrid');
   grid.innerHTML = '';
   CARDS.filter(c => filter === 'all' || c.cat === filter).forEach(card => {
     const wrap = document.createElement('div');
-    wrap.className = `card-wrap${selected.has(card.id) ? ' selected' : ''}`;
+    wrap.className = `card-wrap${selected.has(card.id) ? ' selected' : ''}${card.special ? ' special' : ''}`;
     wrap.dataset.cat = card.cat;
     wrap.dataset.id = card.id;
 
-    // 點擊：選擇器→選擇；其他地方→翻面
     wrap.addEventListener('click', (e) => {
       if (e.target.closest('.card-selector')) {
-        // 點選擇器：切換選擇狀態
         e.stopPropagation();
         if (selected.has(card.id)) selected.delete(card.id);
         else selected.add(card.id);
@@ -452,14 +482,12 @@ function renderCards(filter = 'all') {
         if (sel) sel.textContent = selected.has(card.id) ? '✓' : '';
         updateCount();
       } else {
-        // 點卡牌其他位置：翻面
         wrap.classList.toggle('flipped');
       }
     });
 
-    // 選擇按鈕（左上角鈎）- 點擊不翻面，只切換選擇
     wrap.innerHTML = `
-      <div class="card-selector" data-sel-id="${card.id}">${selected.has(card.id) ? '✓' : ''}</div>
+      <div class="card-selector">${selected.has(card.id) ? '✓' : ''}</div>
       <span class="cat-badge ${card.cat}">${card.tag}</span>
       <div class="card-inner">
         <div class="front-face cface">
@@ -470,26 +498,21 @@ function renderCards(filter = 'all') {
         </div>
         <div class="back-face cback">
           <div class="back-tag">${card.name} ${card.tag}</div>
-          <div class="back-cn">${card.fcn}</div>
-          <div class="back-en">${card.fen}</div>
+          <div class="katex-wrap">
+            <span class="back-cn latex-cn" data-latex="${card.latex}"></span>
+            <span class="back-en latex-en" data-latex="${card.latexEn}"></span>
+          </div>
           <div class="deco"></div>
         </div>
-      </div>`;
+      </div>${card.special ? '<span class="special-badge">★ 特別版</span>' : ''}`;
     grid.appendChild(wrap);
-  });
-  updateCount();
-}
 
-function toggleCard(id) {
-  if (selected.has(id)) selected.delete(id);
-  else selected.add(id);
-  // 只更新UI，不重新渲染整個grid（保持flip狀態）
-  const wrap = document.querySelector(`.card-wrap[data-id="${id}"]`);
-  if (wrap) {
-    wrap.classList.toggle('selected', selected.has(id));
-    const sel = wrap.querySelector('.card-selector');
-    if (sel) sel.textContent = selected.has(id) ? '✓' : '';
-  }
+    // Render LaTeX after appending
+    const cnEl = wrap.querySelector('.latex-cn');
+    const enEl = wrap.querySelector('.latex-en');
+    if (cnEl) renderLatex(cnEl, card.latex);
+    if (enEl) renderLatex(enEl, card.latexEn);
+  });
   updateCount();
 }
 
@@ -515,25 +538,22 @@ function printSelected() {
   const cards = CARDS.filter(c => selected.has(c.id));
   if (cards.length === 0) { alert('請先選擇要列印的卡牌'); return; }
 
-  // 填充 Print Area
   const printArea = document.getElementById('printArea');
   printArea.innerHTML = '';
   printArea.classList.add('show');
 
-  // 分頁：每頁9張
   const pages = [];
   for (let i = 0; i < cards.length; i += 9) pages.push(cards.slice(i, i + 9));
 
-  pages.forEach((pageCards, pageIdx) => {
+  pages.forEach((pageCards) => {
+    // Front
     const sheet = document.createElement('div');
     sheet.className = 'print-sheet';
     sheet.innerHTML = `<div class="print-grid"></div>`;
     const grid = sheet.querySelector('.print-grid');
-
     pageCards.forEach((card, i) => {
-      const pos = `pp${i + 1}`;
       grid.innerHTML += `
-        <div class="p-card front p${card.id} ${pos}">
+        <div class="p-card front p${card.id} pp${i + 1}${card.special ? ' special' : ''}">
           <span class="p-tag" style="background:${tagColor(card.cat)}">${card.tag}</span>
           <div class="p-icon-area">${card.svg}</div>
           <div class="p-cn">${card.name}</div>
@@ -543,20 +563,19 @@ function printSelected() {
     });
     printArea.appendChild(sheet);
 
-    // 背面
+    // Back
     const sheetB = document.createElement('div');
     sheetB.className = 'print-sheet';
     sheetB.innerHTML = `<div class="print-grid"></div>`;
     const gridB = sheetB.querySelector('.print-grid');
     pageCards.forEach((card, i) => {
-      const pos = `pp${i + 1}`;
       gridB.innerHTML += `
-        <div class="p-card back p${card.id} ${pos}">
+        <div class="p-card back p${card.id} pp${i + 1}">
           <span class="p-tag" style="background:${tagColor(card.cat)}">${card.tag}</span>
           <div class="p-fcenter">
             <div class="p-ftag">${card.name} ${card.tag}</div>
-            <div class="p-fcn">${card.fcn}</div>
-            <div class="p-fen">${card.fen}</div>
+            <div class="p-fcn">${card.latex}</div>
+            <div class="p-fen">${card.latexEn}</div>
           </div>
           <div class="p-deco"></div>
         </div>`;
@@ -566,8 +585,8 @@ function printSelected() {
 
   document.querySelector('.print-sheets').style.display = 'block';
   document.querySelector('.print-sheets').classList.add('show');
-  setTimeout(() => window.print(), 200);
-  setTimeout(() => { printArea.innerHTML = ''; printArea.classList.remove('show'); }, 500);
+  setTimeout(() => window.print(), 300);
+  setTimeout(() => { printArea.innerHTML = ''; printArea.classList.remove('show'); }, 600);
 }
 
 function tagColor(cat) {
