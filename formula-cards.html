@@ -146,14 +146,14 @@ body {
 /* 翻面：front/back 可見性切換 */
 .card-inner .front-face {
   position:absolute; inset:0;
-  opacity:1; transition:opacity 0.35s ease;
+  opacity:1;
 }
 .card-inner .back-face {
   position:absolute; inset:0;
-  opacity:0; transition:opacity 0.35s ease;
+  opacity:0;
 }
-.card-wrap.flipped .card-inner .front-face { opacity:0; }
-.card-wrap.flipped .card-inner .back-face  { opacity:1; }
+.card-wrap.flipped .card-inner .front-face { opacity:0; transition:opacity 0.3s ease; }
+.card-wrap.flipped .card-inner .back-face  { opacity:1; transition:opacity 0.3s ease 0.3s; }
 
 /* Card selector */
 .card-selector {
