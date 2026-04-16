@@ -122,12 +122,12 @@ body {
 
 /* Sub-tabs for geometry sub-categories */
 .geo-subtabs {
-  display: none;
+  display: flex;
   gap: 8px;
   margin-top: 8px;
   padding-left: 2px;
 }
-.geo-subtabs.show { display: flex; }
+.geo-subtabs.hidden { display: none; }
 .subtab-btn {
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.1);
@@ -659,7 +659,7 @@ body {
     <button class="tab-btn" data-tab="stats">統計</button>
     <button class="tab-btn" data-tab="other">其他</button>
   </div>
-  <div class="geo-subtabs" id="geoSubTabs" style="display:none;">
+  <div class="geo-subtabs hidden" id="geoSubTabs">
     <button class="subtab-btn active" data-geo="area">面積</button>
     <button class="subtab-btn active" data-geo="peri">周界</button>
     <button class="subtab-btn active" data-geo="vol">體積</button>
@@ -1522,9 +1522,9 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     // Show/hide geometry sub-tabs
     const geoSubTabs = document.getElementById('geoSubTabs');
     if (tab === 'geometry') {
-      geoSubTabs.classList.add('show');
+      geoSubTabs.classList.remove('hidden');
     } else {
-      geoSubTabs.classList.remove('show');
+      geoSubTabs.classList.add('hidden');
     }
 
     renderCards();
