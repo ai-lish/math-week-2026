@@ -120,6 +120,28 @@ body {
   box-shadow: 0 2px 8px rgba(245,158,11,0.3);
 }
 
+/* Sub-tabs for geometry sub-categories */
+.geo-subtabs {
+  display: none;
+  gap: 8px;
+  margin-top: 8px;
+  padding-left: 2px;
+}
+.geo-subtabs.show { display: flex; }
+.subtab-btn {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.5);
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.subtab-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+.subtab-btn.active { background: rgba(255,255,255,0.15); color: #fff; font-weight: 600; border-color: rgba(255,255,255,0.25); }
+
 .sel-btn {
   padding: 6px 14px;
   border-radius: 8px;
@@ -632,11 +654,15 @@ body {
   <span class="ctrl-label">分類</span>
   <div class="tabs">
     <button class="tab-btn active" data-tab="all">全部</button>
-    <button class="tab-btn" data-tab="area">面積</button>
-    <button class="tab-btn" data-tab="peri">周界</button>
-    <button class="tab-btn" data-tab="vol">體積</button>
     <button class="tab-btn" data-tab="algebra">代數</button>
+    <button class="tab-btn" data-tab="geometry" id="geoTab">幾何</button>
     <button class="tab-btn" data-tab="stats">統計</button>
+    <button class="tab-btn" data-tab="other">其他</button>
+  </div>
+  <div class="geo-subtabs" id="geoSubTabs" style="display:none;">
+    <button class="subtab-btn active" data-geo="area">面積</button>
+    <button class="subtab-btn active" data-geo="peri">周界</button>
+    <button class="subtab-btn active" data-geo="vol">體積</button>
   </div>
   <span class="ctrl-label" style="margin-left:12px;">選擇</span>
   <div class="select-btns">
@@ -1344,7 +1370,9 @@ const CARDS = [
 ];
 
 let selected = new Set(CARDS.map(c => c.id));
-let activeFilters = new Set(['all']);
+// ── Filter State ──────────────────────────────────────────────
+let mainCategory = 'all';           // 'all' | 'algebra' | 'geometry' | 'stats' | 'other'
+let geoSubFilters = new Set(['area','peri','vol']); // geometry sub-categories
 
 function renderLatex(el, formula) {
   try {
@@ -1374,7 +1402,7 @@ function gradeClassBack(g) {
 }
 
 function catLabel(cat) {
-  return cat === 'area' ? '面積' : cat === 'peri' ? '周界' : cat === 'vol' ? '體積' : cat === 'algebra' ? '代數' : '統計';
+  return cat === 'area' ? '面積' : cat === 'peri' ? '周界' : cat === 'vol' ? '體積' : cat === 'algebra' ? '代數' : cat === 'stats' ? '統計' : '其他';
 }
 function catEmoji(cat) {
   return cat === 'area' ? '⬡' : cat === 'peri' ? '◯' : cat === 'vol' ? '◈' : cat === 'algebra' ? '∑' : 'σ';
@@ -1383,7 +1411,23 @@ function catEmoji(cat) {
 function renderCards() {
   const grid = document.getElementById('cardGrid');
   grid.innerHTML = '';
-  const filtered = CARDS.filter(c => activeFilters.has('all') || activeFilters.has(c.cat));
+
+  let filtered;
+  if (mainCategory === 'all') {
+    filtered = CARDS;
+  } else if (mainCategory === 'algebra') {
+    filtered = CARDS.filter(c => c.cat === 'algebra');
+  } else if (mainCategory === 'geometry') {
+    filtered = CARDS.filter(c => c.cat === 'area' || c.cat === 'peri' || c.cat === 'vol');
+  } else if (mainCategory === 'stats') {
+    filtered = CARDS.filter(c => c.cat === 'stats');
+  } else {
+    filtered = CARDS; // 'other' — no cards yet, show all
+  }
+  // Secondary filter for geometry sub-categories
+  if (mainCategory === 'geometry') {
+    filtered = filtered.filter(c => geoSubFilters.has(c.cat));
+  }
 
   filtered.forEach(card => {
     const wrap = document.createElement('div');
@@ -1468,30 +1512,42 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.onclick = () => {
     const tab = btn.dataset.tab;
 
-    if (tab === 'all') {
-      // "全部" clears all other filters and shows all
-      activeFilters.clear();
-      activeFilters.add('all');
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    } else {
-      // Remove 'all' when any category is selected
-      activeFilters.delete('all');
-      document.querySelector('.tab-btn[data-tab="all"]').classList.remove('active');
+    // Update main category
+    mainCategory = tab;
 
-      // Toggle this category
-      if (activeFilters.has(tab)) {
-        activeFilters.delete(tab);
-        btn.classList.remove('active');
-        // If no categories left, revert to all
-        if (activeFilters.size === 0) {
-          activeFilters.add('all');
-          document.querySelector('.tab-btn[data-tab="all"]').classList.add('active');
-        }
-      } else {
-        activeFilters.add(tab);
-        btn.classList.add('active');
+    // Update active tab styles
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Show/hide geometry sub-tabs
+    const geoSubTabs = document.getElementById('geoSubTabs');
+    if (tab === 'geometry') {
+      geoSubTabs.classList.add('show');
+    } else {
+      geoSubTabs.classList.remove('show');
+    }
+
+    renderCards();
+  };
+});
+
+// Geometry sub-tab toggle
+document.querySelectorAll('.subtab-btn').forEach(btn => {
+  btn.onclick = () => {
+    const geo = btn.dataset.geo;
+    if (geoSubFilters.has(geo)) {
+      geoSubFilters.delete(geo);
+      btn.classList.remove('active');
+      // If all deselected, revert to all selected
+      if (geoSubFilters.size === 0) {
+        geoSubFilters.add('area');
+        geoSubFilters.add('peri');
+        geoSubFilters.add('vol');
+        document.querySelectorAll('.subtab-btn').forEach(b => b.classList.add('active'));
       }
+    } else {
+      geoSubFilters.add(geo);
+      btn.classList.add('active');
     }
     renderCards();
   };
