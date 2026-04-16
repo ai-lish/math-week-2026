@@ -31,6 +31,14 @@
   --cat-vol-color: #10b981;
   --cat-vol-light: #6ee7b7;
   --cat-vol-bg: #064e3b;
+
+  --cat-algebra-color: #7c3aed;
+  --cat-algebra-light: #c4b5fd;
+  --cat-algebra-bg: #2e1065;
+
+  --cat-stats-color: #db2777;
+  --cat-stats-light: #f9a8d4;
+  --cat-stats-bg: #4a0519;
 }
 
 body {
@@ -589,6 +597,8 @@ body {
   .pb-area { background:linear-gradient(160deg,#1e3a5f,#1e40af,#312e81) !important; }
   .pb-peri { background:linear-gradient(160deg,#3d2e00,#92400e,#b45309) !important; }
   .pb-vol  { background:linear-gradient(160deg,#064e3b,#047857,#059669) !important; }
+  .pb-algebra { background:linear-gradient(160deg,#2e1065,#4c1d95,#6d28d9) !important; }
+  .pb-stats  { background:linear-gradient(160deg,#4a0519,#831843,#be185d) !important; }
 
   /* Positioning */
   .pp1{left:6mm;   top:6mm;   position:absolute;}
@@ -625,6 +635,8 @@ body {
     <button class="tab-btn" data-tab="area">面積</button>
     <button class="tab-btn" data-tab="peri">周界</button>
     <button class="tab-btn" data-tab="vol">體積</button>
+    <button class="tab-btn" data-tab="algebra">代數</button>
+    <button class="tab-btn" data-tab="stats">統計</button>
   </div>
   <span class="ctrl-label" style="margin-left:12px;">選擇</span>
   <div class="select-btns">
@@ -1062,10 +1074,277 @@ const CARDS = [
       <text x="57" y="54" font-size="10" fill="#60a5fa" font-weight="bold" font-family="sans-serif">h</text>
       <text x="44" y="24" font-size="9" fill="#60a5fa" font-weight="bold" font-family="sans-serif">a</text>
     </svg>` },
+
+  /* ══ 代數 ALGEBRA ══ */
+  { id:23, cat:"algebra", name:"差的平方",     en:"Difference of Squares", ask:"因式分解", tag:"代數", grade:"s3",
+    num:"A-01", difficulty:1, special:false,
+    fcn:"a² − b² = (a+b)(a−b)", latex:"a^2 - b^2 = (a+b)(a-b)",
+    tip:"平方相減，等於和乘以差！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="ga1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#a78bfa;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#ga1)" stroke="#7c3aed" stroke-width="9"/>
+      <text x="55" y="60" font-size="32" fill="#a78bfa" font-weight="bold" font-family="serif" text-anchor="middle">−</text>
+      <text x="55" y="25" font-size="16" fill="#c4b5fd" font-weight="bold" text-anchor="middle">a² − b²</text>
+    </svg>` },
+
+  { id:24, cat:"algebra", name:"和的平方",     en:"Square of Sum",       ask:"展開",     tag:"代數", grade:"s3",
+    num:"A-02", difficulty:1, special:false,
+    fcn:"(a+b)² = a²+2ab+b²", latex:"(a+b)^2 = a^2 + 2ab + b^2",
+    tip:"記住「頭頭 + 腳腳 + 2×頭×腳」！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="ga2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#34d399;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#059669;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#ga2)" stroke="#059669" stroke-width="9"/>
+      <text x="55" y="60" font-size="28" fill="#34d399" font-weight="bold" font-family="serif" text-anchor="middle">( )²</text>
+      <text x="55" y="25" font-size="16" fill="#6ee7b7" font-weight="bold" text-anchor="middle">(a+b)²</text>
+    </svg>` },
+
+  { id:25, cat:"algebra", name:"差的平方",     en:"Square of Difference", ask:"展開",     tag:"代數", grade:"s3",
+    num:"A-03", difficulty:1, special:false,
+    fcn:"(a−b)² = a²−2ab+b²", latex:"(a-b)^2 = a^2 - 2ab + b^2",
+    tip:"注意負號，中間項是 −2ab！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="ga3" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#d97706;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#ga3)" stroke="#d97706" stroke-width="9"/>
+      <text x="55" y="60" font-size="28" fill="#f59e0b" font-weight="bold" font-family="serif" text-anchor="middle">( )²</text>
+      <text x="55" y="25" font-size="16" fill="#fcd34d" font-weight="bold" text-anchor="middle">(a−b)²</text>
+    </svg>` },
+
+  { id:26, cat:"algebra", name:"立方和",       en:"Sum of Cubes",        ask:"因式分解", tag:"代數", grade:"s3",
+    num:"A-04", difficulty:2, special:false,
+    fcn:"a³+b³ = (a+b)(a²−ab+b²)", latex:"a^3 + b^3 = (a+b)(a^2 - ab + b^2)",
+    tip:"兩個立方和，等於和乘以平方減積加平方！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="ga4" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#f87171;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#dc2626;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#ga4)" stroke="#dc2626" stroke-width="9"/>
+      <text x="55" y="60" font-size="28" fill="#f87171" font-weight="bold" font-family="serif" text-anchor="middle">+</text>
+      <text x="55" y="25" font-size="16" fill="#fca5a5" font-weight="bold" text-anchor="middle">a³ + b³</text>
+    </svg>` },
+
+  { id:27, cat:"algebra", name:"立方差",       en:"Diff of Cubes",       ask:"因式分解", tag:"代數", grade:"s3",
+    num:"A-05", difficulty:2, special:false,
+    fcn:"a³−b³ = (a−b)(a²+ab+b²)", latex:"a^3 - b^3 = (a-b)(a^2 + ab + b^2)",
+    tip:"兩個立方差，等於差乘以平方加積加平方！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="ga5" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#2563eb;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#ga5)" stroke="#2563eb" stroke-width="9"/>
+      <text x="55" y="60" font-size="28" fill="#60a5fa" font-weight="bold" font-family="serif" text-anchor="middle">−</text>
+      <text x="55" y="25" font-size="16" fill="#93c5fd" font-weight="bold" text-anchor="middle">a³ − b³</text>
+    </svg>` },
+
+  { id:28, cat:"algebra", name:"提公因式",    en:"Factor Out",          ask:"因式分解", tag:"代數", grade:"s1",
+    num:"A-06", difficulty:1, special:false,
+    fcn:"ab+ac = a(b+c)", latex:"ab + ac = a(b + c)",
+    tip:"搵最大公因數，全部除晒佢！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="ga6" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#fb923c;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#ea580c;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#ga6)" stroke="#ea580c" stroke-width="9"/>
+      <text x="55" y="58" font-size="13" fill="#fb923c" font-weight="bold" font-family="sans-serif" text-anchor="middle">ab + ac</text>
+      <line x1="25" y1="68" x2="85" y2="68" stroke="#fdba74" stroke-width="2"/>
+      <text x="55" y="80" font-size="13" fill="#fdba74" font-weight="bold" font-family="sans-serif" text-anchor="middle">a(b + c)</text>
+    </svg>` },
+
+  { id:29, cat:"algebra", name:"分配律",       en:"Distributive Law",    ask:"展開",     tag:"代數", grade:"s1",
+    num:"A-07", difficulty:1, special:false,
+    fcn:"a(b+c) = ab+ac", latex:"a(b+c) = ab + ac",
+    tip:"括號外嘅數要乘曉括號入面每一項！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="ga7" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#c084fc;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#9333ea;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#ga7)" stroke="#9333ea" stroke-width="9"/>
+      <text x="55" y="58" font-size="14" fill="#c084fc" font-weight="bold" font-family="sans-serif" text-anchor="middle">a × (b + c)</text>
+      <line x1="25" y1="68" x2="85" y2="68" stroke="#d8b4fe" stroke-width="2"/>
+      <text x="55" y="80" font-size="13" fill="#d8b4fe" font-weight="bold" font-family="sans-serif" text-anchor="middle">ab + ac</text>
+    </svg>` },
+
+  { id:30, cat:"algebra", name:"兩元一次",     en:"Simultaneous Eq",    ask:"解方程",   tag:"代數", grade:"s2",
+    num:"A-08", difficulty:2, special:false,
+    fcn:"ax+by=c → x=(c−by)/a", latex:"ax + by = c \\Rightarrow x = \\frac{c - by}{a}",
+    tip:"代入法或消去法，逐個未知數拆解！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="ga8" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#2dd4bf;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#0d9488;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#ga8)" stroke="#0d9488" stroke-width="9"/>
+      <text x="55" y="55" font-size="14" fill="#2dd4bf" font-weight="bold" font-family="sans-serif" text-anchor="middle">ax + by = c</text>
+      <line x1="25" y1="65" x2="85" y2="65" stroke="#5eead4" stroke-width="2"/>
+      <text x="55" y="80" font-size="12" fill="#5eead4" font-weight="bold" font-family="sans-serif" text-anchor="middle">x = (c−by)/a</text>
+    </svg>` },
+
+  /* ══ 統計 STATISTICS ══ */
+  { id:31, cat:"stats", name:"平均數",         en:"Mean",                ask:"求平均",   tag:"統計", grade:"s2",
+    num:"S-01", difficulty:1, special:false,
+    fcn:"平均 = 總和 ÷ 數量", latex:"\\bar{x} = \\frac{\\sum x}{n}",
+    tip:"全部加埋再除以有幾多个數！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="gs1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#f472b6;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#db2777;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs1)" stroke="#db2777" stroke-width="9"/>
+      <text x="55" y="55" font-size="26" fill="#f472b6" font-weight="bold" font-family="sans-serif" text-anchor="middle">x̄</text>
+      <text x="55" y="80" font-size="11" fill="#f9a8d4" font-family="sans-serif" text-anchor="middle">總和 ÷ 數量</text>
+    </svg>` },
+
+  { id:32, cat:"stats", name:"中位數",         en:"Median",              ask:"求中位",   tag:"統計", grade:"s2",
+    num:"S-02", difficulty:1, special:false,
+    fcn:"排序後中間的值", latex:"\\text{中位數}",
+    tip:"先排大小，中間位置就係中位數！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="gs2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#a3e635;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#65a30d;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs2)" stroke="#65a30d" stroke-width="9"/>
+      <text x="30" y="58" font-size="18" fill="#a3e635" font-weight="bold" font-family="sans-serif">3</text>
+      <text x="47" y="58" font-size="18" fill="#a3e635" font-weight="bold" font-family="sans-serif">7</text>
+      <text x="64" y="58" font-size="18" fill="#fbbf24" font-weight="900" font-family="sans-serif">9</text>
+      <text x="81" y="58" font-size="18" fill="#a3e635" font-weight="bold" font-family="sans-serif">12</text>
+      <line x1="64" y1="20" x2="64" y2="90" stroke="#fbbf24" stroke-width="3" stroke-dasharray="4,3"/>
+    </svg>` },
+
+  { id:33, cat:"stats", name:"眾數",           en:"Mode",                ask:"求眾數",   tag:"統計", grade:"s2",
+    num:"S-03", difficulty:1, special:false,
+    fcn:"出現次數最多的值", latex:"\\text{眾數}",
+    tip:"數下邊個數字出現次數最多，佢就係眾數！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="gs3" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#fb923c;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#ea580c;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs3)" stroke="#ea580c" stroke-width="9"/>
+      <text x="32" y="58" font-size="18" fill="#fb923c" font-weight="bold" font-family="sans-serif">3</text>
+      <text x="49" y="58" font-size="18" fill="#fbbf24" font-weight="900" font-family="sans-serif">7</text>
+      <text x="66" y="58" font-size="18" fill="#fbbf24" font-weight="900" font-family="sans-serif">7</text>
+      <text x="83" y="58" font-size="18" fill="#fb923c" font-weight="bold" font-family="sans-serif">7</text>
+      <text x="49" y="80" font-size="11" fill="#fed7aa" font-family="sans-serif" text-anchor="middle">7 出現3次</text>
+    </svg>` },
+
+  { id:34, cat:"stats", name:"標準差",         en:"Std Deviation",       ask:"求標準差", tag:"統計", grade:"s3",
+    num:"S-04", difficulty:2, special:false,
+    fcn:"σ = √(Σ(x−x̄)²÷n)", latex:"\\sigma = \\sqrt{\\frac{\\sum(x-\\bar{x})^2}{n}}",
+    tip:"每個數減平均數再平方，加埋再除，最後開方！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="gs4" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#38bdf8;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#0284c7;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs4)" stroke="#0284c7" stroke-width="9"/>
+      <text x="55" y="55" font-size="24" fill="#38bdf8" font-weight="bold" font-family="sans-serif" text-anchor="middle">σ</text>
+      <text x="55" y="80" font-size="11" fill="#7dd3fc" font-family="sans-serif" text-anchor="middle">√(偏差²平均)</text>
+    </svg>` },
+
+  { id:35, cat:"stats", name:"方差",           en:"Variance",            ask:"求方差",   tag:"統計", grade:"s3",
+    num:"S-05", difficulty:2, special:false,
+    fcn:"Var = Σ(x−x̄)²÷n", latex:"\\text{Var} = \\frac{\\sum(x-\\bar{x})^2}{n}",
+    tip:"標準差平方就係方差！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="gs5" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#a78bfa;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs5)" stroke="#7c3aed" stroke-width="9"/>
+      <text x="55" y="55" font-size="22" fill="#a78bfa" font-weight="bold" font-family="sans-serif" text-anchor="middle">Var</text>
+      <text x="55" y="80" font-size="11" fill="#c4b5fd" font-family="sans-serif" text-anchor="middle">Σ偏差²÷n</text>
+    </svg>` },
+
+  { id:36, cat:"stats", name:"概率",           en:"Probability",         ask:"求概率",   tag:"統計", grade:"s1",
+    num:"S-06", difficulty:1, special:false,
+    fcn:"P = 成功情況 ÷ 所有情況", latex:"P(A) = \\frac{\\text{成功}}{\\text{總數}}",
+    tip:"分子係我想要嘅情況，分母係全部情況！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="gs6" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#4ade80;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#16a34a;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs6)" stroke="#16a34a" stroke-width="9"/>
+      <text x="55" y="55" font-size="26" fill="#4ade80" font-weight="bold" font-family="sans-serif" text-anchor="middle">P</text>
+      <text x="55" y="80" font-size="11" fill="#86efac" font-family="sans-serif" text-anchor="middle">成功 ÷ 總數</text>
+    </svg>` },
+
+  { id:37, cat:"stats", name:"排列",           en:"Permutation",         ask:"求排列",   tag:"統計", grade:"s3",
+    num:"S-07", difficulty:2, special:false,
+    fcn:"P(n,r) = n!÷(n−r)!", latex:"P(n,r) = \\frac{n!}{(n-r)!}",
+    tip:"排嘢有順序，n揀r個排法總數！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="gs7" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#f472b6;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#be185d;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs7)" stroke="#be185d" stroke-width="9"/>
+      <text x="55" y="55" font-size="26" fill="#f472b6" font-weight="bold" font-family="sans-serif" text-anchor="middle">n!</text>
+      <text x="55" y="80" font-size="11" fill="#f9a8d4" font-family="sans-serif" text-anchor="middle">P(n,r) 排列</text>
+    </svg>` },
+
+  { id:38, cat:"stats", name:"組合",           en:"Combination",         ask:"求組合",   tag:"統計", grade:"s3",
+    num:"S-08", difficulty:2, special:false,
+    fcn:"C(n,r) = n!÷r!(n−r)!", latex:"C(n,r) = \\frac{n!}{r!(n-r)!}",
+    tip:"揀嘢冇順序，記住除以 r! 嚟取消順序！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="gs8" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#38bdf8;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#0369a1;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs8)" stroke="#0369a1" stroke-width="9"/>
+      <text x="55" y="55" font-size="26" fill="#38bdf8" font-weight="bold" font-family="sans-serif" text-anchor="middle">C</text>
+      <text x="55" y="80" font-size="11" fill="#7dd3fc" font-family="sans-serif" text-anchor="middle">n!÷r!(n−r)!</text>
+    </svg>` },
 ];
 
 let selected = new Set(CARDS.map(c => c.id));
-let currentTab = 'all';
+let activeFilters = new Set(['all']);
 
 function renderLatex(el, formula) {
   try {
@@ -1095,16 +1374,16 @@ function gradeClassBack(g) {
 }
 
 function catLabel(cat) {
-  return cat === 'area' ? '面積' : cat === 'peri' ? '周界' : '體積';
+  return cat === 'area' ? '面積' : cat === 'peri' ? '周界' : cat === 'vol' ? '體積' : cat === 'algebra' ? '代數' : '統計';
 }
 function catEmoji(cat) {
-  return cat === 'area' ? '⬡' : cat === 'peri' ? '◯' : '◈';
+  return cat === 'area' ? '⬡' : cat === 'peri' ? '◯' : cat === 'vol' ? '◈' : cat === 'algebra' ? '∑' : 'σ';
 }
 
-function renderCards(filter = 'all') {
+function renderCards() {
   const grid = document.getElementById('cardGrid');
   grid.innerHTML = '';
-  const filtered = CARDS.filter(c => filter === 'all' || c.cat === filter);
+  const filtered = CARDS.filter(c => activeFilters.has('all') || activeFilters.has(c.cat));
 
   filtered.forEach(card => {
     const wrap = document.createElement('div');
@@ -1177,8 +1456,8 @@ function renderCards(filter = 'all') {
   updateCount();
 }
 
-function selectAll() { CARDS.forEach(c => selected.add(c.id)); renderCards(currentTab); updateCount(); }
-function selectNone() { selected.clear(); renderCards(currentTab); updateCount(); }
+function selectAll() { CARDS.forEach(c => selected.add(c.id)); renderCards(); updateCount(); }
+function selectNone() { selected.clear(); renderCards(); updateCount(); }
 
 function updateCount() {
   document.getElementById('sel-count').textContent = selected.size;
@@ -1187,10 +1466,34 @@ function updateCount() {
 
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.onclick = () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentTab = btn.dataset.tab;
-    renderCards(currentTab);
+    const tab = btn.dataset.tab;
+
+    if (tab === 'all') {
+      // "全部" clears all other filters and shows all
+      activeFilters.clear();
+      activeFilters.add('all');
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    } else {
+      // Remove 'all' when any category is selected
+      activeFilters.delete('all');
+      document.querySelector('.tab-btn[data-tab="all"]').classList.remove('active');
+
+      // Toggle this category
+      if (activeFilters.has(tab)) {
+        activeFilters.delete(tab);
+        btn.classList.remove('active');
+        // If no categories left, revert to all
+        if (activeFilters.size === 0) {
+          activeFilters.add('all');
+          document.querySelector('.tab-btn[data-tab="all"]').classList.add('active');
+        }
+      } else {
+        activeFilters.add(tab);
+        btn.classList.add('active');
+      }
+    }
+    renderCards();
   };
 });
 
@@ -1221,7 +1524,7 @@ function printSelected() {
               <div class="p-stars">${stars(card.difficulty)}</div>
             </div>
           </div>
-          <div style="text-align:right;"><span class="p-cat-badge" style="display:inline-block;background:${card.cat==='area'?'#3b82f6':card.cat==='peri'?'#f59e0b':'#10b981'};padding:1mm 2mm;border-radius:2mm;font-size:2.5mm;font-weight:bold;color:${card.cat==='peri'?'#1e293b':'#fff'};letter-spacing:0.5mm;">${catLabel(card.cat)}</span></div>
+          <div style="text-align:right;"><span class="p-cat-badge" style="display:inline-block;background:${card.cat==='area'?'#3b82f6':card.cat==='peri'?'#f59e0b':card.cat==='vol'?'#10b981':card.cat==='algebra'?'#7c3aed':'#db2777'};padding:1mm 2mm;border-radius:2mm;font-size:2.5mm;font-weight:bold;color:${card.cat==='peri'?'#1e293b':'#fff'};letter-spacing:0.5mm;">${catLabel(card.cat)}</span></div>
           <div class="p-icon">${card.svg}</div>
           <div class="p-name">${card.name}</div>
           <div class="p-en" style="font-size:3mm;color:#94a3b8;text-align:center;font-style:italic;">${card.en}</div>
@@ -1239,7 +1542,7 @@ function printSelected() {
     sheetB.innerHTML = `<div class="print-grid"></div>`;
     const gridB = sheetB.querySelector('.print-grid');
     pageCards.forEach((card, i) => {
-      const catClass = card.cat === 'area' ? 'pb-area' : card.cat === 'peri' ? 'pb-peri' : 'pb-vol';
+      const catClass = card.cat === 'area' ? 'pb-area' : card.cat === 'peri' ? 'pb-peri' : card.cat === 'vol' ? 'pb-vol' : card.cat === 'algebra' ? 'pb-algebra' : 'pb-stats';
       gridB.innerHTML += `
         <div class="p-card back pp${i+1} ${catClass}" style="border-radius:6mm;padding:3mm;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5mm;">
           <div style="display:flex;align-items:center;gap:2mm;">
