@@ -6,6 +6,7 @@
 <title>數學公式卡牌 — 幾何篇</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="window._katexAutoRenderReady=true;"></script>
 <style>
 @page { size: A4; margin: 0; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1245,7 +1246,7 @@ function printSelected() {
             <span style="font-size:2.5mm;color:rgba(255,255,255,0.6);font-weight:700;letter-spacing:0.5mm;">${card.name} · ${catLabel(card.cat)}</span>
             <span style="font-size:2.2mm;font-weight:800;padding:0.5mm 2mm;border-radius:1.5mm;background:${card.grade==='s1'?'rgba(59,130,246,0.3)':card.grade==='s2'?'rgba(139,92,246,0.3)':'rgba(245,158,11,0.3)'};color:${card.grade==='s1'?'#93c5fd':card.grade==='s2'?'#c4b5fd':'#fde68a'};">${gradeLabel(card.grade)}</span>
           </div>
-          <div class="p-bfcn" style="font-size:5.5mm;font-weight:800;color:#fff;text-align:center;line-height:1.8;letter-spacing:0.3mm;text-shadow:0 1mm 2mm rgba(0,0,0,0.3);">${card.fcn}</div>
+          <div class="p-bfcn" style="font-size:5.5mm;font-weight:800;color:#fff;text-align:center;line-height:1.2;letter-spacing:0.3mm;">${card.fcn}</div>
           <div class="p-blatex" style="font-size:3.5mm;color:#fff;text-align:center;margin-top:2mm;">\\[${card.latex}\\]</div>
           <div class="p-btip" style="font-size:2.8mm;color:rgba(255,255,255,0.6);text-align:center;font-style:italic;margin-top:3mm;line-height:1.6;">💡 ${card.tip}</div>
         </div>`;
@@ -1253,8 +1254,18 @@ function printSelected() {
     printArea.appendChild(sheetB);
   });
 
-  printArea.classList.add('show');
-  setTimeout(() => window.print(), 400);
+  // Render KaTeX display-mode delimiters for print output
+  if (typeof renderMathInElement === 'function') {
+    setTimeout(() => {
+      renderMathInElement(printArea, {
+        delimiters: [{left: '\\[', right: '\\]', display: true}],
+        throwOnError: false
+      });
+      setTimeout(() => window.print(), 200);
+    }, 100);
+  } else {
+    setTimeout(() => window.print(), 400);
+  }
   setTimeout(() => { printArea.innerHTML = ''; printArea.classList.remove('show'); }, 800);
 }
 
