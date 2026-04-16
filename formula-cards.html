@@ -1521,11 +1521,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 
     // Show/hide geometry sub-tabs
     const geoSubTabs = document.getElementById('geoSubTabs');
-    if (tab === 'geometry') {
-      geoSubTabs.classList.remove('hidden');
-    } else {
-      geoSubTabs.classList.add('hidden');
-    }
+    geoSubTabs.style.display = (tab === 'geometry') ? 'flex' : 'none';
 
     renderCards();
   };
