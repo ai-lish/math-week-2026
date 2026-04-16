@@ -416,20 +416,19 @@ body {
   z-index: 2;
 }
 .back-fcn {
-  font-size: 14px;
-  font-weight: 700;
-  color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.7);
   text-align: center;
   letter-spacing: 0.3px;
-  line-height: 1.6;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  line-height: 1.4;
 }
 .back-latex {
   display: flex;
   justify-content: center;
   padding: 2px 0;
 }
-.back-latex .katex { font-size: 13px !important; }
+.back-latex .katex { font-size: 18px !important; font-weight: 600; }
 
 /* Back divider */
 .back-divider {
@@ -552,8 +551,8 @@ body {
 
   /* Back elements */
   .p-btag { font-size:2.5mm; color:rgba(255,255,255,0.6); font-weight:700; letter-spacing:0.5mm; text-align:center; margin-bottom:2mm; }
-  .p-bfcn { font-size:6mm; font-weight:800; color:#fff; text-align:center; line-height:1.8; letter-spacing:0.3mm; text-shadow:0 1mm 2mm rgba(0,0,0,0.3); }
-  .p-blatex { font-size:4mm; color:#fff; text-align:center; margin-top:2mm; }
+  .p-bfcn { font-size:3mm; font-weight:400; color:rgba(255,255,255,0.7); text-align:center; line-height:1.2; letter-spacing:0.3mm; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .p-blatex { font-size:6mm; font-weight:600; color:#fff; text-align:center; margin-top:1mm; line-height:1.2; }
   .p-btip { font-size:2.8mm; color:rgba(255,255,255,0.6); text-align:center; font-style:italic; margin-top:3mm; line-height:1.6; }
 
   /* Category back colors */
@@ -802,7 +801,7 @@ const CARDS = [
 
   { id:7,  cat:"peri", name:"圓形",          en:"Circle",         ask:"求周界",   tag:"周界", grade:"s1",
     num:"G-11", difficulty:1, special:false,
-    fcn:"周界 = 2πr = πd", latex:"C = 2\\pi r = \\pi d",
+    fcn:"直徑 × π = 2 × π × 半徑", latex:"C = 2\\pi r = \\pi d",
     tip:"記住 π ≈ 3.1416，半徑×2=直徑！",
     svg:`<svg viewBox="0 0 110 110">
       <defs>
@@ -1040,8 +1039,11 @@ let currentTab = 'all';
 
 function renderLatex(el, formula) {
   try {
-    katex.render(formula, el, { throwOnError: false, displayMode: false });
+    const html = katex.renderToString(formula, { throwOnError: false, displayMode: false });
+    if (!html || html.trim() === '') throw new Error('empty render');
+    el.innerHTML = html;
   } catch(e) {
+    // KaTeX failed — show plain formula text as fallback
     el.textContent = formula;
   }
 }
