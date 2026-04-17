@@ -120,6 +120,9 @@ body {
   box-shadow: 0 2px 8px rgba(245,158,11,0.3);
 }
 
+.stats-subtabs { display: flex; gap: 8px; margin-left: 8px; }
+.stats-subtabs.hidden { display: none; }
+
 .scope-label { margin-left: 12px; }
 .scope-select {
   padding: 6px 12px;
@@ -687,6 +690,10 @@ body {
     <option value="peri">周界</option>
     <option value="vol">體積</option>
   </select>
+  <div class="stats-subtabs hidden" id="statsSubTabs">
+    <button class="subtab-btn active" data-stat="central">集中趨勢</button>
+    <button class="subtab-btn active" data-stat="disp">離差</button>
+  </div>
   <span class="ctrl-label" style="margin-left:12px;">選擇</span>
   <div class="select-btns">
     <button class="sel-btn" onclick="selectAll()">全選</button>
@@ -1257,7 +1264,7 @@ const CARDS = [
     </svg>` },
 
   /* ══ 統計 STATISTICS ══ */
-  { id:31, cat:"stats", name:"平均數",         en:"Mean",                ask:"求平均",   tag:"統計", grade:"s2",
+  { id:31, cat:"stats", subcat:"central", name:"平均數",         en:"Mean",                ask:"求平均",   tag:"統計", grade:"s2",
     num:"S-01", difficulty:1, special:false,
     fcn:"平均 = 總和 ÷ 數量", latex:"\\bar{x} = \\frac{\\sum x}{n}",
     tip:"全部加埋再除以有幾多个數！",
@@ -1273,7 +1280,7 @@ const CARDS = [
       <text x="55" y="80" font-size="11" fill="#f9a8d4" font-family="sans-serif" text-anchor="middle">總和 ÷ 數量</text>
     </svg>` },
 
-  { id:32, cat:"stats", name:"中位數",         en:"Median",              ask:"求中位",   tag:"統計", grade:"s2",
+  { id:32, cat:"stats", subcat:"central", name:"中位數",         en:"Median",              ask:"求中位",   tag:"統計", grade:"s2",
     num:"S-02", difficulty:1, special:false,
     fcn:"排序後中間的值", latex:"\\text{中位數}",
     tip:"先排大小，中間位置就係中位數！",
@@ -1292,7 +1299,7 @@ const CARDS = [
       <line x1="64" y1="20" x2="64" y2="90" stroke="#fbbf24" stroke-width="3" stroke-dasharray="4,3"/>
     </svg>` },
 
-  { id:33, cat:"stats", name:"眾數",           en:"Mode",                ask:"求眾數",   tag:"統計", grade:"s2",
+  { id:33, cat:"stats", subcat:"central", name:"眾數",           en:"Mode",                ask:"求眾數",   tag:"統計", grade:"s2",
     num:"S-03", difficulty:1, special:false,
     fcn:"出現次數最多的值", latex:"\\text{眾數}",
     tip:"數下邊個數字出現次數最多，佢就係眾數！",
@@ -1311,7 +1318,7 @@ const CARDS = [
       <text x="49" y="80" font-size="11" fill="#fed7aa" font-family="sans-serif" text-anchor="middle">7 出現3次</text>
     </svg>` },
 
-  { id:34, cat:"stats", name:"標準差",         en:"Std Deviation",       ask:"求標準差", tag:"統計", grade:"s3",
+  { id:34, cat:"stats", subcat:"disp", name:"標準差",         en:"Std Deviation",       ask:"求標準差", tag:"統計", grade:"s3",
     num:"S-04", difficulty:2, special:false,
     fcn:"σ = √(Σ(x−x̄)²÷n)", latex:"\\sigma = \\sqrt{\\frac{\\sum(x-\\bar{x})^2}{n}}",
     tip:"每個數減平均數再平方，加埋再除，最後開方！",
@@ -1327,7 +1334,7 @@ const CARDS = [
       <text x="55" y="80" font-size="11" fill="#7dd3fc" font-family="sans-serif" text-anchor="middle">√(偏差²平均)</text>
     </svg>` },
 
-  { id:35, cat:"stats", name:"方差",           en:"Variance",            ask:"求方差",   tag:"統計", grade:"s3",
+  { id:35, cat:"stats", subcat:"disp", name:"方差",           en:"Variance",            ask:"求方差",   tag:"統計", grade:"s3",
     num:"S-05", difficulty:2, special:false,
     fcn:"Var = Σ(x−x̄)²÷n", latex:"\\text{Var} = \\frac{\\sum(x-\\bar{x})^2}{n}",
     tip:"標準差平方就係方差！",
@@ -1343,7 +1350,7 @@ const CARDS = [
       <text x="55" y="80" font-size="11" fill="#c4b5fd" font-family="sans-serif" text-anchor="middle">Σ偏差²÷n</text>
     </svg>` },
 
-  { id:36, cat:"stats", name:"概率",           en:"Probability",         ask:"求概率",   tag:"統計", grade:"s1",
+  { id:36, cat:"stats", subcat:"prob", name:"概率",           en:"Probability",         ask:"求概率",   tag:"統計", grade:"s1",
     num:"S-06", difficulty:1, special:false,
     fcn:"P = 成功情況 ÷ 所有情況", latex:"P(A) = \\frac{\\text{成功}}{\\text{總數}}",
     tip:"分子係我想要嘅情況，分母係全部情況！",
@@ -1359,7 +1366,7 @@ const CARDS = [
       <text x="55" y="80" font-size="11" fill="#86efac" font-family="sans-serif" text-anchor="middle">成功 ÷ 總數</text>
     </svg>` },
 
-  { id:37, cat:"stats", name:"排列",           en:"Permutation",         ask:"求排列",   tag:"統計", grade:"s3",
+  { id:37, cat:"stats", subcat:"count", name:"排列",           en:"Permutation",         ask:"求排列",   tag:"統計", grade:"s3",
     num:"S-07", difficulty:2, special:false,
     fcn:"P(n,r) = n!÷(n−r)!", latex:"P(n,r) = \\frac{n!}{(n-r)!}",
     tip:"排嘢有順序，n揀r個排法總數！",
@@ -1375,7 +1382,7 @@ const CARDS = [
       <text x="55" y="80" font-size="11" fill="#f9a8d4" font-family="sans-serif" text-anchor="middle">P(n,r) 排列</text>
     </svg>` },
 
-  { id:38, cat:"stats", name:"組合",           en:"Combination",         ask:"求組合",   tag:"統計", grade:"s3",
+  { id:38, cat:"stats", subcat:"count", name:"組合",           en:"Combination",         ask:"求組合",   tag:"統計", grade:"s3",
     num:"S-08", difficulty:2, special:false,
     fcn:"C(n,r) = n!÷r!(n−r)!", latex:"C(n,r) = \\frac{n!}{r!(n-r)!}",
     tip:"揀嘢冇順序，記住除以 r! 嚟取消順序！",
@@ -1396,6 +1403,7 @@ let selected = new Set(CARDS.map(c => c.id));
 // ── Filter State ──────────────────────────────────────────────
 let mainCategory = 'all';           // 'all' | 'algebra' | 'geometry' | 'stats' | 'other'
 let scopeFilter = 'all';            // 'all' | 'area' | 'peri' | 'vol'
+let statsSubFilters = new Set(['central','disp']); // 'central' | 'disp'
 
 function renderLatex(el, formula) {
   try {
@@ -1448,6 +1456,8 @@ function renderCards() {
       filtered = CARDS.filter(c => c.cat === 'area' || c.cat === 'peri' || c.cat === 'vol');
     } else if (mainCategory === 'stats') {
       filtered = CARDS.filter(c => c.cat === 'stats');
+      // Apply stats sub-filter: only show cards whose subcat is in statsSubFilters
+      filtered = filtered.filter(c => !c.subcat || statsSubFilters.has(c.subcat));
     } else {
       filtered = CARDS; // 'other' — no cards yet, show all
     }
@@ -1543,6 +1553,10 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
+    // Show/hide stats sub-tabs
+    const statsSubTabs = document.getElementById('statsSubTabs');
+    statsSubTabs.classList.toggle('hidden', tab !== 'stats');
+
     renderCards();
   };
 });
@@ -1551,6 +1565,27 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 document.getElementById('scopeSelect').addEventListener('change', (e) => {
   scopeFilter = e.target.value;
   renderCards();
+});
+
+// Stats sub-tab toggle
+document.querySelectorAll('[data-stat]').forEach(btn => {
+  btn.onclick = () => {
+    const stat = btn.dataset.stat;
+    if (statsSubFilters.has(stat)) {
+      statsSubFilters.delete(stat);
+      btn.classList.remove('active');
+      // If all deselected, revert to all selected
+      if (statsSubFilters.size === 0) {
+        statsSubFilters.add('central');
+        statsSubFilters.add('disp');
+        document.querySelectorAll('[data-stat]').forEach(b => b.classList.add('active'));
+      }
+    } else {
+      statsSubFilters.add(stat);
+      btn.classList.add('active');
+    }
+    renderCards();
+  };
 });
 
 function printSelected() {
