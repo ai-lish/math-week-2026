@@ -1366,7 +1366,7 @@ const CARDS = [
       <text x="55" y="80" font-size="11" fill="#86efac" font-family="sans-serif" text-anchor="middle">成功 ÷ 總數</text>
     </svg>` },
 
-  { id:37, cat:"stats", subcat:"count", name:"排列",           en:"Permutation",         ask:"求排列",   tag:"統計", grade:"s3",
+  { id:37, cat:"stats", name:"排列",           en:"Permutation",         ask:"求排列",   tag:"統計", grade:"s3",
     num:"S-07", difficulty:2, special:false,
     fcn:"P(n,r) = n!÷(n−r)!", latex:"P(n,r) = \\frac{n!}{(n-r)!}",
     tip:"排嘢有順序，n揀r個排法總數！",
@@ -1382,7 +1382,7 @@ const CARDS = [
       <text x="55" y="80" font-size="11" fill="#f9a8d4" font-family="sans-serif" text-anchor="middle">P(n,r) 排列</text>
     </svg>` },
 
-  { id:38, cat:"stats", subcat:"count", name:"組合",           en:"Combination",         ask:"求組合",   tag:"統計", grade:"s3",
+  { id:38, cat:"stats", name:"組合",           en:"Combination",         ask:"求組合",   tag:"統計", grade:"s3",
     num:"S-08", difficulty:2, special:false,
     fcn:"C(n,r) = n!÷r!(n−r)!", latex:"C(n,r) = \\frac{n!}{r!(n-r)!}",
     tip:"揀嘢冇順序，記住除以 r! 嚟取消順序！",
@@ -1396,6 +1396,75 @@ const CARDS = [
       <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs8)" stroke="#0369a1" stroke-width="9"/>
       <text x="55" y="55" font-size="26" fill="#38bdf8" font-weight="bold" font-family="sans-serif" text-anchor="middle">C</text>
       <text x="55" y="80" font-size="11" fill="#7dd3fc" font-family="sans-serif" text-anchor="middle">n!÷r!(n−r)!</text>
+    </svg>` },
+
+  /* ══ 額外離差 DISPERSION ══ */
+  { id:39, cat:"stats", subcat:"disp", name:"標準分",     en:"Standard Score",     ask:"求標準分", tag:"統計", grade:"s2",
+    num:"S-09", difficulty:2, special:false,
+    fcn:"z = (x − x̄) ÷ σ", latex:"z = \\frac{x-\\bar{x}}{\\sigma}",
+    tip:"標準分係脫離原始單位，用標準差做量度！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="gs9" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#f0abfc;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#c026d3;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs9)" stroke="#c026d3" stroke-width="9"/>
+      <text x="55" y="55" font-size="26" fill="#f0abfc" font-weight="bold" font-family="sans-serif" text-anchor="middle">z</text>
+      <text x="55" y="80" font-size="11" fill="#e879f9" font-family="sans-serif" text-anchor="middle">z = (x−x̄)/σ</text>
+    </svg>` },
+
+  { id:40, cat:"stats", subcat:"disp", name:"分佈域",     en:"Range",              ask:"求分佈域", tag:"統計", grade:"s1",
+    num:"S-10", difficulty:1, special:false,
+    fcn:"分佈域 = 最大值 − 最小值", latex:"R = \\text{最大值}-\\text{最小值}",
+    tip:"分佈域最簡單，但容易被極端值影響！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="gs10" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#fdba74;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#ea580c;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs10)" stroke="#ea580c" stroke-width="9"/>
+      <line x1="22" y1="55" x2="88" y2="55" stroke="#fdba74" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="22" cy="55" r="5" fill="#ea580c"/>
+      <text x="22" y="48" font-size="9" fill="#fdba74" font-family="sans-serif" text-anchor="middle">最小</text>
+      <circle cx="88" cy="55" r="5" fill="#ea580c"/>
+      <text x="88" y="48" font-size="9" fill="#fdba74" font-family="sans-serif" text-anchor="middle">最大</text>
+      <line x1="22" y1="70" x2="88" y2="70" stroke="#ea580c" stroke-width="3" stroke-dasharray="4,3"/>
+      <text x="55" y="80" font-size="10" fill="#fed7aa" font-family="sans-serif" text-anchor="middle">最大值−最小值</text>
+    </svg>` },
+
+  { id:41, cat:"stats", subcat:"disp", name:"四分位數間距", en:"IQR",              ask:"求四分位數間距", tag:"統計", grade:"s2",
+    num:"S-11", difficulty:2, special:false,
+    fcn:"IQR = Q₃ − Q₁", latex:"\\text{IQR} = Q_3 - Q_1",
+    tip:"四分位數間距唔受極端值影響，更穩健！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="gs11" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#67e8f9;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#0891b2;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs11)" stroke="#0891b2" stroke-width="9"/>
+      <!-- Box plot skeleton -->
+      <line x1="22" y1="55" x2="88" y2="55" stroke="#67e8f9" stroke-width="2"/>
+      <!-- Whisker left -->
+      <line x1="22" y1="45" x2="22" y2="65" stroke="#67e8f9" stroke-width="3"/>
+      <line x1="22" y1="55" x2="35" y2="55" stroke="#67e8f9" stroke-width="3"/>
+      <!-- Box -->
+      <rect x="35" y="40" width="40" height="30" rx="3" fill="rgba(103,232,249,0.3)" stroke="#67e8f9" stroke-width="2"/>
+      <!-- Median line -->
+      <line x1="52" y1="40" x2="52" y2="70" stroke="#22d3ee" stroke-width="3"/>
+      <!-- Whisker right -->
+      <line x1="75" y1="55" x2="88" y2="55" stroke="#67e8f9" stroke-width="3"/>
+      <line x1="88" y1="45" x2="88" y2="65" stroke="#67e8f9" stroke-width="3"/>
+      <!-- Labels -->
+      <text x="22" y="78" font-size="8" fill="#67e8f9" font-family="sans-serif" text-anchor="middle">Q₁</text>
+      <text x="52" y="37" font-size="8" fill="#22d3ee" font-family="sans-serif" text-anchor="middle">Q₂</text>
+      <text x="75" y="78" font-size="8" fill="#67e8f9" font-family="sans-serif" text-anchor="middle">Q₃</text>
+      <text x="55" y="96" font-size="9" fill="#a5f3fc" font-family="sans-serif" text-anchor="middle">IQR = Q₃−Q₁</text>
     </svg>` },
 ];
 
