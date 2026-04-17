@@ -120,7 +120,28 @@ body {
   box-shadow: 0 2px 8px rgba(245,158,11,0.3);
 }
 
-/* Sub-tabs for geometry sub-categories */
+.scope-label { margin-left: 12px; }
+.scope-select {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #e2e8f0;
+  background: #fff;
+  color: #1e293b;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px;
+}
+.scope-select:hover { border-color: #f59e0b; }
+.scope-select:focus { border-color: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,0.15); }
 .geo-subtabs {
   display: flex;
   gap: 8px;
@@ -659,11 +680,13 @@ body {
     <button class="tab-btn" data-tab="stats">統計</button>
     <button class="tab-btn" data-tab="other">其他</button>
   </div>
-  <div class="geo-subtabs hidden" id="geoSubTabs">
-    <button class="subtab-btn active" data-geo="area">面積</button>
-    <button class="subtab-btn active" data-geo="peri">周界</button>
-    <button class="subtab-btn active" data-geo="vol">體積</button>
-  </div>
+  <span class="ctrl-label scope-label">範圍</span>
+  <select class="scope-select" id="scopeSelect">
+    <option value="all">全部</option>
+    <option value="area">面積</option>
+    <option value="peri">周界</option>
+    <option value="vol">體積</option>
+  </select>
   <span class="ctrl-label" style="margin-left:12px;">選擇</span>
   <div class="select-btns">
     <button class="sel-btn" onclick="selectAll()">全選</button>
@@ -1372,7 +1395,7 @@ const CARDS = [
 let selected = new Set(CARDS.map(c => c.id));
 // ── Filter State ──────────────────────────────────────────────
 let mainCategory = 'all';           // 'all' | 'algebra' | 'geometry' | 'stats' | 'other'
-let geoSubFilters = new Set(['area','peri','vol']); // geometry sub-categories
+let scopeFilter = 'all';            // 'all' | 'area' | 'peri' | 'vol'
 
 function renderLatex(el, formula) {
   try {
@@ -1413,20 +1436,21 @@ function renderCards() {
   grid.innerHTML = '';
 
   let filtered;
-  if (mainCategory === 'all') {
-    filtered = CARDS;
-  } else if (mainCategory === 'algebra') {
-    filtered = CARDS.filter(c => c.cat === 'algebra');
-  } else if (mainCategory === 'geometry') {
-    filtered = CARDS.filter(c => c.cat === 'area' || c.cat === 'peri' || c.cat === 'vol');
-  } else if (mainCategory === 'stats') {
-    filtered = CARDS.filter(c => c.cat === 'stats');
+  // Scope filter takes priority — if set, bypass main category filter
+  if (scopeFilter !== 'all') {
+    filtered = CARDS.filter(c => c.cat === scopeFilter);
   } else {
-    filtered = CARDS; // 'other' — no cards yet, show all
-  }
-  // Secondary filter for geometry sub-categories
-  if (mainCategory === 'geometry') {
-    filtered = filtered.filter(c => geoSubFilters.has(c.cat));
+    if (mainCategory === 'all') {
+      filtered = CARDS;
+    } else if (mainCategory === 'algebra') {
+      filtered = CARDS.filter(c => c.cat === 'algebra');
+    } else if (mainCategory === 'geometry') {
+      filtered = CARDS.filter(c => c.cat === 'area' || c.cat === 'peri' || c.cat === 'vol');
+    } else if (mainCategory === 'stats') {
+      filtered = CARDS.filter(c => c.cat === 'stats');
+    } else {
+      filtered = CARDS; // 'other' — no cards yet, show all
+    }
   }
 
   filtered.forEach(card => {
@@ -1519,34 +1543,14 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    // Show/hide geometry sub-tabs
-    const geoSubTabs = document.getElementById('geoSubTabs');
-    geoSubTabs.classList.toggle('hidden', tab !== 'geometry');
-
     renderCards();
   };
 });
 
-// Geometry sub-tab toggle
-document.querySelectorAll('.subtab-btn').forEach(btn => {
-  btn.onclick = () => {
-    const geo = btn.dataset.geo;
-    if (geoSubFilters.has(geo)) {
-      geoSubFilters.delete(geo);
-      btn.classList.remove('active');
-      // If all deselected, revert to all selected
-      if (geoSubFilters.size === 0) {
-        geoSubFilters.add('area');
-        geoSubFilters.add('peri');
-        geoSubFilters.add('vol');
-        document.querySelectorAll('.subtab-btn').forEach(b => b.classList.add('active'));
-      }
-    } else {
-      geoSubFilters.add(geo);
-      btn.classList.add('active');
-    }
-    renderCards();
-  };
+// Scope dropdown filter
+document.getElementById('scopeSelect').addEventListener('change', (e) => {
+  scopeFilter = e.target.value;
+  renderCards();
 });
 
 function printSelected() {
