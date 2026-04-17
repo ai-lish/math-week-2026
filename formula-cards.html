@@ -694,6 +694,7 @@ body {
     <button class="subtab-btn active" data-stat="central">集中趨勢</button>
     <button class="subtab-btn active" data-stat="disp">離差</button>
     <button class="subtab-btn active" data-stat="prob">概率</button>
+    <button class="subtab-btn active" data-stat="chart">統計圖</button>
   </div>
   <span class="ctrl-label" style="margin-left:12px;">選擇</span>
   <div class="select-btns">
@@ -1399,6 +1400,92 @@ const CARDS = [
       <text x="55" y="80" font-size="11" fill="#7dd3fc" font-family="sans-serif" text-anchor="middle">n!÷r!(n−r)!</text>
     </svg>` },
 
+  /* ══ 統計圖 CHARTS ══ */
+  { id:42, cat:"stats", subcat:"chart", name:"棒形圖",       en:"Bar Chart",          ask:"睇圖答",   tag:"統計", grade:"s1",
+    num:"S-12", difficulty:1, special:false,
+    fcn:"棒形圖：類別 vs 數值", latex:"\\text{棒形圖}",
+    tip:"棒嘅高低代表數值大小，類別喺橫軸！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="gs12" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#86efac;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#16a34a;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs12)" stroke="#16a34a" stroke-width="9"/>
+      <rect x="22" y="60" width="12" height="22" rx="2" fill="#4ade80"/>
+      <rect x="40" y="42" width="12" height="40" rx="2" fill="#22c55e"/>
+      <rect x="58" y="52" width="12" height="30" rx="2" fill="#4ade80"/>
+      <rect x="76" y="35" width="12" height="47" rx="2" fill="#16a34a"/>
+      <line x1="15" y1="82" x2="95" y2="82" stroke="#86efac" stroke-width="2"/>
+    </svg>` },
+
+  { id:43, cat:"stats", subcat:"chart", name:"圓形圖",       en:"Pie Chart",          ask:"睇圖答",   tag:"統計", grade:"s1",
+    num:"S-13", difficulty:1, special:false,
+    fcn:"圓形圖：各部分佔整體比例", latex:"\\text{圓形圖}",
+    tip:"每個扇形嘅角度代表該類別所佔比例！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="gs13" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#fda4af;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#e11d48;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs13)" stroke="#e11d48" stroke-width="9"/>
+      <circle cx="55" cy="55" r="30" fill="none" stroke="#fda4af" stroke-width="16"/>
+      <path d="M55,55 L55,25 A30,30 0 0,1 82,67 Z" fill="#fb7185"/>
+      <path d="M55,55 L82,67 A30,30 0 0,1 30,78 Z" fill="#e11d48"/>
+      <path d="M55,55 L30,78 A30,30 0 0,1 55,25 Z" fill="#f87171"/>
+    </svg>` },
+
+  { id:44, cat:"stats", subcat:"chart", name:"折線圖",       en:"Line Chart",         ask:"睇圖答",   tag:"統計", grade:"s1",
+    num:"S-14", difficulty:1, special:false,
+    fcn:"折線圖：數值隨時間變化趨勢", latex:"\\text{折線圖}",
+    tip:"睇趨勢就靠折線，高就係升，低就係跌！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="gs14" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#93c5fd;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs14)" stroke="#1d4ed8" stroke-width="9"/>
+      <polyline points="22,72 38,58 54,64 70,44 86,52" fill="none" stroke="#3b82f6" stroke-width="3" stroke-linejoin="round"/>
+      <circle cx="22" cy="72" r="4" fill="#1d4ed8"/>
+      <circle cx="38" cy="58" r="4" fill="#1d4ed8"/>
+      <circle cx="54" cy="64" r="4" fill="#1d4ed8"/>
+      <circle cx="70" cy="44" r="4" fill="#1d4ed8"/>
+      <circle cx="86" cy="52" r="4" fill="#1d4ed8"/>
+      <line x1="15" y1="82" x2="95" y2="82" stroke="#93c5fd" stroke-width="2"/>
+    </svg>` },
+
+  { id:45, cat:"stats", subcat:"chart", name:"點圖",         en:"Dot Plot",          ask:"睇圖答",   tag:"統計", grade:"s1",
+    num:"S-15", difficulty:1, special:false,
+    fcn:"點圖：每點代表一個數據", latex:"\\text{點圖}",
+    tip:"點圖結合棒形圖同原始數據，睇分布一目了然！",
+    svg:`<svg viewBox="0 0 110 110">
+      <defs>
+        <linearGradient id="gs15" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#fde68a;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#d97706;stop-opacity:0.1"/>
+        </linearGradient>
+      </defs>
+      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs15)" stroke="#d97706" stroke-width="9"/>
+      <line x1="20" y1="78" x2="90" y2="78" stroke="#fde68a" stroke-width="2"/>
+      <!-- Row 1: 2 dots at value 3 -->
+      <circle cx="30" cy="72" r="4" fill="#f59e0b"/><circle cx="42" cy="72" r="4" fill="#f59e0b"/>
+      <!-- Row 2: 3 dots at value 5 -->
+      <circle cx="30" cy="60" r="4" fill="#f59e0b"/><circle cx="42" cy="60" r="4" fill="#f59e0b"/><circle cx="54" cy="60" r="4" fill="#f59e0b"/>
+      <!-- Row 3: 2 dots at value 7 -->
+      <circle cx="42" cy="48" r="4" fill="#f59e0b"/><circle cx="54" cy="48" r="4" fill="#f59e0b"/>
+      <!-- Row 4: 1 dot at value 9 -->
+      <circle cx="66" cy="36" r="4" fill="#f59e0b"/>
+      <!-- x-axis labels -->
+      <text x="30" y="86" font-size="7" fill="#fcd34d" font-family="sans-serif" text-anchor="middle">3</text>
+      <text x="42" y="86" font-size="7" fill="#fcd34d" font-family="sans-serif" text-anchor="middle">5</text>
+      <text x="66" y="86" font-size="7" fill="#fcd34d" font-family="sans-serif" text-anchor="middle">9</text>
+    </svg>` },
+
   /* ══ 額外離差 DISPERSION ══ */
   { id:39, cat:"stats", subcat:"disp", name:"標準分",     en:"Standard Score",     ask:"求標準分", tag:"統計", grade:"s2",
     num:"S-09", difficulty:2, special:false,
@@ -1473,7 +1560,7 @@ let selected = new Set(CARDS.map(c => c.id));
 // ── Filter State ──────────────────────────────────────────────
 let mainCategory = 'all';           // 'all' | 'algebra' | 'geometry' | 'stats' | 'other'
 let scopeFilter = 'all';            // 'all' | 'area' | 'peri' | 'vol'
-let statsSubFilters = new Set(['central','disp','prob']); // 'central' | 'disp' | 'prob'
+let statsSubFilters = new Set(['central','disp','prob','chart']); // 'central' | 'disp' | 'prob' | 'chart'
 
 function renderLatex(el, formula) {
   try {
@@ -1649,6 +1736,7 @@ document.querySelectorAll('[data-stat]').forEach(btn => {
         statsSubFilters.add('central');
         statsSubFilters.add('disp');
         statsSubFilters.add('prob');
+        statsSubFilters.add('chart');
         document.querySelectorAll('[data-stat]').forEach(b => b.classList.add('active'));
       }
     } else {
