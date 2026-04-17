@@ -693,6 +693,7 @@ body {
   <div class="stats-subtabs hidden" id="statsSubTabs">
     <button class="subtab-btn active" data-stat="central">集中趨勢</button>
     <button class="subtab-btn active" data-stat="disp">離差</button>
+    <button class="subtab-btn active" data-stat="prob">概率</button>
   </div>
   <span class="ctrl-label" style="margin-left:12px;">選擇</span>
   <div class="select-btns">
@@ -1472,7 +1473,7 @@ let selected = new Set(CARDS.map(c => c.id));
 // ── Filter State ──────────────────────────────────────────────
 let mainCategory = 'all';           // 'all' | 'algebra' | 'geometry' | 'stats' | 'other'
 let scopeFilter = 'all';            // 'all' | 'area' | 'peri' | 'vol'
-let statsSubFilters = new Set(['central','disp']); // 'central' | 'disp'
+let statsSubFilters = new Set(['central','disp','prob']); // 'central' | 'disp' | 'prob'
 
 function renderLatex(el, formula) {
   try {
@@ -1647,6 +1648,7 @@ document.querySelectorAll('[data-stat]').forEach(btn => {
       if (statsSubFilters.size === 0) {
         statsSubFilters.add('central');
         statsSubFilters.add('disp');
+        statsSubFilters.add('prob');
         document.querySelectorAll('[data-stat]').forEach(b => b.classList.add('active'));
       }
     } else {
