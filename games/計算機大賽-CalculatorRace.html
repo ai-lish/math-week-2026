@@ -350,22 +350,8 @@ function loadQuestions() {
   questionsLoaded = true;
 }
 
-function getGradeDifficulties(grade) {
-  // Map grade to difficulty pool(s)
-  switch(grade) {
-    case 'S1': return ['Easy'];
-    case 'S2': return ['Easy', 'Medium']; // S2: mix of easy and medium
-    case 'S3': return ['Medium'];
-    case 'S4': return ['Medium', 'Hard'];
-    case 'S5': return ['Hard'];
-    case 'S6': return ['Hard'];
-    default:   return ['Easy', 'Medium', 'Hard'];
-  }
-}
-
 function getFilteredQuestions(grade) {
-  const diffs = getGradeDifficulties(grade);
-  return questions.filter(q => diffs.includes(q.difficulty));
+  return [...questions];
 }
 
 function formatExpression(expr) {
