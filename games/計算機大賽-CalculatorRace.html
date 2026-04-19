@@ -246,32 +246,35 @@ body{
       <div class="hint-text" id="gameHint">使用計算機計算上述算式，輸入答案後按提交</div>
     </div>
     <div class="keyboard" id="keyboard">
-      <!-- Row 1 -->
+      <!-- Row 1: C DEL _ _ -->
       <button class="key clear" onclick="typeKey('clear')">C</button>
       <button class="key del" onclick="typeKey('del')">DEL</button>
-      <button class="key" onclick="typeKey('+')" style="background:rgba(255,255,255,.2)">+</button>
-      <button class="key" onclick="typeKey('-')" style="background:rgba(255,255,255,.2)">−</button>
-      <!-- Row 2: 7 8 9 × -->
+      <button class="key" style="visibility:hidden"></button>
+      <button class="key" style="visibility:hidden"></button>
+      <!-- Row 2: 7 8 9 _ -->
       <button class="key" onclick="typeKey('7')">7</button>
       <button class="key" onclick="typeKey('8')">8</button>
       <button class="key" onclick="typeKey('9')">9</button>
-      <button class="key" onclick="typeKey('x')" style="background:rgba(255,255,255,.2)">×</button>
-      <!-- Row 3: 4 5 6 ÷ -->
+      <button class="key" style="visibility:hidden"></button>
+      <!-- Row 3: 4 5 6 _ -->
       <button class="key" onclick="typeKey('4')">4</button>
       <button class="key" onclick="typeKey('5')">5</button>
       <button class="key" onclick="typeKey('6')">6</button>
-      <button class="key" onclick="typeKey('d')" style="background:rgba(255,255,255,.2)">÷</button>
-      <!-- Row 4: 1 2 3 -->
+      <button class="key" style="visibility:hidden"></button>
+      <!-- Row 4: 1 2 3 _ -->
       <button class="key" onclick="typeKey('1')">1</button>
       <button class="key" onclick="typeKey('2')">2</button>
       <button class="key" onclick="typeKey('3')">3</button>
-      <!-- Row 5: 0 (2 cols) . ± -->
+      <button class="key" style="visibility:hidden"></button>
+      <!-- Row 5: 0(2) . ± _ -->
       <button class="key" onclick="typeKey('0')" style="grid-column:span 2">0</button>
       <button class="key" onclick="typeKey('.')">.</button>
       <button class="key" onclick="typeKey('-')">±</button>
-      <!-- Row 6: 提交答案 spans 2 cols (right side) -->
-      <button class="key" style="grid-column:1/3"></button>
-      <button class="key submit" onclick="submitAns()" style="grid-column:3/5">✓ 提交答案</button>
+      <button class="key" style="visibility:hidden"></button>
+      <!-- Row 6: 提交答案 spans 2 cols -->
+      <button class="key submit" onclick="submitAns()" style="grid-column:span 2;grid-column-start:1">✓ 提交答案</button>
+      <button class="key" style="visibility:hidden"></button>
+      <button class="key" style="visibility:hidden"></button>
     </div>
   </div>
 
@@ -569,8 +572,6 @@ function typeKey(k) {
   } else if (k === '-') {
     if (inp.value.startsWith('-')) inp.value = inp.value.slice(1);
     else inp.value = '-' + inp.value;
-  } else if (['+', 'x', 'd', '*'].includes(k)) {
-    // Operator keys are decorative — ignore input
   } else {
     inp.value += k;
   }
