@@ -15,6 +15,9 @@ const fabEdit = document.getElementById('fabEdit');
 function updateCollapseBtn() {
   collapseBtn.textContent = isCollapsed ? '▶' : '▲';
   collapseBtn.title = isCollapsed ? '展開' : '摺疊';
+  if (window.innerWidth < 768) {
+    editorBackdrop.classList.toggle('visible', !isCollapsed);
+  }
 }
 
 collapseBtn.addEventListener('click', () => {
@@ -28,16 +31,66 @@ collapseBtn.addEventListener('click', () => {
 });
 
 // FAB: open editor on mobile
-fabEdit.addEventListener('click', () => {
-  if (isCollapsed) {
-    isCollapsed = false;
-    editorPanel.classList.remove('collapsed');
-    updateCollapseBtn();
-  }
-  // On mobile scroll to editor
+fabEdit.addEventListener('click', () => { openEditor(); });
+
+// ── MOBILE OVERLAY ──
+const editorBackdrop = document.getElementById('editorBackdrop');
+
+function openEditor() {
+  isCollapsed = false;
+  editorPanel.classList.remove('collapsed');
+  updateCollapseBtn();
   if (window.innerWidth < 768) {
+    editorBackdrop.classList.add('visible');
     editorPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+}
+
+function closeEditor() {
+  isCollapsed = true;
+  editorPanel.classList.add('collapsed');
+  updateCollapseBtn();
+  if (window.innerWidth < 768) {
+    editorBackdrop.classList.remove('visible');
+  }
+}
+
+function toggleEditor() {
+  if (isCollapsed) { openEditor(); } else { closeEditor(); }
+}
+
+function savePrefs() {
+  const w = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--editor-w')) || 300;
+  localStorage.setItem('fcEditorW', w);
+}
+
+function initEditorPrefs() {
+  const saved = parseInt(localStorage.getItem('fcEditorW') || '0');
+  if (saved >= 150) {
+    document.documentElement.style.setProperty('--editor-w', saved + 'px');
+  }
+  if (window.innerWidth < 768) {
+    editorBackdrop.classList.remove('visible');
+  }
+}
+
+editorBackdrop.addEventListener('click', () => {
+  if (window.innerWidth < 768) closeEditor();
+});
+
+// ── KEYBOARD NAV ──
+document.addEventListener('keydown', (e) => {
+  if (!['ArrowLeft','ArrowRight'].includes(e.key)) return;
+  const sel = document.getElementById('cardSelect');
+  const filtered = getFiltered();
+  const curIdx = filtered.findIndex(c => String(c.id) === sel.value);
+  if (curIdx < 0) return;
+  const newIdx = e.key === 'ArrowLeft'
+    ? (curIdx - 1 + filtered.length) % filtered.length
+    : (curIdx + 1) % filtered.length;
+  sel.value = filtered[newIdx].id;
+  loadCard(filtered[newIdx].id);
+  e.preventDefault();
 });
 
 // ── RESIZE HANDLE ──
@@ -72,6 +125,7 @@ function stopResize() {
   resizeHandle.classList.remove('dragging');
   document.body.style.cursor = '';
   document.body.style.userSelect = '';
+  savePrefs();
 }
 
 resizeHandle.addEventListener('pointerdown', startResize);
@@ -355,6 +409,18 @@ body { font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC"
 /* ── FAB BUTTON ── */
 .fab-edit {
   display: none;
+/* Mobile overlay backdrop */
+.editor-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 99;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+.editor-backdrop.visible { display: block; }
+
   width: 56px; height: 56px;
   border-radius: 50%;
   background: linear-gradient(135deg, #f59e0b, #d97706);
@@ -482,6 +548,10 @@ body { font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC"
     </div>
   </div>
 </div>
+
+
+<!-- Mobile editor backdrop -->
+<div class="editor-backdrop" id="editorBackdrop"></div>
 
 <!-- FAB for mobile -->
 <button class="fab-edit" id="fabEdit" title="打開編輯器">✏️</button>
@@ -688,6 +758,10 @@ function loadCard(id) {
   document.getElementById('prevBtn').disabled = idx <= 0;
   document.getElementById('nextBtn').disabled = idx >= filtered.length - 1;
   renderViewer(card);
+  // Auto-open editor backdrop on mobile after loading
+  if (window.innerWidth < 768) {
+    editorBackdrop.classList.add('visible');
+  }
 }
 
 function getForm() {
@@ -881,6 +955,7 @@ document.getElementById('copyBtn').addEventListener('click', () => {
 
 // Init
 populateSelect();
+initEditorPrefs();
 renderViewer(null);
 </script>
 </body>
