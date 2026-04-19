@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>🧮 計算機大賽</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -360,19 +362,45 @@ function getFilteredQuestions(mode) {
 }
 
 function formatExpression(expr) {
-  return expr
+  // Convert to LaTeX, wrap in \( \) for MathJax inline rendering
+  let latex = expr
+    // Scientific notation: 1.33e+03 → 1.33\times10^{3}
+    .replace(/(\d+\.?\d*)e\+(\d+)/gi, '$1\\times10^{$2}')
+    .replace(/(\d+\.?\d*)e-(\d+)/gi, '$1\\times10^{-$2}')
+    // Powers: 2**5 → 2^5
     .replace(/\*\*/g, '^')
-    .replace(/\*/g, '×')
-    .replace(/sqrt\(([^)]+)\)/g, '√($1)')
-    .replace(/log10\(/g, 'log₁₀(')
-    .replace(/ln\(/g, 'ln(')
-    .replace(/sin\(/g, 'sin(')
-    .replace(/cos\(/g, 'cos(')
-    .replace(/tan\(/g, 'tan(')
-    .replace(/arctan\(/g, 'arctan(')
-    .replace(/\[deg\]/g, '°')
-    .replace(/\+\+/g, '+')
-    .replace(/e(?![0-9])/g, 'e');
+    // Multiplication: * → \times
+    .replace(/\*/g, '\\times ')
+    // Square root: sqrt(x) → \sqrt{x}
+    .replace(/sqrt\(([^)]+)\)/g, '\\sqrt{$1}')
+    // n-th root: **()^(1/n) → \sqrt[n]{...}
+    // Basic: already covered by power
+    // log10: → \log_{10}
+    .replace(/log10\(([^)]+)\)/g, '\\log_{10}($1)')
+    // ln → \ln
+    .replace(/ln\(([^)]+)\)/g, '\\ln($1)')
+    // sin/cos/tan/arctan → \sin etc
+    .replace(/sin\(/g, '\\sin(')
+    .replace(/cos\(/g, '\\cos(')
+    .replace(/tan\(/g, '\\tan(')
+    .replace(/arctan\(/g, '\\arctan(')
+    // Degree marker: sin(45)[deg] → \sin 45° (LaTeX text degree)
+    // Use \text{°} for upright degree symbol in MathJax
+    .replace(/(\d+\.?\d*)\[deg\]/g, '$1^{°}')
+    .replace(/\[deg\]/g, '^{°}')
+    // π constant
+    .replace(/\bpi\b/g, '\\pi')
+    // e constant (Euler's number) — only standalone, not followed by digits
+    // keep regular 'e'
+    // Clean up double spaces
+    .replace(/\s+/g, ' ')
+    .trim();
+  return latex;
+}
+
+function getLatexForDisplay(expr) {
+  // Returns LaTeX string for KaTeX rendering (no delimiters needed)
+  return formatExpression(expr);
 }
 
 function getNote(q) {
@@ -387,8 +415,11 @@ function nextQuestion() {
   const q = pool[Math.floor(Math.random() * pool.length)];
   currentQ = q;
   answered = false;
-  document.getElementById('questionExpr').textContent = formatExpression(q.expression);
+  document.getElementById('questionExpr').innerHTML = '';
   document.getElementById('questionNote').textContent = getNote(q);
+  katex.render(getLatexForDisplay(q.expression), document.getElementById('questionExpr'), {
+    throwOnError: false, displayMode: false
+  });
   document.getElementById('calcInput').value = '';
   document.getElementById('calcInput').focus();
 
@@ -452,12 +483,34 @@ function submitAns() {
   }, 1200);
 }
 
+function formatAnswer(ans) {
+  // Format answer for display: plain number or LaTeX scientific notation
+  if (typeof ans !== 'number' || isNaN(ans)) return String(ans);
+  // If large number or scientific notation, show in nice format
+  const s = String(ans);
+  if (s.includes('e+') || s.includes('e-')) {
+    const parts = s.split('e');
+    const base = parseFloat(parts[0]);
+    const exp = parseInt(parts[1]);
+    if (parts[0].includes('.')) {
+      // 3sf display
+      return `\\( ${base.toFixed(3)}\\times10^{${exp}}} \\)`;
+    }
+    return `\\( ${base}\\times10^{${exp}}} \\)`;
+  }
+  // Regular number
+  if (Number.isInteger(ans)) return String(ans);
+  return String(ans.toFixed(3));
+}
+
 function showResult(correct, correctAns) {
   const kb = document.getElementById('keyboard');
   if (correct) {
     kb.innerHTML = '<div class="result-overlay"><div class="result-icon result-correct">✓</div></div>';
   } else {
-    kb.innerHTML = `<div class="result-overlay"><div class="result-icon result-wrong">✗</div><div style="color:rgba(255,255,255,.6);margin-top:8px">正確答案: ${correctAns}</div></div>`;
+    kb.innerHTML = `<div class="result-overlay"><div class="result-icon result-wrong">✗</div><div style="color:rgba(255,255,255,.6);margin-top:8px">正確答案: <span id="correctAnsLatex"></span></div></div>`;
+    const ansEl = document.getElementById('correctAnsLatex');
+    katex.render(String(correctAns), ansEl, { throwOnError: false, displayMode: false });
   }
   setTimeout(() => {
     kb.innerHTML = `
