@@ -289,6 +289,7 @@ body { font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC"
   z-index: 99;
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
+  pointer-events: none;
 }
 .editor-backdrop.visible { display: block; }
 
@@ -498,23 +499,23 @@ function initEditorPrefs() {
   }
 }
 
-editorBackdrop.addEventListener('click', () => {
-  if (window.innerWidth < 768) closeEditor();
-});
+// Backdrop click handled by editorPanel outside click
 
-// ── KEYBOARD NAV ──
-document.addEventListener('keydown', (e) => {
-  if (!['ArrowLeft','ArrowRight'].includes(e.key)) return;
-  const sel = document.getElementById('cardSelect');
-  const filtered = getFiltered();
-  const curIdx = filtered.findIndex(c => String(c.id) === sel.value);
-  if (curIdx < 0) return;
-  const newIdx = e.key === 'ArrowLeft'
-    ? (curIdx - 1 + filtered.length) % filtered.length
-    : (curIdx + 1) % filtered.length;
-  sel.value = filtered[newIdx].id;
-  loadCard(filtered[newIdx].id);
-  e.preventDefault();
+// ── OUTSIDE CLICK TO CLOSE ──
+document.addEventListener('click', (e) => {
+  if (window.innerWidth >= 768) return;
+  if (!editorBackdrop.classList.contains('visible')) return;
+  const panel = document.getElementById('editorPanel');
+  if (!panel) return;
+  const rect = panel.getBoundingClientRect();
+  const inPanel = (
+    e.clientX >= rect.left && e.clientX <= rect.right &&
+    e.clientY >= rect.top  && e.clientY <= rect.bottom
+  );
+  if (!inPanel) {
+    closeEditor();
+    e.preventDefault();
+  }
 });
 
 // ── RESIZE HANDLE ──
