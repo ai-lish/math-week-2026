@@ -35,6 +35,24 @@ body{
 }
 .header h1{font-size:1.6rem;font-weight:900;color:#fff}
 .header p{color:rgba(255,255,255,.8);font-size:.85rem;margin-top:4px}
+/* Tab bar */
+.tab-bar{
+  display:flex;
+  background:rgba(0,0,0,.2);
+}
+.tab{
+  flex:1;padding:14px 0;border:none;
+  font-size:.95rem;font-weight:700;cursor:pointer;
+  background:transparent;color:rgba(255,255,255,.5);
+  transition:all .2s;font-family:inherit;
+  border-bottom:3px solid transparent;
+}
+.tab.active{
+  color:#fff;
+  border-bottom-color:var(--gold);
+  background:rgba(255,255,255,.05);
+}
+.tab:hover:not(.active){color:rgba(255,255,255,.8)}
 /* Mode select */
 .mode-select{padding:24px;text-align:center}
 .mode-select h2{font-size:1.1rem;margin-bottom:16px;color:var(--gold)}
@@ -177,10 +195,16 @@ body{
   <!-- Header -->
   <div class="header">
     <h1>🧮 計算機大賽</h1>
-    <p>用 CASIO fx50FHII 計算，60秒挑戰！</p>
+    <p>60秒快問快答！</p>
   </div>
 
-<!-- Grade select -->
+  <!-- Mode tabs -->
+  <div class="tab-bar" id="tabBar">
+    <button class="tab active" id="tabCalc" onclick="selectMode('calc')">🧮 使用計算機</button>
+    <button class="tab" id="tabBrain" onclick="selectMode('brain')">🧠 不使用計算機</button>
+  </div>
+
+  <!-- Grade select -->
   <div class="mode-select" id="modeSelect">
     <h2>🎯 選擇年級</h2>
     <div class="modes">
@@ -195,7 +219,7 @@ body{
 
   <!-- Leaderboard -->
   <div id="leaderboardArea" style="padding:0 24px 24px;display:none">
-    <h3 style="color:var(--gold);font-size:1rem;margin-bottom:12px;text-align:center">🏆 各級龍虎榜</h3>
+    <h3 style="color:var(--gold);font-size:1rem;margin-bottom:12px;text-align:center" id="leaderboardTitle">🏆 各級龍虎榜</h3>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px" id="leaderboardGrid"></div>
   </div>
 
@@ -243,7 +267,7 @@ body{
     <input type="text" class="name-input" id="playerName" placeholder="你的名字" maxlength="12">
     <button class="name-submit" onclick="submitScore()">上傳分數</button>
     <div style="margin-top:10px">
-      <button class="play-again" onclick="playAgain()" style="background:#333;padding:10px 20px;font-size:.95rem">略過</button>
+      <button class="play-again" onclick="playAgain()" style="background:#444;padding:10px 20px;font-size:.95rem">略過</button>
     </div>
   </div>
 
@@ -266,7 +290,10 @@ body{
         <div class="stat-l">準確率</div>
       </div>
     </div>
-    <button class="play-again" onclick="playAgain()">再玩一次</button>
+    <div style="display:flex;gap:10px;justify-content:center;margin-top:16px">
+      <button class="play-again" style="background:var(--teal)" onclick="showNameEntry()">上傳分數</button>
+      <button class="play-again" onclick="playAgain()">再玩一次</button>
+    </div>
   </div>
 </div>
 
@@ -290,6 +317,7 @@ const STORAGE_KEY = 'calc_race_scores';
 let questions = [];
 let gameGrade = 'S1';
 let gameTimer = null;
+let gameCalcMode = 'calc'; // 'calc' = needs calculator (3sf), 'brain' = exact answer
 let timeLeft = GAME_DURATION;
 let correctCount = 0;
 let wrongCount = 0;
@@ -298,56 +326,57 @@ let answered = false;
 let questionsLoaded = false;
 
 // Built-in question set (40 questions — enough for demo)
+// needsCalc: true = use calculator (3sf answer), false = exact answer
 const BUILTIN_QUESTIONS = [
-  // Easy
-  {id:'calc-0001',expression:'7*190',answer:1330,difficulty:'Easy',topics:'basic'},
-  {id:'calc-0002',expression:'11.238*36.85',answer:414,difficulty:'Easy',topics:'basic'},
-  {id:'calc-0003',expression:'2**5',answer:32,difficulty:'Easy',topics:'basic'},
-  {id:'calc-0004',expression:'8-24',answer:-16,difficulty:'Easy',topics:'basic'},
-  {id:'calc-0005',expression:'25.317*1.424',answer:36.1,difficulty:'Easy',topics:'basic'},
-  {id:'calc-0006',expression:'35.829*35.096',answer:1258,difficulty:'Easy',topics:'basic'},
-  {id:'calc-0007',expression:'sqrt(9)',answer:3,difficulty:'Easy',topics:'basic'},
-  {id:'calc-0008',expression:'sqrt(36)',answer:6,difficulty:'Easy',topics:'basic'},
-  {id:'calc-0009',expression:'2*12/100',answer:0.24,difficulty:'Easy',topics:'basic'},
-  {id:'calc-0010',expression:'sqrt(16)',answer:4,difficulty:'Easy',topics:'basic'},
-  {id:'calc-0011',expression:'40*15/100',answer:6,difficulty:'Easy',topics:'basic'},
-  {id:'calc-0012',expression:'27*10/100',answer:2.7,difficulty:'Easy',topics:'basic'},
-  {id:'calc-0013',expression:'sqrt(4)',answer:2,difficulty:'Easy',topics:'basic'},
-  {id:'calc-0014',expression:'89*20/100',answer:17.8,difficulty:'Easy',topics:'basic'},
-  {id:'calc-0015',expression:'187+118',answer:305,difficulty:'Easy',topics:'basic'},
-  {id:'calc-0016',expression:'5**4',answer:625,difficulty:'Easy',topics:'basic'},
-  {id:'calc-0017',expression:'4**2',answer:16,difficulty:'Easy',topics:'basic'},
-  {id:'calc-0018',expression:'170*59',answer:10030,difficulty:'Easy',topics:'basic'},
-  {id:'calc-0019',expression:'150+78',answer:228,difficulty:'Easy',topics:'basic'},
-  {id:'calc-0020',expression:'234-87',answer:147,difficulty:'Easy',topics:'basic'},
-  {id:'calc-0021',expression:'12*45',answer:540,difficulty:'Easy',topics:'basic'},
-  {id:'calc-0022',expression:'144/12',answer:12,difficulty:'Easy',topics:'basic'},
-  {id:'calc-0023',expression:'sqrt(144)',answer:12,difficulty:'Easy',topics:'basic'},
-  {id:'calc-0024',expression:'18*25',answer:450,difficulty:'Easy',topics:'basic'},
-  {id:'calc-0025',expression:'96/8',answer:12,difficulty:'Easy',topics:'basic'},
-  // Medium
-  {id:'calc-0201',expression:'sqrt(2)',answer:1.414,difficulty:'Medium',topics:'intermediate'},
-  {id:'calc-0202',expression:'sqrt(3)',answer:1.732,difficulty:'Medium',topics:'intermediate'},
-  {id:'calc-0203',expression:'sqrt(5)',answer:2.236,difficulty:'Medium',topics:'intermediate'},
-  {id:'calc-0204',expression:'log10(100)',answer:2,difficulty:'Medium',topics:'intermediate'},
-  {id:'calc-0205',expression:'sin(30)',answer:0.5,difficulty:'Medium',topics:'intermediate',note:'[deg]'},
-  {id:'calc-0206',expression:'cos(60)',answer:0.5,difficulty:'Medium',topics:'intermediate',note:'[deg]'},
-  {id:'calc-0207',expression:'tan(45)',answer:1,difficulty:'Medium',topics:'intermediate',note:'[deg]'},
-  {id:'calc-0208',expression:'13/6*100',answer:216.67,difficulty:'Medium',topics:'intermediate'},
-  {id:'calc-0209',expression:'sqrt(71)',answer:8.426,difficulty:'Medium',topics:'intermediate'},
-  {id:'calc-0210',expression:'ln(7)',answer:1.946,difficulty:'Medium',topics:'intermediate'},
-  {id:'calc-0211',expression:'log10(250)',answer:2.398,difficulty:'Medium',topics:'intermediate'},
-  {id:'calc-0212',expression:'log10(50)',answer:1.699,difficulty:'Medium',topics:'intermediate'},
-  {id:'calc-0213',expression:'ln(50)',answer:3.912,difficulty:'Medium',topics:'intermediate'},
-  {id:'calc-0214',expression:'sin(45)',answer:0.7071,difficulty:'Medium',topics:'intermediate',note:'[deg]'},
-  // Hard
-  {id:'calc-0401',expression:'sin(75)+cos(30)',answer:1.573,difficulty:'Hard',topics:'advanced',note:'[deg]'},
-  {id:'calc-0402',expression:'(3+4*5)/(2+3)*sqrt(7)',answer:6.633,difficulty:'Hard',topics:'advanced'},
-  {id:'calc-0403',expression:'arctan(1)',answer:45,difficulty:'Hard',topics:'advanced',note:'[deg]'},
-  {id:'calc-0404',expression:'(pi+e)*2',answer:8.539,difficulty:'Hard',topics:'advanced'},
-  {id:'calc-0405',expression:'(pi+e)*3/2',answer:6.404,difficulty:'Hard',topics:'advanced'},
-  {id:'calc-0406',expression:'(pi+e)*5/2',answer:10.73,difficulty:'Hard',topics:'advanced'},
-  {id:'calc-0407',expression:'ln(482+e*1)',answer:6.477,difficulty:'Hard',topics:'advanced'},
+  // Easy - exact answers (no calculator needed)
+  {id:'calc-0001',expression:'7*190',answer:1330,difficulty:'Easy',topics:'basic',needsCalc:false},
+  {id:'calc-0002',expression:'11.238*36.85',answer:414,difficulty:'Easy',topics:'basic',needsCalc:false},
+  {id:'calc-0003',expression:'2**5',answer:32,difficulty:'Easy',topics:'basic',needsCalc:false},
+  {id:'calc-0004',expression:'8-24',answer:-16,difficulty:'Easy',topics:'basic',needsCalc:false},
+  {id:'calc-0005',expression:'25.317*1.424',answer:36.1,difficulty:'Easy',topics:'basic',needsCalc:false},
+  {id:'calc-0006',expression:'35.829*35.096',answer:1258,difficulty:'Easy',topics:'basic',needsCalc:false},
+  {id:'calc-0007',expression:'sqrt(9)',answer:3,difficulty:'Easy',topics:'basic',needsCalc:false},
+  {id:'calc-0008',expression:'sqrt(36)',answer:6,difficulty:'Easy',topics:'basic',needsCalc:false},
+  {id:'calc-0009',expression:'2*12/100',answer:0.24,difficulty:'Easy',topics:'basic',needsCalc:false},
+  {id:'calc-0010',expression:'sqrt(16)',answer:4,difficulty:'Easy',topics:'basic',needsCalc:false},
+  {id:'calc-0011',expression:'40*15/100',answer:6,difficulty:'Easy',topics:'basic',needsCalc:false},
+  {id:'calc-0012',expression:'27*10/100',answer:2.7,difficulty:'Easy',topics:'basic',needsCalc:false},
+  {id:'calc-0013',expression:'sqrt(4)',answer:2,difficulty:'Easy',topics:'basic',needsCalc:false},
+  {id:'calc-0014',expression:'89*20/100',answer:17.8,difficulty:'Easy',topics:'basic',needsCalc:false},
+  {id:'calc-0015',expression:'187+118',answer:305,difficulty:'Easy',topics:'basic',needsCalc:false},
+  {id:'calc-0016',expression:'5**4',answer:625,difficulty:'Easy',topics:'basic',needsCalc:false},
+  {id:'calc-0017',expression:'4**2',answer:16,difficulty:'Easy',topics:'basic',needsCalc:false},
+  {id:'calc-0018',expression:'170*59',answer:10030,difficulty:'Easy',topics:'basic',needsCalc:false},
+  {id:'calc-0019',expression:'150+78',answer:228,difficulty:'Easy',topics:'basic',needsCalc:false},
+  {id:'calc-0020',expression:'234-87',answer:147,difficulty:'Easy',topics:'basic',needsCalc:false},
+  {id:'calc-0021',expression:'12*45',answer:540,difficulty:'Easy',topics:'basic',needsCalc:false},
+  {id:'calc-0022',expression:'144/12',answer:12,difficulty:'Easy',topics:'basic',needsCalc:false},
+  {id:'calc-0023',expression:'sqrt(144)',answer:12,difficulty:'Easy',topics:'basic',needsCalc:false},
+  {id:'calc-0024',expression:'18*25',answer:450,difficulty:'Easy',topics:'basic',needsCalc:false},
+  {id:'calc-0025',expression:'96/8',answer:12,difficulty:'Easy',topics:'basic',needsCalc:false},
+  // Medium - needs calculator (3sf)
+  {id:'calc-0201',expression:'sqrt(2)',answer:1.414,difficulty:'Medium',topics:'intermediate',needsCalc:true,note:'[deg]'},
+  {id:'calc-0202',expression:'sqrt(3)',answer:1.732,difficulty:'Medium',topics:'intermediate',needsCalc:true,note:'[deg]'},
+  {id:'calc-0203',expression:'sqrt(5)',answer:2.236,difficulty:'Medium',topics:'intermediate',needsCalc:true,note:'[deg]'},
+  {id:'calc-0204',expression:'log10(100)',answer:2,difficulty:'Medium',topics:'intermediate',needsCalc:true,note:'[deg]'},
+  {id:'calc-0205',expression:'sin(30)',answer:0.5,difficulty:'Medium',topics:'intermediate',needsCalc:true,note:'[deg]'},
+  {id:'calc-0206',expression:'cos(60)',answer:0.5,difficulty:'Medium',topics:'intermediate',needsCalc:true,note:'[deg]'},
+  {id:'calc-0207',expression:'tan(45)',answer:1,difficulty:'Medium',topics:'intermediate',needsCalc:true,note:'[deg]'},
+  {id:'calc-0208',expression:'13/6*100',answer:216.67,difficulty:'Medium',topics:'intermediate',needsCalc:true},
+  {id:'calc-0209',expression:'sqrt(71)',answer:8.426,difficulty:'Medium',topics:'intermediate',needsCalc:true},
+  {id:'calc-0210',expression:'ln(7)',answer:1.946,difficulty:'Medium',topics:'intermediate',needsCalc:true},
+  {id:'calc-0211',expression:'log10(250)',answer:2.398,difficulty:'Medium',topics:'intermediate',needsCalc:true},
+  {id:'calc-0212',expression:'log10(50)',answer:1.699,difficulty:'Medium',topics:'intermediate',needsCalc:true},
+  {id:'calc-0213',expression:'ln(50)',answer:3.912,difficulty:'Medium',topics:'intermediate',needsCalc:true},
+  {id:'calc-0214',expression:'sin(45)',answer:0.7071,difficulty:'Medium',topics:'intermediate',needsCalc:true,note:'[deg]'},
+  // Hard - needs calculator (3sf)
+  {id:'calc-0401',expression:'sin(75)+cos(30)',answer:1.573,difficulty:'Hard',topics:'advanced',needsCalc:true,note:'[deg]'},
+  {id:'calc-0402',expression:'(3+4*5)/(2+3)*sqrt(7)',answer:6.633,difficulty:'Hard',topics:'advanced',needsCalc:true},
+  {id:'calc-0403',expression:'arctan(1)',answer:45,difficulty:'Hard',topics:'advanced',needsCalc:true,note:'[deg]'},
+  {id:'calc-0404',expression:'(pi+e)*2',answer:8.539,difficulty:'Hard',topics:'advanced',needsCalc:true},
+  {id:'calc-0405',expression:'(pi+e)*3/2',answer:6.404,difficulty:'Hard',topics:'advanced',needsCalc:true},
+  {id:'calc-0406',expression:'(pi+e)*5/2',answer:10.73,difficulty:'Hard',topics:'advanced',needsCalc:true},
+  {id:'calc-0407',expression:'ln(482+e*1)',answer:6.477,difficulty:'Hard',topics:'advanced',needsCalc:true},
 ];
 
 function loadQuestions() {
@@ -357,7 +386,8 @@ function loadQuestions() {
 }
 
 function getFilteredQuestions(grade) {
-  return [...questions];
+  // Filter by calc mode: 'calc' = needs calculator (needsCalc:true), 'brain' = exact (needsCalc:false)
+  return questions.filter(q => q.needsCalc === (gameCalcMode === 'calc'));
 }
 
 function formatExpression(expr) {
@@ -555,6 +585,7 @@ function endGame() {
   const acc = total > 0 ? Math.round(correctCount / total * 100) : 0;
   document.getElementById('finalAccuracy').textContent = acc + '%';
   document.getElementById('gameArea').style.display = 'none';
+  document.getElementById('tabBar').style.display = 'none';
   document.getElementById('endArea').style.display = 'block';
 }
 
@@ -566,6 +597,7 @@ function startGame(grade) {
   document.getElementById('wrongCount').textContent = '0';
   document.getElementById('modeSelect').style.display = 'none';
   document.getElementById('leaderboardArea').style.display = 'none';
+  document.getElementById('tabBar').style.display = 'none';
   document.getElementById('gameArea').style.display = 'block';
   document.getElementById('endArea').style.display = 'none';
   nextQuestion();
@@ -581,19 +613,22 @@ function playAgain() {
   document.getElementById('nameArea').style.display = 'none';
   document.getElementById('modeSelect').style.display = 'block';
   document.getElementById('leaderboardArea').style.display = 'block';
+  document.getElementById('tabBar').style.display = 'flex';
   if (gameTimer) clearInterval(gameTimer);
 }
 
 function submitScore() {
   const name = document.getElementById('playerName').value.trim() || '匿名';
   const score = correctCount - wrongCount;
-  const entry = { name, score, grade: gameGrade, time: Date.now() };
+  const entry = { name, score, grade: gameGrade, mode: gameCalcMode, time: Date.now() };
   const scores = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
   scores.push(entry);
   scores.sort((a, b) => b.score - a.score);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(scores.slice(0, 100)));
   document.getElementById('nameArea').style.display = 'none';
-  document.getElementById('endArea').style.display = 'block';
+  document.getElementById('tabBar').style.display = 'flex';
+  document.getElementById('modeSelect').style.display = 'block';
+  document.getElementById('leaderboardArea').style.display = 'block';
   renderLeaderboard();
 }
 
@@ -608,13 +643,31 @@ document.addEventListener('keydown', e => {
 
 // Init
 loadQuestions();
+document.getElementById('leaderboardTitle').textContent = '🏆 使用計算機 各級龍虎榜';
 renderLeaderboard();
+
+function selectMode(mode) {
+  gameCalcMode = mode;
+  document.getElementById('tabCalc').classList.toggle('active', mode === 'calc');
+  document.getElementById('tabBrain').classList.toggle('active', mode === 'brain');
+  const title = document.getElementById('leaderboardTitle');
+  if (title) title.textContent = mode === 'calc' ? '🏆 使用計算機 各級龍虎榜' : '🏆 不使用計算機 各級龍虎榜';
+  renderLeaderboard();
+}
+
+function showNameEntry() {
+  document.getElementById('endArea').style.display = 'none';
+  document.getElementById('nameArea').style.display = 'block';
+  document.getElementById('playerName').value = '';
+  document.getElementById('playerName').focus();
+  document.getElementById('playerName').onkeydown = e => { if (e.key === 'Enter') submitScore(); };
+}
 
 function renderLeaderboard() {
   const grades = ['S1','S2','S3','S4','S5','S6'];
   const gradeNames = {S1:'中一',S2:'中二',S3:'中三',S4:'中四',S5:'中五',S6:'中六'};
   const colors = {S1:'#2ecc71',S2:'#27ae60',S3:'#f39c12',S4:'#e67e22',S5:'#e74c3c',S6:'#c0392b'};
-  const scores = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  const scores = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]').filter(s => s.mode === gameCalcMode);
   const grid = document.getElementById('leaderboardGrid');
   if (!grid) return;
   grid.innerHTML = '';
