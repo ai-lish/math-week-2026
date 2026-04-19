@@ -180,22 +180,16 @@ body{
     <p>用 CASIO fx50FHII 計算，60秒挑戰！</p>
   </div>
 
-  <!-- Mode Select -->
+<!-- Grade select -->
   <div class="mode-select" id="modeSelect">
-    <h2>🎯 選擇難度</h2>
+    <h2>🎯 選擇年級</h2>
     <div class="modes">
-      <button class="mode-btn easy" onclick="startGame('Easy')">
-        🟢 Easy<span>基礎運算</span>
-      </button>
-      <button class="mode-btn med" onclick="startGame('Medium')">
-        🟡 Medium<span>進階計算</span>
-      </button>
-      <button class="mode-btn hard" onclick="startGame('Hard')">
-        🔴 Hard<span>綜合應用</span>
-      </button>
-      <button class="mode-btn all" onclick="startGame('Mixed')">
-        ⚡ 混合模式<span>全部難度</span>
-      </button>
+      <button class="mode-btn easy" onclick="startGame('S1')">中一<span>基礎運算</span></button>
+      <button class="mode-btn easy" onclick="startGame('S2')">中二<span>基礎計算</span></button>
+      <button class="mode-btn med" onclick="startGame('S3')">中三<span>進階應用</span></button>
+      <button class="mode-btn hard" onclick="startGame('S4')">中四<span>綜合運算</span></button>
+      <button class="mode-btn hard" onclick="startGame('S5')">中五<span>高階應用</span></button>
+      <button class="mode-btn hard" onclick="startGame('S6')">中六<span>終極挑戰</span></button>
     </div>
   </div>
 
@@ -208,7 +202,7 @@ body{
     </div>
     <div class="score-board">
       <span>✅ <span class="score-pos" id="correctCount">0</span></span>
-      <span id="diffBadge" class="difficulty-badge easy">Easy</span>
+      <span id="diffBadge" class="difficulty-badge easy">中一</span>
       <span>❌ <span class="score-neg" id="wrongCount">0</span></span>
     </div>
     <div class="question-display">
@@ -288,7 +282,7 @@ const GAME_DURATION = 60;
 const STORAGE_KEY = 'calc_race_scores';
 
 let questions = [];
-let gameMode = 'Easy';
+let gameGrade = 'S1';
 let gameTimer = null;
 let timeLeft = GAME_DURATION;
 let correctCount = 0;
@@ -356,9 +350,22 @@ function loadQuestions() {
   questionsLoaded = true;
 }
 
-function getFilteredQuestions(mode) {
-  if (mode === 'Mixed') return [...questions];
-  return questions.filter(q => q.difficulty === mode);
+function getGradeDifficulties(grade) {
+  // Map grade to difficulty pool(s)
+  switch(grade) {
+    case 'S1': return ['Easy'];
+    case 'S2': return ['Easy', 'Medium']; // S2: mix of easy and medium
+    case 'S3': return ['Medium'];
+    case 'S4': return ['Medium', 'Hard'];
+    case 'S5': return ['Hard'];
+    case 'S6': return ['Hard'];
+    default:   return ['Easy', 'Medium', 'Hard'];
+  }
+}
+
+function getFilteredQuestions(grade) {
+  const diffs = getGradeDifficulties(grade);
+  return questions.filter(q => diffs.includes(q.difficulty));
 }
 
 function formatExpression(expr) {
@@ -410,7 +417,7 @@ function getNote(q) {
 }
 
 function nextQuestion() {
-  const pool = getFilteredQuestions(gameMode);
+  const pool = getFilteredQuestions(gameGrade);
   if (pool.length === 0) return;
   const q = pool[Math.floor(Math.random() * pool.length)];
   currentQ = q;
@@ -423,9 +430,10 @@ function nextQuestion() {
   document.getElementById('calcInput').value = '';
   document.getElementById('calcInput').focus();
 
+  const gradeNames = {S1:'中一', S2:'中二', S3:'中三', S4:'中四', S5:'中五', S6:'中六'};
   const badge = document.getElementById('diffBadge');
-  badge.className = 'difficulty-badge ' + (gameMode === 'Mixed' ? q.difficulty.toLowerCase() : gameMode.toLowerCase());
-  badge.textContent = gameMode === 'Mixed' ? q.difficulty : gameMode;
+  badge.className = 'difficulty-badge ' + (q.difficulty === 'Easy' ? 'easy' : q.difficulty === 'Medium' ? 'med' : 'hard');
+  badge.textContent = gradeNames[gameGrade] || gameGrade;
 }
 
 function startTimer() {
@@ -558,8 +566,8 @@ function endGame() {
   document.getElementById('endArea').style.display = 'block';
 }
 
-function startGame(mode) {
-  gameMode = mode;
+function startGame(grade) {
+  gameGrade = grade;
   correctCount = 0;
   wrongCount = 0;
   document.getElementById('correctCount').textContent = '0';
@@ -585,7 +593,7 @@ function playAgain() {
 function submitScore() {
   const name = document.getElementById('playerName').value.trim() || '匿名';
   const score = correctCount - wrongCount;
-  const entry = { name, score, mode: gameMode, time: Date.now() };
+  const entry = { name, score, grade: gameGrade, time: Date.now() };
   const scores = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
   scores.push(entry);
   scores.sort((a, b) => b.score - a.score);
