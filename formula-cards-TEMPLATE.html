@@ -3,78 +3,328 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>數學公式卡牌 — Template</title>
+<title>數學公式卡牌 — 編輯器</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="window._katexAutoRenderReady=true;"></script>
 <style>
-/* ═══════════════════════════════════════════════════════════════
-   顔色變量 — 改呢度就改晒全個卡組嘅顔色
-   ═══════════════════════════════════════════════════════════════ */
 :root {
-  --g-base: #0a0e1a;
-  --g-card-bg: #111827;
-  --g-gold: #f59e0b;
-  --g-gold-light: #fcd34d;
-  --g-border: rgba(245,158,11,0.3);
-
-  /* 類別顔色 */
-  --cat-area-color: #3b82f6;   /* 面積 — 藍 */
-  --cat-area-light: #93c5fd;
+  --cat-area-color: #3b82f6;
+  --cat-peri-color: #f59e0b;
+  --cat-vol-color: #10b981;
   --cat-area-bg: #1e3a5f;
-
-  --cat-peri-color: #f59e0b;   /* 周界 — 橙 */
-  --cat-peri-light: #fcd34d;
   --cat-peri-bg: #3d2e00;
-
-  --cat-vol-color: #10b981;    /* 體積 — 綠 */
-  --cat-vol-light: #6ee7b7;
   --cat-vol-bg: #064e3b;
 }
-
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ═══════════════════════════════════════════════════════════════
-   頁面
-   ═══════════════════════════════════════════════════════════════ */
 body {
   font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",Arial,sans-serif;
-  background: #f8fafc;
+  background: #f1f5f9;
   color: #1e293b;
   min-height: 100vh;
-  padding: 24px;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   卡片網格
-   ═══════════════════════════════════════════════════════════════ */
+/* ═══ LAYOUT ═══ */
+.layout {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  align-items: flex-start;
+}
+.editor-panel {
+  width: 320px;
+  flex-shrink: 0;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+.main-area {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ═══ EDITOR HEADER ═══ */
+.editor-header {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  padding: 14px 18px;
+  color: #fff;
+}
+.editor-header h2 {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+.editor-header p {
+  font-size: 11px;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+/* ═══ FORM ═══ */
+.form-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.field-row {
+  display: flex;
+  gap: 8px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+.field label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 0.3px;
+}
+.field input,
+.field select,
+.field textarea {
+  padding: 7px 10px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #1e293b;
+  background: #fff;
+  transition: border-color 0.2s;
+  outline: none;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 3px rgba(245,158,11,0.12);
+}
+.field textarea {
+  resize: vertical;
+  min-height: 56px;
+  font-size: 12px;
+}
+.field select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+}
+.field small {
+  font-size: 10px;
+  color: #94a3b8;
+}
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+}
+.checkbox-row input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #f59e0b;
+}
+.checkbox-row label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+}
+
+/* ═══ IMAGE MODE TOGGLE ═══ */
+.img-mode-toggle {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.img-mode-btn {
+  flex: 1;
+  padding: 6px;
+  border-radius: 8px;
+  border: 1.5px solid #e2e8f0;
+  background: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.img-mode-btn.active {
+  background: #fffbeb;
+  border-color: #f59e0b;
+  color: #d97706;
+}
+.img-upload-area {
+  border: 2px dashed #e2e8f0;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+.img-upload-area:hover {
+  border-color: #f59e0b;
+  background: #fffbeb;
+}
+.img-upload-area input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+.img-upload-icon {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+.img-upload-text {
+  font-size: 12px;
+  color: #64748b;
+}
+.img-upload-text strong {
+  color: #f59e0b;
+}
+.img-preview-thumb {
+  max-width: 100%;
+  max-height: 120px;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+.img-clear-btn {
+  margin-top: 6px;
+  padding: 4px 12px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  font-size: 11px;
+  color: #94a3b8;
+  cursor: pointer;
+  font-family: inherit;
+}
+.img-clear-btn:hover { border-color: #ef4444; color: #ef4444; }
+
+.hidden { display: none !important; }
+
+/* ═══ SVG INPUT AREA ═══ */
+.svg-area {
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.svg-area textarea {
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  font-family: monospace;
+  font-size: 11px;
+  resize: vertical;
+  min-height: 120px;
+  padding: 8px;
+}
+
+/* ═══ ADD BUTTON ═══ */
+.add-btn {
+  width: 100%;
+  padding: 11px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(16,185,129,0.3);
+  font-family: inherit;
+  transition: all 0.2s;
+  margin-top: 4px;
+}
+.add-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(16,185,129,0.4);
+}
+.add-btn:active { transform: translateY(0); }
+
+/* ═══ CARD COUNT ═══ */
+.grid-header {
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  margin-bottom: 16px;
+}
+.grid-header h3 {
+  font-size: 15px;
+  font-weight: 800;
+  color: #0f172a;
+}
+.card-count {
+  font-size: 13px;
+  color: #64748b;
+}
+.card-count span {
+  color: #f59e0b;
+  font-weight: 700;
+}
+
+/* ═══ PREVIEW CARD ═══ */
+.preview-wrap {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  margin-bottom: 16px;
+}
+.preview-wrap h4 {
+  font-size: 12px;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.preview-card {
+  width: 200px;
+  height: 295px;
+  margin: 0 auto;
+}
+
+/* ═══ CARD GRID ═══ */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, 200px);
   gap: 16px;
-  padding: 24px 0;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   卡片容器（包住成張卡，包 flip 動畫）
-   ═══════════════════════════════════════════════════════════════ */
+/* CARD WRAPPER */
 .card-wrap {
   position: relative;
   width: 200px;
   height: 295px;
   cursor: pointer;
 }
-
-/* 揀中狀態 */
-.card-wrap.selected .card-inner {
-  outline: 3px solid #f59e0b;
-  outline-offset: 2px;
-  box-shadow: 0 8px 24px rgba(245,158,11,0.2);
+.card-wrap.new-card {
+  animation: pulse-outline 1s ease-out;
+}
+@keyframes pulse-outline {
+  0% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   卡片主體
-   ═══════════════════════════════════════════════════════════════ */
+/* CARD INNER */
 .card-inner {
   width: 100%;
   height: 100%;
@@ -82,15 +332,9 @@ body {
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 4px 16px rgba(0,0,0,0.10);
-  transition: box-shadow 0.2s;
-}
-.card-wrap:not(.flipped):hover .card-inner {
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   前面（問題面）
-   ═══════════════════════════════════════════════════════════════ */
+/* FRONT */
 .front-face {
   position: absolute;
   inset: 0;
@@ -101,17 +345,13 @@ body {
   background: #fff;
   border: 1.5px solid #e2e8f0;
 }
-/* 微弱漸變裝飾 */
 .front-face::before {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(ellipse at 0% 0%, rgba(59,130,246,0.04) 0%, transparent 50%);
+  background: radial-gradient(ellipse at 0% 0%, rgba(59,130,246,0.04) 0%, transparent 50%);
   pointer-events: none;
 }
-
-/* Top Bar（頂部橫條） */
 .card-topbar {
   display: flex;
   align-items: center;
@@ -120,114 +360,61 @@ body {
   position: relative;
   z-index: 2;
 }
-.card-set {
-  font-size: 8px;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-  color: #94a3b8;
-}
-/* 難度星 */
+.card-set { font-size: 8px; font-weight: 800; letter-spacing: 1.5px; color: #94a3b8; }
 .card-meta { display: flex; gap: 6px; align-items: center; }
 .card-difficulty { display: flex; gap: 2px; }
-.star {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: #e2e8f0;
-}
-.star.lit {
-  background: linear-gradient(135deg, #fcd34d, #f59e0b);
-}
-/* 年級 Badge */
+.star { width: 9px; height: 9px; border-radius: 50%; background: #e2e8f0; }
+.star.lit { background: linear-gradient(135deg, #fcd34d, #f59e0b); }
+
 .card-grade {
-  font-size: 8px;
-  font-weight: 800;
-  padding: 2px 7px;
-  border-radius: 6px;
-  letter-spacing: 0.5px;
+  font-size: 8px; font-weight: 800; padding: 2px 7px;
+  border-radius: 6px; letter-spacing: 0.5px;
 }
 .grade-s1 { background: #dbeafe; color: #1d4ed8; }
 .grade-s2 { background: #ede9fe; color: #6d28d9; }
 .grade-s3 { background: #fef3c7; color: #92400e; }
 
-/* Category Badge（右上角類別標） */
 .card-cat-badge {
   position: absolute;
-  top: 38px;
-  right: 8px;
-  font-size: 7px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  padding: 2px 7px;
-  border-radius: 5px;
-  color: #fff;
-  z-index: 2;
+  top: 38px; right: 8px;
+  font-size: 7px; font-weight: 800; letter-spacing: 1px;
+  padding: 2px 7px; border-radius: 5px;
+  color: #fff; z-index: 2;
 }
 [data-cat="area"]  .card-cat-badge { background: var(--cat-area-color); }
 [data-cat="peri"]  .card-cat-badge { background: var(--cat-peri-color); color:#1e293b; }
 [data-cat="vol"]   .card-cat-badge { background: var(--cat-vol-color); }
 
-/* SVG 圖（中間主視覺） */
 .card-icon {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px 14px;
-  position: relative;
-  z-index: 1;
+  flex: 1; display: flex; align-items: center;
+  justify-content: center; padding: 6px 14px;
+  position: relative; z-index: 1; overflow: hidden;
 }
-.card-icon svg { width: 108px; height: 108px; }
+.card-icon svg,
+.card-icon img {
+  width: 108px; height: 108px;
+  object-fit: contain;
+}
 
-/* 名稱區 */
 .card-name-area {
   padding: 4px 10px 2px;
-  text-align: center;
-  position: relative;
-  z-index: 2;
+  text-align: center; position: relative; z-index: 2;
 }
-.card-name {
-  font-size: 15px;
-  font-weight: 800;
-  color: #0f172a;
-  letter-spacing: 0.5px;
-  line-height: 1.3;
-}
-.card-en {
-  font-size: 9px;
-  color: #94a3b8;
-  letter-spacing: 0.5px;
-  margin-top: 1px;
-  font-style: italic;
-}
+.card-name { font-size: 15px; font-weight: 800; color: #0f172a; letter-spacing: 0.5px; line-height: 1.3; }
+.card-en { font-size: 9px; color: #94a3b8; letter-spacing: 0.5px; margin-top: 1px; font-style: italic; }
 
-/* Bottom Bar（底部橫條） */
 .card-bottombar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 4px 10px 8px;
-  position: relative;
-  z-index: 2;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 4px 10px 8px; position: relative; z-index: 2;
 }
-.card-num {
-  font-size: 10px;
-  font-weight: 700;
-  color: #cbd5e1;
-  letter-spacing: 0.5px;
-}
-.card-ask {
-  font-size: 9px;
-  color: #94a3b8;
-  font-weight: 600;
-}
+.card-num { font-size: 10px; font-weight: 700; color: #cbd5e1; letter-spacing: 0.5px; }
+.card-ask { font-size: 9px; color: #94a3b8; font-weight: 600; }
 
-/* 特別版（彩虹邊框）— 唔係特別版就唔使加 special class */
+/* SPECIAL */
 .card-wrap.special .front-face {
   border: 2px solid transparent;
-  background:
-    linear-gradient(#fff, #fff) padding-box,
-    linear-gradient(135deg, #fcd34d, #f59e0b, #ef4444, #8b5cf6, #3b82f6, #10b981, #fcd34d) border-box;
+  background: linear-gradient(#fff, #fff) padding-box,
+              linear-gradient(135deg, #fcd34d, #f59e0b, #ef4444, #8b5cf6, #3b82f6, #10b981, #fcd34d) border-box;
   background-size: 300% 300%;
   animation: rainbow-border 4s linear infinite;
 }
@@ -237,533 +424,306 @@ body {
   100% { background-position: 0% 50%; }
 }
 .special-star {
-  position: absolute;
-  top: 36px;
-  left: 8px;
-  font-size: 11px;
-  z-index: 5;
+  position: absolute; top: 36px; left: 8px;
+  font-size: 11px; z-index: 5;
 }
 .special-tag {
-  position: absolute;
-  bottom: 7px;
-  left: 50%;
+  position: absolute; bottom: 7px; left: 50%;
   transform: translateX(-50%);
-  font-size: 8px;
-  font-weight: 800;
-  padding: 2px 9px;
+  font-size: 8px; font-weight: 800; padding: 2px 9px;
   border-radius: 8px;
   background: linear-gradient(135deg, #fcd34d, #f59e0b);
-  color: #1e293b;
-  letter-spacing: 0.5px;
-  z-index: 5;
+  color: #1e293b; letter-spacing: 0.5px; z-index: 5;
   box-shadow: 0 2px 6px rgba(252,211,77,0.4);
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   背面（答案面）
-   ═══════════════════════════════════════════════════════════════ */
+/* BACK */
 .back-face {
-  position: absolute;
-  inset: 0;
-  border-radius: 14px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  opacity: 0;       /* 預設隱藏，翻轉時靠 JS 切換 opacity */
+  position: absolute; inset: 0; border-radius: 14px;
+  display: flex; flex-direction: column; overflow: hidden;
+  opacity: 0;
 }
-
-/* 類別顔色 */
 [data-cat="area"]  .back-face { background: linear-gradient(160deg, #1e3a5f 0%, #1e40af, #312e81); }
 [data-cat="peri"]  .back-face { background: linear-gradient(160deg, #3d2e00 0%, #92400e, #b45309); }
 [data-cat="vol"]   .back-face { background: linear-gradient(160deg, #064e3b 0%, #047857, #059669); }
 
 .back-header {
-  padding: 8px 12px 4px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-  z-index: 2;
+  padding: 8px 12px 4px; display: flex; align-items: center;
+  justify-content: space-between; position: relative; z-index: 2;
 }
-.back-tag {
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: rgba(255,255,255,0.6);
-  text-transform: uppercase;
-}
-.back-grade-badge {
-  font-size: 8px;
-  font-weight: 800;
-  padding: 2px 7px;
-  border-radius: 6px;
-}
+.back-tag { font-size: 8px; font-weight: 700; letter-spacing: 1px; color: rgba(255,255,255,0.6); text-transform: uppercase; }
+.back-grade-badge { font-size: 8px; font-weight: 800; padding: 2px 7px; border-radius: 6px; }
 .grade-s1-back { background: rgba(59,130,246,0.3); color: #93c5fd; }
 .grade-s2-back { background: rgba(139,92,246,0.3); color: #c4b5fd; }
 .grade-s3-back { background: rgba(245,158,11,0.3); color: #fde68a; }
 
 .back-formula {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2px 12px 6px;
-  gap: 6px;
-  position: relative;
-  z-index: 2;
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 2px 12px 6px; gap: 6px; position: relative; z-index: 2;
 }
-.back-fcn {
-  font-size: 12px;
-  font-weight: 400;
-  color: rgba(255,255,255,0.7);
-  text-align: center;
-  letter-spacing: 0.3px;
-  line-height: 1.4;
-}
-.back-latex {
-  display: flex;
-  justify-content: center;
-  padding: 2px 0;
-}
+.back-fcn { font-size: 12px; font-weight: 400; color: rgba(255,255,255,0.7); text-align: center; letter-spacing: 0.3px; line-height: 1.4; }
+.back-latex { display: flex; justify-content: center; padding: 2px 0; }
 .back-latex .katex { font-size: 18px !important; font-weight: 600; }
+.back-divider { width: 60%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); margin: 0 auto; }
+.back-tip { padding: 4px 12px 6px; position: relative; z-index: 2; }
+.back-tip-text { font-size: 9px; color: rgba(255,255,255,0.6); text-align: center; line-height: 1.5; font-style: italic; }
+.back-footer { padding: 4px 12px 8px; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 2; }
+.back-cat-label { font-size: 8px; font-weight: 700; letter-spacing: 1px; color: rgba(255,255,255,0.45); text-transform: uppercase; }
+.back-deco { width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; font-size: 13px; }
 
-.back-divider {
-  width: 60%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  margin: 0 auto;
-}
-
-.back-tip {
-  padding: 4px 12px 6px;
-  position: relative;
-  z-index: 2;
-}
-.back-tip-text {
-  font-size: 9px;
-  color: rgba(255,255,255,0.6);
-  text-align: center;
-  line-height: 1.5;
-  font-style: italic;
-}
-
-.back-footer {
-  padding: 4px 12px 8px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-  z-index: 2;
-}
-.back-cat-label {
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: rgba(255,255,255,0.45);
-  text-transform: uppercase;
-}
-.back-deco {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   翻轉動畫（ opacity 方案，避免 Browserbase rotateY 問題 ）
-   ═══════════════════════════════════════════════════════════════ */
+/* FLIP */
 .card-wrap.flipped .front-face { opacity: 0; }
 .card-wrap.flipped .back-face  { opacity: 1; }
 
-/* ═══════════════════════════════════════════════════════════════
-   説明面板（Template 用途提示）
-   ═══════════════════════════════════════════════════════════════ */
-.info-box {
-  background: #fff;
-  border: 2px solid #f59e0b;
-  border-radius: 12px;
-  padding: 20px 24px;
-  max-width: 900px;
-  margin-bottom: 24px;
+/* TOAST */
+.toast {
+  position: fixed; bottom: 24px; right: 24px;
+  background: #0f172a; color: #fff;
+  padding: 12px 20px; border-radius: 10px;
+  font-size: 13px; font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  z-index: 9999;
+  transform: translateY(80px);
+  opacity: 0;
+  transition: all 0.3s ease;
 }
-.info-box h2 {
-  font-size: 18px;
-  font-weight: 800;
-  color: #0f172a;
-  margin-bottom: 12px;
-}
-.info-box h3 {
-  font-size: 14px;
-  font-weight: 700;
-  color: #1e293b;
-  margin-top: 16px;
-  margin-bottom: 6px;
-}
-.info-box p, .info-box li {
-  font-size: 13px;
-  color: #475569;
-  line-height: 1.7;
-}
-.info-box code {
-  background: #f1f5f9;
-  padding: 1px 5px;
-  border-radius: 4px;
-  font-size: 12px;
-  color: #0f172a;
-}
-.info-box pre {
-  background: #1e293b;
-  color: #e2e8f0;
-  padding: 12px 16px;
-  border-radius: 8px;
-  font-size: 12px;
-  overflow-x: auto;
-  line-height: 1.6;
-  margin: 8px 0;
-}
-.info-box ul { padding-left: 20px; }
-.info-box li { margin-bottom: 4px; }
+.toast.show { transform: translateY(0); opacity: 1; }
 </style>
 </head>
 <body>
 
-<!-- 説明面板 -->
-<div class="info-box">
-  <h2>📐 Formula Cards Template — 説明</h2>
+<div class="layout">
+  <!-- ═══ EDITOR PANEL ═══ -->
+  <div class="editor-panel">
+    <div class="editor-header">
+      <h2>✏️ 卡牌編輯器</h2>
+      <p>填寫資料 → 選擇圖像 → 加入卡牌</p>
+    </div>
 
-  <h3>如何加新卡</h3>
-  <p>响 <code>CARDS</code> 陣列入面 copy 一舊卡，填返相關資料就得。</p>
+    <div class="form-body">
 
-  <h3>每個欄位解説</h3>
-  <ul>
-    <li><code>id</code>：唯一數字，新卡唔可以重複</li>
-    <li><code>cat</code>：類別 — <code>area</code>（面積）| <code>peri</code>（周界）| <code>vol</code>（體積）</li>
-    <li><code>name</code>：中文名</li>
-    <li><code>en</code>：英文名（顯示為斜體）</li>
-    <li><code>ask</code>：問題提示，例如「求面積」「求周界」</li>
-    <li><code>tag</code>：顯示用tag，與 cat 可能相同</li>
-    <li><code>grade</code>：年級 — <code>s1</code>（中一）| <code>s2</code>（中二）| <code>s3</code>（中三）</li>
-    <li><code>num</code>：卡牌編號，例如 <code>G-01</code>、<code>P-03</code>、<code>V-02</code></li>
-    <li><code>difficulty</code>：難度 1-3（1=基礎，2=進階，3=挑戰）</li>
-    <li><code>special</code>：<code>true</code> = 彩虹特別版，<code>false</code> = 普通版</li>
-    <li><code>fcn</code>：背面顯示的繁中公式描述</li>
-    <li><code>latex</code>：LaTeX 公式（用於 MathJax/KaTeX 渲染）</li>
-    <li><code>tip</code>：學習提示（背面顯示）</li>
-    <li><code>svg</code>：SVG 圖形（前面中間視覺）</li>
-  </ul>
+      <!-- 基本資料 -->
+      <div class="field-row">
+        <div class="field">
+          <label>ID（不可重複）</label>
+          <input type="number" id="f-id" min="1" placeholder="例：6">
+        </div>
+        <div class="field">
+          <label>卡牌編號</label>
+          <input type="text" id="f-num" placeholder="例：G-07">
+        </div>
+      </div>
 
-  <h3>如何改 SVG 圖</h3>
-  <p>每個 SVG 固定 <code>viewBox="0 0 110 110"</code>，建議：</p>
-  <ul>
-    <li>用 <code>&lt;defs&gt;</code> + <code>&lt;linearGradient&gt;</code> 或 <code>&lt;radialGradient&gt;</code> 做漸變填充</li>
-    <li>主要形狀用 <code>stroke</code> 設定顔色（同類別主色配合），<code>stroke-width</code> 建議 8-9</li>
-    <li>變量標籤（r, h, a 等）用 <code>&lt;text&gt;</code>，font-size 建議 9-12，顔色用淺色系</li>
-    <li>輔助線用虛線 <code>stroke-dasharray="5,4"</code></li>
-    <li>所有漸變停駐點（stop）用對應類別的淺色，例如面積用藍色系（<code>#93c5fd</code>、<code>#60a5fa</code>）</li>
-  </ul>
+      <div class="field">
+        <label>中文名</label>
+        <input type="text" id="f-name" placeholder="例：菱形">
+      </div>
 
-  <h3>類別配色建議</h3>
-  <ul>
-    <li><strong>面積 area</strong>：主色 <code>#3b82f6</code>（藍），淺色 <code>#93c5fd</code></li>
-    <li><strong>周界 peri</strong>：主色 <code>#f59e0b</code>（橙），淺色 <code>#fcd34d</code></li>
-    <li><strong>體積 vol</strong>：主色 <code>#10b981</code>（綠），淺色 <code>#6ee7b7</code></li>
-  </ul>
+      <div class="field">
+        <label>英文名</label>
+        <input type="text" id="f-en" placeholder="例：Rhombus">
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>類別</label>
+          <select id="f-cat">
+            <option value="area">面積</option>
+            <option value="peri">周界</option>
+            <option value="vol">體積</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>年級</label>
+          <select id="f-grade">
+            <option value="s1">中一</option>
+            <option value="s2">中二</option>
+            <option value="s3">中三</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>難度</label>
+          <select id="f-difficulty">
+            <option value="1">⭐ 基礎</option>
+            <option value="2">⭐⭐ 進階</option>
+            <option value="3">⭐⭐⭐ 挑戰</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>問題提示</label>
+          <input type="text" id="f-ask" placeholder="例：求面積">
+        </div>
+        <div class="field">
+          <label>Tag 顯示</label>
+          <input type="text" id="f-tag" placeholder="例：面積">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>背面公式（繁中）</label>
+        <input type="text" id="f-fcn" placeholder="例：面積 = ½ × 對角線₁ × 對角線₂">
+      </div>
+
+      <div class="field">
+        <label>LaTeX 公式</label>
+        <input type="text" id="f-latex" placeholder="例：A = \\frac{1}{2}d_1 d_2">
+        <small>用 \\text{} 包中文字，例如 \\text{半徑}</small>
+      </div>
+
+      <div class="field">
+        <label>學習提示</label>
+        <textarea id="f-tip" placeholder="例：對角線互相垂直，喺菱形中間交叉！"></textarea>
+      </div>
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="f-special">
+        <label for="f-special">⭐ 特別版（彩虹邊框）</label>
+      </div>
+
+      <!-- 圖像模式 -->
+      <div>
+        <label style="font-size:11px;font-weight:700;color:#64748b;letter-spacing:0.3px;display:block;margin-bottom:4px;">卡牌圖像</label>
+        <div class="img-mode-toggle">
+          <button class="img-mode-btn active" id="mode-svg" type="button">✏️ SVG 原始碼</button>
+          <button class="img-mode-btn" id="mode-img" type="button">📷 圖片上傳</button>
+        </div>
+
+        <!-- SVG 輸入 -->
+        <div id="svg-panel">
+          <div class="svg-area">
+            <textarea id="f-svg" placeholder="<svg viewBox=&quot;0 0 110 110&quot;&#10;  xmlns=&quot;http://www.w3.org/2000/svg&quot;&#10;>&#10;  ...&#10;</svg>"
+            ></textarea>
+          </div>
+          <small>viewBox 固定為 0 0 110 110，尺寸會自動縮放</small>
+        </div>
+
+        <!-- 圖片上傳 -->
+        <div id="img-panel" class="hidden">
+          <div class="img-upload-area" id="img-upload-area">
+            <input type="file" id="img-input" accept="image/*">
+            <div class="img-upload-icon">🖼️</div>
+            <div class="img-upload-text">點擊或拖曳上傳圖片<br><strong>PNG / JPG / WebP</strong></div>
+            <img class="img-preview-thumb" id="img-preview" style="display:none;">
+          </div>
+          <button type="button" class="img-clear-btn hidden" id="img-clear">✕ 清除圖片</button>
+        </div>
+      </div>
+
+      <button class="add-btn" id="add-btn">✅ 加入卡牌</button>
+    </div>
+  </div>
+
+  <!-- ═══ MAIN AREA ═══ -->
+  <div class="main-area">
+    <div class="grid-header">
+      <h3>📐 幾何公式卡</h3>
+      <div class="card-count">已加入 <span id="card-count">0</span> 張卡 — 點擊卡牌翻轉查看背面</div>
+    </div>
+
+    <!-- 即時預覽（編輯時即時睇到做出嚟係點） -->
+    <div class="preview-wrap">
+      <h4>👁️ 即時預覽</h4>
+      <div class="preview-card" id="preview-card"></div>
+    </div>
+
+    <!-- 卡片網格 -->
+    <div class="card-grid" id="cardGrid"></div>
+  </div>
 </div>
 
-<!-- 卡片網格 — JS 動態生成 -->
-<div class="card-grid" id="cardGrid"></div>
+<!-- Toast 通知 -->
+<div class="toast" id="toast"></div>
 
 <script>
-/* ═══════════════════════════════════════════════════════════════
-   卡片資料區 — 响呢度加卡 / 改卡
-   ═══════════════════════════════════════════════════════════════
-   複製下面任何一舊卡嘅 block，改 id / num 避免重複，
-   然後填返自己嘅資料就得。
-   ═══════════════════════════════════════════════════════════════ */
-const CARDS = [
+/* ═══════════════════════════════════════
+   現有卡牌（呢度係起點，可以係空）
+   ═══════════════════════════════════════ */
+const CARDS = [];
 
-  /* ─────────────────────────────────────────────────────────────
-     示例卡 1：長方形（面積）
-     cat: area | grade: s1 | difficulty: 1 | special: false
-     ───────────────────────────────────────────────────────────── */
-  {
-    id: 1,
-    cat: "area",
-    name: "長方形",
-    en: "Rectangle",
-    ask: "求面積",
-    tag: "面積",
-    grade: "s1",
-    num: "G-01",
-    difficulty: 1,
-    special: false,
-    fcn: "面積 = 長 × 闊",
-    latex: "A = \\text{長} \\times \\text{闊}",
-    tip: "長闊分清楚，記緊兩邊都要用！",
-    svg: `<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#bfdbfe;stop-opacity:0.35"/>
-          <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.15"/>
-        </linearGradient>
-      </defs>
-      <!-- 長方形本體 -->
-      <rect x="15" y="30" width="80" height="55" rx="3" fill="url(#g1)" stroke="#3b82f6" stroke-width="9" stroke-linejoin="round"/>
-      <!-- 闊標籤（垂直） -->
-      <line x1="15" y1="30" x2="15" y2="85" stroke="#60a5fa" stroke-width="4" stroke-dasharray="5,4"/>
-      <text x="6" y="60" font-size="11" fill="#60a5fa" font-weight="bold" font-family="sans-serif">闊</text>
-      <!-- 長標籤（水平） -->
-      <line x1="15" y1="85" x2="95" y2="85" stroke="#60a5fa" stroke-width="4" stroke-dasharray="5,4"/>
-      <text x="57" y="98" font-size="11" fill="#60a5fa" font-weight="bold" font-family="sans-serif">長</text>
-    </svg>`
-  },
+let uploadedImage = null; // base64 data URI
 
-  /* ─────────────────────────────────────────────────────────────
-     示例卡 2：三角形（周界）
-     cat: peri | grade: s1 | difficulty: 1 | special: false
-     ───────────────────────────────────────────────────────────── */
-  {
-    id: 2,
-    cat: "peri",
-    name: "三角形",
-    en: "Triangle",
-    ask: "求周界",
-    tag: "周界",
-    grade: "s1",
-    num: "P-01",
-    difficulty: 1,
-    special: false,
-    fcn: "周界 = 邊₁ + 邊₂ + 邊₃",
-    latex: "P = a + b + c",
-    tip: "三邊相加，唔使理形狀！",
-    svg: `<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="p1" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#fef3c7;stop-opacity:0.4"/>
-          <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0.2"/>
-        </linearGradient>
-      </defs>
-      <!-- 三角形本體 -->
-      <polygon points="55,12 96,90 14,90" fill="url(#p1)" stroke="#f59e0b" stroke-width="9" stroke-linejoin="round"/>
-      <!-- 三邊標籤 -->
-      <text x="57" y="56" font-size="11" fill="#fcd34d" font-weight="bold" font-family="sans-serif">a</text>
-      <text x="26" y="78" font-size="9" fill="#fcd34d" font-weight="bold" font-family="sans-serif">b</text>
-      <text x="74" y="78" font-size="9" fill="#fcd34d" font-weight="bold" font-family="sans-serif">c</text>
-      <!-- 底邊線加粗 -->
-      <line x1="14" y1="90" x2="96" y2="90" stroke="#fcd34d" stroke-width="5"/>
-    </svg>`
-  },
-
-  /* ─────────────────────────────────────────────────────────────
-     示例卡 3：圓柱體（體積）
-     cat: vol | grade: s2 | difficulty: 2 | special: false
-     ───────────────────────────────────────────────────────────── */
-  {
-    id: 3,
-    cat: "vol",
-    name: "圓柱體",
-    en: "Cylinder",
-    ask: "求體積",
-    tag: "體積",
-    grade: "s2",
-    num: "V-01",
-    difficulty: 2,
-    special: false,
-    fcn: "體積 = π × 半徑² × 高",
-    latex: "V = \\pi r^2 h",
-    tip: "底面積（圓形）× 高，就係圓柱體積！",
-    svg: `<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="v1" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#a7f3d0;stop-opacity:0.4"/>
-          <stop offset="100%" style="stop-color:#10b981;stop-opacity:0.2"/>
-        </linearGradient>
-      </defs>
-      <!-- 頂橢圓 -->
-      <ellipse cx="55" cy="28" rx="42" ry="14" fill="url(#v1)" stroke="#10b981" stroke-width="8"/>
-      <!-- 身線 -->
-      <line x1="13" y1="28" x2="13" y2="82" stroke="#6ee7b7" stroke-width="5"/>
-      <line x1="97" y1="28" x2="97" y2="82" stroke="#10b981" stroke-width="5"/>
-      <!-- 底橢圓 -->
-      <ellipse cx="55" cy="82" rx="42" ry="14" fill="none" stroke="#6ee7b7" stroke-width="8"/>
-      <!-- 高標籤 -->
-      <line x1="97" y1="28" x2="97" y2="82" stroke="#6ee7b7" stroke-width="3" stroke-dasharray="4,3"/>
-      <text x="100" y="58" font-size="10" fill="#6ee7b7" font-weight="bold" font-family="sans-serif">h</text>
-      <!-- 半徑標籤 -->
-      <line x1="55" y1="28" x2="55" y2="14" stroke="#a7f3d0" stroke-width="3" stroke-dasharray="3,3"/>
-      <text x="50" y="12" font-size="10" fill="#a7f3d0" font-weight="bold" font-family="sans-serif">r</text>
-    </svg>`
-  },
-
-  /* ─────────────────────────────────────────────────────────────
-     示例卡 4：菱形（面積）— 特別版
-     cat: area | grade: s2 | difficulty: 2 | special: true
-     彩虹邊框需要 special: true，HTML 會自動加彩虹 animation
-     ───────────────────────────────────────────────────────────── */
-  {
-    id: 4,
-    cat: "area",
-    name: "菱形",
-    en: "Rhombus",
-    ask: "求面積",
-    tag: "面積",
-    grade: "s2",
-    num: "G-06",
-    difficulty: 2,
-    special: true,          /* true = 彩虹邊框 */
-    fcn: "面積 = ½ × 對角線₁ × 對角線₂",
-    latex: "A = \\frac{1}{2}d_1 d_2",
-    tip: "對角線互相垂直，喺菱形中間交叉！",
-    svg: `<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="g6" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#f9a8d4;stop-opacity:0.4"/>
-          <stop offset="100%" style="stop-color:#ec4899;stop-opacity:0.15"/>
-        </linearGradient>
-      </defs>
-      <!-- 菱形本體 -->
-      <polygon points="55,10 100,55 55,100 10,55" fill="url(#g6)" stroke="#ec4899" stroke-width="9" stroke-linejoin="round"/>
-      <!-- 兩條對角線（虛線） -->
-      <line x1="10" y1="55" x2="100" y2="55" stroke="#f9a8d4" stroke-width="4" stroke-dasharray="6,5"/>
-      <line x1="55" y1="10" x2="55" y2="100" stroke="#f9a8d4" stroke-width="4" stroke-dasharray="6,5"/>
-      <!-- d1 / d2 標籤 -->
-      <text x="14" y="49" font-size="11" fill="#f9a8d4" font-weight="bold" font-family="sans-serif">d₁</text>
-      <text x="74" y="49" font-size="11" fill="#f9a8d4" font-weight="bold" font-family="sans-serif">d₂</text>
-    </svg>`
-  },
-
-  /* ─────────────────────────────────────────────────────────────
-     示例卡 5：圓形（面積）— 示範 radialGradient 用法
-     cat: area | grade: s1 | difficulty: 1 | special: false
-     ───────────────────────────────────────────────────────────── */
-  {
-    id: 5,
-    cat: "area",
-    name: "圓形",
-    en: "Circle",
-    ask: "求面積",
-    tag: "面積",
-    grade: "s1",
-    num: "G-03",
-    difficulty: 1,
-    special: false,
-    fcn: "面積 = π × 半徑²",
-    latex: "A = \\pi \\times \\text{半徑}^2",
-    tip: "半徑係直徑嘅一半，別混淆！",
-    svg: `<svg viewBox="0 0 110 110">
-      <defs>
-        <radialGradient id="g3" cx="35%" cy="35%">
-          <stop offset="0%" style="stop-color:#c4b5fd;stop-opacity:0.4"/>
-          <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0.15"/>
-        </radialGradient>
-      </defs>
-      <!-- 圓形本體 -->
-      <circle cx="55" cy="55" r="45" fill="url(#g3)" stroke="#8b5cf6" stroke-width="9"/>
-      <!-- 半徑線 -->
-      <line x1="55" y1="55" x2="55" y2="10" stroke="#a78bfa" stroke-width="5" stroke-linecap="round" stroke-dasharray="5,4"/>
-      <!-- 圓心 -->
-      <circle cx="55" cy="55" r="4" fill="#a78bfa"/>
-      <!-- r 標籤 -->
-      <text x="59" y="34" font-size="12" fill="#a78bfa" font-weight="bold" font-family="sans-serif">r</text>
-    </svg>`
-  },
-
-  /* ═══════════════════════════════════════════════════════════════
-     新卡加入提示
-     ═══════════════════════════════════════════════════════════════
-     复制上面任何一旧卡，改为新 id 和 num，
-     然後改 fcn / latex / svg 等内容就得。
-
-     记住：
-     - id 唔可以重复
-     - num 唔可以重复（G-01, P-03, V-02 等）
-     - special: true 先有彩虹框
-     ═══════════════════════════════════════════════════════════════ */
-
-];
-
-// ═══════════════════════════════════════════════════════════════
-// 輔助函數
-// ═══════════════════════════════════════════════════════════════
-
-/* 渲染 KaTeX（自動 fallback） */
-function renderLatex(el, formula) {
-  try {
-    const html = katex.renderToString(formula, { throwOnError: false, displayMode: false });
-    if (!html || html.trim() === '') throw new Error('empty render');
-    el.innerHTML = html;
-  } catch(e) {
-    el.textContent = formula;  // KaTeX 失敗就顯示純文字
-  }
+// ═══ TOAST ═══
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
 }
 
-/* 難度星（3粒星顯示） */
+// ═══ HELPERS ═══
 function stars(n) {
-  return Array.from({length: 3}, (_, i) =>
+  return Array.from({length:3},(_,i) =>
     `<span class="star${i < n ? ' lit' : ''}"></span>`
   ).join('');
 }
-
-/* 年級 Badge 文字 */
-function gradeLabel(g) {
-  return g === 's1' ? '中一' : g === 's2' ? '中二' : '中三';
-}
-/* 前面年級 Badge class */
-function gradeClass(g) {
-  return g === 's1' ? 'grade-s1' : g === 's2' ? 'grade-s2' : 'grade-s3';
-}
-/* 背面年級 Badge class */
-function gradeClassBack(g) {
-  return g === 's1' ? 'grade-s1-back' : g === 's2' ? 'grade-s2-back' : 'grade-s3-back';
-}
-
-/* 類別 Emoji */
-function catEmoji(cat) {
-  return cat === 'area' ? '⬡' : cat === 'peri' ? '◯' : cat === 'vol' ? '◈' : '∑';
-}
-
-/* 類別中文名 */
-function catLabel(cat) {
-  return cat === 'area' ? '面積' : cat === 'peri' ? '周界' : cat === 'vol' ? '體積' : '其他';
-}
-
-/* 設定 Badge */
+function gradeLabel(g) { return g === 's1' ? '中一' : g === 's2' ? '中二' : '中三'; }
+function gradeClass(g) { return g === 's1' ? 'grade-s1' : g === 's2' ? 'grade-s2' : 'grade-s3'; }
+function gradeClassBack(g) { return g === 's1' ? 'grade-s1-back' : g === 's2' ? 'grade-s2-back' : 'grade-s3-back'; }
+function catLabel(cat) { return cat === 'area' ? '面積' : cat === 'peri' ? '周界' : cat === 'vol' ? '體積' : '其他'; }
+function catEmoji(cat) { return cat === 'area' ? '⬡' : cat === 'peri' ? '◯' : cat === 'vol' ? '◈' : '∑'; }
 function setLabel(num) {
-  if (num.startsWith('G')) return '幾何';
-  if (num.startsWith('P')) return '幾何';
-  if (num.startsWith('V')) return '幾何';
+  if (!num) return '幾何';
   if (num.startsWith('A')) return '代數';
   if (num.startsWith('S')) return '統計';
-  return '數學';
+  return '幾何';
 }
 
-// ═══════════════════════════════════════════════════════════════
-// 渲染所有卡片
-// ═══════════════════════════════════════════════════════════════
-function renderCards() {
-  const grid = document.getElementById('cardGrid');
-  grid.innerHTML = '';
+function renderLatex(el, formula) {
+  try {
+    const html = katex.renderToString(formula, { throwOnError: false, displayMode: false });
+    if (!html || html.trim() === '') throw new Error('empty');
+    el.innerHTML = html;
+  } catch(e) { el.textContent = formula; }
+}
 
-  CARDS.forEach(card => {
-    const wrap = document.createElement('div');
-    wrap.className = `card-wrap${card.special ? ' special' : ''}`;
-    wrap.dataset.cat = card.cat;
-    wrap.dataset.id = card.id;
+// ═══ GET FORM VALUES ═══
+function getForm() {
+  const cat = document.getElementById('f-cat').value;
+  const imgMode = document.querySelector('.img-mode-btn.active').id === 'mode-img' ? 'img' : 'svg';
+  let svgContent = '';
+  if (imgMode === 'img' && uploadedImage) {
+    svgContent = `<img src="${uploadedImage}" alt="card image" style="width:108px;height:108px;object-fit:contain;">`;
+  } else {
+    svgContent = document.getElementById('f-svg').value.trim();
+  }
 
-    // 點擊 = 翻轉
-    wrap.addEventListener('click', () => {
-      wrap.classList.toggle('flipped');
-    });
+  return {
+    id: parseInt(document.getElementById('f-id').value) || 0,
+    cat,
+    name: document.getElementById('f-name').value.trim(),
+    en: document.getElementById('f-en').value.trim(),
+    ask: document.getElementById('f-ask').value.trim(),
+    tag: document.getElementById('f-tag').value.trim() || catLabel(cat),
+    grade: document.getElementById('f-grade').value,
+    num: document.getElementById('f-num').value.trim(),
+    difficulty: parseInt(document.getElementById('f-difficulty').value),
+    special: document.getElementById('f-special').checked,
+    fcn: document.getElementById('f-fcn').value.trim(),
+    latex: document.getElementById('f-latex').value.trim(),
+    tip: document.getElementById('f-tip').value.trim(),
+    svg: svgContent
+  };
+}
 
-    wrap.innerHTML = `
+// ═══ VALIDATE ═══
+function validate(card) {
+  if (!card.id || CARDS.some(c => c.id === card.id)) return 'ID 已存在或為空';
+  if (!card.num || CARDS.some(c => c.num === card.num)) return '卡牌編號 已存在或為空';
+  if (!card.name) return '中文名不可空白';
+  if (!card.fcn) return '背面公式不可空白';
+  return null;
+}
+
+// ═══ BUILD CARD HTML ═══
+function buildCardHTML(card) {
+  const isImg = card.svg.startsWith('<img');
+  return `
+    <div class="card-wrap${card.special ? ' special' : ''}${isImg ? '' : ''}" data-cat="${card.cat}" data-id="${card.id}">
       ${card.special ? '<span class="special-star">★</span>' : ''}
       <div class="card-inner">
-        <!-- 前面（問題面） -->
         <div class="front-face">
           <div class="card-topbar">
             <span class="card-set">${setLabel(card.num)}</span>
@@ -783,8 +743,6 @@ function renderCards() {
             <span class="card-ask">${card.ask}</span>
           </div>
         </div>
-
-        <!-- 背面（答案面） -->
         <div class="back-face">
           <div class="back-header">
             <span class="back-tag">${card.name}</span>
@@ -792,7 +750,7 @@ function renderCards() {
           </div>
           <div class="back-formula">
             <div class="back-fcn">${card.fcn}</div>
-            <div class="back-latex" data-latex="${card.latex.replace(/"/g, '&quot;')}"></div>
+            <div class="back-latex" data-latex="${(card.latex||'').replace(/"/g, '&quot;')}"></div>
           </div>
           <div class="back-divider"></div>
           <div class="back-tip">
@@ -805,20 +763,119 @@ function renderCards() {
         </div>
       </div>
       ${card.special ? '<span class="special-tag">★ SPECIAL</span>' : ''}
-    `;
+    </div>`;
+}
 
-    grid.appendChild(wrap);
+// ═══ RENDER PREVIEW ═══
+function renderPreview() {
+  const card = getForm();
+  const preview = document.getElementById('preview-card');
+  if (!card.name) {
+    preview.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:12px;">填寫左邊資料即時預覽</div>';
+    return;
+  }
+  // 臨時賦予 cat attribute 俾 CSS 生效
+  preview.innerHTML = `<div data-cat="${card.cat}">${buildCardHTML(card)}</div>`;
+  preview.querySelector('.card-wrap').style.position = 'relative';
+  // render latex
+  const latexEl = preview.querySelector('.back-latex');
+  if (latexEl) {
+    const formula = latexEl.dataset.latex || latexEl.textContent;
+    renderLatex(latexEl, formula);
+  }
+}
+
+// ═══ RENDER GRID ═══
+function renderGrid() {
+  const grid = document.getElementById('cardGrid');
+  grid.innerHTML = CARDS.map(buildCardHTML).join('');
+  grid.querySelectorAll('.card-wrap').forEach(wrap => {
+    wrap.addEventListener('click', () => wrap.classList.toggle('flipped'));
   });
-
-  // 渲染所有 LaTeX
-  document.querySelectorAll('.back-latex').forEach(el => {
+  // render latex
+  grid.querySelectorAll('.back-latex').forEach(el => {
     const formula = el.dataset.latex || el.textContent;
     renderLatex(el, formula);
   });
+  document.getElementById('card-count').textContent = CARDS.length;
 }
 
-// 啟動
-renderCards();
+// ═══ ADD CARD ═══
+document.getElementById('add-btn').addEventListener('click', () => {
+  const card = getForm();
+  const err = validate(card);
+  if (err) { showToast('⚠️ ' + err); return; }
+
+  CARDS.push(card);
+  renderGrid();
+  showToast('✅ 已加入：' + card.name);
+
+  // reset form (keep name/en as reference)
+  document.getElementById('f-id').value = '';
+  document.getElementById('f-num').value = '';
+  document.getElementById('f-fcn').value = '';
+  document.getElementById('f-latex').value = '';
+  document.getElementById('f-tip').value = '';
+  document.getElementById('f-svg').value = '';
+  document.getElementById('f-special').checked = false;
+  uploadedImage = null;
+  document.getElementById('img-preview').style.display = 'none';
+  document.getElementById('img-preview').src = '';
+  document.getElementById('img-clear').classList.add('hidden');
+
+  renderPreview();
+});
+
+// ═══ PREVIEW ON INPUT ═══
+['f-id','f-num','f-name','f-en','f-ask','f-tag','f-grade','f-cat','f-difficulty','f-special','f-fcn','f-latex','f-tip'].forEach(id => {
+  document.getElementById(id).addEventListener('input', renderPreview);
+  document.getElementById(id).addEventListener('change', renderPreview);
+});
+document.getElementById('f-svg').addEventListener('input', renderPreview);
+
+// ═══ IMAGE MODE TOGGLE ═══
+document.getElementById('mode-svg').addEventListener('click', () => {
+  document.getElementById('mode-svg').classList.add('active');
+  document.getElementById('mode-img').classList.remove('active');
+  document.getElementById('svg-panel').classList.remove('hidden');
+  document.getElementById('img-panel').classList.add('hidden');
+  renderPreview();
+});
+document.getElementById('mode-img').addEventListener('click', () => {
+  document.getElementById('mode-img').classList.add('active');
+  document.getElementById('mode-svg').classList.remove('active');
+  document.getElementById('img-panel').classList.remove('hidden');
+  document.getElementById('svg-panel').classList.add('hidden');
+  renderPreview();
+});
+
+// ═══ IMAGE UPLOAD ═══
+document.getElementById('img-input').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    uploadedImage = ev.target.result;
+    const thumb = document.getElementById('img-preview');
+    thumb.src = uploadedImage;
+    thumb.style.display = 'block';
+    document.getElementById('img-clear').classList.remove('hidden');
+    renderPreview();
+  };
+  reader.readAsDataURL(file);
+});
+document.getElementById('img-clear').addEventListener('click', () => {
+  uploadedImage = null;
+  document.getElementById('img-preview').style.display = 'none';
+  document.getElementById('img-preview').src = '';
+  document.getElementById('img-input').value = '';
+  document.getElementById('img-clear').classList.add('hidden');
+  renderPreview();
+});
+
+// ═══ INIT ═══
+renderPreview();
+renderGrid();
 </script>
 </body>
 </html>
