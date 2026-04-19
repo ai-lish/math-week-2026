@@ -246,27 +246,26 @@ body{
       <div class="hint-text" id="gameHint">使用計算機計算上述算式，輸入答案後按提交</div>
     </div>
     <div class="keyboard" id="keyboard">
-      <!-- Row 1: C DEL (col 3 blank) Submit (col 3-4) -->
-      <button class="key clear" onclick="typeKey('clear')">C</button>
-      <button class="key del" onclick="typeKey('del')">DEL</button>
-      <button class="key submit" onclick="submitAns()" style="grid-column:3/5">✓ 提交答案</button>
-      <button class="key" style="visibility:hidden"></button>
-      <!-- Row 2: 7 8 9 . -->
+      <!-- Row 1: 7 8 9 . -->
       <button class="key" onclick="typeKey('7')">7</button>
       <button class="key" onclick="typeKey('8')">8</button>
       <button class="key" onclick="typeKey('9')">9</button>
       <button class="key" onclick="typeKey('.')">.</button>
-      <!-- Row 3: 4 5 6 ± -->
+      <!-- Row 2: 4 5 6 ± -->
       <button class="key" onclick="typeKey('4')">4</button>
       <button class="key" onclick="typeKey('5')">5</button>
       <button class="key" onclick="typeKey('6')">6</button>
       <button class="key" onclick="typeKey('-')">±</button>
-      <!-- Row 4: 1 2 3 (col 4 blank) → 0(2) will auto go to next row which wraps... -->
-      <!-- Instead: explicit col placement for 0 -->
+      <!-- Row 3: 1 2 3 0(2) -->
       <button class="key" onclick="typeKey('1')">1</button>
       <button class="key" onclick="typeKey('2')">2</button>
       <button class="key" onclick="typeKey('3')">3</button>
       <button class="key" onclick="typeKey('0')" style="grid-column:3/5">0</button>
+      <!-- Row 4: C DEL (blank) Submit(2) -->
+      <button class="key clear" onclick="typeKey('clear')">C</button>
+      <button class="key del" onclick="typeKey('del')">DEL</button>
+      <button class="key" style="visibility:hidden"></button>
+      <button class="key submit" onclick="submitAns()" style="grid-column:3/5">✓ 提交答案</button>
     </div>
   </div>
 
