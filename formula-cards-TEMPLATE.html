@@ -8,16 +8,14 @@
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <style>
 :root {
-  --cat-area-color: #3b82f6;
-  --cat-peri-color: #f59e0b;
-  --cat-vol-color: #10b981;
+  --cat-geo-color: #3b82f6;
   --cat-algebra-color: #7c3aed;
   --cat-stats-color: #db2777;
-  --cat-area-bg: #1e3a5f;
-  --cat-peri-bg: #92400e;
-  --cat-vol-bg: #064e3b;
+  --cat-other-color: #64748b;
+  --cat-geo-bg: #1e3a5f;
   --cat-algebra-bg: #2e1065;
   --cat-stats-bg: #4a0519;
+  --cat-other-bg: #1e293b;
   --card-w: 220px;
   --card-h: 320px;
 }
@@ -118,11 +116,13 @@ body { font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC"
 .grade-s2 { background: #ede9fe; color: #6d28d9; }
 .grade-s3 { background: #fef3c7; color: #92400e; }
 .card-cat-badge { position: absolute; top: 42px; right: 9px; font-size: 7px; font-weight: 800; letter-spacing: 1px; padding: 2px 8px; border-radius: 6px; color: #fff; z-index: 2; }
-[data-cat="area"] .card-cat-badge { background: var(--cat-area-color); }
-[data-cat="peri"] .card-cat-badge { background: var(--cat-peri-color); color: #1e293b; }
-[data-cat="vol"] .card-cat-badge { background: var(--cat-vol-color); }
+[data-cat="area"] .card-cat-badge,
+[data-cat="peri"] .card-cat-badge,
+[data-cat="vol"] .card-cat-badge,
+[data-cat="geo"] .card-cat-badge { background: var(--cat-geo-color); }
 [data-cat="algebra"] .card-cat-badge { background: var(--cat-algebra-color); }
 [data-cat="stats"] .card-cat-badge { background: var(--cat-stats-color); }
+[data-cat="other"] .card-cat-badge { background: var(--cat-other-color); }
 .card-icon { flex: 1; display: flex; align-items: center; justify-content: center; padding: 8px 16px; position: relative; z-index: 1; overflow: hidden; }
 .card-icon svg, .card-icon img { width: 110px; height: 110px; object-fit: contain; }
 .card-name-area { padding: 5px 10px 3px; text-align: center; position: relative; z-index: 2; }
@@ -140,11 +140,13 @@ body { font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC"
 
 /* back face */
 .back-face { position: absolute; inset: 0; border-radius: 16px; display: flex; flex-direction: column; overflow: hidden; }
-[data-cat="area"] .back-face { background: linear-gradient(160deg, #1e3a5f 0%, #1e40af, #312e81); }
-[data-cat="peri"] .back-face { background: linear-gradient(160deg, #92400e 0%, #b45309, #92400e); }
-[data-cat="vol"] .back-face { background: linear-gradient(160deg, #064e3b 0%, #047857, #059669); }
+[data-cat="area"] .back-face,
+[data-cat="peri"] .back-face,
+[data-cat="vol"] .back-face,
+[data-cat="geo"] .back-face { background: linear-gradient(160deg, #1e3a5f 0%, #1e40af, #312e81); }
 [data-cat="algebra"] .back-face { background: linear-gradient(160deg, #2e1065 0%, #4c1d95, #6d28d9); }
 [data-cat="stats"] .back-face { background: linear-gradient(160deg, #4a0519 0%, #831843, #be185d); }
+[data-cat="other"] .back-face { background: linear-gradient(160deg, #1e293b 0%, #334155, #475569); }
 .back-header { padding: 9px 12px 5px; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 2; }
 .back-tag { font-size: 8px; font-weight: 700; letter-spacing: 1px; color: rgba(255,255,255,0.55); text-transform: uppercase; }
 .back-grade-badge { font-size: 8px; font-weight: 800; padding: 2px 8px; border-radius: 6px; }
@@ -184,11 +186,10 @@ body { font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC"
     <!-- Category Tabs -->
     <div class="cat-tabs" id="catTabs">
       <button class="cat-tab active" data-cat="all">全部</button>
-      <button class="cat-tab" data-cat="area">面積</button>
-      <button class="cat-tab" data-cat="peri">周界</button>
-      <button class="cat-tab" data-cat="vol">體積</button>
+      <button class="cat-tab" data-cat="geo">幾何</button>
       <button class="cat-tab" data-cat="algebra">代數</button>
       <button class="cat-tab" data-cat="stats">統計</button>
+      <button class="cat-tab" data-cat="other">其他</button>
     </div>
 
     <!-- Card Selector -->
@@ -212,7 +213,7 @@ body { font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC"
       <div class="field"><label>英文名</label><input type="text" id="fEn" placeholder="例：Rhombus"></div>
       <div class="field-row">
         <div class="field flex1"><label>類別</label>
-          <select id="fCat"><option value="area">面積</option><option value="peri">周界</option><option value="vol">體積</option><option value="algebra">代數</option><option value="stats">統計</option></select>
+          <select id="fCat"><option value="geo">幾何</option><option value="algebra">代數</option><option value="stats">統計</option><option value="other">其他</option></select>
         </div>
         <div class="field flex1"><label>年級</label>
           <select id="fGrade"><option value="s1">中一</option><option value="s2">中二</option><option value="s3">中三</option></select>
@@ -348,8 +349,8 @@ function stars(n) { return Array.from({length:3},(_,i)=>'<span class="star'+(i<n
 function gradeLabel(g) { return g==='s1'?'中一':g==='s2'?'中二':'中三'; }
 function gradeClass(g) { return g==='s1'?'grade-s1':g==='s2'?'grade-s2':'grade-s3'; }
 function gradeClassBack(g) { return g==='s1'?'grade-s1-back':g==='s2'?'grade-s2-back':'grade-s3-back'; }
-function catLabel(cat) { return cat==='area'?'面積':cat==='peri'?'周界':cat==='vol'?'體積':cat==='algebra'?'代數':cat==='stats'?'統計':'其他'; }
-function catEmoji(cat) { return cat==='area'?'⬡':cat==='peri'?'◯':cat==='vol'?'◈':cat==='algebra'?'∑':'σ'; }
+function catLabel(cat) { return cat==='area'||cat==='peri'||cat==='vol'||cat==='geo'?'幾何':cat==='algebra'?'代數':cat==='stats'?'統計':'其他'; }
+function catEmoji(cat) { return cat==='area'||cat==='peri'||cat==='vol'||cat==='geo'?'⬡':cat==='algebra'?'∑':cat==='stats'?'σ':'◈'; }
 function setLabel(num) { if(!num) return '幾何'; if(num.startsWith('A')) return '代數'; if(num.startsWith('S')) return '統計'; return '幾何'; }
 
 function renderLatexEl(el, formula) {
@@ -415,6 +416,7 @@ function renderViewer(card) {
 
 function getFiltered() {
   if (activeCat === 'all') return CARDS;
+  if (activeCat === 'geo') return CARDS.filter(c => c.cat === 'area' || c.cat === 'peri' || c.cat === 'vol' || c.cat === 'geo');
   return CARDS.filter(c => c.cat === activeCat);
 }
 
@@ -525,7 +527,7 @@ function validate(card, isUpdate) {
 function resetForm() {
   ['fId','fNum','fFcn','fLatex','fTip','fSvg'].forEach(id => document.getElementById(id).value = '');
   ['fName','fEn','fAsk','fTag'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('fCat').value = 'area';
+  document.getElementById('fCat').value = 'geo';
   document.getElementById('fGrade').value = 's1';
   document.getElementById('fDiff').value = '1';
   document.getElementById('fSpecial').checked = false;
