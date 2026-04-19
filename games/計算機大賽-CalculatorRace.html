@@ -193,12 +193,6 @@ body{
     </div>
   </div>
 
-  <!-- Leaderboard -->
-  <div id="leaderboardArea" style="padding:0 24px 24px;display:none">
-    <h3 style="color:var(--gold);font-size:1rem;margin-bottom:12px;text-align:center">🏆 各級龍虎榜</h3>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px" id="leaderboardGrid"></div>
-  </div>
-
   <!-- Game Area -->
   <div class="game-area" id="gameArea">
     <div class="timer-bar" id="timerBar">
@@ -606,41 +600,6 @@ document.addEventListener('keydown', e => {
 
 // Init
 loadQuestions();
-renderLeaderboard();
-
-function renderLeaderboard() {
-  const grades = ['S1','S2','S3','S4','S5','S6'];
-  const gradeNames = {S1:'中一',S2:'中二',S3:'中三',S4:'中四',S5:'中五',S6:'中六'};
-  const colors = {S1:'#2ecc71',S2:'#27ae60',S3:'#f39c12',S4:'#e67e22',S5:'#e74c3c',S6:'#c0392b'};
-  const scores = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-  const grid = document.getElementById('leaderboardGrid');
-  if (!grid) return;
-  grid.innerHTML = '';
-  grades.forEach(g => {
-    const top = scores.filter(s => s.grade === g).sort((a,b) => b.score - a.score).slice(0,3);
-    const col = document.createElement('div');
-    col.style.cssText = 'background:rgba(255,255,255,.05);border-radius:10px;padding:10px';
-    let html = `<div style="color:${colors[g]};font-weight:700;font-size:.9rem;margin-bottom:6px">${gradeNames[g]}</div>`;
-    if (top.length === 0) {
-      html += '<div style="color:rgba(255,255,255,.3);font-size:.75rem">暫無記錄</div>';
-    } else {
-      top.forEach((s,i) => {
-        html += `<div style="display:flex;justify-content:space-between;font-size:.78rem;color:rgba(255,255,255,.7);margin:3px 0">
-          <span>${i+1}. ${escapeHtml(s.name)}</span>
-          <span style="color:${colors[g]};font-weight:700">${s.score}</span>
-        </div>`;
-      });
-    }
-    col.innerHTML = html;
-    grid.appendChild(col);
-  });
-  const la = document.getElementById('leaderboardArea');
-  if (la) la.style.display = 'block';
-}
-
-function escapeHtml(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
 </script>
 </body>
 </html>
