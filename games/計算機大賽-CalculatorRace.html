@@ -241,9 +241,11 @@ body{
     </div>
     <div class="input-area">
       <input type="text" class="calc-input" id="calcInput" placeholder="?" autocomplete="off">
-      <div class="hint-text">使用計算機計算上述算式，輸入答案後按提交</div>
+      <div class="hint-text" id="gameHint">使用計算機計算上述算式，輸入答案後按提交</div>
     </div>
     <div class="keyboard" id="keyboard">
+      <button class="key" style="background:#e74c3c" onclick="typeKey('clear')">C</button>
+      <button class="key" style="background:#e67e22" onclick="typeKey('del')">DEL</button>
       <button class="key" onclick="typeKey('1')">1</button>
       <button class="key" onclick="typeKey('2')">2</button>
       <button class="key" onclick="typeKey('3')">3</button>
@@ -279,7 +281,7 @@ body{
         <div class="stat-l">準確率</div>
       </div>
     </div>
-    <button class="play-again" onclick="playAgain()">再玩一次</button>
+    <button class="play-again" onclick="goHome()">返回首頁</button>
   </div>
 </div>
 
@@ -584,6 +586,8 @@ function startGame(grade) {
   document.getElementById('tabBar').style.display = 'none';
   document.getElementById('gameArea').style.display = 'block';
   document.getElementById('endArea').style.display = 'none';
+  const hint = document.getElementById('gameHint');
+  if (hint) hint.textContent = gameCalcMode === 'calc' ? '使用計算機計算上述算式，輸入答案後按提交' : '心算回答上述算式，輸入答案後按提交';
   nextQuestion();
   startTimer();
 
@@ -593,27 +597,15 @@ function startGame(grade) {
 }
 
 function playAgain() {
+  goHome();
+}
+
+function goHome() {
   document.getElementById('endArea').style.display = 'none';
-  document.getElementById('nameArea').style.display = 'none';
   document.getElementById('modeSelect').style.display = 'block';
   document.getElementById('leaderboardArea').style.display = 'block';
   document.getElementById('tabBar').style.display = 'flex';
   if (gameTimer) clearInterval(gameTimer);
-}
-
-function submitScore() {
-  const name = document.getElementById('playerName').value.trim() || '匿名';
-  const score = correctCount - wrongCount;
-  const entry = { name, score, grade: gameGrade, mode: gameCalcMode, time: Date.now() };
-  const scores = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-  scores.push(entry);
-  scores.sort((a, b) => b.score - a.score);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(scores.slice(0, 100)));
-  document.getElementById('nameArea').style.display = 'none';
-  document.getElementById('tabBar').style.display = 'flex';
-  document.getElementById('modeSelect').style.display = 'block';
-  document.getElementById('leaderboardArea').style.display = 'block';
-  renderLeaderboard();
 }
 
 // Keyboard support
@@ -636,6 +628,8 @@ function selectMode(mode) {
   document.getElementById('tabBrain').classList.toggle('active', mode === 'brain');
   const title = document.getElementById('leaderboardTitle');
   if (title) title.textContent = mode === 'calc' ? '🏆 使用計算機 各級龍虎榜' : '🏆 不使用計算機 各級龍虎榜';
+  const hint = document.getElementById('gameHint');
+  if (hint) hint.textContent = mode === 'calc' ? '使用計算機計算上述算式，輸入答案後按提交' : '心算回答上述算式，輸入答案後按提交';
   renderLeaderboard();
 }
 
