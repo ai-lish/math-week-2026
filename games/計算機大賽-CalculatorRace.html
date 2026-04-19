@@ -260,17 +260,6 @@ body{
     </div>
   </div>
 
-  <!-- Name Entry -->
-  <div class="name-area" id="nameArea">
-    <h2>🏆 挑戰完成！</h2>
-    <p class="name-hint">輸入名字以上傳分數到排行榜</p>
-    <input type="text" class="name-input" id="playerName" placeholder="你的名字" maxlength="12">
-    <button class="name-submit" onclick="submitScore()">上傳分數</button>
-    <div style="margin-top:10px">
-      <button class="play-again" onclick="playAgain()" style="background:#444;padding:10px 20px;font-size:.95rem">略過</button>
-    </div>
-  </div>
-
   <!-- End Screen -->
   <div class="end-area" id="endArea">
     <h2>⏱️ 時間到！</h2>
@@ -290,10 +279,7 @@ body{
         <div class="stat-l">準確率</div>
       </div>
     </div>
-    <div style="display:flex;gap:10px;justify-content:center;margin-top:16px">
-      <button class="play-again" style="background:var(--teal)" onclick="showNameEntry()">上傳分數</button>
-      <button class="play-again" onclick="playAgain()">再玩一次</button>
-    </div>
+    <button class="play-again" onclick="playAgain()">再玩一次</button>
   </div>
 </div>
 
@@ -508,9 +494,12 @@ function submitAns() {
   document.getElementById('correctCount').textContent = correctCount;
   document.getElementById('wrongCount').textContent = wrongCount;
 
+  document.getElementById('calcInput').disabled = true;
   setTimeout(() => {
+    document.getElementById('calcInput').disabled = false;
+    document.getElementById('calcInput').focus();
     nextQuestion();
-  }, 1200);
+  }, 800);
 }
 
 function formatAnswer(ans) {
@@ -534,31 +523,26 @@ function formatAnswer(ans) {
 }
 
 function showResult(correct, correctAns) {
-  const kb = document.getElementById('keyboard');
+  const inp = document.getElementById('calcInput');
   if (correct) {
-    kb.innerHTML = '<div class="result-overlay"><div class="result-icon result-correct">✓</div></div>';
+    inp.style.borderColor = '#2ecc71';
+    inp.style.background = 'rgba(46,204,113,.15)';
   } else {
-    kb.innerHTML = `<div class="result-overlay"><div class="result-icon result-wrong">✗</div><div style="color:rgba(255,255,255,.6);margin-top:8px">正確答案: <span id="correctAnsLatex"></span></div></div>`;
-    const ansEl = document.getElementById('correctAnsLatex');
-    katex.render(String(correctAns), ansEl, { throwOnError: false, displayMode: false });
+    inp.style.borderColor = '#e74c3c';
+    inp.style.background = 'rgba(231,76,60,.15)';
+    // Show correct answer in the note area
+    const note = document.getElementById('questionNote');
+    note.style.color = '#f1c40f';
+    note.textContent = '正確答案：' + correctAns;
   }
   setTimeout(() => {
-    kb.innerHTML = `
-      <button class="key" onclick="typeKey('1')">1</button>
-      <button class="key" onclick="typeKey('2')">2</button>
-      <button class="key" onclick="typeKey('3')">3</button>
-      <button class="key" onclick="typeKey('4')">4</button>
-      <button class="key" onclick="typeKey('5')">5</button>
-      <button class="key" onclick="typeKey('6')">6</button>
-      <button class="key" onclick="typeKey('7')">7</button>
-      <button class="key" onclick="typeKey('8')">8</button>
-      <button class="key" onclick="typeKey('9')">9</button>
-      <button class="key" onclick="typeKey('.')">.</button>
-      <button class="key" onclick="typeKey('0')">0</button>
-      <button class="key" onclick="typeKey('-')">±</button>
-      <button class="key submit" onclick="submitAns()">✓ 提交答案</button>
-    `;
-  }, 1100);
+    inp.style.borderColor = '';
+    inp.style.background = '';
+    inp.value = '';
+    inp.disabled = false;
+    document.getElementById('questionNote').textContent = getNote(window.currentQ || {expression:'',note:''});
+    document.getElementById('questionNote').style.color = '';
+  }, 800);
 }
 
 function typeKey(k) {
@@ -653,14 +637,6 @@ function selectMode(mode) {
   const title = document.getElementById('leaderboardTitle');
   if (title) title.textContent = mode === 'calc' ? '🏆 使用計算機 各級龍虎榜' : '🏆 不使用計算機 各級龍虎榜';
   renderLeaderboard();
-}
-
-function showNameEntry() {
-  document.getElementById('endArea').style.display = 'none';
-  document.getElementById('nameArea').style.display = 'block';
-  document.getElementById('playerName').value = '';
-  document.getElementById('playerName').focus();
-  document.getElementById('playerName').onkeydown = e => { if (e.key === 'Enter') submitScore(); };
 }
 
 function renderLeaderboard() {
