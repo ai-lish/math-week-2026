@@ -5,137 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>數學公式卡牌 — 編輯器</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js">
-// ── COLLAPSE / EXPAND ──
-let isCollapsed = false;
-const collapseBtn = document.getElementById('collapseBtn');
-const editorPanel = document.querySelector('.editor-panel');
-const fabEdit = document.getElementById('fabEdit');
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 
-function updateCollapseBtn() {
-  collapseBtn.textContent = isCollapsed ? '▶' : '▲';
-  collapseBtn.title = isCollapsed ? '展開' : '摺疊';
-  if (window.innerWidth < 768) {
-    editorBackdrop.classList.toggle('visible', !isCollapsed);
-  }
-}
-
-collapseBtn.addEventListener('click', () => {
-  isCollapsed = !isCollapsed;
-  editorPanel.classList.toggle('collapsed', isCollapsed);
-  updateCollapseBtn();
-  // On desktop, when collapsed, give viewer more room
-  if (window.innerWidth >= 768) {
-    document.getElementById('viewerPanel').style.flex = isCollapsed ? '1' : '';
-  }
-});
-
-// FAB: open editor on mobile
-fabEdit.addEventListener('click', () => { openEditor(); });
-
-// ── MOBILE OVERLAY ──
-const editorBackdrop = document.getElementById('editorBackdrop');
-
-function openEditor() {
-  isCollapsed = false;
-  editorPanel.classList.remove('collapsed');
-  updateCollapseBtn();
-  if (window.innerWidth < 768) {
-    editorBackdrop.classList.add('visible');
-    editorPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-}
-
-function closeEditor() {
-  isCollapsed = true;
-  editorPanel.classList.add('collapsed');
-  updateCollapseBtn();
-  if (window.innerWidth < 768) {
-    editorBackdrop.classList.remove('visible');
-  }
-}
-
-function toggleEditor() {
-  if (isCollapsed) { openEditor(); } else { closeEditor(); }
-}
-
-function savePrefs() {
-  const w = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--editor-w')) || 300;
-  localStorage.setItem('fcEditorW', w);
-}
-
-function initEditorPrefs() {
-  const saved = parseInt(localStorage.getItem('fcEditorW') || '0');
-  if (saved >= 150) {
-    document.documentElement.style.setProperty('--editor-w', saved + 'px');
-  }
-  if (window.innerWidth < 768) {
-    editorBackdrop.classList.remove('visible');
-  }
-}
-
-editorBackdrop.addEventListener('click', () => {
-  if (window.innerWidth < 768) closeEditor();
-});
-
-// ── KEYBOARD NAV ──
-document.addEventListener('keydown', (e) => {
-  if (!['ArrowLeft','ArrowRight'].includes(e.key)) return;
-  const sel = document.getElementById('cardSelect');
-  const filtered = getFiltered();
-  const curIdx = filtered.findIndex(c => String(c.id) === sel.value);
-  if (curIdx < 0) return;
-  const newIdx = e.key === 'ArrowLeft'
-    ? (curIdx - 1 + filtered.length) % filtered.length
-    : (curIdx + 1) % filtered.length;
-  sel.value = filtered[newIdx].id;
-  loadCard(filtered[newIdx].id);
-  e.preventDefault();
-});
-
-// ── RESIZE HANDLE ──
-const resizeHandle = document.getElementById('resizeHandle');
-let isResizing = false;
-let startX = 0;
-let startW = 0;
-
-function startResize(e) {
-  // Only on desktop
-  if (window.innerWidth < 768) return;
-  isResizing = true;
-  startX = e.clientX || e.touches?.[0]?.clientX || 0;
-  startW = editorPanel.offsetWidth;
-  resizeHandle.classList.add('dragging');
-  document.body.style.cursor = 'col-resize';
-  document.body.style.userSelect = 'none';
-  e.preventDefault();
-}
-
-function doResize(e) {
-  if (!isResizing) return;
-  const clientX = e.clientX || e.touches?.[0]?.clientX || 0;
-  const delta = clientX - startX;
-  const newW = Math.max(200, Math.min(560, startW + delta));
-  document.documentElement.style.setProperty('--editor-w', newW + 'px');
-}
-
-function stopResize() {
-  if (!isResizing) return;
-  isResizing = false;
-  resizeHandle.classList.remove('dragging');
-  document.body.style.cursor = '';
-  document.body.style.userSelect = '';
-  savePrefs();
-}
-
-resizeHandle.addEventListener('pointerdown', startResize);
-window.addEventListener('pointermove', doResize);
-window.addEventListener('pointerup', stopResize);
-resizeHandle.addEventListener('touchstart', startResize, { passive: false });
-window.addEventListener('touchmove', doResize, { passive: false });
-window.addEventListener('touchend', stopResize);
-
-</script>
 <style>
 :root {
   --cat-geo-color: #3b82f6;
@@ -558,6 +429,136 @@ body { font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC"
 
 <div class="toast" id="toast"></div>
 <script>
+
+// ── COLLAPSE / EXPAND ──
+let isCollapsed = false;
+const collapseBtn = document.getElementById('collapseBtn');
+const editorPanel = document.querySelector('.editor-panel');
+const fabEdit = document.getElementById('fabEdit');
+
+function updateCollapseBtn() {
+  collapseBtn.textContent = isCollapsed ? '▶' : '▲';
+  collapseBtn.title = isCollapsed ? '展開' : '摺疊';
+  if (window.innerWidth < 768) {
+    editorBackdrop.classList.toggle('visible', !isCollapsed);
+  }
+}
+
+collapseBtn.addEventListener('click', () => {
+  isCollapsed = !isCollapsed;
+  editorPanel.classList.toggle('collapsed', isCollapsed);
+  updateCollapseBtn();
+  // On desktop, when collapsed, give viewer more room
+  if (window.innerWidth >= 768) {
+    document.getElementById('viewerPanel').style.flex = isCollapsed ? '1' : '';
+  }
+});
+
+// FAB: open editor on mobile
+fabEdit.addEventListener('click', () => { openEditor(); });
+
+// ── MOBILE OVERLAY ──
+const editorBackdrop = document.getElementById('editorBackdrop');
+
+function openEditor() {
+  isCollapsed = false;
+  editorPanel.classList.remove('collapsed');
+  updateCollapseBtn();
+  if (window.innerWidth < 768) {
+    editorBackdrop.classList.add('visible');
+    editorPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function closeEditor() {
+  isCollapsed = true;
+  editorPanel.classList.add('collapsed');
+  updateCollapseBtn();
+  if (window.innerWidth < 768) {
+    editorBackdrop.classList.remove('visible');
+  }
+}
+
+function toggleEditor() {
+  if (isCollapsed) { openEditor(); } else { closeEditor(); }
+}
+
+function savePrefs() {
+  const w = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--editor-w')) || 300;
+  localStorage.setItem('fcEditorW', w);
+}
+
+function initEditorPrefs() {
+  const saved = parseInt(localStorage.getItem('fcEditorW') || '0');
+  if (saved >= 150) {
+    document.documentElement.style.setProperty('--editor-w', saved + 'px');
+  }
+  if (window.innerWidth < 768) {
+    editorBackdrop.classList.remove('visible');
+  }
+}
+
+editorBackdrop.addEventListener('click', () => {
+  if (window.innerWidth < 768) closeEditor();
+});
+
+// ── KEYBOARD NAV ──
+document.addEventListener('keydown', (e) => {
+  if (!['ArrowLeft','ArrowRight'].includes(e.key)) return;
+  const sel = document.getElementById('cardSelect');
+  const filtered = getFiltered();
+  const curIdx = filtered.findIndex(c => String(c.id) === sel.value);
+  if (curIdx < 0) return;
+  const newIdx = e.key === 'ArrowLeft'
+    ? (curIdx - 1 + filtered.length) % filtered.length
+    : (curIdx + 1) % filtered.length;
+  sel.value = filtered[newIdx].id;
+  loadCard(filtered[newIdx].id);
+  e.preventDefault();
+});
+
+// ── RESIZE HANDLE ──
+const resizeHandle = document.getElementById('resizeHandle');
+let isResizing = false;
+let startX = 0;
+let startW = 0;
+
+function startResize(e) {
+  // Only on desktop
+  if (window.innerWidth < 768) return;
+  isResizing = true;
+  startX = e.clientX || e.touches?.[0]?.clientX || 0;
+  startW = editorPanel.offsetWidth;
+  resizeHandle.classList.add('dragging');
+  document.body.style.cursor = 'col-resize';
+  document.body.style.userSelect = 'none';
+  e.preventDefault();
+}
+
+function doResize(e) {
+  if (!isResizing) return;
+  const clientX = e.clientX || e.touches?.[0]?.clientX || 0;
+  const delta = clientX - startX;
+  const newW = Math.max(200, Math.min(560, startW + delta));
+  document.documentElement.style.setProperty('--editor-w', newW + 'px');
+}
+
+function stopResize() {
+  if (!isResizing) return;
+  isResizing = false;
+  resizeHandle.classList.remove('dragging');
+  document.body.style.cursor = '';
+  document.body.style.userSelect = '';
+  savePrefs();
+}
+
+resizeHandle.addEventListener('pointerdown', startResize);
+window.addEventListener('pointermove', doResize);
+window.addEventListener('pointerup', stopResize);
+resizeHandle.addEventListener('touchstart', startResize, { passive: false });
+window.addEventListener('touchmove', doResize, { passive: false });
+window.addEventListener('touchend', stopResize);
+
 /* ═══════════════════════════════════════
    45 張卡牌
    ═══════════════════════════════════════ */
@@ -957,6 +958,7 @@ document.getElementById('copyBtn').addEventListener('click', () => {
 populateSelect();
 initEditorPrefs();
 renderViewer(null);
+
 </script>
 </body>
 </html>
