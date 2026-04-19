@@ -5,7 +5,83 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>數學公式卡牌 — 編輯器</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js">
+// ── COLLAPSE / EXPAND ──
+let isCollapsed = false;
+const collapseBtn = document.getElementById('collapseBtn');
+const editorPanel = document.querySelector('.editor-panel');
+const fabEdit = document.getElementById('fabEdit');
+
+function updateCollapseBtn() {
+  collapseBtn.textContent = isCollapsed ? '▶' : '▲';
+  collapseBtn.title = isCollapsed ? '展開' : '摺疊';
+}
+
+collapseBtn.addEventListener('click', () => {
+  isCollapsed = !isCollapsed;
+  editorPanel.classList.toggle('collapsed', isCollapsed);
+  updateCollapseBtn();
+  // On desktop, when collapsed, give viewer more room
+  if (window.innerWidth >= 768) {
+    document.getElementById('viewerPanel').style.flex = isCollapsed ? '1' : '';
+  }
+});
+
+// FAB: open editor on mobile
+fabEdit.addEventListener('click', () => {
+  if (isCollapsed) {
+    isCollapsed = false;
+    editorPanel.classList.remove('collapsed');
+    updateCollapseBtn();
+  }
+  // On mobile scroll to editor
+  if (window.innerWidth < 768) {
+    editorPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+});
+
+// ── RESIZE HANDLE ──
+const resizeHandle = document.getElementById('resizeHandle');
+let isResizing = false;
+let startX = 0;
+let startW = 0;
+
+function startResize(e) {
+  // Only on desktop
+  if (window.innerWidth < 768) return;
+  isResizing = true;
+  startX = e.clientX || e.touches?.[0]?.clientX || 0;
+  startW = editorPanel.offsetWidth;
+  resizeHandle.classList.add('dragging');
+  document.body.style.cursor = 'col-resize';
+  document.body.style.userSelect = 'none';
+  e.preventDefault();
+}
+
+function doResize(e) {
+  if (!isResizing) return;
+  const clientX = e.clientX || e.touches?.[0]?.clientX || 0;
+  const delta = clientX - startX;
+  const newW = Math.max(200, Math.min(560, startW + delta));
+  document.documentElement.style.setProperty('--editor-w', newW + 'px');
+}
+
+function stopResize() {
+  if (!isResizing) return;
+  isResizing = false;
+  resizeHandle.classList.remove('dragging');
+  document.body.style.cursor = '';
+  document.body.style.userSelect = '';
+}
+
+resizeHandle.addEventListener('pointerdown', startResize);
+window.addEventListener('pointermove', doResize);
+window.addEventListener('pointerup', stopResize);
+resizeHandle.addEventListener('touchstart', startResize, { passive: false });
+window.addEventListener('touchmove', doResize, { passive: false });
+window.addEventListener('touchend', stopResize);
+
+</script>
 <style>
 :root {
   --cat-geo-color: #3b82f6;
@@ -22,13 +98,54 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",Arial,sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
 
-.layout { display: flex; gap: 28px; padding: 24px; min-height: 100vh; align-items: flex-start; }
+.layout {
+  display: flex;
+  gap: 0;
+  padding: 16px;
+  min-height: 100vh;
+  align-items: flex-start;
+  --editor-w: 300px;
+  --handle-w: 16px;
+}
 
 /* ── LEFT PANEL ── */
-.editor-panel { width: 300px; flex-shrink: 0; background: #1e293b; border-radius: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); overflow: hidden; }
-.editor-header { background: linear-gradient(135deg, #f59e0b, #d97706); padding: 16px 20px; }
-.editor-header h2 { font-size: 16px; font-weight: 900; color: #fff; }
-.editor-header p { font-size: 11px; color: rgba(255,255,255,0.75); margin-top: 2px; }
+.editor-panel {
+  width: var(--editor-w);
+  flex-shrink: 0;
+  background: #1e293b;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  overflow: hidden;
+  transition: width 0.35s cubic-bezier(0.4,0,0.2,1);
+  position: relative;
+  z-index: 10;
+}
+.editor-panel.collapsed { width: 52px; }
+.editor-header {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  padding: 14px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.editor-header-text { flex: 1; min-width: 0; }
+.editor-header h2 { font-size: 15px; font-weight: 900; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.editor-header p { font-size: 10px; color: rgba(255,255,255,0.75); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.editor-panel.collapsed .editor-header-text { display: none; }
+.collapse-btn {
+  width: 34px; height: 34px; flex-shrink: 0;
+  border-radius: 10px; border: none;
+  background: rgba(0,0,0,0.25); color: #fff;
+  font-size: 16px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.collapse-btn:hover { background: rgba(0,0,0,0.4); }
+.editor-panel.collapsed .collapse-btn {
+  width: 36px; height: 36px;
+  margin: 8px auto 0;
+  display: flex;
+}
 
 /* category tabs */
 .cat-tabs { display: flex; flex-wrap: wrap; gap: 6px; padding: 14px 16px 10px; border-bottom: 1px solid #334155; }
@@ -172,6 +289,85 @@ body { font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC"
 /* toast */
 .toast { position: fixed; bottom: 24px; right: 24px; background: #0f172a; color: #fff; padding: 12px 20px; border-radius: 10px; font-size: 13px; font-weight: 600; box-shadow: 0 8px 24px rgba(0,0,0,0.3); z-index: 9999; transform: translateY(80px); opacity: 0; transition: all 0.3s ease; border: 1px solid #334155; }
 .toast.show { transform: translateY(0); opacity: 1; }
+
+/* ── RESIZE HANDLE ── */
+.resize-handle {
+  width: var(--handle-w);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: col-resize;
+  user-select: none;
+  position: relative;
+  z-index: 5;
+}
+.resize-handle::before {
+  content: '';
+  width: 4px;
+  height: 48px;
+  border-radius: 4px;
+  background: #334155;
+  transition: background 0.2s, height 0.2s;
+}
+.resize-handle:hover::before,
+.resize-handle.dragging::before {
+  background: #f59e0b;
+  height: 64px;
+}
+
+
+/* ── MOBILE (< 768px) ── */
+@media (max-width: 767px) {
+  .layout { flex-direction: column; padding: 12px; gap: 12px; }
+  .editor-panel {
+    width: 100% !important;
+    border-radius: 16px;
+    max-height: 70vh;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    transform: translateY(0);
+    transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), width 0.35s;
+    z-index: 100;
+  }
+  .editor-panel.collapsed {
+    width: 100% !important;
+    transform: translateY(calc(100% - 56px));
+  }
+  .editor-panel.collapsed .editor-header-text { display: block !important; }
+  .editor-panel.collapsed .collapse-btn { display: none !important; }
+  .resize-handle { display: none; }
+  .viewer-panel { width: 100%; padding: 12px 0; }
+  .card-2up { gap: 16px; flex-wrap: wrap; justify-content: center; }
+  .fab-edit {
+    display: flex !important;
+    position: fixed;
+    bottom: 24px; right: 24px;
+    z-index: 99;
+  }
+}
+@media (min-width: 768px) {
+  .fab-edit { display: none !important; }
+}
+
+/* ── FAB BUTTON ── */
+.fab-edit {
+  display: none;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  border: none;
+  color: #fff; font-size: 22px;
+  box-shadow: 0 4px 16px rgba(245,158,11,0.5);
+  cursor: pointer;
+  align-items: center; justify-content: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.fab-edit:hover { transform: scale(1.08); box-shadow: 0 6px 20px rgba(245,158,11,0.6); }
+.fab-edit:active { transform: scale(0.96); }
+
 </style>
 </head>
 <body>
@@ -179,8 +375,11 @@ body { font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC"
   <!-- LEFT: Editor -->
   <div class="editor-panel">
     <div class="editor-header">
-      <h2>✏️ 卡牌編輯器</h2>
-      <p>選擇分類 → 揀卡 → 修改 → 更新</p>
+      <div class="editor-header-text">
+        <h2>✏️ 卡牌編輯器</h2>
+        <p>揀卡 → 修改 → 更新</p>
+      </div>
+      <button class="collapse-btn" id="collapseBtn" title="摺疊">▲</button>
     </div>
 
     <!-- Category Tabs -->
@@ -263,6 +462,9 @@ body { font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC"
     </div>
   </div>
 
+  <!-- Resize Handle -->
+  <div class="resize-handle" id="resizeHandle" title="拖動調整闊窄"></div>
+
   <!-- RIGHT: 2-Card Viewer -->
   <div class="viewer-panel">
     <div class="viewer-title">📐 幾何公式卡 — <span id="viewerName">選擇一張卡</span></div>
@@ -280,6 +482,9 @@ body { font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC"
     </div>
   </div>
 </div>
+
+<!-- FAB for mobile -->
+<button class="fab-edit" id="fabEdit" title="打開編輯器">✏️</button>
 
 <div class="toast" id="toast"></div>
 <script>
