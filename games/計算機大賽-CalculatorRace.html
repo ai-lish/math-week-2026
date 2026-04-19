@@ -194,7 +194,7 @@ body{
   </div>
 
   <!-- Leaderboard -->
-  <div id="leaderboardArea" style="padding:0 24px 24px">
+  <div id="leaderboardArea" style="padding:0 24px 24px;display:none">
     <h3 style="color:var(--gold);font-size:1rem;margin-bottom:12px;text-align:center">🏆 各級龍虎榜</h3>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px" id="leaderboardGrid"></div>
   </div>
@@ -565,6 +565,7 @@ function startGame(grade) {
   document.getElementById('correctCount').textContent = '0';
   document.getElementById('wrongCount').textContent = '0';
   document.getElementById('modeSelect').style.display = 'none';
+  document.getElementById('leaderboardArea').style.display = 'none';
   document.getElementById('gameArea').style.display = 'block';
   document.getElementById('endArea').style.display = 'none';
   nextQuestion();
@@ -579,6 +580,7 @@ function playAgain() {
   document.getElementById('endArea').style.display = 'none';
   document.getElementById('nameArea').style.display = 'none';
   document.getElementById('modeSelect').style.display = 'block';
+  document.getElementById('leaderboardArea').style.display = 'block';
   if (gameTimer) clearInterval(gameTimer);
 }
 
