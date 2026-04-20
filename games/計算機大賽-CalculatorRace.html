@@ -130,7 +130,7 @@ body{
 .calc-input:focus{outline:none;border-color:var(--accent)}
 .hint-text{font-size:.78rem;color:rgba(255,255,255,.4);margin-top:6px}
 /* Keys */
-.keyboard{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);gap:8px;max-width:340px;margin:16px auto 0}
+.keyboard{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(5,1fr);gap:8px;max-width:340px;margin:16px auto 0}
 .key{
   padding:14px 0;border:none;border-radius:10px;
   font-size:1.2rem;font-weight:700;cursor:pointer;
@@ -141,7 +141,7 @@ body{
 .key:active{transform:scale(.95)}
 .key.clear{background:#e74c3c}
 .key.del{background:#e67e22}
-.key.submit{background:var(--accent);grid-column:span 2;font-size:1.1rem}
+.key.submit{background:var(--accent);grid-column:4;font-size:1.1rem}
 .key.next{background:var(--teal);grid-column:span 3}
 /* Result */
 .result-overlay{
@@ -256,16 +256,16 @@ body{
       <button class="key" onclick="typeKey('5')">5</button>
       <button class="key" onclick="typeKey('6')">6</button>
       <button class="key" onclick="typeKey('-')">±</button>
-      <!-- Row 3: 1 2 3 0(2) -->
+      <!-- Row 3: 1 2 3 0 -->
       <button class="key" onclick="typeKey('1')">1</button>
       <button class="key" onclick="typeKey('2')">2</button>
       <button class="key" onclick="typeKey('3')">3</button>
-      <button class="key" onclick="typeKey('0')" style="grid-column:3/5">0</button>
-      <!-- Row 4: C DEL (blank) Submit(2) -->
+      <button class="key" onclick="typeKey('0')">0</button>
+      <!-- Row 4: C DEL (hidden) Submit -->
       <button class="key clear" onclick="typeKey('clear')">C</button>
       <button class="key del" onclick="typeKey('del')">DEL</button>
       <button class="key" style="visibility:hidden"></button>
-      <button class="key submit" onclick="submitAns()" style="grid-column:3/5">✓ 提交答案</button>
+      <button class="key submit" onclick="submitAns()">✓ 提交答案</button>
     </div>
   </div>
 
