@@ -150,17 +150,14 @@ body{
     <h2>⚙️ 遊戲設定</h2>
 
     <div class="opt-group">
-      <div class="opt-label">👤 名字</div>
-      <input type="text" class="name-input" id="playerName" placeholder="輸入名字" autocomplete="off">
-    </div>
-
-    <div class="opt-group">
-      <div class="opt-label">⚡ 難度</div>
-      <div class="opt-row" id="diffRow">
-        <button class="opt-btn easy" onclick="selectDiff('Easy',this)">簡單</button>
-        <button class="opt-btn med selected" onclick="selectDiff('Medium',this)">中等</button>
-        <button class="opt-btn hard" onclick="selectDiff('Hard',this)">困難</button>
-        <button class="opt-btn all" onclick="selectDiff('Mixed',this)">混合</button>
+      <div class="opt-label">🏫 年級</div>
+      <div class="opt-row" id="gradeRow">
+        <button class="opt-btn easy" onclick="selectGrade('S1',this)">中一</button>
+        <button class="opt-btn easy" onclick="selectGrade('S2',this)">中二</button>
+        <button class="opt-btn med" onclick="selectGrade('S3',this)">中三</button>
+        <button class="opt-btn hard" onclick="selectGrade('S4',this)">中四</button>
+        <button class="opt-btn hard" onclick="selectGrade('S5',this)">中五</button>
+        <button class="opt-btn hard" onclick="selectGrade('S6',this)">中六</button>
       </div>
     </div>
 
@@ -225,18 +222,18 @@ body{
 <script>
 // Fallback data if JSON fails to load
 const FALLBACK_PAIRS = [
-    { id:1, formula:'a² − b²', answer:'(a+b)(a−b)', category:'代數', difficulty:'Easy' },
-    { id:2, formula:'(a+b)²', answer:'a²+2ab+b²', category:'代數', difficulty:'Easy' },
-    { id:3, formula:'sin²θ + cos²θ', answer:'1', category:'三角', difficulty:'Easy' },
-    { id:4, formula:'圓面積', answer:'πr²', category:'幾何', difficulty:'Easy' },
-    { id:5, formula:'y = mx + c', answer:'直線方程', category:'函數', difficulty:'Easy' },
-    { id:6, formula:'畢氏定理', answer:'a²+b²=c²', category:'幾何', difficulty:'Easy' },
-    { id:7, formula:'求根公式', answer:'x = (−b±√(b²−4ac)) / 2a', category:'代數', difficulty:'Medium' },
-    { id:8, formula:'梯形面積', answer:'½(a+b)×h', category:'幾何', difficulty:'Easy' },
-    { id:9, formula:'圓周長', answer:'2πr', category:'幾何', difficulty:'Easy' },
-    { id:10, formula:'(a−b)²', answer:'a²−2ab+b²', category:'代數', difficulty:'Easy' },
-    { id:11, formula:'三角形面積', answer:'½ × 底 × 高', category:'幾何', difficulty:'Easy' },
-    { id:12, formula:'tan θ', answer:'sin θ / cos θ', category:'三角', difficulty:'Easy' },
+    { id:1, formula:'a² − b²', answer:'(a+b)(a−b)', category:'代數', grade:'S3' },
+    { id:2, formula:'(a+b)²', answer:'a²+2ab+b²', category:'代數', grade:'S3' },
+    { id:3, formula:'sin²θ + cos²θ', answer:'1', category:'三角', grade:'S4' },
+    { id:4, formula:'圓面積', answer:'πr²', category:'幾何', grade:'S1' },
+    { id:5, formula:'y = mx + c', answer:'直線方程', category:'函數', grade:'S3' },
+    { id:6, formula:'畢氏定理', answer:'a²+b²=c²', category:'幾何', grade:'S2' },
+    { id:7, formula:'求根公式', answer:'x = (−b±√(b²−4ac)) / 2a', category:'代數', grade:'S4' },
+    { id:8, formula:'梯形面積', answer:'½(a+b)×h', category:'幾何', grade:'S1' },
+    { id:9, formula:'圓周長', answer:'2πr', category:'幾何', grade:'S1' },
+    { id:10, formula:'(a−b)²', answer:'a²−2ab+b²', category:'代數', grade:'S3' },
+    { id:11, formula:'三角形面積', answer:'½ × 底 × 高', category:'幾何', grade:'S1' },
+    { id:12, formula:'tan θ', answer:'sin θ / cos θ', category:'三角', grade:'S4' },
 ];
 
 let ALL_PAIRS = [];
@@ -247,7 +244,7 @@ let moveCount = 0;
 let totalPairs = 8;
 let timerVal = 0;
 let timerInt = null;
-let selectedDiff = 'Medium';
+let selectedGrade = null; // null = all grades
 let selectedCat = 'All';
 
 // Load question bank
@@ -267,9 +264,9 @@ async function loadPairs() {
 }
 loadPairs();
 
-function selectDiff(val, btn) {
-    selectedDiff = val;
-    document.querySelectorAll('#diffRow .opt-btn').forEach(b => b.classList.remove('selected'));
+function selectGrade(val, btn) {
+    selectedGrade = val;
+    document.querySelectorAll('#gradeRow .opt-btn').forEach(b => b.classList.remove('selected'));
     btn.classList.add('selected');
 }
 
@@ -293,14 +290,11 @@ function shuffle(arr) {
 function filterPairs() {
     let pool = [...ALL_PAIRS];
     if (selectedCat !== 'All') pool = pool.filter(p => p.category === selectedCat);
-    if (selectedDiff !== 'Mixed') pool = pool.filter(p => p.difficulty === selectedDiff);
+    if (selectedGrade) pool = pool.filter(p => p.grade === selectedGrade);
     return pool;
 }
 
 function startGame() {
-    const name = document.getElementById('playerName').value.trim();
-    if(!name) { alert('請輸入名字！'); return; }
-
     let pool = filterPairs();
     if (pool.length < totalPairs) {
         alert('此分類/難度只有 ' + pool.length + ' 條題目，不夠 ' + totalPairs + ' 對。\n請選擇其他設定或減少配對數量。');
