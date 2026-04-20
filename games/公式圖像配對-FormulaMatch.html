@@ -11,6 +11,7 @@
   --bg:#1a1a2e;--card:#16213e;--accent:#e94560;
   --gold:#f5c518;--teal:#0f3460;--text:#eaeaea;
   --easy:#2ecc71;--med:#f39c12;--hard:#e74c3c;
+  --area:#3b82f6;--peri:#f59e0b;--vol:#10b981;--algebra:#8b5cf6;
 }
 body{
   font-family:'Noto Sans TC',sans-serif;
@@ -22,11 +23,10 @@ body{
 .container{
   background:var(--card);
   border-radius:16px;
-  width:100%;max-width:520px;
+  width:100%;max-width:560px;
   box-shadow:0 20px 60px rgba(0,0,0,.5);
   overflow:hidden;
 }
-/* Header */
 .header{
   background:linear-gradient(135deg,#667eea,#764ba2);
   padding:20px;text-align:center;
@@ -62,19 +62,18 @@ body{
   display:block;margin:0 auto;
 }
 .start-btn:hover{transform:translateY(-2px)}
-/* Level badge */
+/* Game area */
+.game-area{padding:20px;display:none}
 .level-badge{
   display:inline-block;padding:4px 16px;border-radius:20px;
   font-size:.8rem;font-weight:700;margin-bottom:12px;
   background:rgba(255,255,255,.15);
 }
-/* Game area */
-.game-area{padding:24px;display:none}
 .timer-bar{
   display:flex;align-items:center;gap:10px;
   background:rgba(255,255,255,.05);
   padding:10px 14px;border-radius:10px;
-  margin-bottom:14px;
+  margin-bottom:12px;
 }
 .timer-label{font-weight:700;color:var(--gold);white-space:nowrap;font-size:.9rem}
 .timer-track{flex:1;height:8px;background:#333;border-radius:4px;overflow:hidden}
@@ -87,36 +86,68 @@ body{
   display:flex;justify-content:space-between;
   background:rgba(255,255,255,.05);
   padding:10px 14px;border-radius:10px;
-  margin-bottom:14px;font-size:.9rem;
+  margin-bottom:12px;font-size:.9rem;
 }
 .score-pos{color:var(--easy);font-weight:700}
 .score-neg{color:var(--hard);font-weight:700}
 /* Card grid */
-.board{display:grid;gap:8px;margin-top:4px}
+.board{display:grid;gap:8px}
 .board.cols-2{grid-template-columns:repeat(2,1fr)}
 .board.cols-3{grid-template-columns:repeat(3,1fr)}
 .board.cols-4{grid-template-columns:repeat(4,1fr)}
 .board.cols-5{grid-template-columns:repeat(5,1fr)}
+/* Formula card (SVG card) */
 .card{
-  aspect-ratio:1;
-  background:linear-gradient(135deg,#667eea,#764ba2);
+  background:linear-gradient(145deg,#1e2a4a,#162035);
+  border-radius:12px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  cursor:pointer;
+  transition:all .3s;
+  user-select:none;-webkit-user-select:none;
+  position:relative;overflow:hidden;
+  min-height:100px;
+  padding:8px;
+}
+.card-cover{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,#2a3a6e,#1a2a5e);
   border-radius:12px;
   display:flex;align-items:center;justify-content:center;
-  font-size:.7rem;font-weight:bold;cursor:pointer;
-  transition:all .3s;
-  padding:6px;text-align:center;word-break:break-word;
-  user-select:none;-webkit-user-select:none;
-  min-height:65px;
-  position:relative;overflow:hidden;
+  font-size:2rem;color:rgba(255,255,255,.2);
+  transition:opacity .3s;
+  z-index:2;
 }
-.card.hidden-card::after{content:'?';font-size:1.6rem;color:rgba(255,255,255,.25)}
-.card.revealed{background:rgba(255,255,255,.12);transform:scale(.95)}
-.card.matched{background:linear-gradient(135deg,#2ecc71,#27ae60);opacity:.6;pointer-events:none}
-.card.wrong{background:linear-gradient(135deg,#e74c3c,#c0392b);animation:shake .3s}
+.card.revealed .card-cover{opacity:0;pointer-events:none}
+.card.matched{opacity:.55;pointer-events:none}
+.card.matched .card-cover{opacity:0}
+.card.wrong{animation:shake .3s}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+/* SVG inside card */
+.card-svg-wrap{
+  width:100%;flex:1;display:flex;align-items:center;justify-content:center;
+  padding:4px 0;
+}
+.card-svg-wrap svg{
+  width:100%;height:100%;max-height:55px;
+}
+.card-label{
+  font-size:.65rem;font-weight:700;color:#fff;text-align:center;
+  padding:2px 4px 4px;line-height:1.3;
+  width:100%;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.card-label.formula-type{color:rgba(255,255,255,.85)}
+.card-label.answer-type{color:var(--gold);font-size:.6rem}
+/* Badge on card */
+.cat-badge{
+  position:absolute;top:4px;right:4px;
+  font-size:.5rem;padding:1px 5px;border-radius:8px;
+  font-weight:700;opacity:.7;
+  background:rgba(255,255,255,.1);color:#fff;
+}
 /* Level up overlay */
 .levelup-overlay{
-  position:absolute;inset:0;z-index:10;
+  position:absolute;inset:0;z-index:20;
   background:rgba(0,0,0,.85);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   border-radius:16px;
@@ -145,16 +176,13 @@ body{
 </head>
 <body>
 <div class="container" id="app" style="position:relative;overflow:hidden">
-  <!-- Header -->
   <div class="header">
     <h1>🃏 公式圖像配對</h1>
     <p>配對公式和它的答案！</p>
   </div>
 
-  <!-- Setup -->
   <div class="setup" id="setup">
     <h2>⚙️ 遊戲設定</h2>
-
     <div class="opt-group">
       <div class="opt-label">🏫 年級</div>
       <div class="opt-row" id="gradeRow">
@@ -166,24 +194,21 @@ body{
         <button class="opt-btn hard" onclick="selectGrade('S6',this)">中六</button>
       </div>
     </div>
-
     <div class="opt-group">
       <div class="opt-label">📂 類別</div>
       <div class="opt-row" id="catRow">
         <button class="opt-btn selected" onclick="selectCat('代數',this)">代數</button>
         <button class="opt-btn" onclick="selectCat('幾何',this)">幾何</button>
         <button class="opt-btn" onclick="selectCat('統計',this)">統計</button>
-        <button class="opt-btn" disabled title="暫未開放" onclick="selectCat('其他',this)">其他 🔒</button>
+        <button class="opt-btn" disabled title="暫未開放">其他 🔒</button>
       </div>
     </div>
-
     <button class="start-btn" onclick="startGame()">🚀 開始配對</button>
     <p id="loadStatus" style="color:#aaa;font-size:.8rem;margin-top:12px;"></p>
   </div>
 
-  <!-- Game Area -->
   <div class="game-area" id="gameArea">
-    <div style="text-align:center;margin-bottom:12px">
+    <div style="text-align:center;margin-bottom:10px">
       <span class="level-badge" id="levelBadge">第 1 關</span>
     </div>
     <div class="timer-bar" id="timerBar">
@@ -198,7 +223,6 @@ body{
     <div class="board cols-2" id="board"></div>
   </div>
 
-  <!-- Results -->
   <div class="results" id="results">
     <h2 id="resultTitle" class="win">🎉 過關！</h2>
     <div class="big" id="finalTime">0</div>
@@ -218,40 +242,34 @@ body{
 </div>
 
 <script>
-// Fallback (unlikely to be needed if JSON loads)
+// Fallback pairs (should rarely be needed)
 const FALLBACK_PAIRS = [
-    {formula:'長方形',answer:'長 × 寬',category:'幾何',grade:'S1'},
-    {formula:'三角形',answer:'½ × 底 × 高',category:'幾何',grade:'S1'},
-    {formula:'圓形',answer:'π × 半徑²',category:'幾何',grade:'S1'},
-    {formula:'梯形',answer:'½(上底+下底)×高',category:'幾何',grade:'S2'},
-    {formula:'a² − b²',answer:'(a+b)(a−b)',category:'代數',grade:'S3'},
-    {formula:'(a+b)²',answer:'a²+2ab+b²',category:'代數',grade:'S3'},
-    {formula:'平均數',answer:'總和 ÷ 數量',category:'統計',grade:'S2'},
-    {formula:'中位數',answer:'排序後的中間值',category:'統計',grade:'S2'},
+    {formula:'長方形',answer:'長 × 寬',category:'幾何',grade:'S1',svg:null},
+    {formula:'三角形',answer:'½ × 底 × 高',category:'幾何',grade:'S1',svg:null},
+    {formula:'圓形',answer:'π × 半徑²',category:'幾何',grade:'S1',svg:null},
+    {formula:'梯形',answer:'½(上底+下底)×高',category:'幾何',grade:'S2',svg:null},
+    {formula:'a² − b²',answer:'(a+b)(a−b)',category:'代數',grade:'S3',svg:null},
+    {formula:'(a+b)²',answer:'a²+2ab+b²',category:'代數',grade:'S3',svg:null},
+    {formula:'平均數',answer:'總和 ÷ 數量',category:'統計',grade:'S2',svg:null},
+    {formula:'中位數',answer:'排序後的中間值',category:'統計',grade:'S2',svg:null},
 ];
 
 let ALL_PAIRS = [];
 let selectedGrade = null;
 let selectedCat = '代數';
 
-// Level config: [pairs, seconds]
-const LEVELS = [
-    [2, 20],
-    [3, 30],
-    [4, 40],
-];
+const LEVELS = [[2,20],[3,30],[4,40]];
 const MAX_LEVEL = LEVELS.length;
 
-let currentLevel = 0; // 0-indexed
-let currentPairs = []; // selected pairs for this level
+let currentLevel = 0;
+let currentPairs = [];
 let cards = [];
 let flipped = [];
 let matched = 0;
 let moveCount = 0;
 let timerVal = 0;
-let timerDur = 20;
 let timerInt = null;
-let totalMoves = 0; // across all levels
+let totalMoves = 0;
 
 async function loadPairs() {
     const status = document.getElementById('loadStatus');
@@ -260,9 +278,10 @@ async function loadPairs() {
         if (!resp.ok) throw new Error('HTTP ' + resp.status);
         const data = await resp.json();
         ALL_PAIRS = data.pairs || data;
-        status.textContent = '✅ 已載入 ' + ALL_PAIRS.length + ' 條題目';
+        const withSvg = ALL_PAIRS.filter(p => p.svg).length;
+        status.textContent = '✅ 已載入 ' + ALL_PAIRS.length + ' 條題目（含 ' + withSvg + ' 張卡牌圖）';
     } catch(e) {
-        ALL_PAIRS = FALLBACK_PAIRS.map((p,i)=>({...p,id:i}));
+        ALL_PAIRS = FALLBACK_PAIRS.map((p,i) => ({...p,id:i}));
         status.textContent = '⚠️ 使用內置題庫';
     }
 }
@@ -280,7 +299,6 @@ function selectGrade(val, btn) {
 }
 
 function selectCat(val, btn) {
-    if (val === '其他') return;
     selectedCat = val;
     document.querySelectorAll('#catRow .opt-btn').forEach(b => b.classList.remove('selected'));
     btn.classList.add('selected');
@@ -316,10 +334,7 @@ function startGame() {
 
 function startLevel(pool) {
     const [pairs, secs] = LEVELS[currentLevel];
-    timerDur = secs;
-
     if (pool.length < pairs) {
-        // Not enough pairs for this level — end game
         endGame(true);
         return;
     }
@@ -327,18 +342,15 @@ function startLevel(pool) {
     currentPairs = shuffle([...pool]).slice(0, pairs);
     matched = 0; moveCount = 0; timerVal = 0; flipped = [];
 
-    // Update UI
-    document.getElementById('levelBadge').textContent = `第 ${currentLevel + 1} 關`;
+    document.getElementById('levelBadge').textContent = '第 ' + (currentLevel + 1) + ' 關';
     document.getElementById('pairsLeft').textContent = pairs;
     document.getElementById('moves').textContent = '0';
 
-    // Timer bar
     const timerText = document.getElementById('timerText');
     const timerBar = document.getElementById('timerBar');
     timerText.textContent = secs;
     timerBar.classList.remove('timer-warning');
 
-    // Grid
     const board = document.getElementById('board');
     board.className = 'board';
     if (pairs === 2) board.classList.add('cols-2');
@@ -361,10 +373,7 @@ function startTimer(secs) {
         timerVal++;
         timerText.textContent = secs - timerVal;
         timerFill.style.width = Math.max(0, (secs - timerVal) / secs * 100) + '%';
-
-        if (timerVal >= secs - 5) {
-            timerBar.classList.add('timer-warning');
-        }
+        if (timerVal >= secs - 5) timerBar.classList.add('timer-warning');
         if (timerVal >= secs) {
             clearInterval(timerInt);
             endGame(false);
@@ -372,35 +381,89 @@ function startTimer(secs) {
     }, 1000);
 }
 
+function makeSvgCard(svgRaw, text, type) {
+    // Wrap SVG: ensure viewBox, strip width/height, add preserveAspectRatio
+    let svgContent = svgRaw || '';
+    // Inject viewBox if missing
+    if (!/viewBox=/i.test(svgContent)) {
+        svgContent = svgContent.replace('<svg', '<svg viewBox="0 0 110 110"');
+    }
+    // Ensure preserveAspectRatio
+    if (!/preserveAspectRatio=/i.test(svgContent)) {
+        svgContent = svgContent.replace('<svg', '<svg preserveAspectRatio="xMidYMid meet"');
+    }
+    // Strip existing width/height from svg tag
+    svgContent = svgContent.replace(/\s(width|height)="[^"]*"/g, '');
+
+    const labelClass = type === 'formula' ? 'formula-type' : 'answer-type';
+    return `
+<div class="card-svg-wrap">${svgContent}</div>
+<div class="card-label ${labelClass}">${escapeHtml(text)}</div>`;
+}
+
+function escapeHtml(s) {
+    return String(s)
+        .replace(/&/g,'&amp;')
+        .replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;')
+        .replace(/"/g,'&quot;');
+}
+
 function renderBoard() {
     const board = document.getElementById('board');
     board.innerHTML = '';
     cards = [];
+
     currentPairs.forEach((p, i) => {
-        cards.push({ id: i * 2, pairId: i, text: p.formula, type: 'formula' });
-        cards.push({ id: i * 2 + 1, pairId: i, text: p.answer, type: 'answer' });
+        // Formula card
+        const formulaCard = makeCardEl(i * 2, i, p.formula, 'formula', p.svg);
+        // Answer card
+        const answerCard = makeCardEl(i * 2 + 1, i, p.answer, 'answer', p.svg);
+        cards.push({ id: i * 2, pairId: i, el: formulaCard });
+        cards.push({ id: i * 2 + 1, pairId: i, el: answerCard });
+        board.appendChild(formulaCard);
+        board.appendChild(answerCard);
     });
     shuffle(cards);
-
-    cards.forEach(c => {
-        const div = document.createElement('div');
-        div.className = 'card hidden-card';
-        div.dataset.id = c.id;
-        div.addEventListener('click', () => flipCard(c.id, div));
-        div.addEventListener('touchend', e => { e.preventDefault(); div.click(); });
-        board.appendChild(div);
-    });
+    // Re-append in shuffled order
+    board.innerHTML = '';
+    cards.forEach(c => board.appendChild(c.el));
 }
 
-function flipCard(id, el) {
-    if (flipped.length >= 2) return;
-    if (el.classList.contains('matched') || el.classList.contains('revealed')) return;
+function makeCardEl(id, pairId, text, type, svgRaw) {
+    const div = document.createElement('div');
+    div.className = 'card';
+    div.dataset.id = id;
+    div.dataset.pairId = pairId;
 
+    // Cover layer
+    const cover = document.createElement('div');
+    cover.className = 'card-cover';
+    cover.textContent = '?';
+    div.appendChild(cover);
+
+    // SVG + label content
+    const svgContent = makeSvgCard(svgRaw, text, type);
+    // Parse and append
+    const temp = document.createElement('div');
+    temp.innerHTML = svgContent;
+    while (temp.firstChild) div.appendChild(temp.firstChild);
+
+    div.addEventListener('click', () => flipCard(id, div));
+    div.addEventListener('touchend', e => { e.preventDefault(); div.click(); });
+
+    return div;
+}
+
+function flipCard(id, div) {
+    // Find card data
     const card = cards.find(c => c.id === id);
-    el.classList.remove('hidden-card');
-    el.classList.add('revealed');
-    el.textContent = card.text;
-    flipped.push({ id, pairId: card.pairId, el });
+    if (!card) return;
+    if (div.classList.contains('matched') || div.classList.contains('revealed')) return;
+    if (flipped.length >= 2) return;
+
+    div.classList.add('revealed');
+    flipped.push({ id, el: div, pairId: card.pairId });
 
     if (flipped.length === 2) {
         moveCount++;
@@ -408,7 +471,10 @@ function flipCard(id, el) {
         document.getElementById('moves').textContent = moveCount;
 
         if (flipped[0].pairId === flipped[1].pairId) {
-            flipped.forEach(f => f.el.classList.add('matched'));
+            flipped.forEach(f => {
+                f.el.classList.remove('revealed');
+                f.el.classList.add('matched');
+            });
             matched++;
             document.getElementById('pairsLeft').textContent = currentPairs.length - matched;
             flipped = [];
@@ -425,8 +491,6 @@ function flipCard(id, el) {
             setTimeout(() => {
                 flipped.forEach(f => {
                     f.el.classList.remove('revealed', 'wrong');
-                    f.el.classList.add('hidden-card');
-                    f.el.textContent = '';
                 });
                 flipped = [];
             }, 800);
@@ -438,13 +502,10 @@ function showLevelUp() {
     const container = document.getElementById('app');
     const overlay = document.createElement('div');
     overlay.className = 'levelup-overlay';
-    overlay.id = 'levelupOverlay';
     overlay.innerHTML = `
         <div class="levelup-icon">🎉</div>
-        <div class="levelup-text">第 ${currentLevel + 1} 關完成！</div>
-    `;
+        <div class="levelup-text">第 ${currentLevel + 1} 關完成！</div>`;
     container.appendChild(overlay);
-
     setTimeout(() => {
         overlay.remove();
         currentLevel++;
@@ -457,7 +518,6 @@ function endGame(won) {
     document.getElementById('gameArea').style.display = 'none';
     const results = document.getElementById('results');
     results.style.display = 'block';
-
     const title = document.getElementById('resultTitle');
     if (won) {
         title.textContent = '🎉 全部過關！';
@@ -466,7 +526,6 @@ function endGame(won) {
         title.textContent = '⏱️ 時間到！';
         title.className = 'timeout';
     }
-
     document.getElementById('finalTime').textContent = currentLevel + (won ? 1 : 0);
     document.getElementById('finalLevel').textContent = currentLevel + (won ? 1 : 0);
     document.getElementById('finalMoves').textContent = totalMoves;
