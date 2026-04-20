@@ -1,7 +1,7 @@
 {
-  "version": "2.0",
-  "lastUpdated": "2026-03-31",
-  "description": "靈風中學數學週2026 - 公式圖像配對題庫",
+  "version": "3.0",
+  "lastUpdated": "2026-04-20",
+  "description": "靈風中學數學週2026 - 公式圖像配對題庫（同步自formula-cards）",
   "pairs": [
     {
       "id": 1,
@@ -165,366 +165,226 @@
     },
     {
       "id": 17,
-      "formula": "三角形面積",
-      "answer": "½ × 底 × 高",
-      "description": "三角形面積公式",
+      "formula": "長方形",
+      "answer": "長 × 寬",
+      "description": "求面積 長方形",
       "category": "幾何",
       "difficulty": "Easy",
       "grade": "S1",
-      "hint": "½bh"
+      "hint": "面積 = 長 × 寬"
     },
     {
       "id": 18,
-      "formula": "圓面積",
-      "answer": "πr²",
-      "description": "圓形面積公式",
+      "formula": "三角形",
+      "answer": "½ × 底 × 高",
+      "description": "求面積 三角形",
       "category": "幾何",
       "difficulty": "Easy",
       "grade": "S1",
-      "hint": "π乘半徑平方"
+      "hint": "面積 = ½ × 底 × 高"
     },
     {
       "id": 19,
-      "formula": "圓周長",
-      "answer": "2πr",
-      "description": "圓周長公式",
+      "formula": "圓形",
+      "answer": "π × 半徑²",
+      "description": "求面積 圓形",
       "category": "幾何",
       "difficulty": "Easy",
       "grade": "S1",
-      "hint": "2π乘半徑"
+      "hint": "面積 = π × 半徑²"
     },
     {
       "id": 20,
-      "formula": "梯形面積",
-      "answer": "½(a+b) × h",
-      "description": "梯形面積公式",
+      "formula": "平行四邊形",
+      "answer": "底 × 高",
+      "description": "求面積 平行四邊形",
       "category": "幾何",
       "difficulty": "Easy",
       "grade": "S1",
-      "hint": "上底加下底乘高除2"
+      "hint": "面積 = 底 × 高"
     },
     {
       "id": 21,
-      "formula": "平行四邊形面積",
-      "answer": "底 × 高",
-      "description": "平行四邊形面積公式",
+      "formula": "梯形",
+      "answer": "½ × (上底+下底) × 高",
+      "description": "求面積 梯形",
       "category": "幾何",
       "difficulty": "Easy",
       "grade": "S1",
-      "hint": "bh"
+      "hint": "面積 = ½ × (上底+下底) × 高"
     },
     {
       "id": 22,
-      "formula": "畢氏定理",
-      "answer": "a² + b² = c²",
-      "description": "直角三角形三邊關係",
+      "formula": "菱形",
+      "answer": "½ × 對角線₁ × 對角線₂",
+      "description": "求面積 菱形",
       "category": "幾何",
       "difficulty": "Easy",
       "grade": "S2",
-      "hint": "Pythagoras"
+      "hint": "面積 = ½ × 對角線₁ × 對角線₂"
     },
     {
       "id": 23,
-      "formula": "長方體體積",
-      "answer": "長 × 闊 × 高",
-      "description": "長方體體積公式",
+      "formula": "扇形",
+      "answer": "(θ/360) × π × 半徑²",
+      "description": "求面積 扇形",
       "category": "幾何",
       "difficulty": "Easy",
-      "grade": "S1",
-      "hint": "lwh"
+      "grade": "S2",
+      "hint": "面積 = (θ/360) × π × 半徑²"
     },
     {
       "id": 24,
-      "formula": "圓柱體體積",
-      "answer": "πr²h",
-      "description": "圓柱體體積公式",
+      "formula": "環形",
+      "answer": "π × (外半徑² − 內半徑²)",
+      "description": "求面積 環形",
       "category": "幾何",
-      "difficulty": "Medium",
+      "difficulty": "Easy",
       "grade": "S2",
-      "hint": "底面積乘高"
+      "hint": "面積 = π × (外半徑² − 內半徑²)"
     },
     {
       "id": 25,
-      "formula": "圓錐體體積",
-      "answer": "⅓πr²h",
-      "description": "圓錐體體積公式",
+      "formula": "複合圖形",
+      "answer": "分割法 / 填補法",
+      "description": "求面積 複合圖形",
       "category": "幾何",
-      "difficulty": "Medium",
+      "difficulty": "Easy",
       "grade": "S2",
-      "hint": "圓柱體的三分一"
+      "hint": "面積 = 分割法 / 填補法"
     },
     {
       "id": 26,
-      "formula": "球體體積",
-      "answer": "⁴⁄₃πr³",
-      "description": "球體體積公式",
+      "formula": "長方形",
+      "answer": "2 × (長 + 寬)",
+      "description": "求周界 長方形",
       "category": "幾何",
-      "difficulty": "Medium",
-      "grade": "S3",
-      "hint": "4/3 π r³"
+      "difficulty": "Easy",
+      "grade": "S1",
+      "hint": "周界 = 2 × (長 + 寬)"
     },
     {
       "id": 27,
-      "formula": "球體表面積",
-      "answer": "4πr²",
-      "description": "球體表面積公式",
+      "formula": "圓形",
+      "answer": "直徑 × π = 2 × π × 半徑",
+      "description": "求周界 圓形",
       "category": "幾何",
-      "difficulty": "Medium",
-      "grade": "S3",
-      "hint": "四個大圓面積"
+      "difficulty": "Easy",
+      "grade": "S1",
+      "hint": "直徑 × π = 2 × π × 半徑"
     },
     {
       "id": 28,
-      "formula": "弧長公式",
-      "answer": "θ/360° × 2πr",
-      "description": "圓弧長度",
+      "formula": "三角形",
+      "answer": "邊₁ + 邊₂ + 邊₃",
+      "description": "求周界 三角形",
       "category": "幾何",
-      "difficulty": "Medium",
-      "grade": "S2",
-      "hint": "扇形的弧"
+      "difficulty": "Easy",
+      "grade": "S1",
+      "hint": "周界 = 邊₁ + 邊₂ + 邊₃"
     },
     {
       "id": 29,
-      "formula": "扇形面積",
-      "answer": "θ/360° × πr²",
-      "description": "扇形面積公式",
+      "formula": "正方形",
+      "answer": "4 × 邊長",
+      "description": "求周界 正方形",
       "category": "幾何",
-      "difficulty": "Medium",
-      "grade": "S2",
-      "hint": "圓面積的比例"
+      "difficulty": "Easy",
+      "grade": "S1",
+      "hint": "周界 = 4 × 邊長"
     },
     {
       "id": 30,
-      "formula": "棱柱體體積",
-      "answer": "底面積 × 高",
-      "description": "棱柱體體積公式",
+      "formula": "多邊形",
+      "answer": "邊₁ + 邊₂ + … + 邊ₙ",
+      "description": "求周界 多邊形",
       "category": "幾何",
       "difficulty": "Easy",
-      "grade": "S2",
-      "hint": "Ah"
+      "grade": "S1",
+      "hint": "周界 = 邊₁ + 邊₂ + … + 邊ₙ"
     },
     {
       "id": 31,
-      "formula": "棱錐體體積",
-      "answer": "⅓ × 底面積 × 高",
-      "description": "棱錐體體積公式",
+      "formula": "正方體",
+      "answer": "邊長³",
+      "description": "求體積 正方體",
       "category": "幾何",
-      "difficulty": "Medium",
-      "grade": "S2",
-      "hint": "棱柱的三分一"
+      "difficulty": "Easy",
+      "grade": "S1",
+      "hint": "體積 = 邊長³"
     },
     {
       "id": 32,
-      "formula": "sin²θ + cos²θ",
-      "answer": "1",
-      "description": "畢氏三角恆等式",
-      "category": "三角",
+      "formula": "圓柱體",
+      "answer": "π × 半徑² × 高",
+      "description": "求體積 圓柱體",
+      "category": "幾何",
       "difficulty": "Easy",
-      "grade": "S3",
-      "hint": "最基本的三角恆等式"
+      "grade": "S1",
+      "hint": "體積 = π × 半徑² × 高"
     },
     {
       "id": 33,
-      "formula": "tan θ",
-      "answer": "sin θ / cos θ",
-      "description": "正切比的定義",
-      "category": "三角",
+      "formula": "長方體",
+      "answer": "長 × 寬 × 高",
+      "description": "求體積 長方體",
+      "category": "幾何",
       "difficulty": "Easy",
-      "grade": "S3",
-      "hint": "對邊除鄰邊"
+      "grade": "S1",
+      "hint": "體積 = 長 × 寬 × 高"
     },
     {
       "id": 34,
-      "formula": "正弦定律",
-      "answer": "a/sinA = b/sinB = c/sinC",
-      "description": "三角形正弦定律",
-      "category": "三角",
-      "difficulty": "Medium",
-      "grade": "HKCEE",
-      "hint": "Sine Rule"
+      "formula": "圓錐體",
+      "answer": "⅓ × π × 半徑² × 高",
+      "description": "求體積 圓錐體",
+      "category": "幾何",
+      "difficulty": "Easy",
+      "grade": "S3",
+      "hint": "體積 = ⅓ × π × 半徑² × 高"
     },
     {
       "id": 35,
-      "formula": "餘弦定律",
-      "answer": "c² = a²+b²−2ab·cosC",
-      "description": "三角形餘弦定律",
-      "category": "三角",
-      "difficulty": "Medium",
-      "grade": "HKCEE",
-      "hint": "Cosine Rule"
+      "formula": "球體",
+      "answer": "⅘ × π × 半徑³",
+      "description": "求體積 球體",
+      "category": "幾何",
+      "difficulty": "Easy",
+      "grade": "S3",
+      "hint": "體積 = ⅘ × π × 半徑³"
     },
     {
       "id": 36,
-      "formula": "三角形面積（正弦）",
-      "answer": "½ ab sinC",
-      "description": "用正弦求三角形面積",
-      "category": "三角",
-      "difficulty": "Medium",
-      "grade": "HKCEE",
-      "hint": "兩邊夾角"
+      "formula": "三角柱體",
+      "answer": "½ × 底 × 高 × 柱高",
+      "description": "求體積 三角柱體",
+      "category": "幾何",
+      "difficulty": "Easy",
+      "grade": "S2",
+      "hint": "體積 = ½ × 底 × 高 × 柱高"
     },
     {
       "id": 37,
-      "formula": "sin 30°",
-      "answer": "½",
-      "description": "特殊角的正弦值",
-      "category": "三角",
+      "formula": "正四面體",
+      "answer": "√2/12 × 邊長³",
+      "description": "求體積 正四面體",
+      "category": "幾何",
       "difficulty": "Easy",
       "grade": "S3",
-      "hint": "30-60-90 三角形"
+      "hint": "體積 = √2/12 × 邊長³"
     },
     {
       "id": 38,
-      "formula": "cos 60°",
-      "answer": "½",
-      "description": "特殊角的餘弦值",
-      "category": "三角",
+      "formula": "四角錐體",
+      "answer": "⅓ × 底邊² × 高",
+      "description": "求體積 四角錐體",
+      "category": "幾何",
       "difficulty": "Easy",
       "grade": "S3",
-      "hint": "30-60-90 三角形"
+      "hint": "體積 = ⅓ × 底邊² × 高"
     },
     {
       "id": 39,
-      "formula": "tan 45°",
-      "answer": "1",
-      "description": "特殊角的正切值",
-      "category": "三角",
-      "difficulty": "Easy",
-      "grade": "S3",
-      "hint": "等腰直角三角形"
-    },
-    {
-      "id": 40,
-      "formula": "sin 90°",
-      "answer": "1",
-      "description": "直角的正弦值",
-      "category": "三角",
-      "difficulty": "Easy",
-      "grade": "S3",
-      "hint": "最大的正弦值"
-    },
-    {
-      "id": 41,
-      "formula": "cos 0°",
-      "answer": "1",
-      "description": "零度的餘弦值",
-      "category": "三角",
-      "difficulty": "Easy",
-      "grade": "S3",
-      "hint": "最大的餘弦值"
-    },
-    {
-      "id": 42,
-      "formula": "y = mx + c",
-      "answer": "直線方程",
-      "description": "直線的斜截式",
-      "category": "函數",
-      "difficulty": "Easy",
-      "grade": "S3",
-      "hint": "m是斜率，c是截距"
-    },
-    {
-      "id": 43,
-      "formula": "斜率公式",
-      "answer": "(y₂−y₁)/(x₂−x₁)",
-      "description": "兩點斜率公式",
-      "category": "函數",
-      "difficulty": "Easy",
-      "grade": "S3",
-      "hint": "rise over run"
-    },
-    {
-      "id": 44,
-      "formula": "中點公式",
-      "answer": "((x₁+x₂)/2, (y₁+y₂)/2)",
-      "description": "兩點的中點坐標",
-      "category": "函數",
-      "difficulty": "Easy",
-      "grade": "S3",
-      "hint": "取平均"
-    },
-    {
-      "id": 45,
-      "formula": "距離公式",
-      "answer": "√((x₂−x₁)²+(y₂−y₁)²)",
-      "description": "兩點間的距離",
-      "category": "函數",
-      "difficulty": "Medium",
-      "grade": "S3",
-      "hint": "畢氏定理的應用"
-    },
-    {
-      "id": 46,
-      "formula": "二次函數頂點式",
-      "answer": "y = a(x−h)² + k",
-      "description": "拋物線頂點式",
-      "category": "函數",
-      "difficulty": "Medium",
-      "grade": "HKCEE",
-      "hint": "頂點為(h,k)"
-    },
-    {
-      "id": 47,
-      "formula": "拋物線對稱軸",
-      "answer": "x = −b/2a",
-      "description": "二次函數的對稱軸",
-      "category": "函數",
-      "difficulty": "Medium",
-      "grade": "HKCEE",
-      "hint": "y = ax²+bx+c"
-    },
-    {
-      "id": 48,
-      "formula": "指數函數",
-      "answer": "y = aˣ",
-      "description": "指數函數一般式",
-      "category": "函數",
-      "difficulty": "Medium",
-      "grade": "HKCEE",
-      "hint": "底數大於0"
-    },
-    {
-      "id": 49,
-      "formula": "對數定義",
-      "answer": "若 aˣ = N 則 x = logₐN",
-      "description": "對數的定義",
-      "category": "函數",
-      "difficulty": "Hard",
-      "grade": "HKCEE",
-      "hint": "指數的逆運算"
-    },
-    {
-      "id": 50,
-      "formula": "logₐ(MN)",
-      "answer": "logₐM + logₐN",
-      "description": "對數乘法定律",
-      "category": "函數",
-      "difficulty": "Hard",
-      "grade": "HKCEE",
-      "hint": "積的對數"
-    },
-    {
-      "id": 51,
-      "formula": "logₐ(M/N)",
-      "answer": "logₐM − logₐN",
-      "description": "對數除法定律",
-      "category": "函數",
-      "difficulty": "Hard",
-      "grade": "HKCEE",
-      "hint": "商的對數"
-    },
-    {
-      "id": 52,
-      "formula": "logₐMⁿ",
-      "answer": "n logₐM",
-      "description": "對數冪定律",
-      "category": "函數",
-      "difficulty": "Hard",
-      "grade": "HKCEE",
-      "hint": "冪的對數"
-    },
-    {
-      "id": 53,
       "formula": "平均數 (Mean)",
       "answer": "Σx / n",
       "description": "算術平均數",
@@ -534,7 +394,7 @@
       "hint": "總和除以個數"
     },
     {
-      "id": 54,
+      "id": 40,
       "formula": "加權平均數",
       "answer": "Σ(fx) / Σf",
       "description": "加權平均數公式",
@@ -544,7 +404,7 @@
       "hint": "頻率加權"
     },
     {
-      "id": 55,
+      "id": 41,
       "formula": "標準差",
       "answer": "√(Σ(x−x̄)²/n)",
       "description": "標準差公式",
@@ -554,7 +414,7 @@
       "hint": "離差的量度"
     },
     {
-      "id": 56,
+      "id": 42,
       "formula": "概率 P(A)",
       "answer": "有利結果數 / 總結果數",
       "description": "古典概率公式",
@@ -564,7 +424,7 @@
       "hint": "0 ≤ P ≤ 1"
     },
     {
-      "id": 57,
+      "id": 43,
       "formula": "P(A') 補事件",
       "answer": "1 − P(A)",
       "description": "補事件概率",
@@ -574,7 +434,7 @@
       "hint": "互補"
     },
     {
-      "id": 58,
+      "id": 44,
       "formula": "P(A 或 B) 互斥",
       "answer": "P(A) + P(B)",
       "description": "互斥事件的加法定律",
@@ -584,7 +444,7 @@
       "hint": "不能同時發生"
     },
     {
-      "id": 59,
+      "id": 45,
       "formula": "P(A 且 B) 獨立",
       "answer": "P(A) × P(B)",
       "description": "獨立事件的乘法定律",
@@ -594,7 +454,7 @@
       "hint": "互不影響"
     },
     {
-      "id": 60,
+      "id": 46,
       "formula": "單利息",
       "answer": "I = Prt",
       "description": "單利息公式",
@@ -604,7 +464,7 @@
       "hint": "本金×利率×時間"
     },
     {
-      "id": 61,
+      "id": 47,
       "formula": "複利息本利和",
       "answer": "A = P(1+r)ⁿ",
       "description": "複利息公式",
@@ -614,7 +474,7 @@
       "hint": "利滾利"
     },
     {
-      "id": 62,
+      "id": 48,
       "formula": "排列 P(n,r)",
       "answer": "n! / (n−r)!",
       "description": "排列公式",
@@ -624,7 +484,7 @@
       "hint": "有序選擇"
     },
     {
-      "id": 63,
+      "id": 49,
       "formula": "組合 C(n,r)",
       "answer": "n! / (r!(n−r)!)",
       "description": "組合公式",
@@ -634,7 +494,7 @@
       "hint": "無序選擇"
     },
     {
-      "id": 64,
+      "id": 50,
       "formula": "等差數列通項",
       "answer": "aₙ = a₁ + (n−1)d",
       "description": "等差數列第n項",
@@ -644,7 +504,7 @@
       "hint": "公差為d"
     },
     {
-      "id": 65,
+      "id": 51,
       "formula": "等差級數求和",
       "answer": "S = n(a₁+aₙ)/2",
       "description": "等差級數前n項和",
@@ -654,7 +514,7 @@
       "hint": "首項加末項乘項數除2"
     },
     {
-      "id": 66,
+      "id": 52,
       "formula": "等比數列通項",
       "answer": "aₙ = a₁ × rⁿ⁻¹",
       "description": "等比數列第n項",
@@ -664,7 +524,7 @@
       "hint": "公比為r"
     },
     {
-      "id": 67,
+      "id": 53,
       "formula": "等比級數求和",
       "answer": "S = a₁(1−rⁿ)/(1−r)",
       "description": "等比級數前n項和",
@@ -674,87 +534,7 @@
       "hint": "r ≠ 1"
     },
     {
-      "id": 68,
-      "formula": "兩平行線斜率",
-      "answer": "m₁ = m₂",
-      "description": "平行線斜率相等",
-      "category": "函數",
-      "difficulty": "Easy",
-      "grade": "S3",
-      "hint": "平行⟹同斜率"
-    },
-    {
-      "id": 69,
-      "formula": "兩垂直線斜率",
-      "answer": "m₁ × m₂ = −1",
-      "description": "垂直線斜率之積",
-      "category": "函數",
-      "difficulty": "Medium",
-      "grade": "S3",
-      "hint": "負倒數"
-    },
-    {
-      "id": 70,
-      "formula": "圓方程（標準式）",
-      "answer": "(x−h)²+(y−k)²=r²",
-      "description": "圓心(h,k)半徑r",
-      "category": "函數",
-      "difficulty": "Medium",
-      "grade": "HKCEE",
-      "hint": "圓的標準方程"
-    },
-    {
-      "id": 71,
-      "formula": "內角和（n邊形）",
-      "answer": "(n−2) × 180°",
-      "description": "n邊形內角和",
-      "category": "幾何",
-      "difficulty": "Easy",
-      "grade": "S2",
-      "hint": "三角形是180°"
-    },
-    {
-      "id": 72,
-      "formula": "正n邊形每個內角",
-      "answer": "(n−2) × 180° / n",
-      "description": "正多邊形每個內角",
-      "category": "幾何",
-      "difficulty": "Medium",
-      "grade": "S2",
-      "hint": "內角和除以邊數"
-    },
-    {
-      "id": 73,
-      "formula": "外角和",
-      "answer": "360°",
-      "description": "任何凸多邊形外角和",
-      "category": "幾何",
-      "difficulty": "Easy",
-      "grade": "S2",
-      "hint": "永遠是360°"
-    },
-    {
-      "id": 74,
-      "formula": "圓錐體曲面面積",
-      "answer": "πrl",
-      "description": "圓錐體側面積",
-      "category": "幾何",
-      "difficulty": "Medium",
-      "grade": "S3",
-      "hint": "l是斜高"
-    },
-    {
-      "id": 75,
-      "formula": "圓柱體曲面面積",
-      "answer": "2πrh",
-      "description": "圓柱體側面積",
-      "category": "幾何",
-      "difficulty": "Medium",
-      "grade": "S2",
-      "hint": "展開為長方形"
-    },
-    {
-      "id": 76,
+      "id": 54,
       "formula": "速率公式",
       "answer": "距離 / 時間",
       "description": "速率等於距離除以時間",
@@ -764,7 +544,7 @@
       "hint": "v = d/t"
     },
     {
-      "id": 77,
+      "id": 55,
       "formula": "百分比變化",
       "answer": "(新值−舊值)/舊值 × 100%",
       "description": "百分比變化公式",
@@ -774,7 +554,7 @@
       "hint": "增長或減少"
     },
     {
-      "id": 78,
+      "id": 56,
       "formula": "利潤百分率",
       "answer": "利潤/成本 × 100%",
       "description": "利潤百分率公式",
@@ -784,7 +564,7 @@
       "hint": "以成本為基準"
     },
     {
-      "id": 79,
+      "id": 57,
       "formula": "折扣後售價",
       "answer": "原價 × (1−折扣率)",
       "description": "折扣計算公式",
@@ -792,16 +572,6 @@
       "difficulty": "Easy",
       "grade": "S2",
       "hint": "打折"
-    },
-    {
-      "id": 80,
-      "formula": "sin(90°−θ)",
-      "answer": "cos θ",
-      "description": "互餘關係",
-      "category": "三角",
-      "difficulty": "Medium",
-      "grade": "S3",
-      "hint": "互餘角"
     }
   ]
 }
