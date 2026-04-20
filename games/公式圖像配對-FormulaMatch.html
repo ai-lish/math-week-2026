@@ -4,106 +4,222 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>🃏 公式圖像配對 - Formula Match</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:'Noto Sans TC',sans-serif; background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460); color:#fff; min-height:100vh; -webkit-tap-highlight-color:transparent; }
-        .container { max-width:600px; margin:0 auto; padding:15px; }
-        .back-link { display:inline-block; color:#aaa; text-decoration:none; padding:10px 0; font-size:0.9rem; }
-        h1 { text-align:center; font-size:1.6rem; margin:5px 0; }
-        .subtitle { text-align:center; color:#aaa; margin-bottom:15px; font-size:0.85rem; }
-
-        .stats-bar { display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.1); border-radius:12px; padding:10px 20px; margin:10px 0; }
-        .stats-bar .stat { text-align:center; }
-        .stats-bar .num { font-size:1.5rem; font-weight:900; }
-        .stats-bar .lbl { font-size:0.7rem; color:#aaa; }
-
-        .board { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:15px 0; }
-        .card { aspect-ratio:1; background:linear-gradient(135deg,#667eea,#764ba2); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:bold; cursor:pointer; transition:all 0.3s; padding:6px; text-align:center; word-break:break-word; user-select:none; -webkit-user-select:none; min-height:80px; }
-        .card.hidden-card::after { content:'❓'; font-size:1.8rem; }
-        .card.revealed { background:rgba(255,255,255,0.15); transform:scale(0.95); }
-        .card.matched { background:linear-gradient(135deg,#2ecc71,#27ae60); opacity:0.6; pointer-events:none; }
-        .card.wrong { background:linear-gradient(135deg,#e74c3c,#c0392b); animation:shake 0.3s; }
-
-        @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
-
-        .btn { display:inline-block; padding:12px 35px; border-radius:25px; border:none; font-size:1.1rem; font-weight:bold; cursor:pointer; margin:10px; color:#fff; }
-        .btn-start { background:linear-gradient(135deg,#00b09b,#96c93d); }
-        .btn-start:active { transform:scale(0.95); }
-
-        .setup, .results { text-align:center; padding:30px 10px; }
-        .setup label { display:block; margin:10px 0 5px; font-size:0.95rem; }
-        .setup input, .setup select { width:220px; padding:10px; border-radius:8px; border:none; font-size:1rem; text-align:center; background:rgba(255,255,255,0.9); color:#333; }
-        .setup select { appearance:auto; }
-
-        .results .big { font-size:3rem; font-weight:900; }
-        .game-area { display:none; }
-
-        .filter-row { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:10px 0; }
-        .filter-btn { padding:6px 16px; border-radius:20px; border:2px solid rgba(255,255,255,0.3); background:transparent; color:#fff; font-size:0.85rem; cursor:pointer; transition:all 0.2s; }
-        .filter-btn.active { background:rgba(255,255,255,0.2); border-color:#fff; }
-        .filter-btn:active { transform:scale(0.95); }
-
-        .category-tag { display:inline-block; font-size:0.65rem; background:rgba(255,255,255,0.2); padding:2px 6px; border-radius:8px; margin-top:3px; }
-    </style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#1a1a2e;--card:#16213e;--accent:#e94560;
+  --gold:#f5c518;--teal:#0f3460;--text:#eaeaea;
+  --easy:#2ecc71;--med:#f39c12;--hard:#e74c3c;
+}
+body{
+  font-family:'Noto Sans TC',sans-serif;
+  background:var(--bg);
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:16px;color:var(--text);
+}
+.container{
+  background:var(--card);
+  border-radius:16px;
+  width:100%;max-width:520px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+  overflow:hidden;
+}
+/* Header */
+.header{
+  background:linear-gradient(135deg,#667eea,#764ba2);
+  padding:20px;text-align:center;
+}
+.header h1{font-size:1.6rem;font-weight:900;color:#fff}
+.header p{color:rgba(255,255,255,.8);font-size:.85rem;margin-top:4px}
+/* Setup */
+.setup{padding:24px;text-align:center;display:block}
+.setup h2{font-size:1.1rem;margin-bottom:16px;color:var(--gold)}
+.opt-group{margin-bottom:18px}
+.opt-label{font-size:.8rem;color:rgba(255,255,255,.6);margin-bottom:8px}
+.opt-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.opt-btn{
+  padding:10px 16px;border:none;border-radius:10px;
+  font-weight:700;font-size:.9rem;cursor:pointer;
+  transition:transform .15s,box-shadow .15s;
+  font-family:inherit;
+  background:rgba(255,255,255,.1);color:#fff;
+}
+.opt-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.3)}
+.opt-btn.easy{background:var(--easy)}
+.opt-btn.med{background:var(--med)}
+.opt-btn.hard{background:var(--hard)}
+.opt-btn.all{background:var(--teal)}
+.opt-btn.selected{outline:3px solid var(--gold);outline-offset:2px}
+.pair-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.pair-btn{
+  padding:8px 14px;border:2px solid rgba(255,255,255,.2);
+  border-radius:10px;background:transparent;color:#fff;
+  font-size:.85rem;font-weight:700;cursor:pointer;font-family:inherit;
+  transition:all .15s;
+}
+.pair-btn:hover{border-color:rgba(255,255,255,.5)}
+.pair-btn.selected{background:rgba(255,255,255,.15);border-color:var(--gold)}
+.name-input{
+  width:100%;max-width:260px;
+  padding:12px;font-size:1rem;text-align:center;
+  border:2px solid rgba(255,255,255,.2);
+  border-radius:8px;background:rgba(255,255,255,.05);
+  color:#fff;font-family:inherit;margin-bottom:10px;
+}
+.name-input:focus{outline:none;border-color:var(--accent)}
+.name-hint{font-size:.78rem;color:rgba(255,255,255,.4);margin-bottom:16px}
+.start-btn{
+  background:var(--accent);color:#fff;
+  border:none;padding:14px 32px;border-radius:10px;
+  font-size:1.1rem;font-weight:700;cursor:pointer;
+  font-family:inherit;transition:transform .15s;
+  display:block;margin:0 auto;
+}
+.start-btn:hover{transform:translateY(-2px)}
+/* Game area */
+.game-area{padding:24px;display:none}
+.timer-bar{
+  display:flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.05);
+  padding:10px 14px;border-radius:10px;
+  margin-bottom:14px;
+}
+.timer-label{font-weight:700;color:var(--gold);white-space:nowrap;font-size:.9rem}
+.timer-track{flex:1;height:8px;background:#333;border-radius:4px;overflow:hidden}
+.timer-fill{height:100%;background:var(--accent);width:100%;transition:width 1s linear;border-radius:4px}
+.score-board{
+  display:flex;justify-content:space-between;
+  background:rgba(255,255,255,.05);
+  padding:10px 14px;border-radius:10px;
+  margin-bottom:14px;font-size:.9rem;
+}
+.score-pos{color:var(--easy);font-weight:700}
+.score-neg{color:var(--hard);font-weight:700}
+/* Card grid */
+.board{display:grid;gap:8px;margin-top:4px}
+.board.cols-3{grid-template-columns:repeat(3,1fr)}
+.board.cols-4{grid-template-columns:repeat(4,1fr)}
+.board.cols-5{grid-template-columns:repeat(5,1fr)}
+.card{
+  aspect-ratio:1;
+  background:linear-gradient(135deg,#667eea,#764ba2);
+  border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;font-weight:bold;cursor:pointer;
+  transition:all .3s;
+  padding:6px;text-align:center;word-break:break-word;
+  user-select:none;-webkit-user-select:none;
+  min-height:70px;
+  position:relative;
+  overflow:hidden;
+}
+.card.hidden-card::after{content:'?';font-size:1.8rem;color:rgba(255,255,255,.3)}
+.card.revealed{background:rgba(255,255,255,.12);transform:scale(.95)}
+.card.matched{background:linear-gradient(135deg,#2ecc71,#27ae60);opacity:.55;pointer-events:none}
+.card.wrong{background:linear-gradient(135deg,#e74c3c,#c0392b);animation:shake .3s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+/* Results */
+.results{padding:24px;text-align:center;display:none}
+.results h2{font-size:1.4rem;color:var(--gold);margin-bottom:16px}
+.big{font-size:3rem;font-weight:900}
+.stat-row{display:flex;justify-content:center;gap:24px;margin-bottom:20px}
+.stat{text-align:center}
+.stat-n{font-size:1.6rem;font-weight:900}
+.stat-l{font-size:.75rem;color:rgba(255,255,255,.5);margin-top:2px}
+.play-again{
+  background:var(--accent);color:#fff;
+  border:none;padding:14px 32px;border-radius:10px;
+  font-size:1.1rem;font-weight:700;cursor:pointer;
+  font-family:inherit;transition:transform .15s;
+}
+.play-again:hover{transform:translateY(-2px)}
+</style>
 </head>
 <body>
-<div class="container">
-    <a href="../games.html" class="back-link">← 返回遊戲專區</a>
+<div class="container" id="app">
+  <!-- Header -->
+  <div class="header">
     <h1>🃏 公式圖像配對</h1>
-    <p class="subtitle">配對數學公式和它的答案！</p>
+    <p>翻開兩張牌，配對公式和答案！</p>
+  </div>
 
-    <div class="setup" id="setup">
-        <p>翻開兩張牌，配對公式和答案！</p>
-        <label>👤 名字</label>
-        <input type="text" id="playerName" placeholder="輸入名字">
-        <label>🏫 班別</label>
-        <input type="text" id="playerClass" placeholder="例: 2B">
-        <label>⚡ 難度</label>
-        <select id="diffSelect">
-            <option value="Easy">簡單 (Easy)</option>
-            <option value="Medium" selected>中等 (Medium)</option>
-            <option value="Hard">困難 (Hard)</option>
-            <option value="Mixed">混合 (Mixed)</option>
-        </select>
-        <label>📂 類別</label>
-        <select id="catSelect">
-            <option value="All" selected>全部</option>
-            <option value="代數">代數 Algebra</option>
-            <option value="幾何">幾何 Geometry</option>
-            <option value="三角">三角 Trigonometry</option>
-            <option value="統計">統計 Statistics</option>
-            <option value="函數">函數 Functions</option>
-            <option value="其他">其他 Others</option>
-        </select>
-        <label>🎴 配對數量</label>
-        <select id="pairCount">
-            <option value="6">6 對 (3×4)</option>
-            <option value="8" selected>8 對 (4×4)</option>
-            <option value="10">10 對 (4×5)</option>
-        </select>
-        <br><br>
-        <button class="btn btn-start" onclick="startGame()">🚀 開始配對</button>
-        <p id="loadStatus" style="color:#aaa;font-size:0.8rem;margin-top:10px;"></p>
+  <!-- Setup -->
+  <div class="setup" id="setup">
+    <h2>⚙️ 遊戲設定</h2>
+
+    <div class="opt-group">
+      <div class="opt-label">👤 名字</div>
+      <input type="text" class="name-input" id="playerName" placeholder="輸入名字" autocomplete="off">
     </div>
 
-    <div class="game-area" id="gameArea">
-        <div class="stats-bar">
-            <div class="stat"><span class="num" id="pairsLeft">8</span><span class="lbl">剩餘配對</span></div>
-            <div class="stat"><span class="num" id="moves">0</span><span class="lbl">翻牌次數</span></div>
-            <div class="stat"><span class="num" id="timer">0</span><span class="lbl">秒</span></div>
-        </div>
-        <div class="board" id="board"></div>
+    <div class="opt-group">
+      <div class="opt-label">⚡ 難度</div>
+      <div class="opt-row" id="diffRow">
+        <button class="opt-btn easy" onclick="selectDiff('Easy',this)">簡單</button>
+        <button class="opt-btn med selected" onclick="selectDiff('Medium',this)">中等</button>
+        <button class="opt-btn hard" onclick="selectDiff('Hard',this)">困難</button>
+        <button class="opt-btn all" onclick="selectDiff('Mixed',this)">混合</button>
+      </div>
     </div>
 
-    <div class="results" id="results" style="display:none;">
-        <h2>🎉 配對完成！</h2>
-        <div class="big" id="finalTime">0</div>
-        <p>完成時間（秒）</p>
-        <p style="margin:15px 0;">翻牌次數: <strong id="finalMoves">0</strong></p>
-        <p style="margin:5px 0;">效率: <strong id="efficiency">0</strong>%</p>
-        <button class="btn btn-start" onclick="resetGame()">🔄 再玩</button>
+    <div class="opt-group">
+      <div class="opt-label">📂 類別</div>
+      <div class="opt-row" id="catRow">
+        <button class="opt-btn selected" onclick="selectCat('All',this)">全部</button>
+        <button class="opt-btn" onclick="selectCat('代數',this)">代數</button>
+        <button class="opt-btn" onclick="selectCat('幾何',this)">幾何</button>
+        <button class="opt-btn" onclick="selectCat('三角',this)">三角</button>
+        <button class="opt-btn" onclick="selectCat('統計',this)">統計</button>
+        <button class="opt-btn" onclick="selectCat('函數',this)">函數</button>
+      </div>
     </div>
+
+    <div class="opt-group">
+      <div class="opt-label">🎴 配對數量</div>
+      <div class="pair-row">
+        <button class="pair-btn" onclick="selectPairs(6,this)">6 對</button>
+        <button class="pair-btn selected" onclick="selectPairs(8,this)">8 對</button>
+        <button class="pair-btn" onclick="selectPairs(10,this)">10 對</button>
+      </div>
+    </div>
+
+    <button class="start-btn" onclick="startGame()">🚀 開始配對</button>
+    <p id="loadStatus" style="color:#aaa;font-size:.8rem;margin-top:12px;"></p>
+  </div>
+
+  <!-- Game Area -->
+  <div class="game-area" id="gameArea">
+    <div class="timer-bar">
+      <span class="timer-label">⏱️ 時間</span>
+      <div class="timer-track"><div class="timer-fill" id="timerFill"></div></div>
+      <span class="score-pos" id="timerText">0</span>
+    </div>
+    <div class="score-board">
+      <span>🎯 剩餘 <span id="pairsLeft">8</span></span>
+      <span>🔄 <span id="moves">0</span> 次</span>
+    </div>
+    <div class="board cols-4" id="board"></div>
+  </div>
+
+  <!-- Results -->
+  <div class="results" id="results">
+    <h2>🎉 配對完成！</h2>
+    <div class="big" id="finalTime">0</div>
+    <div style="color:rgba(255,255,255,.6);font-size:.9rem;margin-bottom:20px">完成時間（秒）</div>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-n" id="finalMoves">0</div>
+        <div class="stat-l">翻牌次數</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n" id="efficiency">0%</div>
+        <div class="stat-l">效率</div>
+      </div>
+    </div>
+    <button class="play-again" onclick="resetGame()">🔄 再玩一次</button>
+  </div>
 </div>
 
 <script>
@@ -131,6 +247,8 @@ let moveCount = 0;
 let totalPairs = 8;
 let timerVal = 0;
 let timerInt = null;
+let selectedDiff = 'Medium';
+let selectedCat = 'All';
 
 // Load question bank
 async function loadPairs() {
@@ -149,17 +267,33 @@ async function loadPairs() {
 }
 loadPairs();
 
+function selectDiff(val, btn) {
+    selectedDiff = val;
+    document.querySelectorAll('#diffRow .opt-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+}
+
+function selectCat(val, btn) {
+    selectedCat = val;
+    document.querySelectorAll('#catRow .opt-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+}
+
+function selectPairs(val, btn) {
+    totalPairs = val;
+    document.querySelectorAll('.pair-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+}
+
 function shuffle(arr) {
     for(let i=arr.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]; }
     return arr;
 }
 
 function filterPairs() {
-    const diff = document.getElementById('diffSelect').value;
-    const cat = document.getElementById('catSelect').value;
     let pool = [...ALL_PAIRS];
-    if (cat !== 'All') pool = pool.filter(p => p.category === cat);
-    if (diff !== 'Mixed') pool = pool.filter(p => p.difficulty === diff);
+    if (selectedCat !== 'All') pool = pool.filter(p => p.category === selectedCat);
+    if (selectedDiff !== 'Mixed') pool = pool.filter(p => p.difficulty === selectedDiff);
     return pool;
 }
 
@@ -167,9 +301,7 @@ function startGame() {
     const name = document.getElementById('playerName').value.trim();
     if(!name) { alert('請輸入名字！'); return; }
 
-    totalPairs = parseInt(document.getElementById('pairCount').value);
     let pool = filterPairs();
-
     if (pool.length < totalPairs) {
         alert('此分類/難度只有 ' + pool.length + ' 條題目，不夠 ' + totalPairs + ' 對。\n請選擇其他設定或減少配對數量。');
         return;
@@ -177,14 +309,15 @@ function startGame() {
 
     const selected = shuffle(pool).slice(0, totalPairs);
 
-    // Adjust grid based on pair count
+    // Adjust grid columns based on pair count
     const board = document.getElementById('board');
-    if (totalPairs === 6) {
-        board.style.gridTemplateColumns = 'repeat(3,1fr)';
-    } else if (totalPairs === 10) {
-        board.style.gridTemplateColumns = 'repeat(4,1fr)';
+    board.className = 'board';
+    if (totalPairs <= 6) {
+        board.classList.add('cols-3');
+    } else if (totalPairs <= 8) {
+        board.classList.add('cols-4');
     } else {
-        board.style.gridTemplateColumns = 'repeat(4,1fr)';
+        board.classList.add('cols-5');
     }
 
     cards = [];
@@ -202,7 +335,13 @@ function startGame() {
 
     renderBoard();
     updateStats();
-    timerInt = setInterval(() => { timerVal++; document.getElementById('timer').textContent = timerVal; }, 1000);
+    timerInt = setInterval(() => {
+        timerVal++;
+        document.getElementById('timerText').textContent = timerVal;
+        const fill = document.getElementById('timerFill');
+        // Show timer bar filling (no max limit, just visual)
+        fill.style.width = '100%';
+    }, 1000);
 }
 
 function renderBoard() {
@@ -213,7 +352,6 @@ function renderBoard() {
         div.className = 'card hidden-card';
         div.dataset.id = c.id;
         div.addEventListener('click', () => flipCard(c.id, div));
-        // Prevent double-tap zoom on iPad
         div.addEventListener('touchend', e => { e.preventDefault(); div.click(); });
         board.appendChild(div);
     });
