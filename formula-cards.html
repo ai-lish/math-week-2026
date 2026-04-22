@@ -718,842 +718,1756 @@ const CARDS = [
     num:"G-01", difficulty:1, special:false,
     fcn:"面積 = 長 × 寬", latex:"A = \\text{長} \\times \\text{寬}",
     tip:"長闊分清楚，記緊兩邊都要用！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="12" y="28" width="86" height="58" rx="6" fill="url(#g1)" stroke="#60a5fa" stroke-width="9"/>
-      <line x1="12" y1="28" x2="24" y2="16" stroke="#93c5fd" stroke-width="5" stroke-linecap="round"/>
-      <line x1="24" y1="16" x2="46" y2="16" stroke="#93c5fd" stroke-width="5" stroke-linecap="round"/>
-      <text x="26" y="13" font-size="12" fill="#93c5fd" font-weight="bold" font-family="sans-serif">長</text>
-      <line x1="98" y1="28" x2="108" y2="44" stroke="#93c5fd" stroke-width="5" stroke-linecap="round"/>
-      <line x1="108" y1="44" x2="108" y2="66" stroke="#93c5fd" stroke-width="5" stroke-linecap="round"/>
-      <text x="101" y="56" font-size="12" fill="#93c5fd" font-weight="bold" font-family="sans-serif">闊</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fill1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.5"/>
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.3"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="#3b82f6" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bg1)"/>
+  <!-- Rectangle shape -->
+  <rect x="15" y="30" width="72" height="50" rx="4" fill="url(#fill1)" stroke="#3b82f6" stroke-width="3" filter="url(#shadow)"/>
+  <!-- Dimension: width (b) -->
+  <line x1="15" y1="88" x2="87" y2="88" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <polygon points="15,88 20,84 20,92" fill="#1d4ed8"/>
+  <polygon points="87,88 82,84 82,92" fill="#1d4ed8"/>
+  <text x="51" y="100" font-size="10" fill="#1d4ed8" text-anchor="middle" font-family="sans-serif" font-weight="bold">b</text>
+  <!-- Dimension: height (a) -->
+  <line x1="93" y1="30" x2="93" y2="80" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <polygon points="93,30 89,35 97,35" fill="#1d4ed8"/>
+  <polygon points="93,80 89,75 97,75" fill="#1d4ed8"/>
+  <text x="103" y="56" font-size="10" fill="#1d4ed8" text-anchor="middle" font-family="sans-serif" font-weight="bold">a</text>
+  <!-- Area label -->
+  <text x="51" y="54" font-size="11" fill="#3b82f6" text-anchor="middle" font-family="sans-serif" font-weight="bold">A = a × b</text>
+</svg>` },
 
   { id:2,  cat:"area", name:"三角形",        en:"Triangle",       ask:"求面積",   tag:"面積", grade:"s1",
     num:"G-02", difficulty:1, special:false,
     fcn:"面積 = ½ × 底 × 高", latex:"A = \\frac{1}{2} \\times \\text{底} \\times \\text{高}",
     tip:"高要垂直於底，唔好誤用斜邊！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <polygon points="55,12 10,96 100,96" fill="url(#g2)" stroke="#f59e0b" stroke-width="9" stroke-linejoin="round"/>
-      <line x1="55" y1="96" x2="55" y2="12" stroke="#fcd34d" stroke-width="4" stroke-dasharray="6,4"/>
-      <text x="57" y="56" font-size="11" fill="#fcd34d" font-weight="bold" font-family="sans-serif">高</text>
-      <line x1="10" y1="96" x2="100" y2="96" stroke="#f59e0b" stroke-width="4"/>
-      <text x="51" y="107" font-size="10" fill="#f59e0b" font-weight="bold" font-family="sans-serif">底</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fill2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.5"/>
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.3"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="#3b82f6" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bg2)"/>
+  <!-- Triangle: base at bottom, apex at top -->
+  <polygon points="55,20 15,82 95,82" fill="url(#fill2)" stroke="#3b82f6" stroke-width="3" filter="url(#shadow)"/>
+  <!-- Height line (dashed) -->
+  <line x1="55" y1="20" x2="55" y2="82" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <polygon points="55,20 51,26 59,26" fill="#1d4ed8"/>
+  <polygon points="55,82 51,76 59,76" fill="#1d4ed8"/>
+  <text x="62" y="50" font-size="10" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">h</text>
+  <!-- Base label -->
+  <text x="55" y="100" font-size="10" fill="#1d4ed8" text-anchor="middle" font-family="sans-serif" font-weight="bold">b</text>
+  <!-- Area formula -->
+  <text x="55" y="15" font-size="11" fill="#3b82f6" text-anchor="middle" font-family="sans-serif" font-weight="bold">A = ½bh</text>
+</svg>` },
 
   { id:3,  cat:"area", name:"圓形",          en:"Circle",         ask:"求面積",   tag:"面積", grade:"s1",
     num:"G-03", difficulty:1, special:false,
     fcn:"面積 = π × 半徑²", latex:"A = \\pi \\times \\text{半徑}^2",
     tip:"半徑係直徑嘅一半，別混淆！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <radialGradient id="g3" cx="35%" cy="35%">
-          <stop offset="0%" style="stop-color:#c4b5fd;stop-opacity:0.4"/>
-          <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0.15"/>
-        </radialGradient>
-      </defs>
-      <circle cx="55" cy="55" r="45" fill="url(#g3)" stroke="#8b5cf6" stroke-width="9"/>
-      <line x1="55" y1="55" x2="55" y2="10" stroke="#a78bfa" stroke-width="5" stroke-linecap="round" stroke-dasharray="5,4"/>
-      <circle cx="55" cy="55" r="4" fill="#a78bfa"/>
-      <text x="59" y="34" font-size="12" fill="#a78bfa" font-weight="bold" font-family="sans-serif">r</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg3" cx="35%" cy="35%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:0.05"/>
+    </radialGradient>
+    <radialGradient id="fill3" cx="35%" cy="35%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.5"/>
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.3"/>
+    </radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="#3b82f6" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bg3)"/>
+  <!-- Main circle -->
+  <circle cx="55" cy="55" r="40" fill="url(#fill3)" stroke="#3b82f6" stroke-width="3" filter="url(#shadow)"/>
+  <!-- Radius line with arrow -->
+  <line x1="55" y1="55" x2="83" y2="38" stroke="#1d4ed8" stroke-width="2"/>
+  <polygon points="83,38 78,36 79,42" fill="#1d4ed8"/>
+  <!-- Label r -->
+  <text x="70" y="44" font-size="12" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">r</text>
+  <!-- Center dot -->
+  <circle cx="55" cy="55" r="3" fill="#3b82f6"/>
+  <text x="55" y="15" font-size="10" fill="#1d4ed8" text-anchor="middle" font-family="sans-serif" font-weight="bold">O</text>
+  <!-- Diameter line (horizontal) -->
+  <line x1="15" y1="55" x2="95" y2="55" stroke="#1d4ed8" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>
+  <text x="55" y="75" font-size="10" fill="#1d4ed8" text-anchor="middle" font-family="sans-serif" font-weight="bold">d = 2r</text>
+  <!-- Area formula -->
+  <text x="55" y="100" font-size="10" fill="#3b82f6" text-anchor="middle" font-family="sans-serif" font-weight="bold">A = πr²</text>
+</svg>` },
 
   { id:4,  cat:"area", name:"平行四邊形",    en:"Parallelogram",   ask:"求面積",   tag:"面積", grade:"s1",
     num:"G-04", difficulty:2, special:false,
     fcn:"面積 = 底 × 高", latex:"A = \\text{底} \\times \\text{高}",
     tip:"高要向「斜」度方向量度，唔係斜邊！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="g4" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#34d399;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#10b981;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <polygon points="22,30 88,30 78,86 12,86" fill="url(#g4)" stroke="#10b981" stroke-width="9" stroke-linejoin="round"/>
-      <line x1="22" y1="86" x2="22" y2="30" stroke="#6ee7b7" stroke-width="4" stroke-dasharray="5,4"/>
-      <text x="8" y="60" font-size="12" fill="#6ee7b7" font-weight="bold" font-family="sans-serif">高</text>
-      <text x="40" y="24" font-size="10" fill="#6ee7b7" font-weight="bold" font-family="sans-serif">底</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fill4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.5"/>
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.3"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="#3b82f6" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bg4)"/>
+  <!-- Parallelogram: top-left shifted right -->
+  <polygon points="20,35 85,35 70,78 5,78" fill="url(#fill4)" stroke="#3b82f6" stroke-width="3" filter="url(#shadow)"/>
+  <!-- Height (dashed) -->
+  <line x1="20" y1="35" x2="20" y2="78" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <polygon points="20,35 16,41 24,41" fill="#1d4ed8"/>
+  <polygon points="20,78 16,72 24,72" fill="#1d4ed8"/>
+  <text x="28" y="58" font-size="10" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">h</text>
+  <!-- Base label -->
+  <text x="55" y="100" font-size="10" fill="#1d4ed8" text-anchor="middle" font-family="sans-serif" font-weight="bold">b</text>
+  <!-- Area formula -->
+  <text x="52" y="54" font-size="11" fill="#3b82f6" text-anchor="middle" font-family="sans-serif" font-weight="bold">A = bh</text>
+</svg>` },
 
   { id:5,  cat:"area", name:"梯形",          en:"Trapezoid",      ask:"求面積",   tag:"面積", grade:"s1",
     num:"G-05", difficulty:2, special:false,
     fcn:"面積 = ½ × (上底+下底) × 高", latex:"A = \\frac{1}{2}(a+b)h",
     tip:"上下底要平行，高要垂直於兩底！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="g5" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#5eead4;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#14b8a6;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <polygon points="28,18 82,18 96,90 14,90" fill="url(#g5)" stroke="#14b8a6" stroke-width="9" stroke-linejoin="round"/>
-      <text x="49" y="14" font-size="9" fill="#5eead4" font-weight="bold" font-family="sans-serif">上底</text>
-      <text x="47" y="104" font-size="9" fill="#5eead4" font-weight="bold" font-family="sans-serif">下底</text>
-      <line x1="82" y1="18" x2="96" y2="90" stroke="#5eead4" stroke-width="3" stroke-dasharray="4,3"/>
-      <text x="86" y="56" font-size="10" fill="#5eead4" font-weight="bold" font-family="sans-serif">高</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fill5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.5"/>
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.3"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="#3b82f6" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bg5)"/>
+  <!-- Trapezoid: parallel top and bottom -->
+  <polygon points="30,25 80,25 95,80 15,80" fill="url(#fill5)" stroke="#3b82f6" stroke-width="3" filter="url(#shadow)"/>
+  <!-- Height -->
+  <line x1="55" y1="25" x2="55" y2="80" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <polygon points="55,25 51,31 59,31" fill="#1d4ed8"/>
+  <polygon points="55,80 51,74 59,74" fill="#1d4ed8"/>
+  <text x="64" y="54" font-size="10" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">h</text>
+  <!-- Top base label a -->
+  <text x="55" y="18" font-size="10" fill="#1d4ed8" text-anchor="middle" font-family="sans-serif" font-weight="bold">a</text>
+  <!-- Bottom base label b -->
+  <text x="55" y="98" font-size="10" fill="#1d4ed8" text-anchor="middle" font-family="sans-serif" font-weight="bold">b</text>
+  <!-- Area formula -->
+  <text x="55" y="52" font-size="10" fill="#3b82f6" text-anchor="middle" font-family="sans-serif" font-weight="bold">A = ½(a+b)h</text>
+</svg>` },
 
   { id:10, cat:"area", name:"菱形",          en:"Rhombus",        ask:"求面積",   tag:"面積", grade:"s2",
     num:"G-06", difficulty:2, special:true,
     fcn:"面積 = ½ × 對角線₁ × 對角線₂", latex:"A = \\frac{1}{2}d_1 d_2",
     tip:"對角線係最長嘅兩條線，互相垂直！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="g10" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#f9a8d4;stop-opacity:0.4"/>
-          <stop offset="100%" style="stop-color:#ec4899;stop-opacity:0.15"/>
-        </linearGradient>
-      </defs>
-      <polygon points="55,10 100,55 55,100 10,55" fill="url(#g10)" stroke="#ec4899" stroke-width="9" stroke-linejoin="round"/>
-      <line x1="10" y1="55" x2="100" y2="55" stroke="#f9a8d4" stroke-width="4" stroke-dasharray="6,5"/>
-      <line x1="55" y1="10" x2="55" y2="100" stroke="#f9a8d4" stroke-width="4" stroke-dasharray="6,5"/>
-      <text x="14" y="49" font-size="11" fill="#f9a8d4" font-weight="bold" font-family="sans-serif">d₁</text>
-      <text x="74" y="49" font-size="11" fill="#f9a8d4" font-weight="bold" font-family="sans-serif">d₂</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg10" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fcd34d;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#b45309;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fill10" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fcd34d;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0.2"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="#f59e0b" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bg10)"/>
+  <!-- Rectangle with perimeter arrows going around -->
+  <rect x="12" y="28" width="72" height="52" rx="3" fill="url(#fill10)" stroke="#f59e0b" stroke-width="3" filter="url(#shadow)"/>
+  <!-- Perimeter arrows: top edge (left to right) -->
+  <line x1="16" y1="24" x2="84" y2="24" stroke="#b45309" stroke-width="2"/>
+  <polygon points="84,24 78,20 78,28" fill="#b45309"/>
+  <text x="50" y="20" font-size="9" fill="#b45309" text-anchor="middle" font-family="sans-serif" font-weight="bold">l</text>
+  <!-- Right edge -->
+  <line x1="88" y1="32" x2="88" y2="76" stroke="#b45309" stroke-width="2"/>
+  <polygon points="88,76 84,70 92,70" fill="#b45309"/>
+  <text x="100" y="55" font-size="9" fill="#b45309" text-anchor="middle" font-family="sans-serif" font-weight="bold">w</text>
+  <!-- Corner label showing 4 sides -->
+  <text x="55" y="57" font-size="9" fill="#f59e0b" text-anchor="middle" font-family="sans-serif" font-weight="bold">P = 2(l+w)</text>
+</svg>` },
 
   { id:11, cat:"area", name:"扇形",          en:"Sector",         ask:"求面積",   tag:"面積", grade:"s2",
     num:"G-07", difficulty:2, special:false,
     fcn:"面積 = (θ/360) × π × 半徑²", latex:"A = \\frac{\\theta}{360}\\pi r^2",
     tip:"θ 係圓心角，用角度制，唔係弧度！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="g11" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#67e8f9;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <path d="M55,55 L55,10 A45,45 0 0,1 100,55 Z" fill="url(#g11)" stroke="#06b6d4" stroke-width="9" stroke-linejoin="round"/>
-      <line x1="55" y1="55" x2="55" y2="10" stroke="#22d3ee" stroke-width="4" stroke-dasharray="5,4"/>
-      <line x1="55" y1="55" x2="100" y2="55" stroke="#22d3ee" stroke-width="4" stroke-dasharray="5,4"/>
-      <text x="60" y="30" font-size="11" fill="#22d3ee" font-weight="bold" font-family="sans-serif">r</text>
-      <text x="38" y="6" font-size="9" fill="#22d3ee" font-weight="bold" font-family="sans-serif">θ°</text>
-      <circle cx="55" cy="55" r="4" fill="#22d3ee"/>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg11" cx="35%" cy="35%">
+      <stop offset="0%" style="stop-color:#fcd34d;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#b45309;stop-opacity:0.05"/>
+    </radialGradient>
+    <radialGradient id="fill11" cx="35%" cy="35%">
+      <stop offset="0%" style="stop-color:#fcd34d;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0.2"/>
+    </radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="#f59e0b" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bg11)"/>
+  <circle cx="55" cy="55" r="40" fill="url(#fill11)" stroke="#f59e0b" stroke-width="3" filter="url(#shadow)"/>
+  <!-- Circumference arrow arc -->
+  <path d="M55,15 A40,40 0 1,0 55,95" fill="none" stroke="#b45309" stroke-width="2.5" stroke-dasharray="6,3"/>
+  <polygon points="55,15 52,21 58,21" fill="#b45309"/>
+  <!-- Radius with arrow -->
+  <line x1="55" y1="55" x2="55" y2="15" stroke="#b45309" stroke-width="2"/>
+  <polygon points="55,15 51,21 59,21" fill="#b45309"/>
+  <text x="62" y="32" font-size="10" fill="#b45309" font-family="sans-serif" font-weight="bold">r</text>
+  <circle cx="55" cy="55" r="3" fill="#f59e0b"/>
+  <!-- C = 2πr formula -->
+  <text x="55" y="102" font-size="10" fill="#f59e0b" text-anchor="middle" font-family="sans-serif" font-weight="bold">C = 2πr</text>
+</svg>` },
 
   { id:12, cat:"area", name:"環形",          en:"Annulus",        ask:"求面積",   tag:"面積", grade:"s2",
     num:"G-08", difficulty:2, special:true,
     fcn:"面積 = π × (外半徑² − 內半徑²)", latex:"A = \\pi(R^2 - r^2)",
     tip:"外圓面積 − 內圓面積 = 甜甜圈形狀！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <radialGradient id="g12" cx="40%" cy="40%">
-          <stop offset="0%" style="stop-color:#bef264;stop-opacity:0.35"/>
-          <stop offset="60%" style="stop-color:#84cc16;stop-opacity:0.15"/>
-          <stop offset="100%" style="stop-color:#65a30d;stop-opacity:0.2"/>
-        </radialGradient>
-      </defs>
-      <circle cx="55" cy="55" r="46" fill="url(#g12)" stroke="#84cc16" stroke-width="9"/>
-      <circle cx="55" cy="55" r="24" fill="#fff" stroke="#84cc16" stroke-width="9"/>
-      <text x="60" y="24" font-size="10" fill="#bef264" font-weight="bold" font-family="sans-serif">R</text>
-      <text x="40" y="52" font-size="10" fill="#bef264" font-weight="bold" font-family="sans-serif">r</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg12" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fcd34d;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#b45309;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fill12" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fcd34d;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0.2"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="#f59e0b" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bg12)"/>
+  <!-- Triangle -->
+  <polygon points="55,18 12,85 98,85" fill="url(#fill12)" stroke="#f59e0b" stroke-width="3" filter="url(#shadow)"/>
+  <!-- Side labels with arrows -->
+  <text x="30" y="78" font-size="10" fill="#b45309" font-family="sans-serif" font-weight="bold">a</text>
+  <text x="80" y="78" font-size="10" fill="#b45309" font-family="sans-serif" font-weight="bold">b</text>
+  <text x="55" y="42" font-size="10" fill="#b45309" text-anchor="middle" font-family="sans-serif" font-weight="bold">c</text>
+  <!-- Arc for perimeter -->
+  <path d="M20,90 Q55,100 90,90" fill="none" stroke="#b45309" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.5"/>
+  <!-- Formula -->
+  <text x="55" y="104" font-size="10" fill="#f59e0b" text-anchor="middle" font-family="sans-serif" font-weight="bold">P = a + b + c</text>
+</svg>` },
 
   { id:13, cat:"area", name:"複合圖形",      en:"Composite",      ask:"求面積",   tag:"面積", grade:"s2",
     num:"G-09", difficulty:3, special:true,
     fcn:"面積 = 分割法 / 填補法", latex:"A = \\sum A_i",
     tip:"複雜形狀拆成熟悉圖形，逐個計再相加！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="g13" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#c4b5fd;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0.15"/>
-        </linearGradient>
-      </defs>
-      <rect x="10" y="20" width="90" height="70" rx="4" fill="url(#g13)" stroke="#8b5cf6" stroke-width="8"/>
-      <line x1="10" y1="55" x2="100" y2="55" stroke="#8b5cf6" stroke-width="5" stroke-dasharray="8,5"/>
-      <rect x="10" y="20" width="45" height="35" fill="none" stroke="#c4b5fd" stroke-width="2" stroke-dasharray="4,3"/>
-      <rect x="55" y="55" width="45" height="35" fill="none" stroke="#c4b5fd" stroke-width="2" stroke-dasharray="4,3"/>
-      <text x="20" y="40" font-size="11" fill="#c4b5fd" font-weight="bold" font-family="sans-serif">A</text>
-      <text x="68" y="74" font-size="11" fill="#c4b5fd" font-weight="bold" font-family="sans-serif">B</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg13" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fcd34d;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#b45309;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fill13" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fcd34d;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0.2"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="#f59e0b" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bg13)"/>
+  <!-- Square -->
+  <rect x="18" y="18" width="72" height="72" rx="4" fill="url(#fill13)" stroke="#f59e0b" stroke-width="3" filter="url(#shadow)"/>
+  <!-- Side label with arrow -->
+  <line x1="96" y1="18" x2="96" y2="90" stroke="#b45309" stroke-width="2"/>
+  <polygon points="96,18 92,24 100,24" fill="#b45309"/>
+  <polygon points="96,90 92,84 100,84" fill="#b45309"/>
+  <text x="104" y="56" font-size="11" fill="#b45309" text-anchor="middle" font-family="sans-serif" font-weight="bold">a</text>
+  <!-- Diagonal label -->
+  <text x="55" y="55" font-size="9" fill="#f59e0b" text-anchor="middle" font-family="sans-serif" font-weight="bold">d</text>
+  <!-- Formula -->
+  <text x="55" y="102" font-size="10" fill="#f59e0b" text-anchor="middle" font-family="sans-serif" font-weight="bold">P = 4a</text>
+</svg>` },
 
   /* ══ 周界 PERIMETER ══ */
   { id:6,  cat:"peri", name:"長方形",        en:"Rectangle",      ask:"求周界",   tag:"周界", grade:"s1",
     num:"G-10", difficulty:1, special:false,
     fcn:"周界 = 2 × (長 + 寬)", latex:"P = 2(l + w)",
     tip:"長同闊各出現兩次！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="g6" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#fde68a;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="12" y="28" width="86" height="58" rx="4" fill="url(#g6)" stroke="#f59e0b" stroke-width="9"/>
-      <line x1="12" y1="28" x2="24" y2="16" stroke="#fcd34d" stroke-width="5" stroke-linecap="round"/>
-      <line x1="24" y1="16" x2="46" y2="16" stroke="#fcd34d" stroke-width="5" stroke-linecap="round"/>
-      <text x="26" y="13" font-size="11" fill="#fcd34d" font-weight="bold" font-family="sans-serif">l</text>
-      <line x1="98" y1="28" x2="108" y2="40" stroke="#fcd34d" stroke-width="5" stroke-linecap="round"/>
-      <line x1="108" y1="40" x2="108" y2="66" stroke="#fcd34d" stroke-width="5" stroke-linecap="round"/>
-      <text x="100" y="54" font-size="11" fill="#fcd34d" font-weight="bold" font-family="sans-serif">w</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fill6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.55"/>
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.35"/>
+    </linearGradient>
+    <linearGradient id="rainbow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fcd34d"/>
+      <stop offset="25%" style="stop-color:#f59e0b"/>
+      <stop offset="50%" style="stop-color:#ef4444"/>
+      <stop offset="75%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#3b82f6"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="#3b82f6" flood-opacity="0.3"/>
+    </filter>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bg6)"/>
+  <!-- Rainbow border -->
+  <rect x="4" y="4" width="102" height="102" rx="12" fill="none" stroke="url(#rainbow)" stroke-width="2" opacity="0.8" filter="url(#glow)"/>
+  <!-- Rhombus -->
+  <polygon points="55,12 98,55 55,98 12,55" fill="url(#fill6)" stroke="#3b82f6" stroke-width="3" filter="url(#shadow)"/>
+  <!-- Diagonals -->
+  <line x1="12" y1="55" x2="98" y2="55" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <line x1="55" y1="12" x2="55" y2="98" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <!-- Diagonal labels -->
+  <text x="55" y="30" font-size="9" fill="#1d4ed8" text-anchor="middle" font-family="sans-serif" font-weight="bold">d₁</text>
+  <text x="73" y="56" font-size="9" fill="#1d4ed8" text-anchor="middle" font-family="sans-serif" font-weight="bold">d₂</text>
+  <!-- Area formula -->
+  <text x="55" y="58" font-size="10" fill="#3b82f6" text-anchor="middle" font-family="sans-serif" font-weight="bold">A = ½d₁d₂</text>
+</svg>` },
 
   { id:7,  cat:"peri", name:"圓形",          en:"Circle",         ask:"求周界",   tag:"周界", grade:"s1",
     num:"G-11", difficulty:1, special:false,
     fcn:"直徑 × π = 2 × π × 半徑", latex:"C = 2\\pi r = \\pi d",
     tip:"記住 π ≈ 3.1416，半徑×2=直徑！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <radialGradient id="g7" cx="35%" cy="35%">
-          <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.1"/>
-        </radialGradient>
-      </defs>
-      <circle cx="55" cy="55" r="44" fill="url(#g7)" stroke="#ef4444" stroke-width="9"/>
-      <line x1="55" y1="55" x2="99" y2="55" stroke="#f87171" stroke-width="4" stroke-dasharray="6,5"/>
-      <line x1="55" y1="11" x2="99" y2="11" stroke="#f87171" stroke-width="4"/>
-      <line x1="99" y1="11" x2="99" y2="55" stroke="#f87171" stroke-width="4"/>
-      <text x="75" y="48" font-size="12" fill="#f87171" font-weight="bold" font-family="sans-serif">r</text>
-      <circle cx="55" cy="55" r="4" fill="#f87171"/>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg7" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:0.05"/>
+    </radialGradient>
+    <radialGradient id="fill7" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.5"/>
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.3"/>
+    </radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="#3b82f6" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bg7)"/>
+  <!-- Sector: 90 degree -->
+  <path d="M55,65 A30,30 0 0,1 85,65 L55,65 Z" fill="url(#fill7)" stroke="#3b82f6" stroke-width="3" filter="url(#shadow)"/>
+  <!-- Arc highlight -->
+  <path d="M55,35 A30,30 0 0,1 85,65" fill="none" stroke="#1d4ed8" stroke-width="2" opacity="0.6"/>
+  <!-- Radius lines -->
+  <line x1="55" y1="65" x2="55" y2="35" stroke="#1d4ed8" stroke-width="2"/>
+  <line x1="55" y1="65" x2="85" y2="65" stroke="#1d4ed8" stroke-width="2"/>
+  <!-- Arrow on arc -->
+  <text x="70" y="45" font-size="20" fill="#3b82f6" font-family="sans-serif">⌢</text>
+  <!-- Labels -->
+  <text x="50" y="46" font-size="10" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">r</text>
+  <text x="72" y="62" font-size="10" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">r</text>
+  <text x="82" y="50" font-size="10" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">θ</text>
+  <!-- Area formula -->
+  <text x="28" y="95" font-size="9" fill="#3b82f6" font-family="sans-serif" font-weight="bold">A = ½r²θ</text>
+  <text x="28" y="105" font-size="8" fill="#1d4ed8" font-family="sans-serif">(θ in rad)</text>
+</svg>` },
 
   { id:14, cat:"peri", name:"三角形",        en:"Triangle",       ask:"求周界",   tag:"周界", grade:"s1",
     num:"G-12", difficulty:1, special:false,
     fcn:"周界 = 邊₁ + 邊₂ + 邊₃", latex:"P = a + b + c",
     tip:"三邊相加，唔需要任何高或角！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="g14" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#fda4af;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#e11d48;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <polygon points="55,12 10,96 100,96" fill="url(#g14)" stroke="#e11d48" stroke-width="9" stroke-linejoin="round"/>
-      <line x1="10" y1="96" x2="55" y2="96" stroke="#fb7185" stroke-width="5" stroke-linecap="round"/>
-      <line x1="55" y1="96" x2="55" y2="96" stroke="#fb7185" stroke-width="5" stroke-linecap="round"/>
-      <text x="26" y="106" font-size="10" fill="#fb7185" font-weight="bold" font-family="sans-serif">a</text>
-      <line x1="55" y1="96" x2="100" y2="96" stroke="#fb7185" stroke-width="5" stroke-linecap="round"/>
-      <text x="76" y="106" font-size="10" fill="#fb7185" font-weight="bold" font-family="sans-serif">b</text>
-      <line x1="100" y1="96" x2="55" y2="12" stroke="#fb7185" stroke-width="4" stroke-dasharray="4,3"/>
-      <text x="76" y="56" font-size="10" fill="#fb7185" font-weight="bold" font-family="sans-serif">c</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg14" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fcd34d;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#b45309;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fill14" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fcd34d;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0.2"/>
+    </linearGradient>
+    <linearGradient id="rainbow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fcd34d"/>
+      <stop offset="25%" style="stop-color:#f59e0b"/>
+      <stop offset="50%" style="stop-color:#ef4444"/>
+      <stop offset="75%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#3b82f6"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="#f59e0b" flood-opacity="0.3"/>
+    </filter>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bg14)"/>
+  <!-- Rainbow border -->
+  <rect x="4" y="4" width="102" height="102" rx="12" fill="none" stroke="url(#rainbow)" stroke-width="2" opacity="0.8" filter="url(#glow)"/>
+  <!-- Regular hexagon -->
+  <polygon points="55,10 92,30 92,70 55,90 18,70 18,30" fill="url(#fill14)" stroke="#f59e0b" stroke-width="3" filter="url(#shadow)"/>
+  <!-- Side arrows -->
+  <line x1="55" y1="10" x2="92" y2="30" stroke="#b45309" stroke-width="2" stroke-dasharray="4,2"/>
+  <line x1="92" y1="30" x2="92" y2="70" stroke="#b45309" stroke-width="2" stroke-dasharray="4,2"/>
+  <line x1="92" y1="70" x2="55" y2="90" stroke="#b45309" stroke-width="2" stroke-dasharray="4,2"/>
+  <!-- Side labels -->
+  <text x="76" y="17" font-size="9" fill="#b45309" font-family="sans-serif" font-weight="bold">a</text>
+  <text x="99" y="52" font-size="9" fill="#b45309" font-family="sans-serif" font-weight="bold">a</text>
+  <text x="76" y="84" font-size="9" fill="#b45309" font-family="sans-serif" font-weight="bold">a</text>
+  <!-- n = 6 label -->
+  <text x="55" y="52" font-size="10" fill="#f59e0b" text-anchor="middle" font-family="sans-serif" font-weight="bold">n</text>
+  <!-- Formula -->
+  <text x="55" y="104" font-size="10" fill="#f59e0b" text-anchor="middle" font-family="sans-serif" font-weight="bold">P = na</text>
+</svg>` },
 
   { id:15, cat:"peri", name:"正方形",         en:"Square",         ask:"求周界",   tag:"周界", grade:"s1",
     num:"G-13", difficulty:1, special:false,
     fcn:"周界 = 4 × 邊長", latex:"P = 4a",
     tip:"四邊相等，一邊×4就搞掂！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="g15" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#7dd3fc;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#0ea5e9;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="20" y="20" width="70" height="70" rx="4" fill="url(#g15)" stroke="#0ea5e9" stroke-width="9"/>
-      <line x1="20" y1="20" x2="32" y2="8" stroke="#38bdf8" stroke-width="5" stroke-linecap="round"/>
-      <line x1="32" y1="8" x2="52" y2="8" stroke="#38bdf8" stroke-width="5" stroke-linecap="round"/>
-      <text x="33" y="6" font-size="12" fill="#38bdf8" font-weight="bold" font-family="sans-serif">a</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg15" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6ee7b7;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fill15" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6ee7b7;stop-opacity:0.45"/>
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:0.25"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="#10b981" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bg15)"/>
+  <!-- Isometric cube -->
+  <!-- Front face -->
+  <polygon points="30,40 75,40 75,85 30,85" fill="url(#fill15)" stroke="#10b981" stroke-width="2.5" filter="url(#shadow)"/>
+  <!-- Top face -->
+  <polygon points="30,40 55,22 100,22 75,40" fill="#6ee7b7" stroke="#10b981" stroke-width="2.5" opacity="0.7"/>
+  <!-- Right face -->
+  <polygon points="75,40 100,22 100,67 75,85" fill="#10b981" stroke="#10b981" stroke-width="2.5" opacity="0.5"/>
+  <!-- Edge labels -->
+  <text x="52" y="38" font-size="10" fill="#047857" font-family="sans-serif" font-weight="bold">a</text>
+  <text x="88" y="32" font-size="10" fill="#047857" font-family="sans-serif" font-weight="bold">a</text>
+  <!-- Formula -->
+  <text x="55" y="100" font-size="10" fill="#10b981" text-anchor="middle" font-family="sans-serif" font-weight="bold">V = a³</text>
+</svg>` },
 
   { id:16, cat:"peri", name:"多邊形",         en:"Polygon",        ask:"求周界",   tag:"周界", grade:"s1",
     num:"G-14", difficulty:2, special:true,
     fcn:"周界 = 邊₁ + 邊₂ + … + 邊ₙ", latex:"P = \\sum_{i=1}^{n} l_i",
     tip:"有多少邊就數多少次，總和就係周界！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="g16" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#fde047;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#ca8a04;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <polygon points="55,12 94,38 78,84 32,84 16,38" fill="url(#g16)" stroke="#ca8a04" stroke-width="8" stroke-linejoin="round"/>
-      <circle cx="55" cy="12" r="5" fill="#eab308"/>
-      <circle cx="94" cy="38" r="5" fill="#eab308"/>
-      <circle cx="78" cy="84" r="5" fill="#eab308"/>
-      <circle cx="32" cy="84" r="5" fill="#eab308"/>
-      <circle cx="16" cy="38" r="5" fill="#eab308"/>
-      <line x1="55" y1="12" x2="94" y2="38" stroke="#fde047" stroke-width="3" stroke-dasharray="4,3"/>
-      <line x1="94" y1="38" x2="78" y2="84" stroke="#fde047" stroke-width="3" stroke-dasharray="4,3"/>
-      <text x="56" y="70" font-size="9" fill="#fde047" font-weight="bold" font-family="sans-serif">×5</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg16" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#6ee7b7;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:0.05"/>
+    </radialGradient>
+    <linearGradient id="fill16" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:0.5"/>
+      <stop offset="50%" style="stop-color:#6ee7b7;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:0.4"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="#10b981" flood-opacity:0.3"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bg16)"/>
+  <!-- Cylinder body -->
+  <rect x="22" y="30" width="66" height="50" fill="url(#fill16)"/>
+  <!-- Top ellipse -->
+  <ellipse cx="55" cy="30" rx="33" ry="10" fill="#6ee7b7" stroke="#10b981" stroke-width="2.5" opacity="0.8"/>
+  <!-- Bottom ellipse (visible arc) -->
+  <ellipse cx="55" cy="80" rx="33" ry="10" fill="none" stroke="#047857" stroke-width="2"/>
+  <!-- Side lines -->
+  <line x1="22" y1="30" x2="22" y2="80" stroke="#047857" stroke-width="2"/>
+  <line x1="88" y1="30" x2="88" y2="80" stroke="#047857" stroke-width="2"/>
+  <!-- Height label -->
+  <line x1="95" y1="30" x2="95" y2="80" stroke="#047857" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="102" y="57" font-size="10" fill="#047857" font-family="sans-serif" font-weight="bold">h</text>
+  <!-- Radius label -->
+  <line x1="55" y1="30" x2="88" y2="30" stroke="#047857" stroke-width="1.5" opacity="0.7"/>
+  <text x="72" y="26" font-size="9" fill="#047857" font-family="sans-serif" font-weight="bold">r</text>
+  <!-- Formula -->
+  <text x="55" y="100" font-size="10" fill="#10b981" text-anchor="middle" font-family="sans-serif" font-weight="bold">V = πr²h</text>
+</svg>` },
 
   /* ══ 體積 VOLUME ══ */
   { id:8,  cat:"vol", name:"正方體",         en:"Cube",           ask:"求體積",   tag:"體積", grade:"s1",
     num:"G-15", difficulty:1, special:false,
     fcn:"體積 = 邊長³", latex:"V = a^3",
     tip:"三條邊相等，全部係邊長 a！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="g8" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#fde68a;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#d97706;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <polygon points="55,10 96,28 96,72 55,90 14,72 14,28" fill="url(#g8)" stroke="#d97706" stroke-width="8" stroke-linejoin="round"/>
-      <line x1="55" y1="10" x2="55" y2="48" stroke="#f59e0b" stroke-width="6"/>
-      <line x1="55" y1="48" x2="96" y2="28" stroke="#f59e0b" stroke-width="6"/>
-      <line x1="55" y1="48" x2="14" y2="28" stroke="#f59e0b" stroke-width="6"/>
-      <line x1="55" y1="48" x2="55" y2="90" stroke="#f59e0b" stroke-width="6"/>
-      <text x="57" y="54" font-size="13" fill="#f59e0b" font-weight="bold" font-family="sans-serif">a</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg8" cx="40%" cy="40%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:0.05"/>
+    </radialGradient>
+    <radialGradient id="fill8" cx="40%" cy="40%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.5"/>
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.3"/>
+    </radialGradient>
+    <linearGradient id="rainbow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fcd34d"/>
+      <stop offset="25%" style="stop-color:#f59e0b"/>
+      <stop offset="50%" style="stop-color:#ef4444"/>
+      <stop offset="75%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#3b82f6"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="#3b82f6" flood-opacity="0.3"/>
+    </filter>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bg8)"/>
+  <!-- Rainbow border -->
+  <rect x="4" y="4" width="102" height="102" rx="12" fill="none" stroke="url(#rainbow)" stroke-width="2" opacity="0.8" filter="url(#glow)"/>
+  <!-- Outer circle -->
+  <circle cx="55" cy="55" r="42" fill="url(#fill8)" stroke="#3b82f6" stroke-width="3" filter="url(#shadow)"/>
+  <!-- Inner cutout circle (white to mask) -->
+  <circle cx="55" cy="55" r="22" fill="white"/>
+  <!-- Outer ring border -->
+  <circle cx="55" cy="55" r="42" fill="none" stroke="#3b82f6" stroke-width="3"/>
+  <!-- Inner circle border -->
+  <circle cx="55" cy="55" r="22" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-dasharray="3,2"/>
+  <!-- Radius labels -->
+  <line x1="55" y1="55" x2="83" y2="38" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="72" y="44" font-size="10" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">R</text>
+  <line x1="55" y1="55" x2="68" y2="67" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="64" y="58" font-size="9" fill="#1d4ed8" font-family="sans-serif" font-weight="bold">r</text>
+  <!-- Area formula -->
+  <text x="10" y="102" font-size="10" fill="#3b82f6" font-family="sans-serif" font-weight="bold">A = π(R²−r²)</text>
+</svg>` },
 
   { id:9,  cat:"vol", name:"圓柱體",         en:"Cylinder",       ask:"求體積",   tag:"體積", grade:"s1",
     num:"G-16", difficulty:2, special:false,
     fcn:"體積 = π × 半徑² × 高", latex:"V = \\pi r^2 h",
     tip:"底面積係圓形，再乘高度！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="g9" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#fef08a;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#92400e;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <ellipse cx="55" cy="24" rx="40" ry="14" fill="url(#g9)" stroke="#92400e" stroke-width="8"/>
-      <line x1="15" y1="24" x2="15" y2="84" stroke="#b45309" stroke-width="8"/>
-      <line x1="95" y1="24" x2="95" y2="84" stroke="#b45309" stroke-width="8"/>
-      <ellipse cx="55" cy="84" rx="40" ry="14" fill="url(#g9)" stroke="#92400e" stroke-width="8"/>
-      <line x1="55" y1="24" x2="55" y2="84" stroke="#d97706" stroke-width="4" stroke-dasharray="6,4"/>
-      <text x="44" y="56" font-size="11" fill="#d97706" font-weight="bold" font-family="sans-serif">h</text>
-      <text x="58" y="18" font-size="10" fill="#d97706" font-weight="bold" font-family="sans-serif">r</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg9" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fill19" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.5"/>
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.3"/>
+    </linearGradient>
+    <linearGradient id="fill29" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#bef264;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#84cc16;stop-opacity:0.2"/>
+    </linearGradient>
+    <linearGradient id="rainbow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fcd34d"/>
+      <stop offset="25%" style="stop-color:#f59e0b"/>
+      <stop offset="50%" style="stop-color:#ef4444"/>
+      <stop offset="75%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#3b82f6"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#3b82f6" flood-opacity="0.25"/>
+    </filter>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bg9)"/>
+  <!-- Rainbow border -->
+  <rect x="4" y="4" width="102" height="102" rx="12" fill="none" stroke="url(#rainbow)" stroke-width="2" opacity="0.8" filter="url(#glow)"/>
+  <!-- Rectangle base -->
+  <rect x="10" y="30" width="70" height="55" rx="3" fill="url(#fill19)" stroke="#3b82f6" stroke-width="2.5" filter="url(#shadow)"/>
+  <!-- Triangle on top -->
+  <polygon points="80,30 80,85 55,85" fill="url(#fill29)" stroke="#84cc16" stroke-width="2.5" filter="url(#shadow)"/>
+  <!-- Divider line -->
+  <line x1="80" y1="30" x2="80" y2="85" stroke="#1d4ed8" stroke-width="2" stroke-dasharray="4,2"/>
+  <!-- Dimension labels -->
+  <text x="38" y="95" font-size="9" fill="#1d4ed8" text-anchor="middle" font-family="sans-serif" font-weight="bold">b₁</text>
+  <text x="68" y="95" font-size="9" fill="#65a30d" text-anchor="middle" font-family="sans-serif" font-weight="bold">b₂</text>
+  <text x="93" y="60" font-size="9" fill="#1d4ed8" text-anchor="middle" font-family="sans-serif" font-weight="bold">h</text>
+  <text x="30" y="22" font-size="9" fill="#1d4ed8" text-anchor="middle" font-family="sans-serif" font-weight="bold">a</text>
+  <!-- Formula -->
+  <text x="38" y="58" font-size="9" fill="#3b82f6" text-anchor="middle" font-family="sans-serif" font-weight="bold">A₁</text>
+  <text x="68" y="60" font-size="8" fill="#65a30d" text-anchor="middle" font-family="sans-serif" font-weight="bold">A₂</text>
+</svg>` },
 
   { id:17, cat:"vol", name:"長方體",         en:"Cuboid",         ask:"求體積",   tag:"體積", grade:"s1",
     num:"G-17", difficulty:1, special:false,
     fcn:"體積 = 長 × 寬 × 高", latex:"V = l \\times w \\times h",
     tip:"三個維度相乘，缺一不可！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="g17" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#ddd6fe;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <polygon points="55,12 96,28 96,70 55,88 14,70 14,28" fill="url(#g17)" stroke="#7c3aed" stroke-width="8" stroke-linejoin="round"/>
-      <line x1="55" y1="12" x2="55" y2="48" stroke="#8b5cf6" stroke-width="6"/>
-      <line x1="55" y1="48" x2="96" y2="28" stroke="#8b5cf6" stroke-width="6"/>
-      <line x1="55" y1="48" x2="14" y2="28" stroke="#8b5cf6" stroke-width="6"/>
-      <line x1="55" y1="48" x2="55" y2="88" stroke="#8b5cf6" stroke-width="6"/>
-      <text x="57" y="54" font-size="9" fill="#8b5cf6" font-weight="bold" font-family="sans-serif">h</text>
-      <text x="74" y="24" font-size="9" fill="#8b5cf6" font-weight="bold" font-family="sans-serif">l</text>
-      <text x="4" y="52" font-size="9" fill="#8b5cf6" font-weight="bold" font-family="sans-serif">w</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg17" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6ee7b7;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fill17" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6ee7b7;stop-opacity:0.45"/>
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:0.25"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="#10b981" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bg17)"/>
+  <!-- Front face -->
+  <polygon points="18,38 70,38 70,82 18,82" fill="url(#fill17)" stroke="#10b981" stroke-width="2.5" filter="url(#shadow)"/>
+  <!-- Top face -->
+  <polygon points="18,38 42,22 94,22 70,38" fill="#6ee7b7" stroke="#10b981" stroke-width="2.5" opacity="0.7"/>
+  <!-- Right face -->
+  <polygon points="70,38 94,22 94,66 70,82" fill="#10b981" stroke="#10b981" stroke-width="2.5" opacity="0.5"/>
+  <!-- Labels -->
+  <text x="42" y="36" font-size="9" fill="#047857" font-family="sans-serif" font-weight="bold">l</text>
+  <text x="82" y="28" font-size="9" fill="#047857" font-family="sans-serif" font-weight="bold">w</text>
+  <text x="86" y="58" font-size="9" fill="#047857" font-family="sans-serif" font-weight="bold">h</text>
+  <!-- Formula -->
+  <text x="55" y="100" font-size="10" fill="#10b981" text-anchor="middle" font-family="sans-serif" font-weight="bold">V = l × w × h</text>
+</svg>` },
 
   { id:18, cat:"vol", name:"圓錐體",         en:"Cone",            ask:"求體積",   tag:"體積", grade:"s3",
     num:"G-18", difficulty:2, special:false,
     fcn:"體積 = ⅓ × π × 半徑² × 高", latex:"V = \\frac{1}{3}\\pi r^2 h",
     tip:"三分一底面積，別忘記除以3！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="g18" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#bbf7d0;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#16a34a;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <ellipse cx="55" cy="84" rx="38" ry="13" fill="url(#g18)" stroke="#16a34a" stroke-width="8"/>
-      <line x1="55" y1="14" x2="17" y2="84" stroke="#22c55e" stroke-width="8" stroke-linecap="round"/>
-      <line x1="55" y1="14" x2="93" y2="84" stroke="#22c55e" stroke-width="8" stroke-linecap="round"/>
-      <line x1="55" y1="14" x2="55" y2="84" stroke="#22c55e" stroke-width="4" stroke-dasharray="5,4"/>
-      <text x="57" y="52" font-size="10" fill="#22c55e" font-weight="bold" font-family="sans-serif">h</text>
-      <text x="58" y="10" font-size="10" fill="#22c55e" font-weight="bold" font-family="sans-serif">r</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg18" cx="50%" cy="60%">
+      <stop offset="0%" style="stop-color:#6ee7b7;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:0.05"/>
+    </radialGradient>
+    <linearGradient id="fill18" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:0.5"/>
+      <stop offset="50%" style="stop-color:#6ee7b7;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:0.4"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="#10b981" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bg18)"/>
+  <!-- Cone body (triangle) -->
+  <polygon points="55,12 18,82 92,82" fill="url(#fill18)" stroke="#10b981" stroke-width="2.5" filter="url(#shadow)"/>
+  <!-- Base ellipse -->
+  <ellipse cx="55" cy="82" rx="37" ry="8" fill="#6ee7b7" stroke="#10b981" stroke-width="2.5" opacity="0.8"/>
+  <!-- Slant height label -->
+  <line x1="55" y1="12" x2="25" y2="78" stroke="#047857" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="38" y="48" font-size="9" fill="#047857" font-family="sans-serif" font-weight="bold">l</text>
+  <!-- Height label -->
+  <line x1="55" y1="12" x2="55" y2="82" stroke="#047857" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="62" y="50" font-size="9" fill="#047857" font-family="sans-serif" font-weight="bold">h</text>
+  <!-- Radius label -->
+  <line x1="55" y1="82" x2="88" y2="82" stroke="#047857" stroke-width="1.5" opacity="0.7"/>
+  <text x="72" y="90" font-size="9" fill="#047857" font-family="sans-serif" font-weight="bold">r</text>
+  <!-- Formula -->
+  <text x="55" y="104" font-size="10" fill="#10b981" text-anchor="middle" font-family="sans-serif" font-weight="bold">V = ⅓πr²h</text>
+</svg>` },
 
   { id:19, cat:"vol", name:"球體",           en:"Sphere",          ask:"求體積",   tag:"體積", grade:"s3",
     num:"G-19", difficulty:2, special:false,
     fcn:"體積 = ⅘ × π × 半徑³", latex:"V = \\frac{4}{3}\\pi r^3",
     tip:"球形最完美，所有方向半徑相同！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <radialGradient id="g19" cx="35%" cy="35%">
-          <stop offset="0%" style="stop-color:#fbcfe8;stop-opacity:0.4"/>
-          <stop offset="100%" style="stop-color:#e11d48;stop-opacity:0.15"/>
-        </radialGradient>
-      </defs>
-      <circle cx="55" cy="55" r="45" fill="url(#g19)" stroke="#e11d48" stroke-width="8"/>
-      <ellipse cx="55" cy="55" rx="45" ry="12" fill="none" stroke="#fb7185" stroke-width="3" stroke-dasharray="5,4"/>
-      <line x1="55" y1="10" x2="55" y2="100" stroke="#fb7185" stroke-width="3" stroke-dasharray="5,4"/>
-      <text x="64" y="48" font-size="13" fill="#fb7185" font-weight="bold" font-family="sans-serif">r</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg19" cx="35%" cy="35%">
+      <stop offset="0%" style="stop-color:#6ee7b7;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:0.05"/>
+    </radialGradient>
+    <radialGradient id="fill19" cx="30%" cy="30%">
+      <stop offset="0%" style="stop-color:#6ee7b7;stop-opacity:0.6"/>
+      <stop offset="60%" style="stop-color:#10b981;stop-opacity:0.35"/>
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:0.5"/>
+    </radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-color="#10b981" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bg19)"/>
+  <!-- Main sphere -->
+  <circle cx="55" cy="55" r="40" fill="url(#fill19)" stroke="#10b981" stroke-width="3" filter="url(#shadow)"/>
+  <!-- Equator (horizontal ellipse) -->
+  <ellipse cx="55" cy="55" rx="40" ry="12" fill="none" stroke="#047857" stroke-width="1.5" opacity="0.4" stroke-dasharray="4,2"/>
+  <!-- Vertical meridian -->
+  <ellipse cx="55" cy="55" rx="12" ry="40" fill="none" stroke="#047857" stroke-width="1.5" opacity="0.4" stroke-dasharray="4,2"/>
+  <!-- Radius line -->
+  <line x1="55" y1="55" x2="80" y2="38" stroke="#047857" stroke-width="2"/>
+  <polygon points="80,38 76,36 77,42" fill="#047857"/>
+  <text x="70" y="44" font-size="11" fill="#047857" font-family="sans-serif" font-weight="bold">r</text>
+  <!-- Center dot -->
+  <circle cx="55" cy="55" r="3" fill="#10b981"/>
+  <!-- O label -->
+  <text x="55" y="20" font-size="10" fill="#047857" text-anchor="middle" font-family="sans-serif" font-weight="bold">O</text>
+  <!-- Formula -->
+  <text x="55" y="102" font-size="10" fill="#10b981" text-anchor="middle" font-family="sans-serif" font-weight="bold">V = ⁴⁄₃πr³</text>
+</svg>` },
 
   { id:20, cat:"vol", name:"三角柱體",        en:"Triangular Prism", ask:"求體積", tag:"體積", grade:"s2",
     num:"G-20", difficulty:2, special:false,
     fcn:"體積 = ½ × 底 × 高 × 柱高", latex:"V = \\frac{1}{2}bh \\times H",
     tip:"三角底面積 × 柱高 = 整體積！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="g20" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#a5f3fc;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#0891b2;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <polygon points="22,30 88,30 55,80" fill="url(#g20)" stroke="#0891b2" stroke-width="8"/>
-      <line x1="22" y1="30" x2="22" y2="76" stroke="#06b6d4" stroke-width="8"/>
-      <line x1="88" y1="30" x2="88" y2="76" stroke="#06b6d4" stroke-width="8"/>
-      <line x1="55" y1="80" x2="55" y2="90" stroke="#06b6d4" stroke-width="8"/>
-      <polygon points="22,76 88,76 55,90" fill="url(#g20)" stroke="#0891b2" stroke-width="8"/>
-      <text x="44" y="58" font-size="9" fill="#06b6d4" font-weight="bold" font-family="sans-serif">h</text>
-      <text x="10" y="24" font-size="9" fill="#06b6d4" font-weight="bold" font-family="sans-serif">b</text>
-      <text x="57" y="70" font-size="9" fill="#06b6d4" font-weight="bold" font-family="sans-serif">H</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg20" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6ee7b7;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fill20" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6ee7b7;stop-opacity:0.45"/>
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:0.25"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="#10b981" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bg20)"/>
+  <!-- Front triangle -->
+  <polygon points="15,30 15,75 55,75" fill="url(#fill20)" stroke="#10b981" stroke-width="2.5" filter="url(#shadow)" opacity="0.9"/>
+  <!-- Back triangle -->
+  <polygon points="55,30 55,75 95,75" fill="none" stroke="#047857" stroke-width="2" opacity="0.4"/>
+  <!-- Connecting edges -->
+  <line x1="15" y1="30" x2="55" y2="30" stroke="#047857" stroke-width="2"/>
+  <line x1="15" y1="75" x2="55" y2="75" stroke="#047857" stroke-width="2"/>
+  <line x1="55" y1="30" x2="95" y2="30" stroke="#047857" stroke-width="2" stroke-dasharray="3,2" opacity="0.5"/>
+  <line x1="55" y1="75" x2="95" y2="75" stroke="#047857" stroke-width="2" stroke-dasharray="3,2" opacity="0.5"/>
+  <!-- Back vertical edge -->
+  <line x1="95" y1="30" x2="95" y2="75" stroke="#047857" stroke-width="2" stroke-dasharray="3,2" opacity="0.5"/>
+  <!-- Labels -->
+  <text x="32" y="55" font-size="9" fill="#047857" font-family="sans-serif" font-weight="bold">b</text>
+  <text x="35" y="84" font-size="9" fill="#047857" font-family="sans-serif" font-weight="bold">h</text>
+  <text x="75" y="84" font-size="9" fill="#047857" font-family="sans-serif" font-weight="bold">l</text>
+  <!-- Formula -->
+  <text x="55" y="102" font-size="10" fill="#10b981" text-anchor="middle" font-family="sans-serif" font-weight="bold">V = ½bhl</text>
+</svg>` },
 
   { id:21, cat:"vol", name:"正四面體",        en:"Tetrahedron",     ask:"求體積",   tag:"體積", grade:"s3",
     num:"G-21", difficulty:3, special:true,
     fcn:"體積 = √2/12 × 邊長³", latex:"V = \\frac{\\sqrt{2}}{12}a^3",
     tip:"正四面體係最完美嘅三角錐，四面皆正三角形！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="g21" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#bbf7d0;stop-opacity:0.35"/>
-          <stop offset="100%" style="stop-color:#22c55e;stop-opacity:0.15"/>
-        </linearGradient>
-      </defs>
-      <polygon points="55,12 96,80 14,80" fill="url(#g21)" stroke="#22c55e" stroke-width="8" stroke-linejoin="round"/>
-      <line x1="55" y1="12" x2="55" y2="80" stroke="#4ade80" stroke-width="4" stroke-dasharray="5,4"/>
-      <line x1="14" y1="80" x2="96" y2="80" stroke="#22c55e" stroke-width="8"/>
-      <line x1="96" y1="80" x2="55" y2="12" stroke="#4ade80" stroke-width="3" stroke-dasharray="4,3"/>
-      <line x1="14" y1="80" x2="55" y2="12" stroke="#4ade80" stroke-width="3" stroke-dasharray="4,3"/>
-      <text x="57" y="48" font-size="11" fill="#4ade80" font-weight="bold" font-family="sans-serif">a</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg21" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6ee7b7;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fill121" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6ee7b7;stop-opacity:0.5"/>
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:0.3"/>
+    </linearGradient>
+    <linearGradient id="fill221" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6ee7b7;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:0.15"/>
+    </linearGradient>
+    <linearGradient id="rainbow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fcd34d"/>
+      <stop offset="25%" style="stop-color:#f59e0b"/>
+      <stop offset="50%" style="stop-color:#ef4444"/>
+      <stop offset="75%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#3b82f6"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="#10b981" flood-opacity="0.3"/>
+    </filter>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bg21)"/>
+  <!-- Rainbow border -->
+  <rect x="4" y="4" width="102" height="102" rx="12" fill="none" stroke="url(#rainbow)" stroke-width="2" opacity="0.8" filter="url(#glow)"/>
+  <!-- Front face (triangle) -->
+  <polygon points="55,12 12,80 98,80" fill="url(#fill121)" stroke="#10b981" stroke-width="2.5" filter="url(#shadow)"/>
+  <!-- Right back face -->
+  <polygon points="55,12 98,80 55,65" fill="url(#fill221)" stroke="#047857" stroke-width="2" opacity="0.7"/>
+  <!-- Edge from apex to base right -->
+  <line x1="55" y1="12" x2="98" y2="80" stroke="#10b981" stroke-width="2"/>
+  <!-- Base triangle -->
+  <polygon points="12,80 98,80 55,65" fill="none" stroke="#047857" stroke-width="2" stroke-dasharray="4,2" opacity="0.5"/>
+  <!-- Height label -->
+  <line x1="55" y1="12" x2="55" y2="65" stroke="#047857" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="63" y="40" font-size="9" fill="#047857" font-family="sans-serif" font-weight="bold">h</text>
+  <!-- Edge label -->
+  <text x="78" y="48" font-size="9" fill="#10b981" font-family="sans-serif" font-weight="bold">a</text>
+  <!-- Formula -->
+  <text x="55" y="102" font-size="10" fill="#10b981" text-anchor="middle" font-family="sans-serif" font-weight="bold">V = a³/6√2</text>
+</svg>` },
 
   { id:22, cat:"vol", name:"四角錐體",        en:"Square Pyramid",   ask:"求體積",   tag:"體積", grade:"s3",
     num:"G-22", difficulty:2, special:false,
     fcn:"體積 = ⅓ × 底邊² × 高", latex:"V = \\frac{1}{3}a^2 h",
     tip:"正方形底 × 高 ÷ 3，圓錐都係呢個原理！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="g22" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#bfdbfe;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <polygon points="55,12 94,40 55,90 16,40" fill="url(#g22)" stroke="#3b82f6" stroke-width="8" stroke-linejoin="round"/>
-      <line x1="16" y1="40" x2="94" y2="40" stroke="#60a5fa" stroke-width="5"/>
-      <line x1="55" y1="12" x2="55" y2="90" stroke="#60a5fa" stroke-width="4" stroke-dasharray="5,4"/>
-      <text x="57" y="54" font-size="10" fill="#60a5fa" font-weight="bold" font-family="sans-serif">h</text>
-      <text x="44" y="24" font-size="9" fill="#60a5fa" font-weight="bold" font-family="sans-serif">a</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg22" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6ee7b7;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fill22" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6ee7b7;stop-opacity:0.45"/>
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:0.25"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="#10b981" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bg22)"/>
+  <!-- Square base -->
+  <polygon points="18,65 55,80 92,65 55,50" fill="none" stroke="#047857" stroke-width="2" stroke-dasharray="3,2" opacity="0.5"/>
+  <polygon points="18,65 55,80 92,65" fill="url(#fill22)" stroke="#10b981" stroke-width="2" filter="url(#shadow)" opacity="0.6"/>
+  <!-- Front left face -->
+  <polygon points="55,10 18,65 55,50" fill="url(#fill22)" stroke="#10b981" stroke-width="2.5" filter="url(#shadow)"/>
+  <!-- Front right face -->
+  <polygon points="55,10 55,50 92,65" fill="#10b981" stroke="#10b981" stroke-width="2" opacity="0.6"/>
+  <!-- Apex lines -->
+  <line x1="55" y1="10" x2="18" y2="65" stroke="#10b981" stroke-width="2"/>
+  <line x1="55" y1="10" x2="92" y2="65" stroke="#10b981" stroke-width="2"/>
+  <line x1="55" y1="10" x2="55" y2="50" stroke="#10b981" stroke-width="2"/>
+  <!-- Base edges -->
+  <line x1="18" y1="65" x2="55" y2="80" stroke="#047857" stroke-width="2" opacity="0.5"/>
+  <line x1="92" y1="65" x2="55" y2="80" stroke="#047857" stroke-width="2" opacity="0.5"/>
+  <!-- Labels -->
+  <text x="53" y="8" font-size="9" fill="#047857" font-family="sans-serif" font-weight="bold">h</text>
+  <text x="12" y="60" font-size="9" fill="#047857" font-family="sans-serif" font-weight="bold">a</text>
+  <text x="78" y="60" font-size="9" fill="#047857" font-family="sans-serif" font-weight="bold">a</text>
+  <!-- Slant height -->
+  <line x1="55" y1="10" x2="18" y2="65" stroke="#047857" stroke-width="1" stroke-dasharray="2,2" opacity="0.5"/>
+  <!-- Formula -->
+  <text x="55" y="100" font-size="10" fill="#10b981" text-anchor="middle" font-family="sans-serif" font-weight="bold">V = ⅓a²h</text>
+</svg>` },
 
   /* ══ 代數 ALGEBRA ══ */
   { id:23, cat:"algebra", name:"差的平方",     en:"Difference of Squares", ask:"因式分解", tag:"代數", grade:"s3",
     num:"A-01", difficulty:1, special:false,
     fcn:"a² − b² = (a+b)(a−b)", latex:"a^2 - b^2 = (a+b)(a-b)",
     tip:"平方相減，等於和乘以差！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="ga1" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#a78bfa;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#ga1)" stroke="#7c3aed" stroke-width="9"/>
-      <text x="55" y="60" font-size="32" fill="#a78bfa" font-weight="bold" font-family="serif" text-anchor="middle">−</text>
-      <text x="55" y="25" font-size="16" fill="#c4b5fd" font-weight="bold" text-anchor="middle">a² − b²</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bga1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c4b5fd;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#6d28d9;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="filla1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c4b5fd;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0.2"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#8b5cf6" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bga1)"/>
+  <!-- Big square (a×a) divided into 4 parts -->
+  <!-- Part 1: top-left (a-b)² core -->
+  <rect x="22" y="22" width="50" height="50" rx="2" fill="url(#filla1)" stroke="#8b5cf6" stroke-width="2" filter="url(#shadow)"/>
+  <!-- Part 2: top-right strip (a-b)*b -->
+  <rect x="72" y="22" width="18" height="50" rx="1" fill="#c4b5fd" stroke="#8b5cf6" stroke-width="1.5" opacity="0.6"/>
+  <!-- Part 3: bottom-left strip b*(a-b) -->
+  <rect x="22" y="72" width="50" height="18" rx="1" fill="#c4b5fd" stroke="#8b5cf6" stroke-width="1.5" opacity="0.6"/>
+  <!-- Part 4: bottom-right corner (b²) -->
+  <rect x="72" y="72" width="18" height="18" rx="1" fill="#6d28d9" stroke="#6d28d9" stroke-width="1.5" opacity="0.3"/>
+  <!-- Separator lines -->
+  <line x1="72" y1="22" x2="72" y2="90" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <line x1="22" y1="72" x2="90" y2="72" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <!-- Labels -->
+  <text x="47" y="50" font-size="11" fill="#6d28d9" text-anchor="middle" font-family="sans-serif" font-weight="bold">(a−b)</text>
+  <text x="81" y="50" font-size="10" fill="#6d28d9" text-anchor="middle" font-family="sans-serif" font-weight="bold">b</text>
+  <text x="47" y="84" font-size="10" fill="#6d28d9" text-anchor="middle" font-family="sans-serif" font-weight="bold">b</text>
+  <text x="100" y="100" font-size="8" fill="#8b5cf6" font-family="sans-serif" font-weight="bold">a² − 2ab + b²</text>
+</svg>` },
 
   { id:24, cat:"algebra", name:"和的平方",     en:"Square of Sum",       ask:"展開",     tag:"代數", grade:"s3",
     num:"A-02", difficulty:1, special:false,
     fcn:"(a+b)² = a²+2ab+b²", latex:"(a+b)^2 = a^2 + 2ab + b^2",
     tip:"記住「頭頭 + 腳腳 + 2×頭×腳」！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="ga2" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#34d399;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#059669;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#ga2)" stroke="#059669" stroke-width="9"/>
-      <text x="55" y="60" font-size="28" fill="#34d399" font-weight="bold" font-family="serif" text-anchor="middle">( )²</text>
-      <text x="55" y="25" font-size="16" fill="#6ee7b7" font-weight="bold" text-anchor="middle">(a+b)²</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bga2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c4b5fd;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#6d28d9;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="filla2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c4b5fd;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0.2"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#8b5cf6" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bga2)"/>
+  <!-- Big square (a+b)² -->
+  <!-- Core square a² -->
+  <rect x="18" y="18" width="50" height="50" rx="2" fill="url(#filla2)" stroke="#8b5cf6" stroke-width="2" filter="url(#shadow)"/>
+  <!-- Right strip: a*b -->
+  <rect x="68" y="18" width="22" height="50" rx="1" fill="#c4b5fd" stroke="#8b5cf6" stroke-width="2" opacity="0.6"/>
+  <!-- Bottom strip: b*a -->
+  <rect x="18" y="68" width="50" height="22" rx="1" fill="#c4b5fd" stroke="#8b5cf6" stroke-width="2" opacity="0.6"/>
+  <!-- Corner square: b² -->
+  <rect x="68" y="68" width="22" height="22" rx="1" fill="#6d28d9" stroke="#6d28d9" stroke-width="2" opacity="0.35"/>
+  <!-- Separator lines -->
+  <line x1="68" y1="18" x2="68" y2="90" stroke="#6d28d9" stroke-width="2"/>
+  <line x1="18" y1="68" x2="90" y2="68" stroke="#6d28d9" stroke-width="2"/>
+  <!-- Labels -->
+  <text x="43" y="46" font-size="11" fill="#6d28d9" text-anchor="middle" font-family="sans-serif" font-weight="bold">a²</text>
+  <text x="79" y="46" font-size="10" fill="#6d28d9" text-anchor="middle" font-family="sans-serif" font-weight="bold">ab</text>
+  <text x="43" y="82" font-size="10" fill="#6d28d9" text-anchor="middle" font-family="sans-serif" font-weight="bold">ab</text>
+  <text x="79" y="82" font-size="10" fill="#6d28d9" text-anchor="middle" font-family="sans-serif" font-weight="bold">b²</text>
+  <!-- Formula -->
+  <text x="100" y="100" font-size="8" fill="#8b5cf6" text-anchor="end" font-family="sans-serif" font-weight="bold">a² + 2ab + b²</text>
+</svg>` },
 
   { id:25, cat:"algebra", name:"差的平方",     en:"Square of Difference", ask:"展開",     tag:"代數", grade:"s3",
     num:"A-03", difficulty:1, special:false,
     fcn:"(a−b)² = a²−2ab+b²", latex:"(a-b)^2 = a^2 - 2ab + b^2",
     tip:"注意負號，中間項是 −2ab！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="ga3" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#d97706;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#ga3)" stroke="#d97706" stroke-width="9"/>
-      <text x="55" y="60" font-size="28" fill="#f59e0b" font-weight="bold" font-family="serif" text-anchor="middle">( )²</text>
-      <text x="55" y="25" font-size="16" fill="#fcd34d" font-weight="bold" text-anchor="middle">(a−b)²</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bga1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c4b5fd;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#6d28d9;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="filla1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c4b5fd;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0.2"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#8b5cf6" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bga1)"/>
+  <!-- Big square (a×a) divided into 4 parts -->
+  <!-- Part 1: top-left (a-b)² core -->
+  <rect x="22" y="22" width="50" height="50" rx="2" fill="url(#filla1)" stroke="#8b5cf6" stroke-width="2" filter="url(#shadow)"/>
+  <!-- Part 2: top-right strip (a-b)*b -->
+  <rect x="72" y="22" width="18" height="50" rx="1" fill="#c4b5fd" stroke="#8b5cf6" stroke-width="1.5" opacity="0.6"/>
+  <!-- Part 3: bottom-left strip b*(a-b) -->
+  <rect x="22" y="72" width="50" height="18" rx="1" fill="#c4b5fd" stroke="#8b5cf6" stroke-width="1.5" opacity="0.6"/>
+  <!-- Part 4: bottom-right corner (b²) -->
+  <rect x="72" y="72" width="18" height="18" rx="1" fill="#6d28d9" stroke="#6d28d9" stroke-width="1.5" opacity="0.3"/>
+  <!-- Separator lines -->
+  <line x1="72" y1="22" x2="72" y2="90" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <line x1="22" y1="72" x2="90" y2="72" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <!-- Labels -->
+  <text x="47" y="50" font-size="11" fill="#6d28d9" text-anchor="middle" font-family="sans-serif" font-weight="bold">(a−b)</text>
+  <text x="81" y="50" font-size="10" fill="#6d28d9" text-anchor="middle" font-family="sans-serif" font-weight="bold">b</text>
+  <text x="47" y="84" font-size="10" fill="#6d28d9" text-anchor="middle" font-family="sans-serif" font-weight="bold">b</text>
+  <text x="100" y="100" font-size="8" fill="#8b5cf6" font-family="sans-serif" font-weight="bold">a² − 2ab + b²</text>
+</svg>` },
 
   { id:26, cat:"algebra", name:"立方和",       en:"Sum of Cubes",        ask:"因式分解", tag:"代數", grade:"s3",
     num:"A-04", difficulty:2, special:false,
     fcn:"a³+b³ = (a+b)(a²−ab+b²)", latex:"a^3 + b^3 = (a+b)(a^2 - ab + b^2)",
     tip:"兩個立方和，等於和乘以平方減積加平方！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="ga4" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#f87171;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#dc2626;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#ga4)" stroke="#dc2626" stroke-width="9"/>
-      <text x="55" y="60" font-size="28" fill="#f87171" font-weight="bold" font-family="serif" text-anchor="middle">+</text>
-      <text x="55" y="25" font-size="16" fill="#fca5a5" font-weight="bold" text-anchor="middle">a³ + b³</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bga2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c4b5fd;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#6d28d9;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="filla2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c4b5fd;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0.2"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#8b5cf6" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bga2)"/>
+  <!-- Big square (a+b)² -->
+  <!-- Core square a² -->
+  <rect x="18" y="18" width="50" height="50" rx="2" fill="url(#filla2)" stroke="#8b5cf6" stroke-width="2" filter="url(#shadow)"/>
+  <!-- Right strip: a*b -->
+  <rect x="68" y="18" width="22" height="50" rx="1" fill="#c4b5fd" stroke="#8b5cf6" stroke-width="2" opacity="0.6"/>
+  <!-- Bottom strip: b*a -->
+  <rect x="18" y="68" width="50" height="22" rx="1" fill="#c4b5fd" stroke="#8b5cf6" stroke-width="2" opacity="0.6"/>
+  <!-- Corner square: b² -->
+  <rect x="68" y="68" width="22" height="22" rx="1" fill="#6d28d9" stroke="#6d28d9" stroke-width="2" opacity="0.35"/>
+  <!-- Separator lines -->
+  <line x1="68" y1="18" x2="68" y2="90" stroke="#6d28d9" stroke-width="2"/>
+  <line x1="18" y1="68" x2="90" y2="68" stroke="#6d28d9" stroke-width="2"/>
+  <!-- Labels -->
+  <text x="43" y="46" font-size="11" fill="#6d28d9" text-anchor="middle" font-family="sans-serif" font-weight="bold">a²</text>
+  <text x="79" y="46" font-size="10" fill="#6d28d9" text-anchor="middle" font-family="sans-serif" font-weight="bold">ab</text>
+  <text x="43" y="82" font-size="10" fill="#6d28d9" text-anchor="middle" font-family="sans-serif" font-weight="bold">ab</text>
+  <text x="79" y="82" font-size="10" fill="#6d28d9" text-anchor="middle" font-family="sans-serif" font-weight="bold">b²</text>
+  <!-- Formula -->
+  <text x="100" y="100" font-size="8" fill="#8b5cf6" text-anchor="end" font-family="sans-serif" font-weight="bold">a² + 2ab + b²</text>
+</svg>` },
 
   { id:27, cat:"algebra", name:"立方差",       en:"Diff of Cubes",       ask:"因式分解", tag:"代數", grade:"s3",
     num:"A-05", difficulty:2, special:false,
     fcn:"a³−b³ = (a−b)(a²+ab+b²)", latex:"a^3 - b^3 = (a-b)(a^2 + ab + b^2)",
     tip:"兩個立方差，等於差乘以平方加積加平方！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="ga5" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#2563eb;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#ga5)" stroke="#2563eb" stroke-width="9"/>
-      <text x="55" y="60" font-size="28" fill="#60a5fa" font-weight="bold" font-family="serif" text-anchor="middle">−</text>
-      <text x="55" y="25" font-size="16" fill="#93c5fd" font-weight="bold" text-anchor="middle">a³ − b³</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bga1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c4b5fd;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#6d28d9;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="filla1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c4b5fd;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0.2"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#8b5cf6" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bga1)"/>
+  <!-- Big square (a×a) divided into 4 parts -->
+  <!-- Part 1: top-left (a-b)² core -->
+  <rect x="22" y="22" width="50" height="50" rx="2" fill="url(#filla1)" stroke="#8b5cf6" stroke-width="2" filter="url(#shadow)"/>
+  <!-- Part 2: top-right strip (a-b)*b -->
+  <rect x="72" y="22" width="18" height="50" rx="1" fill="#c4b5fd" stroke="#8b5cf6" stroke-width="1.5" opacity="0.6"/>
+  <!-- Part 3: bottom-left strip b*(a-b) -->
+  <rect x="22" y="72" width="50" height="18" rx="1" fill="#c4b5fd" stroke="#8b5cf6" stroke-width="1.5" opacity="0.6"/>
+  <!-- Part 4: bottom-right corner (b²) -->
+  <rect x="72" y="72" width="18" height="18" rx="1" fill="#6d28d9" stroke="#6d28d9" stroke-width="1.5" opacity="0.3"/>
+  <!-- Separator lines -->
+  <line x1="72" y1="22" x2="72" y2="90" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <line x1="22" y1="72" x2="90" y2="72" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <!-- Labels -->
+  <text x="47" y="50" font-size="11" fill="#6d28d9" text-anchor="middle" font-family="sans-serif" font-weight="bold">(a−b)</text>
+  <text x="81" y="50" font-size="10" fill="#6d28d9" text-anchor="middle" font-family="sans-serif" font-weight="bold">b</text>
+  <text x="47" y="84" font-size="10" fill="#6d28d9" text-anchor="middle" font-family="sans-serif" font-weight="bold">b</text>
+  <text x="100" y="100" font-size="8" fill="#8b5cf6" font-family="sans-serif" font-weight="bold">a² − 2ab + b²</text>
+</svg>` },
 
   { id:28, cat:"algebra", name:"提公因式",    en:"Factor Out",          ask:"因式分解", tag:"代數", grade:"s1",
     num:"A-06", difficulty:1, special:false,
     fcn:"ab+ac = a(b+c)", latex:"ab + ac = a(b + c)",
     tip:"搵最大公因數，全部除晒佢！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="ga6" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#fb923c;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#ea580c;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#ga6)" stroke="#ea580c" stroke-width="9"/>
-      <text x="55" y="58" font-size="13" fill="#fb923c" font-weight="bold" font-family="sans-serif" text-anchor="middle">ab + ac</text>
-      <line x1="25" y1="68" x2="85" y2="68" stroke="#fdba74" stroke-width="2"/>
-      <text x="55" y="80" font-size="13" fill="#fdba74" font-weight="bold" font-family="sans-serif" text-anchor="middle">a(b + c)</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bga6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c4b5fd;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#6d28d9;stop-opacity:0.05"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#8b5cf6" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bga6)"/>
+  <!-- Expression box -->
+  <rect x="10" y="40" width="90" height="30" rx="6" fill="url(#bga6)" stroke="#8b5cf6" stroke-width="2" filter="url(#shadow)"/>
+  <!-- Highlight common factor -->
+  <rect x="10" y="40" width="22" height="30" rx="6" fill="#c4b5fd" opacity="0.5"/>
+  <!-- Expression: ax + ay = a(x + y) -->
+  <text x="55" y="60" font-size="14" fill="#8b5cf6" text-anchor="middle" font-family="sans-serif" font-weight="bold">ax + ay</text>
+  <!-- Arrow pointing to common factor extraction -->
+  <line x1="21" y1="36" x2="21" y2="20" stroke="#6d28d9" stroke-width="2"/>
+  <polygon points="21,20 17,27 25,27" fill="#6d28d9"/>
+  <text x="21" y="16" font-size="11" fill="#6d28d9" text-anchor="middle" font-family="sans-serif" font-weight="bold">a</text>
+  <!-- Result -->
+  <text x="55" y="82" font-size="12" fill="#8b5cf6" text-anchor="middle" font-family="sans-serif" font-weight="bold">= a(x + y)</text>
+</svg>` },
 
   { id:29, cat:"algebra", name:"分配律",       en:"Distributive Law",    ask:"展開",     tag:"代數", grade:"s1",
     num:"A-07", difficulty:1, special:false,
     fcn:"a(b+c) = ab+ac", latex:"a(b+c) = ab + ac",
     tip:"括號外嘅數要乘曉括號入面每一項！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="ga7" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#c084fc;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#9333ea;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#ga7)" stroke="#9333ea" stroke-width="9"/>
-      <text x="55" y="58" font-size="14" fill="#c084fc" font-weight="bold" font-family="sans-serif" text-anchor="middle">a × (b + c)</text>
-      <line x1="25" y1="68" x2="85" y2="68" stroke="#d8b4fe" stroke-width="2"/>
-      <text x="55" y="80" font-size="13" fill="#d8b4fe" font-weight="bold" font-family="sans-serif" text-anchor="middle">ab + ac</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bga7" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c4b5fd;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#6d28d9;stop-opacity:0.05"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#8b5cf6" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bga7)"/>
+  <!-- Left bracket -->
+  <rect x="8" y="35" width="40" height="28" rx="5" fill="url(#bga7)" stroke="#8b5cf6" stroke-width="2" filter="url(#shadow)"/>
+  <!-- Right bracket -->
+  <rect x="62" y="35" width="40" height="28" rx="5" fill="url(#bga7)" stroke="#8b5cf6" stroke-width="2" filter="url(#shadow)"/>
+  <!-- Left: a(b+c) -->
+  <text x="28" y="54" font-size="13" fill="#8b5cf6" text-anchor="middle" font-family="sans-serif" font-weight="bold">a(b+c)</text>
+  <!-- Right: ab + ac -->
+  <text x="82" y="54" font-size="11" fill="#8b5cf6" text-anchor="middle" font-family="sans-serif" font-weight="bold">ab+ac</text>
+  <!-- Equals sign -->
+  <text x="55" y="54" font-size="16" fill="#6d28d9" text-anchor="middle" font-family="sans-serif" font-weight="bold">=</text>
+  <!-- Arrow from left to right -->
+  <line x1="48" y1="78" x2="62" y2="78" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <polygon points="62,78 55,74 55,82" fill="#6d28d9"/>
+  <text x="55" y="90" font-size="10" fill="#6d28d9" text-anchor="middle" font-family="sans-serif" font-weight="bold">展開</text>
+</svg>` },
 
   { id:30, cat:"algebra", name:"兩元一次",     en:"Simultaneous Eq",    ask:"解方程",   tag:"代數", grade:"s2",
     num:"A-08", difficulty:2, special:false,
     fcn:"ax+by=c → x=(c−by)/a", latex:"ax + by = c \\Rightarrow x = \\frac{c - by}{a}",
     tip:"代入法或消去法，逐個未知數拆解！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="ga8" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#2dd4bf;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#0d9488;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#ga8)" stroke="#0d9488" stroke-width="9"/>
-      <text x="55" y="55" font-size="14" fill="#2dd4bf" font-weight="bold" font-family="sans-serif" text-anchor="middle">ax + by = c</text>
-      <line x1="25" y1="65" x2="85" y2="65" stroke="#5eead4" stroke-width="2"/>
-      <text x="55" y="80" font-size="12" fill="#5eead4" font-weight="bold" font-family="sans-serif" text-anchor="middle">x = (c−by)/a</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bga8" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c4b5fd;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#6d28d9;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="line1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f87171"/>
+      <stop offset="100%" style="stop-color:#ef4444"/>
+    </linearGradient>
+    <linearGradient id="line2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#60a5fa"/>
+      <stop offset="100%" style="stop-color:#3b82f6"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#8b5cf6" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bga8)"/>
+  <!-- Grid lines -->
+  <line x1="10" y1="55" x2="100" y2="55" stroke="#6d28d9" stroke-width="1" opacity="0.2"/>
+  <line x1="55" y1="10" x2="55" y2="100" stroke="#6d28d9" stroke-width="1" opacity="0.2"/>
+  <!-- Axes -->
+  <line x1="10" y1="55" x2="100" y2="55" stroke="#6d28d9" stroke-width="2"/>
+  <line x1="55" y1="10" x2="55" y2="100" stroke="#6d28d9" stroke-width="2"/>
+  <polygon points="100,55 93,51 93,59" fill="#6d28d9"/>
+  <polygon points="55,10 51,17 59,17" fill="#6d28d9"/>
+  <text x="100" y="50" font-size="9" fill="#6d28d9">x</text>
+  <text x="59" y="14" font-size="9" fill="#6d28d9">y</text>
+  <!-- Line 1: y = x + 2 (red) -->
+  <line x1="10" y1="72" x2="100" y2="32" stroke="#ef4444" stroke-width="2.5" opacity="0.8"/>
+  <!-- Line 2: y = -x + 6 (blue) -->
+  <line x1="10" y1="32" x2="100" y2="72" stroke="#3b82f6" stroke-width="2.5" opacity="0.8"/>
+  <!-- Intersection point -->
+  <circle cx="55" cy="47" r="5" fill="#8b5cf6" stroke="#6d28d9" stroke-width="2" filter="url(#shadow)"/>
+  <text x="55" y="50" font-size="7" fill="white" text-anchor="middle" font-family="sans-serif" font-weight="bold">(2,4)</text>
+  <!-- Legend -->
+  <text x="15" y="15" font-size="9" fill="#ef4444" font-family="sans-serif" font-weight="bold">y = x + 2</text>
+  <text x="15" y="25" font-size="9" fill="#3b82f6" font-family="sans-serif" font-weight="bold">y = −x + 6</text>
+</svg>` },
 
   /* ══ 統計 STATISTICS ══ */
   { id:31, cat:"stats", subcat:"central", name:"平均數",         en:"Mean",                ask:"求平均",   tag:"統計", grade:"s2",
     num:"S-01", difficulty:1, special:false,
     fcn:"平均 = 總和 ÷ 數量", latex:"\\bar{x} = \\frac{\\sum x}{n}",
     tip:"全部加埋再除以有幾多个數！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="gs1" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#f472b6;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#db2777;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs1)" stroke="#db2777" stroke-width="9"/>
-      <text x="55" y="55" font-size="26" fill="#f472b6" font-weight="bold" font-family="sans-serif" text-anchor="middle">x̄</text>
-      <text x="55" y="80" font-size="11" fill="#f9a8d4" font-family="sans-serif" text-anchor="middle">總和 ÷ 數量</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgs1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#b91c1c;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fills1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.4"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#ef4444" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bgs1)"/>
+  <!-- Bar chart bars -->
+  <rect x="12" y="50" width="14" height="30" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="30" y="35" width="14" height="45" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="48" y="55" width="14" height="25" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="66" y="28" width="14" height="52" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="84" y="42" width="14" height="38" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <!-- Values on bars -->
+  <text x="19" y="47" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">4</text>
+  <text x="37" y="32" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">7</text>
+  <text x="55" y="52" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">3</text>
+  <text x="73" y="25" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">8</text>
+  <text x="91" y="39" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">5</text>
+  <!-- Mean line -->
+  <line x1="8" y1="42" x2="102" y2="42" stroke="#b91c1c" stroke-width="2.5" stroke-dasharray="5,3"/>
+  <polygon points="102,42 95,39 95,45" fill="#b91c1c"/>
+  <!-- Mean label -->
+  <text x="105" y="44" font-size="9" fill="#b91c1c" text-anchor="start" font-family="sans-serif" font-weight="bold">x̄</text>
+  <!-- Formula -->
+  <text x="55" y="100" font-size="10" fill="#ef4444" text-anchor="middle" font-family="sans-serif" font-weight="bold">x̄ = Σx / n</text>
+</svg>` },
 
   { id:32, cat:"stats", subcat:"central", name:"中位數",         en:"Median",              ask:"求中位",   tag:"統計", grade:"s2",
     num:"S-02", difficulty:1, special:false,
     fcn:"排序後中間的值", latex:"\\text{中位數}",
     tip:"先排大小，中間位置就係中位數！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="gs2" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#a3e635;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#65a30d;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs2)" stroke="#65a30d" stroke-width="9"/>
-      <text x="30" y="58" font-size="18" fill="#a3e635" font-weight="bold" font-family="sans-serif">3</text>
-      <text x="47" y="58" font-size="18" fill="#a3e635" font-weight="bold" font-family="sans-serif">7</text>
-      <text x="64" y="58" font-size="18" fill="#fbbf24" font-weight="900" font-family="sans-serif">9</text>
-      <text x="81" y="58" font-size="18" fill="#a3e635" font-weight="bold" font-family="sans-serif">12</text>
-      <line x1="64" y1="20" x2="64" y2="90" stroke="#fbbf24" stroke-width="3" stroke-dasharray="4,3"/>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgs2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#b91c1c;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fills2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.4"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#ef4444" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bgs2)"/>
+  <!-- Number line -->
+  <line x1="10" y1="70" x2="100" y2="70" stroke="#b91c1c" stroke-width="2"/>
+  <polygon points="100,70 93,66 93,74" fill="#b91c1c"/>
+  <!-- Tick marks -->
+  <line x1="20" y1="67" x2="20" y2="73" stroke="#b91c1c" stroke-width="2"/>
+  <line x1="35" y1="67" x2="35" y2="73" stroke="#b91c1c" stroke-width="2"/>
+  <line x1="50" y1="67" x2="50" y2="73" stroke="#b91c1c" stroke-width="2"/>
+  <line x1="65" y1="67" x2="65" y2="73" stroke="#b91c1c" stroke-width="2"/>
+  <line x1="80" y1="67" x2="80" y2="73" stroke="#b91c1c" stroke-width="2"/>
+  <line x1="95" y1="67" x2="95" y2="73" stroke="#b91c1c" stroke-width="2"/>
+  <!-- Data points -->
+  <circle cx="20" cy="55" r="5" fill="#fca5a5" stroke="#ef4444" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="35" cy="55" r="5" fill="#fca5a5" stroke="#ef4444" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="50" cy="55" r="5" fill="#ef4444" stroke="#b91c1c" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="65" cy="55" r="5" fill="#ef4444" stroke="#b91c1c" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="80" cy="55" r="5" fill="#fca5a5" stroke="#ef4444" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="95" cy="55" r="5" fill="#fca5a5" stroke="#ef4444" stroke-width="2" filter="url(#shadow)"/>
+  <!-- Median bracket -->
+  <line x1="50" y1="38" x2="65" y2="38" stroke="#b91c1c" stroke-width="2"/>
+  <line x1="50" y1="35" x2="50" y2="41" stroke="#b91c1c" stroke-width="2"/>
+  <line x1="65" y1="35" x2="65" y2="41" stroke="#b91c1c" stroke-width="2"/>
+  <text x="57" y="34" font-size="10" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">Median</text>
+  <!-- Labels -->
+  <text x="20" y="50" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif">3</text>
+  <text x="35" y="50" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif">5</text>
+  <text x="50" y="50" font-size="8" fill="white" text-anchor="middle" font-family="sans-serif">7</text>
+  <text x="65" y="50" font-size="8" fill="white" text-anchor="middle" font-family="sans-serif">9</text>
+  <text x="80" y="50" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif">11</text>
+  <text x="95" y="50" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif">13</text>
+</svg>` },
 
   { id:33, cat:"stats", subcat:"central", name:"眾數",           en:"Mode",                ask:"求眾數",   tag:"統計", grade:"s2",
     num:"S-03", difficulty:1, special:false,
     fcn:"出現次數最多的值", latex:"\\text{眾數}",
     tip:"數下邊個數字出現次數最多，佢就係眾數！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="gs3" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#fb923c;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#ea580c;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs3)" stroke="#ea580c" stroke-width="9"/>
-      <text x="32" y="58" font-size="18" fill="#fb923c" font-weight="bold" font-family="sans-serif">3</text>
-      <text x="49" y="58" font-size="18" fill="#fbbf24" font-weight="900" font-family="sans-serif">7</text>
-      <text x="66" y="58" font-size="18" fill="#fbbf24" font-weight="900" font-family="sans-serif">7</text>
-      <text x="83" y="58" font-size="18" fill="#fb923c" font-weight="bold" font-family="sans-serif">7</text>
-      <text x="49" y="80" font-size="11" fill="#fed7aa" font-family="sans-serif" text-anchor="middle">7 出現3次</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgs3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#b91c1c;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fills3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.4"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#ef4444" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bgs3)"/>
+  <!-- Bar chart with tallest bar highlighted -->
+  <rect x="12" y="60" width="14" height="20" rx="2" fill="url(#fills3)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="30" y="40" width="14" height="40" rx="2" fill="url(#fills3)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="48" y="25" width="14" height="55" rx="2" fill="#ef4444" stroke="#b91c1c" stroke-width="2.5" filter="url(#shadow)"/>
+  <rect x="66" y="45" width="14" height="35" rx="2" fill="url(#fills3)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="84" y="58" width="14" height="22" rx="2" fill="url(#fills3)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <!-- Mode star/marker above tallest bar -->
+  <text x="55" y="18" font-size="16" fill="#ef4444" text-anchor="middle">★</text>
+  <text x="55" y="12" font-size="9" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">Mode</text>
+  <!-- Labels -->
+  <text x="19" y="57" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif">2</text>
+  <text x="37" y="37" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif">4</text>
+  <text x="55" y="22" font-size="9" fill="white" text-anchor="middle" font-family="sans-serif" font-weight="bold">6</text>
+  <text x="73" y="42" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif">8</text>
+  <text x="91" y="55" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif">10</text>
+  <!-- Frequency label -->
+  <text x="55" y="100" font-size="10" fill="#ef4444" text-anchor="middle" font-family="sans-serif" font-weight="bold">f = 5</text>
+</svg>` },
 
   { id:34, cat:"stats", subcat:"disp", name:"標準差",         en:"Std Deviation",       ask:"求標準差", tag:"統計", grade:"s3",
     num:"S-04", difficulty:2, special:false,
     fcn:"σ = √(Σ(x−x̄)²÷n)", latex:"\\sigma = \\sqrt{\\frac{\\sum(x-\\bar{x})^2}{n}}",
     tip:"每個數減平均數再平方，加埋再除，最後開方！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="gs4" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#38bdf8;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#0284c7;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs4)" stroke="#0284c7" stroke-width="9"/>
-      <text x="55" y="55" font-size="24" fill="#38bdf8" font-weight="bold" font-family="sans-serif" text-anchor="middle">σ</text>
-      <text x="55" y="80" font-size="11" fill="#7dd3fc" font-family="sans-serif" text-anchor="middle">√(偏差²平均)</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgs1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#b91c1c;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fills1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.4"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#ef4444" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bgs1)"/>
+  <!-- Bar chart bars -->
+  <rect x="12" y="50" width="14" height="30" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="30" y="35" width="14" height="45" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="48" y="55" width="14" height="25" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="66" y="28" width="14" height="52" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="84" y="42" width="14" height="38" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <!-- Values on bars -->
+  <text x="19" y="47" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">4</text>
+  <text x="37" y="32" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">7</text>
+  <text x="55" y="52" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">3</text>
+  <text x="73" y="25" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">8</text>
+  <text x="91" y="39" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">5</text>
+  <!-- Mean line -->
+  <line x1="8" y1="42" x2="102" y2="42" stroke="#b91c1c" stroke-width="2.5" stroke-dasharray="5,3"/>
+  <polygon points="102,42 95,39 95,45" fill="#b91c1c"/>
+  <!-- Mean label -->
+  <text x="105" y="44" font-size="9" fill="#b91c1c" text-anchor="start" font-family="sans-serif" font-weight="bold">x̄</text>
+  <!-- Formula -->
+  <text x="55" y="100" font-size="10" fill="#ef4444" text-anchor="middle" font-family="sans-serif" font-weight="bold">x̄ = Σx / n</text>
+</svg>` },
 
   { id:35, cat:"stats", subcat:"disp", name:"方差",           en:"Variance",            ask:"求方差",   tag:"統計", grade:"s3",
     num:"S-05", difficulty:2, special:false,
     fcn:"Var = Σ(x−x̄)²÷n", latex:"\\text{Var} = \\frac{\\sum(x-\\bar{x})^2}{n}",
     tip:"標準差平方就係方差！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="gs5" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#a78bfa;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs5)" stroke="#7c3aed" stroke-width="9"/>
-      <text x="55" y="55" font-size="22" fill="#a78bfa" font-weight="bold" font-family="sans-serif" text-anchor="middle">Var</text>
-      <text x="55" y="80" font-size="11" fill="#c4b5fd" font-family="sans-serif" text-anchor="middle">Σ偏差²÷n</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgs1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#b91c1c;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fills1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.4"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#ef4444" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bgs1)"/>
+  <!-- Bar chart bars -->
+  <rect x="12" y="50" width="14" height="30" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="30" y="35" width="14" height="45" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="48" y="55" width="14" height="25" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="66" y="28" width="14" height="52" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="84" y="42" width="14" height="38" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <!-- Values on bars -->
+  <text x="19" y="47" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">4</text>
+  <text x="37" y="32" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">7</text>
+  <text x="55" y="52" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">3</text>
+  <text x="73" y="25" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">8</text>
+  <text x="91" y="39" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">5</text>
+  <!-- Mean line -->
+  <line x1="8" y1="42" x2="102" y2="42" stroke="#b91c1c" stroke-width="2.5" stroke-dasharray="5,3"/>
+  <polygon points="102,42 95,39 95,45" fill="#b91c1c"/>
+  <!-- Mean label -->
+  <text x="105" y="44" font-size="9" fill="#b91c1c" text-anchor="start" font-family="sans-serif" font-weight="bold">x̄</text>
+  <!-- Formula -->
+  <text x="55" y="100" font-size="10" fill="#ef4444" text-anchor="middle" font-family="sans-serif" font-weight="bold">x̄ = Σx / n</text>
+</svg>` },
 
   { id:36, cat:"stats", subcat:"prob", name:"概率",           en:"Probability",         ask:"求概率",   tag:"統計", grade:"s1",
     num:"S-06", difficulty:1, special:false,
     fcn:"P = 成功情況 ÷ 所有情況", latex:"P(A) = \\frac{\\text{成功}}{\\text{總數}}",
     tip:"分子係我想要嘅情況，分母係全部情況！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="gs6" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#4ade80;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#16a34a;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs6)" stroke="#16a34a" stroke-width="9"/>
-      <text x="55" y="55" font-size="26" fill="#4ade80" font-weight="bold" font-family="sans-serif" text-anchor="middle">P</text>
-      <text x="55" y="80" font-size="11" fill="#86efac" font-family="sans-serif" text-anchor="middle">成功 ÷ 總數</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgs6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#b91c1c;stop-opacity:0.05"/>
+    </linearGradient>
+    <radialGradient id="coin" cx="35%" cy="35%">
+      <stop offset="0%" style="stop-color:#fcd34d"/>
+      <stop offset="100%" style="stop-color:#f59e0b"/>
+    </radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#ef4444" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bgs6)"/>
+  <!-- Coin 1 - Heads -->
+  <circle cx="35" cy="35" r="22" fill="url(#coin)" stroke="#b91c1c" stroke-width="2.5" filter="url(#shadow)"/>
+  <text x="35" y="40" font-size="18" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">H</text>
+  <!-- Coin 2 - Tails -->
+  <circle cx="75" cy="35" r="22" fill="url(#coin)" stroke="#b91c1c" stroke-width="2.5" filter="url(#shadow)"/>
+  <text x="75" y="40" font-size="18" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">T</text>
+  <!-- Die -->
+  <rect x="38" y="62" width="34" height="34" rx="5" fill="white" stroke="#b91c1c" stroke-width="2.5" filter="url(#shadow)"/>
+  <!-- Die dots for 5 -->
+  <circle cx="47" cy="71" r="3" fill="#b91c1c"/>
+  <circle cx="55" cy="79" r="3" fill="#b91c1c"/>
+  <circle cx="63" cy="71" r="3" fill="#b91c1c"/>
+  <circle cx="47" cy="87" r="3" fill="#b91c1c"/>
+  <circle cx="63" cy="87" r="3" fill="#b91c1c"/>
+  <!-- Labels -->
+  <text x="35" y="12" font-size="9" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">硬幣</text>
+  <text x="55" y="106" font-size="10" fill="#ef4444" text-anchor="middle" font-family="sans-serif" font-weight="bold">P(A) = n(A)/n(S)</text>
+</svg>` },
 
   { id:37, cat:"stats", subcat:"prob", name:"排列",           en:"Permutation",         ask:"求排列",   tag:"統計", grade:"s3",
     num:"S-07", difficulty:2, special:false,
     fcn:"P(n,r) = n!÷(n−r)!", latex:"P(n,r) = \\frac{n!}{(n-r)!}",
     tip:"排嘢有順序，n揀r個排法總數！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="gs7" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#f472b6;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#be185d;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs7)" stroke="#be185d" stroke-width="9"/>
-      <text x="55" y="55" font-size="26" fill="#f472b6" font-weight="bold" font-family="sans-serif" text-anchor="middle">n!</text>
-      <text x="55" y="80" font-size="11" fill="#f9a8d4" font-family="sans-serif" text-anchor="middle">P(n,r) 排列</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgs1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#b91c1c;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fills1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.4"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#ef4444" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bgs1)"/>
+  <!-- Bar chart bars -->
+  <rect x="12" y="50" width="14" height="30" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="30" y="35" width="14" height="45" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="48" y="55" width="14" height="25" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="66" y="28" width="14" height="52" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="84" y="42" width="14" height="38" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <!-- Values on bars -->
+  <text x="19" y="47" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">4</text>
+  <text x="37" y="32" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">7</text>
+  <text x="55" y="52" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">3</text>
+  <text x="73" y="25" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">8</text>
+  <text x="91" y="39" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">5</text>
+  <!-- Mean line -->
+  <line x1="8" y1="42" x2="102" y2="42" stroke="#b91c1c" stroke-width="2.5" stroke-dasharray="5,3"/>
+  <polygon points="102,42 95,39 95,45" fill="#b91c1c"/>
+  <!-- Mean label -->
+  <text x="105" y="44" font-size="9" fill="#b91c1c" text-anchor="start" font-family="sans-serif" font-weight="bold">x̄</text>
+  <!-- Formula -->
+  <text x="55" y="100" font-size="10" fill="#ef4444" text-anchor="middle" font-family="sans-serif" font-weight="bold">x̄ = Σx / n</text>
+</svg>` },
 
   { id:38, cat:"stats", subcat:"prob", name:"組合",           en:"Combination",         ask:"求組合",   tag:"統計", grade:"s3",
     num:"S-08", difficulty:2, special:false,
     fcn:"C(n,r) = n!÷r!(n−r)!", latex:"C(n,r) = \\frac{n!}{r!(n-r)!}",
     tip:"揀嘢冇順序，記住除以 r! 嚟取消順序！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="gs8" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#38bdf8;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#0369a1;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs8)" stroke="#0369a1" stroke-width="9"/>
-      <text x="55" y="55" font-size="26" fill="#38bdf8" font-weight="bold" font-family="sans-serif" text-anchor="middle">C</text>
-      <text x="55" y="80" font-size="11" fill="#7dd3fc" font-family="sans-serif" text-anchor="middle">n!÷r!(n−r)!</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgs1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#b91c1c;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fills1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.4"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#ef4444" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bgs1)"/>
+  <!-- Bar chart bars -->
+  <rect x="12" y="50" width="14" height="30" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="30" y="35" width="14" height="45" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="48" y="55" width="14" height="25" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="66" y="28" width="14" height="52" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="84" y="42" width="14" height="38" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <!-- Values on bars -->
+  <text x="19" y="47" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">4</text>
+  <text x="37" y="32" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">7</text>
+  <text x="55" y="52" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">3</text>
+  <text x="73" y="25" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">8</text>
+  <text x="91" y="39" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">5</text>
+  <!-- Mean line -->
+  <line x1="8" y1="42" x2="102" y2="42" stroke="#b91c1c" stroke-width="2.5" stroke-dasharray="5,3"/>
+  <polygon points="102,42 95,39 95,45" fill="#b91c1c"/>
+  <!-- Mean label -->
+  <text x="105" y="44" font-size="9" fill="#b91c1c" text-anchor="start" font-family="sans-serif" font-weight="bold">x̄</text>
+  <!-- Formula -->
+  <text x="55" y="100" font-size="10" fill="#ef4444" text-anchor="middle" font-family="sans-serif" font-weight="bold">x̄ = Σx / n</text>
+</svg>` },
 
   /* ══ 統計圖 CHARTS ══ */
   { id:42, cat:"stats", subcat:"chart", name:"棒形圖",       en:"Bar Chart",          ask:"睇圖答",   tag:"統計", grade:"s1",
     num:"S-12", difficulty:1, special:false,
     fcn:"棒形圖：類別 vs 數值", latex:"\\text{棒形圖}",
     tip:"棒嘅高低代表數值大小，類別喺橫軸！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="gs12" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#86efac;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#16a34a;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs12)" stroke="#16a34a" stroke-width="9"/>
-      <rect x="22" y="60" width="12" height="22" rx="2" fill="#4ade80"/>
-      <rect x="40" y="42" width="12" height="40" rx="2" fill="#22c55e"/>
-      <rect x="58" y="52" width="12" height="30" rx="2" fill="#4ade80"/>
-      <rect x="76" y="35" width="12" height="47" rx="2" fill="#16a34a"/>
-      <line x1="15" y1="82" x2="95" y2="82" stroke="#86efac" stroke-width="2"/>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgs12" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#b91c1c;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fills12" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.4"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#ef4444" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bgs12)"/>
+  <!-- Axes -->
+  <line x1="18" y1="88" x2="100" y2="88" stroke="#b91c1c" stroke-width="2"/>
+  <line x1="18" y1="12" x2="18" y2="88" stroke="#b91c1c" stroke-width="2"/>
+  <!-- Bars -->
+  <rect x="24" y="55" width="12" height="33" rx="1" fill="url(#fills12)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="40" y="38" width="12" height="50" rx="1" fill="url(#fills12)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="56" y="25" width="12" height="63" rx="1" fill="url(#fills12)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="72" y="45" width="12" height="43" rx="1" fill="url(#fills12)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="88" y="60" width="12" height="28" rx="1" fill="url(#fills12)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <!-- Axis labels -->
+  <text x="30" y="96" font-size="7" fill="#b91c1c" text-anchor="middle" font-family="sans-serif">A</text>
+  <text x="46" y="96" font-size="7" fill="#b91c1c" text-anchor="middle" font-family="sans-serif">B</text>
+  <text x="62" y="96" font-size="7" fill="#b91c1c" text-anchor="middle" font-family="sans-serif">C</text>
+  <text x="78" y="96" font-size="7" fill="#b91c1c" text-anchor="middle" font-family="sans-serif">D</text>
+  <text x="94" y="96" font-size="7" fill="#b91c1c" text-anchor="middle" font-family="sans-serif">E</text>
+  <!-- Title -->
+  <text x="55" y="8" font-size="9" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">棒形圖</text>
+</svg>` },
 
   { id:43, cat:"stats", subcat:"chart", name:"圓形圖",       en:"Pie Chart",          ask:"睇圖答",   tag:"統計", grade:"s1",
     num:"S-13", difficulty:1, special:false,
     fcn:"圓形圖：各部分佔整體比例", latex:"\\text{圓形圖}",
     tip:"每個扇形嘅角度代表該類別所佔比例！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="gs13" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#fda4af;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#e11d48;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs13)" stroke="#e11d48" stroke-width="9"/>
-      <circle cx="55" cy="55" r="30" fill="none" stroke="#fda4af" stroke-width="16"/>
-      <path d="M55,55 L55,25 A30,30 0 0,1 82,67 Z" fill="#fb7185"/>
-      <path d="M55,55 L82,67 A30,30 0 0,1 30,78 Z" fill="#e11d48"/>
-      <path d="M55,55 L30,78 A30,30 0 0,1 55,25 Z" fill="#f87171"/>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgs13" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#b91c1c;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="pie1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#ef4444"/>
+    </linearGradient>
+    <linearGradient id="pie2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6ee7b7;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#10b981"/>
+    </linearGradient>
+    <linearGradient id="pie3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fcd34d;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#f59e0b"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#ef4444" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bgs13)"/>
+  <!-- Pie slices (approximated as paths) -->
+  <!-- Slice 1: 40% (0 to 144 deg) -->
+  <path d="M55,55 L55,12 A43,43 0 0,1 90,78 Z" fill="url(#pie1)" stroke="#b91c1c" stroke-width="1.5" filter="url(#shadow)"/>
+  <!-- Slice 2: 35% (144 to 270 deg) -->
+  <path d="M55,55 L90,78 A43,43 0 0,1 18,75 Z" fill="url(#pie2)" stroke="#b91c1c" stroke-width="1.5" filter="url(#shadow)"/>
+  <!-- Slice 3: 25% (270 to 360 deg) -->
+  <path d="M55,55 L18,75 A43,43 0 0,1 55,12 Z" fill="url(#pie3)" stroke="#b91c1c" stroke-width="1.5" filter="url(#shadow)"/>
+  <!-- Center dot -->
+  <circle cx="55" cy="55" r="3" fill="#b91c1c"/>
+  <!-- Labels -->
+  <text x="72" y="40" font-size="9" fill="white" font-family="sans-serif" font-weight="bold">40%</text>
+  <text x="38" y="88" font-size="9" fill="white" font-family="sans-serif" font-weight="bold">35%</text>
+  <text x="22" y="32" font-size="9" fill="#b91c1c" font-family="sans-serif" font-weight="bold">25%</text>
+  <!-- Title -->
+  <text x="55" y="8" font-size="9" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">圓形圖</text>
+</svg>` },
 
   { id:44, cat:"stats", subcat:"chart", name:"折線圖",       en:"Line Chart",         ask:"睇圖答",   tag:"統計", grade:"s1",
     num:"S-14", difficulty:1, special:false,
     fcn:"折線圖：數值隨時間變化趨勢", latex:"\\text{折線圖}",
     tip:"睇趨勢就靠折線，高就係升，低就係跌！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="gs14" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#93c5fd;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs14)" stroke="#1d4ed8" stroke-width="9"/>
-      <polyline points="22,72 38,58 54,64 70,44 86,52" fill="none" stroke="#3b82f6" stroke-width="3" stroke-linejoin="round"/>
-      <circle cx="22" cy="72" r="4" fill="#1d4ed8"/>
-      <circle cx="38" cy="58" r="4" fill="#1d4ed8"/>
-      <circle cx="54" cy="64" r="4" fill="#1d4ed8"/>
-      <circle cx="70" cy="44" r="4" fill="#1d4ed8"/>
-      <circle cx="86" cy="52" r="4" fill="#1d4ed8"/>
-      <line x1="15" y1="82" x2="95" y2="82" stroke="#93c5fd" stroke-width="2"/>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgs14" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#b91c1c;stop-opacity:0.05"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#ef4444" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bgs14)"/>
+  <!-- Axes -->
+  <line x1="18" y1="88" x2="100" y2="88" stroke="#b91c1c" stroke-width="2"/>
+  <line x1="18" y1="12" x2="18" y2="88" stroke="#b91c1c" stroke-width="2"/>
+  <!-- Grid lines -->
+  <line x1="18" y1="60" x2="100" y2="60" stroke="#b91c1c" stroke-width="0.5" opacity="0.3" stroke-dasharray="3,3"/>
+  <line x1="18" y1="32" x2="100" y2="32" stroke="#b91c1c" stroke-width="0.5" opacity="0.3" stroke-dasharray="3,3"/>
+  <!-- Line segments -->
+  <polyline points="24,72 38,55 52,62 66,30 80,45 94,25" fill="none" stroke="#ef4444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" filter="url(#shadow)"/>
+  <!-- Data points -->
+  <circle cx="24" cy="72" r="4" fill="#ef4444" stroke="white" stroke-width="1.5" filter="url(#shadow)"/>
+  <circle cx="38" cy="55" r="4" fill="#ef4444" stroke="white" stroke-width="1.5" filter="url(#shadow)"/>
+  <circle cx="52" cy="62" r="4" fill="#ef4444" stroke="white" stroke-width="1.5" filter="url(#shadow)"/>
+  <circle cx="66" cy="30" r="4" fill="#ef4444" stroke="white" stroke-width="1.5" filter="url(#shadow)"/>
+  <circle cx="80" cy="45" r="4" fill="#ef4444" stroke="white" stroke-width="1.5" filter="url(#shadow)"/>
+  <circle cx="94" cy="25" r="4" fill="#ef4444" stroke="white" stroke-width="1.5" filter="url(#shadow)"/>
+  <!-- Title -->
+  <text x="55" y="8" font-size="9" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">折線圖</text>
+</svg>` },
 
   { id:45, cat:"stats", subcat:"chart", name:"點圖",         en:"Dot Plot",          ask:"睇圖答",   tag:"統計", grade:"s1",
     num:"S-15", difficulty:1, special:false,
     fcn:"點圖：每點代表一個數據", latex:"\\text{點圖}",
     tip:"點圖結合棒形圖同原始數據，睇分布一目了然！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="gs15" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#fde68a;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#d97706;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs15)" stroke="#d97706" stroke-width="9"/>
-      <line x1="20" y1="78" x2="90" y2="78" stroke="#fde68a" stroke-width="2"/>
-      <!-- Row 1: 2 dots at value 3 -->
-      <circle cx="30" cy="72" r="4" fill="#f59e0b"/><circle cx="42" cy="72" r="4" fill="#f59e0b"/>
-      <!-- Row 2: 3 dots at value 5 -->
-      <circle cx="30" cy="60" r="4" fill="#f59e0b"/><circle cx="42" cy="60" r="4" fill="#f59e0b"/><circle cx="54" cy="60" r="4" fill="#f59e0b"/>
-      <!-- Row 3: 2 dots at value 7 -->
-      <circle cx="42" cy="48" r="4" fill="#f59e0b"/><circle cx="54" cy="48" r="4" fill="#f59e0b"/>
-      <!-- Row 4: 1 dot at value 9 -->
-      <circle cx="66" cy="36" r="4" fill="#f59e0b"/>
-      <!-- x-axis labels -->
-      <text x="30" y="86" font-size="7" fill="#fcd34d" font-family="sans-serif" text-anchor="middle">3</text>
-      <text x="42" y="86" font-size="7" fill="#fcd34d" font-family="sans-serif" text-anchor="middle">5</text>
-      <text x="66" y="86" font-size="7" fill="#fcd34d" font-family="sans-serif" text-anchor="middle">9</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgs15" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#b91c1c;stop-opacity:0.05"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="1.5" flood-color="#ef4444" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bgs15)"/>
+  <!-- Number line -->
+  <line x1="15" y1="80" x2="100" y2="80" stroke="#b91c1c" stroke-width="2"/>
+  <polygon points="100,80 93,76 93,84" fill="#b91c1c"/>
+  <!-- Tick marks and dots for each category -->
+  <!-- Category 3: 2 dots -->
+  <circle cx="25" cy="70" r="5" fill="#ef4444" stroke="#b91c1c" stroke-width="1.5" filter="url(#shadow)"/>
+  <circle cx="25" cy="56" r="5" fill="#ef4444" stroke="#b91c1c" stroke-width="1.5" filter="url(#shadow)"/>
+  <line x1="25" y1="61" x2="25" y2="65" stroke="#b91c1c" stroke-width="1"/>
+  <!-- Category 4: 3 dots -->
+  <circle cx="40" cy="70" r="5" fill="#ef4444" stroke="#b91c1c" stroke-width="1.5" filter="url(#shadow)"/>
+  <circle cx="40" cy="56" r="5" fill="#ef4444" stroke="#b91c1c" stroke-width="1.5" filter="url(#shadow)"/>
+  <circle cx="40" cy="42" r="5" fill="#ef4444" stroke="#b91c1c" stroke-width="1.5" filter="url(#shadow)"/>
+  <!-- Category 5: 4 dots -->
+  <circle cx="55" cy="70" r="5" fill="#ef4444" stroke="#b91c1c" stroke-width="1.5" filter="url(#shadow)"/>
+  <circle cx="55" cy="56" r="5" fill="#ef4444" stroke="#b91c1c" stroke-width="1.5" filter="url(#shadow)"/>
+  <circle cx="55" cy="42" r="5" fill="#ef4444" stroke="#b91c1c" stroke-width="1.5" filter="url(#shadow)"/>
+  <circle cx="55" cy="28" r="5" fill="#ef4444" stroke="#b91c1c" stroke-width="1.5" filter="url(#shadow)"/>
+  <!-- Category 6: 2 dots -->
+  <circle cx="70" cy="70" r="5" fill="#ef4444" stroke="#b91c1c" stroke-width="1.5" filter="url(#shadow)"/>
+  <circle cx="70" cy="56" r="5" fill="#ef4444" stroke="#b91c1c" stroke-width="1.5" filter="url(#shadow)"/>
+  <!-- Category 7: 1 dot -->
+  <circle cx="85" cy="70" r="5" fill="#ef4444" stroke="#b91c1c" stroke-width="1.5" filter="url(#shadow)"/>
+  <!-- Tick labels -->
+  <text x="25" y="90" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif">3</text>
+  <text x="40" y="90" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif">4</text>
+  <text x="55" y="90" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif">5</text>
+  <text x="70" y="90" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif">6</text>
+  <text x="85" y="90" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif">7</text>
+  <!-- Title -->
+  <text x="55" y="8" font-size="9" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">點圖</text>
+</svg>` },
 
   /* ══ 額外離差 DISPERSION ══ */
   { id:39, cat:"stats", subcat:"disp", name:"標準分",     en:"Standard Score",     ask:"求標準分", tag:"統計", grade:"s2",
     num:"S-09", difficulty:2, special:false,
     fcn:"z = (x − x̄) ÷ σ", latex:"z = \\frac{x-\\bar{x}}{\\sigma}",
     tip:"標準分係脫離原始單位，用標準差做量度！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="gs9" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#f0abfc;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#c026d3;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs9)" stroke="#c026d3" stroke-width="9"/>
-      <text x="55" y="55" font-size="26" fill="#f0abfc" font-weight="bold" font-family="sans-serif" text-anchor="middle">z</text>
-      <text x="55" y="80" font-size="11" fill="#e879f9" font-family="sans-serif" text-anchor="middle">z = (x−x̄)/σ</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgs1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#b91c1c;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fills1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.4"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#ef4444" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bgs1)"/>
+  <!-- Bar chart bars -->
+  <rect x="12" y="50" width="14" height="30" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="30" y="35" width="14" height="45" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="48" y="55" width="14" height="25" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="66" y="28" width="14" height="52" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="84" y="42" width="14" height="38" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <!-- Values on bars -->
+  <text x="19" y="47" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">4</text>
+  <text x="37" y="32" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">7</text>
+  <text x="55" y="52" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">3</text>
+  <text x="73" y="25" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">8</text>
+  <text x="91" y="39" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">5</text>
+  <!-- Mean line -->
+  <line x1="8" y1="42" x2="102" y2="42" stroke="#b91c1c" stroke-width="2.5" stroke-dasharray="5,3"/>
+  <polygon points="102,42 95,39 95,45" fill="#b91c1c"/>
+  <!-- Mean label -->
+  <text x="105" y="44" font-size="9" fill="#b91c1c" text-anchor="start" font-family="sans-serif" font-weight="bold">x̄</text>
+  <!-- Formula -->
+  <text x="55" y="100" font-size="10" fill="#ef4444" text-anchor="middle" font-family="sans-serif" font-weight="bold">x̄ = Σx / n</text>
+</svg>` },
 
   { id:40, cat:"stats", subcat:"disp", name:"分佈域",     en:"Range",              ask:"求分佈域", tag:"統計", grade:"s1",
     num:"S-10", difficulty:1, special:false,
     fcn:"分佈域 = 最大值 − 最小值", latex:"R = \\text{最大值}-\\text{最小值}",
     tip:"分佈域最簡單，但容易被極端值影響！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="gs10" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#fdba74;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#ea580c;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs10)" stroke="#ea580c" stroke-width="9"/>
-      <line x1="22" y1="55" x2="88" y2="55" stroke="#fdba74" stroke-width="4" stroke-linecap="round"/>
-      <circle cx="22" cy="55" r="5" fill="#ea580c"/>
-      <text x="22" y="48" font-size="9" fill="#fdba74" font-family="sans-serif" text-anchor="middle">最小</text>
-      <circle cx="88" cy="55" r="5" fill="#ea580c"/>
-      <text x="88" y="48" font-size="9" fill="#fdba74" font-family="sans-serif" text-anchor="middle">最大</text>
-      <line x1="22" y1="70" x2="88" y2="70" stroke="#ea580c" stroke-width="3" stroke-dasharray="4,3"/>
-      <text x="55" y="80" font-size="10" fill="#fed7aa" font-family="sans-serif" text-anchor="middle">最大值−最小值</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgs1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#b91c1c;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fills1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.4"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#ef4444" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bgs1)"/>
+  <!-- Bar chart bars -->
+  <rect x="12" y="50" width="14" height="30" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="30" y="35" width="14" height="45" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="48" y="55" width="14" height="25" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="66" y="28" width="14" height="52" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="84" y="42" width="14" height="38" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <!-- Values on bars -->
+  <text x="19" y="47" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">4</text>
+  <text x="37" y="32" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">7</text>
+  <text x="55" y="52" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">3</text>
+  <text x="73" y="25" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">8</text>
+  <text x="91" y="39" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">5</text>
+  <!-- Mean line -->
+  <line x1="8" y1="42" x2="102" y2="42" stroke="#b91c1c" stroke-width="2.5" stroke-dasharray="5,3"/>
+  <polygon points="102,42 95,39 95,45" fill="#b91c1c"/>
+  <!-- Mean label -->
+  <text x="105" y="44" font-size="9" fill="#b91c1c" text-anchor="start" font-family="sans-serif" font-weight="bold">x̄</text>
+  <!-- Formula -->
+  <text x="55" y="100" font-size="10" fill="#ef4444" text-anchor="middle" font-family="sans-serif" font-weight="bold">x̄ = Σx / n</text>
+</svg>` },
 
   { id:41, cat:"stats", subcat:"disp", name:"四分位數間距", en:"IQR",              ask:"求四分位數間距", tag:"統計", grade:"s2",
     num:"S-11", difficulty:2, special:false,
     fcn:"IQR = Q₃ − Q₁", latex:"\\text{IQR} = Q_3 - Q_1",
     tip:"四分位數間距唔受極端值影響，更穩健！",
-    svg:`<svg viewBox="0 0 110 110">
-      <defs>
-        <linearGradient id="gs11" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#67e8f9;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#0891b2;stop-opacity:0.1"/>
-        </linearGradient>
-      </defs>
-      <rect x="15" y="20" width="80" height="70" rx="6" fill="url(#gs11)" stroke="#0891b2" stroke-width="9"/>
-      <!-- Box plot skeleton -->
-      <line x1="22" y1="55" x2="88" y2="55" stroke="#67e8f9" stroke-width="2"/>
-      <!-- Whisker left -->
-      <line x1="22" y1="45" x2="22" y2="65" stroke="#67e8f9" stroke-width="3"/>
-      <line x1="22" y1="55" x2="35" y2="55" stroke="#67e8f9" stroke-width="3"/>
-      <!-- Box -->
-      <rect x="35" y="40" width="40" height="30" rx="3" fill="rgba(103,232,249,0.3)" stroke="#67e8f9" stroke-width="2"/>
-      <!-- Median line -->
-      <line x1="52" y1="40" x2="52" y2="70" stroke="#22d3ee" stroke-width="3"/>
-      <!-- Whisker right -->
-      <line x1="75" y1="55" x2="88" y2="55" stroke="#67e8f9" stroke-width="3"/>
-      <line x1="88" y1="45" x2="88" y2="65" stroke="#67e8f9" stroke-width="3"/>
-      <!-- Labels -->
-      <text x="22" y="78" font-size="8" fill="#67e8f9" font-family="sans-serif" text-anchor="middle">Q₁</text>
-      <text x="52" y="37" font-size="8" fill="#22d3ee" font-family="sans-serif" text-anchor="middle">Q₂</text>
-      <text x="75" y="78" font-size="8" fill="#67e8f9" font-family="sans-serif" text-anchor="middle">Q₃</text>
-      <text x="55" y="96" font-size="9" fill="#a5f3fc" font-family="sans-serif" text-anchor="middle">IQR = Q₃−Q₁</text>
-    </svg>` },
+    svg:`<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgs1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#b91c1c;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="fills1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fca5a5;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.4"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#ef4444" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="110" height="110" rx="10" fill="url(#bgs1)"/>
+  <!-- Bar chart bars -->
+  <rect x="12" y="50" width="14" height="30" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="30" y="35" width="14" height="45" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="48" y="55" width="14" height="25" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="66" y="28" width="14" height="52" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="84" y="42" width="14" height="38" rx="2" fill="url(#fills1)" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <!-- Values on bars -->
+  <text x="19" y="47" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">4</text>
+  <text x="37" y="32" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">7</text>
+  <text x="55" y="52" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">3</text>
+  <text x="73" y="25" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">8</text>
+  <text x="91" y="39" font-size="8" fill="#b91c1c" text-anchor="middle" font-family="sans-serif" font-weight="bold">5</text>
+  <!-- Mean line -->
+  <line x1="8" y1="42" x2="102" y2="42" stroke="#b91c1c" stroke-width="2.5" stroke-dasharray="5,3"/>
+  <polygon points="102,42 95,39 95,45" fill="#b91c1c"/>
+  <!-- Mean label -->
+  <text x="105" y="44" font-size="9" fill="#b91c1c" text-anchor="start" font-family="sans-serif" font-weight="bold">x̄</text>
+  <!-- Formula -->
+  <text x="55" y="100" font-size="10" fill="#ef4444" text-anchor="middle" font-family="sans-serif" font-weight="bold">x̄ = Σx / n</text>
+</svg>` },
 ];
 
 let selected = new Set(CARDS.map(c => c.id));
