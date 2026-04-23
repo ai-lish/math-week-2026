@@ -332,10 +332,10 @@ body { font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC"
     <!-- Category Tabs -->
     <div class="cat-tabs" id="catTabs">
       <button class="cat-tab active" data-cat="all">全部</button>
-      <button class="cat-tab" data-cat="geo">幾何</button>
-      <button class="cat-tab" data-cat="algebra">代數</button>
-      <button class="cat-tab" data-cat="stats">統計</button>
-      <button class="cat-tab" data-cat="other">其他</button>
+      <button class="cat-tab" data-cat="geo">Geometry</button>
+      <button class="cat-tab" data-cat="algebra">Algebra</button>
+      <button class="cat-tab" data-cat="stats">Statistic</button>
+      <button class="cat-tab" data-cat="other">Others</button>
     </div>
 
     <!-- Card Selector -->
@@ -359,7 +359,7 @@ body { font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC"
       <div class="field"><label>英文名</label><input type="text" id="fEn" placeholder="例：Rhombus"></div>
       <div class="field-row">
         <div class="field flex1"><label>類別</label>
-          <select id="fCat"><option value="geo">幾何</option><option value="algebra">代數</option><option value="stats">統計</option><option value="other">其他</option></select>
+          <select id="fCat"><option value="geo">Geometry</option><option value="algebra">Algebra</option><option value="stats">Statistic</option><option value="other">Others</option></select>
         </div>
         <div class="field flex1"><label>年級</label>
           <select id="fGrade"><option value="s1">中一</option><option value="s2">中二</option><option value="s3">中三</option></select>
@@ -1735,9 +1735,9 @@ function stars(n) { return Array.from({length:3},(_,i)=>'<span class="star'+(i<n
 function gradeLabel(g) { return g==='s1'?'中一':g==='s2'?'中二':'中三'; }
 function gradeClass(g) { return g==='s1'?'grade-s1':g==='s2'?'grade-s2':'grade-s3'; }
 function gradeClassBack(g) { return g==='s1'?'grade-s1-back':g==='s2'?'grade-s2-back':'grade-s3-back'; }
-function catLabel(cat) { return cat==='area'||cat==='peri'||cat==='vol'||cat==='geo'?'幾何':cat==='algebra'?'代數':cat==='stats'?'統計':'其他'; }
+function catLabel(cat) { return cat==='area'||cat==='peri'||cat==='vol'||cat==='geo'?'Geometry':cat==='algebra'?'Algebra':cat==='stats'?'Statistic':'Others'; }
 function catEmoji(cat) { return cat==='area'||cat==='peri'||cat==='vol'||cat==='geo'?'⬡':cat==='algebra'?'∑':cat==='stats'?'σ':'◈'; }
-function setLabel(num) { if(!num) return '幾何'; if(num.startsWith('A')) return '代數'; if(num.startsWith('S')) return '統計'; return '幾何'; }
+function setLabel(num) { if(!num) return 'Geometry'; if(num.startsWith('A')) return 'Algebra'; if(num.startsWith('S')) return 'Statistic'; return 'Geometry'; }
 
 function renderLatexEl(el, formula) {
   try {
