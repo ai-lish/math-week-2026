@@ -242,6 +242,22 @@ body{
 </div>
 
 <script>
+// ===== DEBUG HELPERS (expose game state to window for browser console) =====
+window._debug = {
+    getState: () => ({ cards, flipped, matched, moveCount, timerVal, currentLevel, currentPairs, gamePhase: document.getElementById('gameArea').style.display !== 'none' ? 'playing' : 'idle' }),
+    getCards: () => cards,
+    getFlipped: () => flipped,
+    getMatched: () => matched,
+    // Force reveal all cards (for testing)
+    revealAll: () => cards.forEach(c => { if (!c.el.classList.contains('matched')) c.el.classList.add('revealed'); }),
+    // Hide all covers (for testing)
+    hideAll: () => cards.forEach(c => c.el.classList.remove('revealed')),
+    // Print readable card map
+    printCards: () => cards.forEach((c, i) => console.log(i, 'pairId:', c.pairId, 'el:', c.el.dataset.id)),
+    // Get all unmatched cards as array of {id, pairId, isFlipped}
+    getCardInfo: () => cards.filter(c => !c.el.classList.contains('matched')).map(c => ({ id: c.id, pairId: c.pairId, flipped: c.el.classList.contains('revealed') })),
+};
+
 // Fallback pairs (should rarely be needed)
 const FALLBACK_PAIRS = [
     {formula:'長方形',answer:'長 × 寬',category:'幾何',grade:'S1',svg:null},
@@ -428,6 +444,9 @@ function renderBoard() {
     // Re-append in shuffled order
     board.innerHTML = '';
     cards.forEach(c => board.appendChild(c.el));
+    // Expose to window for automation
+    window._cards = cards;
+    window._cardEls = Array.from(board.querySelectorAll('.card'));
 }
 
 function makeCardEl(id, pairId, text, type, svgRaw) {
