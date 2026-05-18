@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>直線方程的面試教室</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+  header { background: #1e293b; padding: 16px 24px; border-bottom: 1px solid #334155; }
+  header h1 { font-size: 1.3rem; color: #38bdf8; }
+  header p { font-size: 0.85rem; color: #94a3b8; margin-top: 4px; }
+  
+  .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+  
+  .tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .tab-btn {
+    padding: 8px 18px; border: none; border-radius: 8px; cursor: pointer;
+    font-size: 0.9rem; font-weight: 600; transition: all 0.2s;
+    background: #1e293b; color: #94a3b8;
+  }
+  .tab-btn.active { background: #0ea5e9; color: #fff; }
+  .tab-btn:hover:not(.active) { background: #334155; color: #e2e8f0; }
+  
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+  
+  .card { background: #1e293b; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid #334155; }
+  .card h2 { font-size: 1.1rem; color: #38bdf8; margin-bottom: 12px; }
+  .card h3 { font-size: 0.95rem; color: #fb923c; margin: 12px 0 6px; }
+  
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+  
+  /* Canvas */
+  #geo-canvas { width: 100%; border-radius: 8px; cursor: crosshair; display: block; background: #0f172a; }
+  
+  .info-box { background: #1e3a5f; border-radius: 8px; padding: 12px 16px; margin-top: 12px; font-size: 0.9rem; line-height: 1.6; }
+  .info-box.blue { border-left: 3px solid #38bdf8; }
+  .info-box.orange { border-left: 3px solid #fb923c; }
+  .info-box.green { border-left: 3px solid #4ade80; }
+  
+  .formula { font-family: 'Times New Roman', serif; font-size: 1.3rem; color: #fbbf24; background: #1e293b; padding: 8px 14px; border-radius: 6px; display: inline-block; margin: 4px 0; }
+  
+  .step { background: #334155; border-radius: 6px; padding: 8px 12px; margin: 6px 0; font-size: 0.88rem; }
+  .step-num { display: inline-block; width: 22px; height: 22px; background: #0ea5e9; border-radius: 50%; text-align: center; line-height: 22px; font-size: 0.75rem; margin-right: 8px; font-weight: bold; }
+  
+  .life-example { background: #1a2744; border-radius: 8px; padding: 14px; margin: 8px 0; border: 1px solid #334155; }
+  .life-example strong { color: #fb923c; }
+  .life-example .concept { color: #38bdf8; font-size: 0.85rem; }
+  
+  .timeline-item { display: flex; gap: 16px; margin-bottom: 16px; align-items: flex-start; }
+  .time-badge { background: #0ea5e9; color: #fff; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; white-space: nowrap; min-width: 60px; text-align: center; }
+  .timeline-content { flex: 1; }
+  .timeline-content strong { color: #fbbf24; }
+  
+  .example-box { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 16px; margin: 10px 0; }
+  .example-box .q { color: #fb923c; font-weight: bold; margin-bottom: 8px; }
+  .example-box .ans { color: #4ade80; margin-top: 8px; line-height: 1.6; }
+  
+  canvas { image-rendering: crisp-edges; }
+  .btn { background: #0ea5e9; color: #fff; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin: 4px; }
+  .btn:hover { background: #38bdf8; }
+</style>
+</head>
+<body>
+<header>
+  <h1>📐 直線方程 — 面試示範教學</h1>
+  <p>課題： 中四數學第3章 | 課件用途： 示範教學 / 面試演示</p>
+</header>
+
+<div class="container">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('plan')">📋 教學流程</button>
+    <button class="tab-btn" onclick="showTab('life')">🌍 生活例子</button>
+    <button class="tab-btn" onclick="showTab('examples')">📝 三類例題</button>
+    <button class="tab-btn" onclick="showTab('geo')">📐 互動幾何</button>
+    <button class="tab-btn" onclick="showTab('summary')">📌 總結要點</button>
+  </div>
+
+  <!-- Tab 1: 教學流程 -->
+  <div class="tab-panel active" id="tab-plan">
+    <div class="card">
+      <h2>⏱️ 15分鐘面試示範教學流程</h2>
+      
+      <div class="timeline-item">
+        <span class="time-badge">3 分鐘</span>
+        <div class="timeline-content">
+          <strong>引起動機 — 生活中既直線方程</strong>
+          <div style="margin-top:6px; font-size:0.88rem; color:#cbd5e1;">
+            提問：「你今日返學的路線，係唔係直線？」引出斜率概念。<br>
+            展示三個生活例子（樓梯斜路 / 巴士收費 /  MPF強積金）。<br>
+            <span style="color:#94a3b8;">★ 教學技巧：設問引發思考，互動提問</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <span class="time-badge">2 分鐘</span>
+        <div class="timeline-content">
+          <strong>概念澄清 — 點與斜率缺一不可</strong>
+          <div style="margin-top:6px; font-size:0.88rem; color:#cbd5e1;">
+            展示：只有斜率 → 無限多條平行線；只有一點 → 無法確定。<br>
+            結論：要確定一條特定直線，需要「斜率 + 一點」或「兩點」。<br>
+            <span style="color:#94a3b8;">★ 教學技巧：反面論證，加深印象</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <span class="time-badge">8 分鐘</span>
+        <div class="timeline-content">
+          <strong>例題演繹 — 求直線方程三種方法</strong>
+          <div style="margin-top:6px; font-size:0.88rem; color:#cbd5e1;">
+            <strong style="color:#fb923c;">例題一（點 + 斜率）：</strong> 斜率3，通過(-5,2) → y = 3x + 17<br>
+            <strong style="color:#fb923c;">例題二（點 + 點）：</strong> 通過(1,3)及(3,7) → y = 2x + 1<br>
+            <strong style="color:#fb923c;">例題三（截距 + 截距）：</strong> x截距2，y截距6 → y = -3x + 6<br>
+            <span style="color:#94a3b8;">★ 教學技巧：逐步拆解，每題後留白等學生回應</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <span class="time-badge">2 分鐘</span>
+        <div class="timeline-content">
+          <strong>課堂總結 — 一般式</strong>
+          <div style="margin-top:6px; font-size:0.88rem; color:#cbd5e1;">
+            將三個例題的答案統一化成 <span class="formula">Ax + By + C = 0</span>（A > 0）。<br>
+            預告下節：點到直線的距離。<br>
+            <span style="color:#94a3b8;">★ 教學技巧：首尾呼應，用例題結果作結</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab 2: 生活例子 -->
+  <div class="tab-panel" id="tab-life">
+    <div class="grid-2">
+      <div>
+        <div class="card">
+          <h2>🌍 生活中與直線方程相關的概念</h2>
+          
+          <div class="life-example">
+            <strong>🚶 例1：斜路 / 樓梯的坡度</strong><br>
+            <span class="concept">具體數值：輪椅通道標準坡度 1:12（約 4.8°）</span><br>
+            概念：斜率 = 上升高度 / 水平距離<br>
+            直線方程：y = (1/12)x — 每走12米水平距離，高度上升1米
+          </div>
+
+          <div class="life-example">
+            <strong>🚌 例2：巴士 / 的士收費</strong><br>
+            <span class="concept">具體數值：某巴士 $6 起步 + $1.2/公里</span><br>
+            概念：y = mx + c（斜截式）<br>
+            直線方程：y = 1.2x + 6 — x截距 = -5（無意義），y截距 = $6 起步價
+          </div>
+
+          <div class="life-example">
+            <strong>💰 例3： MPF 強制性公積金</strong><br>
+            <span class="concept">具體數值：每月固定 $1500 強積金</span><br>
+            概念：正變關係（直線通過原點）<br>
+            直線方程：y = 1500x — 斜率 = 每月底薪，y截距 = 0
+          </div>
+
+          <div class="life-example">
+            <strong>📦 例4：物流運費</strong><br>
+            <span class="concept">具體數值：首公斤 $24，每加1公斤 +$3</span><br>
+            概念：兩點式 — 知道兩組數據就能建立方程<br>
+            直線方程：y = 3x + 21 — 斜率 = $3/封閉，y截距 = $21 基本收費
+          </div>
+
+          <div class="life-example">
+            <strong>⛽ 例5：汽車耗油量</strong><br>
+            <span class="concept">具體數值：油缸60L，每行1公里耗0.2L</span><br>
+            概念：負斜率（油量隨距離減少）<br>
+            直線方程：G = 60 − 0.2x — 斜率 = −0.2，y截距 = 60L（出發時油量）
+          </div>
+
+          <div class="life-example">
+            <strong>🏗️ 例6：安裝閉路電視費用</strong><br>
+            <span class="concept">具體數值：基本安裝費 $12000 + 每部 $600</span><br>
+            概念：y截距 = 固定成本，斜率 = 邊際成本<br>
+            直線方程：C = 600n + 12000
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h2>🎯 互動問題設計</h2>
+          <div class="info-box orange">
+            <strong>提問層次：</strong><br>
+            1️⃣ 識別層：圖中邊條綫嘅斜率最大？<br>
+            2️⃣ 理解層：巴士收費公式係直線方程，點寫？<br>
+            3️⃣ 應用層：如果車程係8公里，收費係幾多？<br>
+            4️⃣ 分析層：將物流收費同巴士收費比較，邊個起步價貴？
+          </div>
+
+          <h3 style="color:#fb923c; margin-top: 16px;">分組活動建議</h3>
+          <div class="info-box blue">
+            <strong>活動：樓梯測量</strong><br>
+            學生量度課室樓梯的階高（vertical rise）和水平深度（horizontal run），計算斜率，並寫成直線方程。<br><br>
+            延伸問題：如果樓梯總高度係3米，需要幾多級台階？
+          </div>
+
+          <h3 style="color:#fb923c; margin-top: 16px;">面試加分技巧</h3>
+          <div class="info-box green">
+            ✅ 用學生熟悉的例子（樓梯、收費）而非抽象概念<br>
+            ✅ 每個例子留 5-10 秒等學生思考<br>
+            ✅ 用顏色標記斜率（m）和截距（c）<br>
+            ✅ 總結時用一般式 Ax + By + C = 0 收尾
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab 3: 三類例題 -->
+  <div class="tab-panel" id="tab-examples">
+    <div class="grid-2">
+      <div>
+        <div class="card">
+          <h2>📝 例題一：點 + 斜率（點斜式）</h2>
+          <div class="formula">y − y₁ = m(x − x₁)</div>
+          
+          <div class="example-box">
+            <div class="q">📖 題目：已知一直線的斜率為 3，且通過點 (−5, 2)，求該直線的方程。</div>
+            <div class="ans">
+              <strong>步驟：</strong><br>
+              ① 代入 m = 3，x₁ = −5，y₁ = 2<br>
+              &nbsp;&nbsp;y − 2 = 3(x − (−5))<br>
+              ② 展開括號：y − 2 = 3(x + 5)<br>
+              ③ 展開：y − 2 = 3x + 15<br>
+              ④ 移項：y = 3x + 17<br><br>
+              <strong>答案：y = 3x + 17</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>📝 例題二：點 + 點（兩點式）</h2>
+          <div class="formula">y − y₁ = (y₂−y₁)/(x₂−x₁)(x − x₁)</div>
+          
+          <div class="example-box">
+            <div class="q">📖 題目：求通過 A(1, 3) 及 B(3, 7) 兩點的直線方程。</div>
+            <div class="ans">
+              <strong>步驟：</strong><br>
+              ① 先求斜率：m = (7−3)/(3−1) = 4/2 = 2<br>
+              ② 代入 m = 2，選用 A點 (1,3)：<br>
+              &nbsp;&nbsp;y − 3 = 2(x − 1)<br>
+              ③ 展開：y − 3 = 2x − 2<br>
+              ④ 移項：y = 2x + 1<br><br>
+              <strong>答案：y = 2x + 1</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h2>📝 例題三：截距 + 截距（截距式）</h2>
+          <div class="formula">x/a + y/b = 1</div>
+          
+          <div class="example-box">
+            <div class="q">📖 題目：已知一直線的 x 截距為 2，y 截距為 6，求該直線的方程。</div>
+            <div class="ans">
+              <strong>步驟：</strong><br>
+              ① 代入 a = 2，b = 6：<br>
+              &nbsp;&nbsp;x/2 + y/6 = 1<br>
+              ② 兩邊乘6：3x + y = 6<br>
+              ③ 移項：y = −3x + 6<br><br>
+              <strong>答案：y = −3x + 6</strong>
+            </div>
+          </div>
+
+          <h3 style="color:#fb923c; margin: 12px 0 8px;">統一成一般式 (Ax + By + C = 0, A > 0)</h3>
+          <div class="info-box blue">
+            例題一：y = 3x + 17 → <strong>3x − y + 17 = 0</strong>（× (−1)）<br>
+            例題二：y = 2x + 1 → <strong>2x − y + 1 = 0</strong>（× (−1)）<br>
+            例題三：y = −3x + 6 → <strong>3x + y − 6 = 0</strong>（× (−1)）
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>⚠️ 常見錯誤提醒</h2>
+          <div class="step">⚠️ <strong>忘記處理負號：</strong> x − (−5) = x + 5，呢步最易錯</div>
+          <div class="step">⚠️ <strong>斜率公式符號：</strong> m = (y₂−y₁)/(x₂−x₁)，唔係 (x₂−x₁)/(y₂−y₁)</div>
+          <div class="step">⚠️ <strong>截距式 a、b 正負：</strong> 如果截距係負數，要小心代入</div>
+          <div class="step">⚠️ <strong>一般式 A>0：</strong> 化簡後記得調整符號，令 A 係正數</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab 4: 互動幾何 -->
+  <div class="tab-panel" id="tab-geo">
+    <div class="grid-2">
+      <div>
+        <div class="card">
+          <h2>📐 互動：兩點一定點 — 垂直線距離</h2>
+          <p style="font-size:0.85rem; color:#94a3b8; margin-bottom:12px;">
+            🎯 任務：拖動 P1、P2 設定直線，再拖動 Q 點，觀察 Q 到直線的最短距離（垂直線）。
+          </p>
+          <canvas id="geo-canvas" width="500" height="420"></canvas>
+          <div style="margin-top:10px; font-size:0.85rem; color:#94a3b8;">
+            💡 視覺提示：垂直線（藍色虛線） = Q到直線的最短距離
+          </div>
+          <div id="geo-info" style="margin-top:10px; font-size:0.85rem; color:#e2e8f0;"></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h2>📐 互動：斜率與截距視覺化</h2>
+          <p style="font-size:0.85rem; color:#94a3b8; margin-bottom:12px;">
+            🎯 任務：拖動兩點，睇斜率點變化。嘗試砌出「經過原點」「平行於x軸」的直線。
+          </p>
+          <canvas id="slope-canvas" width="500" height="420"></canvas>
+          <div style="margin-top:10px; font-size:0.85rem; color:#e2e8f0;">
+            <strong>斜率 m = <span id="m-display" style="color:#fbbf24;">—</span></strong>，
+            <strong>x截距 a = <span id="a-display" style="color:#4ade80;">—</span></strong>，
+            <strong>y截距 b = <span id="b-display" style="color:#f472b6;">—</span></strong>
+          </div>
+          <div style="margin-top:8px;">
+            <button class="btn" onclick="resetSlope()">重設</button>
+            <button class="btn" onclick="snapToOrigin()">經過原點</button>
+            <button class="btn" onclick="snapToFlat()">水平線</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab 5: 總結 -->
+  <div class="tab-panel" id="tab-summary">
+    <div class="card">
+      <h2>📌 直線方程求法 — 總結表</h2>
+      <table style="width:100%; border-collapse:collapse; margin-top:12px; font-size:0.88rem;">
+        <tr style="background:#334155;">
+          <th style="padding:10px; text-align:left; color:#38bdf8;">條件</th>
+          <th style="padding:10px; text-align:left; color:#38bdf8;">公式</th>
+          <th style="padding:10px; text-align:left; color:#38bdf8;">例題</th>
+          <th style="padding:10px; text-align:left; color:#38bdf8;">答案</th>
+        </tr>
+        <tr style="border-bottom:1px solid #334155;">
+          <td style="padding:8px;">斜率 m + 點 (x₁,y₁)</td>
+          <td style="padding:8px; font-family:serif; color:#fbbf24;">y−y₁=m(x−x₁)</td>
+          <td style="padding:8px; color:#94a3b8;">m=3, (−5,2)</td>
+          <td style="padding:8px; color:#4ade80;">y=3x+17</td>
+        </tr>
+        <tr style="border-bottom:1px solid #334155; background:#1a2744;">
+          <td style="padding:8px;">兩點 (x₁,y₁) 和 (x₂,y₂)</td>
+          <td style="padding:8px; font-family:serif; color:#fbbf24;">m=(y₂−y₁)/(x₂−x₁)</td>
+          <td style="padding:8px; color:#94a3b8;">(1,3) 和 (3,7)</td>
+          <td style="padding:8px; color:#4ade80;">y=2x+1</td>
+        </tr>
+        <tr style="border-bottom:1px solid #334155;">
+          <td style="padding:8px;">x截距 a + y截距 b</td>
+          <td style="padding:8px; font-family:serif; color:#fbbf24;">x/a + y/b = 1</td>
+          <td style="padding:8px; color:#94a3b8;">a=2, b=6</td>
+          <td style="padding:8px; color:#4ade80;">y=−3x+6</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h2>⭐ 核心要點（背誦版）</h2>
+        <div class="info-box blue">
+          1️⃣ <strong>斜率 m = 垂直變化 ÷ 水平變化</strong><br>
+          &nbsp;&nbsp;&nbsp;(Δy/Δx)<br><br>
+          2️⃣ <strong>只有斜率 → 只能話明係邊組平行線</strong><br>
+          &nbsp;&nbsp;&nbsp;（因為過任意一點都可以畫一條斜率3的線）<br><br>
+          3️⃣ <strong>斜截式 y = mx + c</strong><br>
+          &nbsp;&nbsp;&nbsp;m = 斜率（傾斜程度），c = y截距（起點高度）<br><br>
+          4️⃣ <strong>一般式 Ax + By + C = 0（A > 0）</strong><br>
+          &nbsp;&nbsp;&nbsp;所有直線都可以化成呢個形式
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🎓 面試評分重點</h2>
+        <div class="step"><span class="step-num">1</span> 概念清晰 — 點與斜率缺一不可</div>
+        <div class="step"><span class="step-num">2</span> 公式運用 — 三種方法孰練切換</div>
+        <div class="step"><span class="step-num">3</span> 互動設計 — 生活例子引發興趣</div>
+        <div class="step"><span class="step-num">4</span> 板書清晰 — 逐步展示計算過程</div>
+        <div class="step"><span class="step-num">5</span> 學生參與 — 提問留白等回應</div>
+        <div class="step"><span class="step-num">6</span> 總結有力 — 用一般式收尾呼應主題</div>
+        
+        <h3 style="color:#fb923c; margin-top:16px;">面試禁忌</h3>
+        <div class="info-box orange" style="font-size:0.85rem;">
+          ❌ 唔好只係寫公式然後照讀<br>
+          ❌ 唔好跳步驟，學生會跟唔上<br>
+          ❌ 唔好忽略「為什麼需要兩點」呢個問題
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Tab Navigation ──
+function showTab(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ── Geo Canvas: Point-to-Line Distance ──
+const canvas = document.getElementById('geo-canvas');
+const ctx = canvas.getContext('2d');
+const W = canvas.width, H = canvas.height;
+
+function toCanvas(x, y) {
+  return { cx: 60 + x * 50, cy: H - 60 - y * 50 };
+}
+function toMath(cx, cy) {
+  return { x: (cx - 60) / 50, y: (H - 60 - cy) / 50 };
+}
+
+let p1 = toCanvas(2, 2);
+let p2 = toCanvas(8, 6);
+let q  = toCanvas(3, 8);
+let dragging = null;
+
+function drawGrid() {
+  ctx.fillStyle = '#0f172a';
+  ctx.fillRect(0, 0, W, H);
+  // Grid
+  ctx.strokeStyle = '#1e293b';
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 10; i++) {
+    let gx = 60 + i * 50, gy = H - 60 - i * 50;
+    ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, H); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(W, gy); ctx.stroke();
+  }
+  // Axes
+  ctx.strokeStyle = '#475569'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(60, H-60); ctx.lineTo(W-10, H-60); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(60, H-60); ctx.lineTo(60, 10); ctx.stroke();
+  ctx.font = '12px sans-serif'; ctx.fillStyle = '#64748b';
+  for (let i = 2; i <= 8; i++) {
+    ctx.fillText(i, 55 + i*50, H-45);
+    ctx.fillText(i, 40, H-55-i*50);
+  }
+  ctx.fillText('x', W-20, H-55);
+  ctx.fillText('y', 65, 20);
+}
+
+function lineEq(pA, pB) {
+  let m = (pB.cy - pA.cy) / (pB.cx - pA.cx);
+  let b2 = pA.cy - m * pA.cx;
+  return { m, b2 };
+}
+
+function perpFoot(pA, pB, Q) {
+  let m1 = (pB.cy - pA.cy) / (pB.cx - pA.cx);
+  let m2 = -1 / m1;
+  let b1 = pA.cy - m1 * pA.cx;
+  let b2 = Q.cy - m2 * Q.cx;
+  let fx = (b2 - b1) / (m1 - m2);
+  let fy = m1 * fx + b1;
+  return { fx, fy };
+}
+
+function draw() {
+  drawGrid();
+  
+  // Line P1-P2
+  ctx.strokeStyle = '#f472b6'; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(p1.cx, p1.cy); ctx.lineTo(p2.cx, p2.cy); ctx.stroke();
+  
+  // Foot of perpendicular from Q to line
+  let foot = perpFoot(p1, p2, q);
+  
+  // Perpendicular line
+  ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2;
+  ctx.setLineDash([5, 5]);
+  ctx.beginPath(); ctx.moveTo(q.cx, q.cy); ctx.lineTo(foot.fx, foot.fy); ctx.stroke();
+  ctx.setLineDash([]);
+  
+  // Perpendicular marker (right angle)
+  let d = 12;
+  let dm = (p2.cy - p1.cy) / (p2.cx - p1.cx);
+  let px = foot.fx + d, py = foot.fy - dm * d;
+  ctx.fillStyle = '#38bdf8';
+  ctx.font = '12px sans-serif';
+  ctx.fillText('⊥', foot.fx - 5, foot.fy - 8);
+  
+  // Foot point
+  ctx.beginPath();
+  ctx.arc(foot.fx, foot.fy, 5, 0, Math.PI * 2);
+  ctx.fillStyle = '#38bdf8';
+  ctx.fill();
+  
+  // Q point
+  ctx.beginPath();
+  ctx.arc(q.cx, q.cy, 7, 0, Math.PI * 2);
+  ctx.fillStyle = '#fb923c';
+  ctx.fill();
+  
+  // P1, P2 points
+  ctx.beginPath(); ctx.arc(p1.cx, p1.cy, 6, 0, Math.PI*2); ctx.fillStyle = '#4ade80'; ctx.fill();
+  ctx.beginPath(); ctx.arc(p2.cx, p2.cy, 6, 0, Math.PI*2); ctx.fillStyle = '#4ade80'; ctx.fill();
+  
+  // Labels
+  ctx.fillStyle = '#4ade80';
+  ctx.font = 'bold 13px sans-serif';
+  ctx.fillText('P₁', p1.cx + 8, p1.cy - 5);
+  ctx.fillText('P₂', p2.cx + 8, p2.cy - 5);
+  ctx.fillStyle = '#fb923c';
+  ctx.fillText('Q', q.cx + 8, q.cy - 5);
+  ctx.fillStyle = '#38bdf8';
+  ctx.fillText('F', foot.fx + 8, foot.fy - 5);
+
+  // Distance
+  let dist = Math.sqrt((q.cx - foot.fx)**2 + (q.cy - foot.fy)**2) / 50;
+  let info = document.getElementById('geo-info');
+  let m = (toMath(p2.cx,p2.cy).y - toMath(p1.cx,p1.cy).y) / (toMath(p2.cx,p2.cy).x - toMath(p1.cx,p1.cy).x);
+  info.innerHTML = `直線斜率 m = ${m.toFixed(2)} ｜ Q 到直線的最短距離 = ${dist.toFixed(2)} 單位<br>
+  <span style="color:#94a3b8; font-size:0.8rem;">💡 不管 Q 喺邊度，到直線的最短距離永遠係垂直線的長度</span>`;
+}
+
+canvas.addEventListener('mousedown', e => {
+  let rect = canvas.getBoundingClientRect();
+  let mx = e.clientX - rect.left, my = e.clientY - rect.top;
+  let dists = [
+    { name: 'p1', d: Math.hypot(mx-p1.cx, my-p1.cy) },
+    { name: 'p2', d: Math.hypot(mx-p2.cx, my-p2.cy) },
+    { name: 'q',  d: Math.hypot(mx-q.cx,  my-q.cy)  }
+  ];
+  dists.sort((a,b) => a.d - b.d);
+  dragging = dists[0].name;
+});
+canvas.addEventListener('mousemove', e => {
+  if (!dragging) return;
+  let rect = canvas.getBoundingClientRect();
+  let mx = e.clientX - rect.left, my = e.clientY - rect.top;
+  let clamped = { cx: Math.max(10, Math.min(W-10, mx)), cy: Math.max(10, Math.min(H-10, my)) };
+  if (dragging === 'p1') p1 = clamped;
+  if (dragging === 'p2') p2 = clamped;
+  if (dragging === 'q')  q  = clamped;
+  draw();
+});
+canvas.addEventListener('mouseup', () => dragging = null);
+
+draw();
+
+// ── Slope Canvas ──
+const canvas2 = document.getElementById('slope-canvas');
+const ctx2 = canvas2.getContext('2d');
+const W2 = canvas2.width, H2 = canvas2.height;
+
+function toCanvas2(x, y) {
+  return { cx: 60 + x * 45, cy: H2 - 60 - y * 45 };
+}
+
+let sp1 = toCanvas2(1, 1);
+let sp2 = toCanvas2(7, 5);
+let sdragging = null;
+
+function drawGrid2() {
+  ctx2.fillStyle = '#0f172a';
+  ctx2.fillRect(0, 0, W2, H2);
+  ctx2.strokeStyle = '#1e293b'; ctx2.lineWidth = 1;
+  for (let i = 0; i <= 10; i++) {
+    let gx = 60 + i*45, gy = H2 - 60 - i*45;
+    ctx2.beginPath(); ctx2.moveTo(gx, 0); ctx2.lineTo(gx, H2); ctx2.stroke();
+    ctx2.beginPath(); ctx2.moveTo(0, gy); ctx2.lineTo(W2, gy); ctx2.stroke();
+  }
+  ctx2.strokeStyle = '#475569'; ctx2.lineWidth = 2;
+  ctx2.beginPath(); ctx2.moveTo(60, H2-60); ctx2.lineTo(W2-10, H2-60); ctx2.stroke();
+  ctx2.beginPath(); ctx2.moveTo(60, H2-60); ctx2.lineTo(60, 10); ctx2.stroke();
+  ctx2.font = '12px sans-serif'; ctx2.fillStyle = '#64748b';
+  for (let i = 1; i <= 8; i++) {
+    ctx2.fillText(i, 55+i*45, H2-45);
+    ctx2.fillText(i, 40, H2-55-i*45);
+  }
+  ctx2.fillText('x', W2-20, H2-55);
+  ctx2.fillText('y', 65, 20);
+}
+
+function draw2() {
+  drawGrid2();
+  
+  // Line
+  let m = (sp2.cy - sp1.cy) / (sp2.cx - sp1.cx);
+  let b2 = sp1.cy - m * sp1.cx;
+  
+  ctx2.strokeStyle = '#f472b6'; ctx2.lineWidth = 3;
+  ctx2.beginPath();
+  ctx2.moveTo(0, b2);
+  ctx2.lineTo(W2, m * W2 + b2);
+  ctx2.stroke();
+  
+  // y-intercept point
+  let iy = { cx: 60, cy: b2 };
+  if (b2 > 0 && b2 < H2) {
+    ctx2.beginPath(); ctx2.arc(60, b2, 5, 0, Math.PI*2);
+    ctx2.fillStyle = '#f472b6'; ctx2.fill();
+    ctx2.fillStyle = '#f472b6'; ctx2.font = 'bold 12px sans-serif';
+    ctx2.fillText('(0,' + Math.round((H2-60-b2)/45) + ')', 5, b2 - 8);
+  }
+  
+  // x-intercept
+  if (m !== 0) {
+    let xi = -b2 / m;
+    let xi_cx = 60 + xi * 45;
+    if (xi_cx > 60 && xi_cx < W2) {
+      ctx2.beginPath(); ctx2.arc(xi_cx, H2-60, 5, 0, Math.PI*2);
+      ctx2.fillStyle = '#4ade80'; ctx2.fill();
+      ctx2.fillStyle = '#4ade80'; ctx2.font = 'bold 12px sans-serif';
+      ctx2.fillText('(' + Math.round(xi) + ',0)', xi_cx + 5, H2-45);
+    }
+  }
+  
+  // Points
+  ctx2.beginPath(); ctx2.arc(sp1.cx, sp1.cy, 6, 0, Math.PI*2); ctx2.fillStyle='#fb923c'; ctx2.fill();
+  ctx2.beginPath(); ctx2.arc(sp2.cx, sp2.cy, 6, 0, Math.PI*2); ctx2.fillStyle='#fb923c'; ctx2.fill();
+  ctx2.fillStyle = '#fb923c'; ctx2.font = 'bold 13px sans-serif';
+  ctx2.fillText('P₁', sp1.cx+8, sp1.cy-5);
+  ctx2.fillText('P₂', sp2.cx+8, sp2.cy-5);
+  
+  // Triangle annotation
+  let tx = Math.min(sp1.cx, sp2.cx) + Math.abs(sp2.cx-sp1.cx)/2;
+  let ty = Math.max(sp1.cy, sp2.cy) + 20;
+  if (ty < H2-10) {
+    ctx2.strokeStyle = '#38bdf8'; ctx2.lineWidth = 1;
+    ctx2.setLineDash([3,3]);
+    ctx2.beginPath(); ctx2.moveTo(tx, sp1.cy); ctx2.lineTo(tx, sp2.cy); ctx2.stroke();
+    ctx2.beginPath(); ctx2.moveTo(sp1.cx, ty); ctx2.lineTo(sp2.cx, ty); ctx2.stroke();
+    ctx2.setLineDash([]);
+    let dm = ((H2-60-sp2.cy) - (H2-60-sp1.cy)) / ((sp2.cx-60)-(sp1.cx-60));
+    ctx2.fillStyle = '#38bdf8'; ctx2.font = '12px sans-serif';
+    ctx2.fillText('Δy=' + Math.round((sp2.cy-sp1.cy)/45), tx+3, (sp1.cy+sp2.cy)/2 - 5);
+    ctx2.fillText('Δx=' + Math.round((sp2.cx-sp1.cx)/45), (sp1.cx+sp2.cx)/2, ty+12);
+  }
+  
+  // Display values
+  let mathM = (toMath2(sp2.cx,sp2.cy).y - toMath2(sp1.cx,sp1.cy).y) / (toMath2(sp2.cx,sp2.cy).x - toMath2(sp1.cx,sp1.cy).x);
+  let mathA = m !== 0 ? -b2/m : '—';
+  let mathB = (H2-60-b2)/45;
+  document.getElementById('m-display').textContent = mathM.toFixed(2);
+  document.getElementById('a-display').textContent = mathA === '—' ? '—' : mathA.toFixed(2);
+  document.getElementById('b-display').textContent = mathB.toFixed(2);
+}
+
+function toMath2(cx, cy) {
+  return { x: (cx-60)/45, y: (H2-60-cy)/45 };
+}
+
+canvas2.addEventListener('mousedown', e => {
+  let rect = canvas2.getBoundingClientRect();
+  let mx = e.clientX-rect.left, my = e.clientY-rect.top;
+  let d1 = Math.hypot(mx-sp1.cx, my-sp1.cy), d2 = Math.hypot(mx-sp2.cx, my-sp2.cy);
+  sdragging = d1 < d2 ? 'sp1' : 'sp2';
+});
+canvas2.addEventListener('mousemove', e => {
+  if (!sdragging) return;
+  let rect = canvas2.getBoundingClientRect();
+  let mx = Math.max(10, Math.min(W2-10, e.clientX-rect.left));
+  let my = Math.max(10, Math.min(H2-10, e.clientY-rect.top));
+  if (sdragging === 'sp1') sp1 = {cx:mx, cy:my};
+  else sp2 = {cx:mx, cy:my};
+  draw2();
+});
+canvas2.addEventListener('mouseup', () => sdragging = null);
+
+function resetSlope() { sp1 = toCanvas2(1,1); sp2 = toCanvas2(7,5); draw2(); }
+function snapToOrigin() { sp1 = toCanvas2(0,0); sp2 = toCanvas2(6,3); draw2(); }
+function snapToFlat() { sp1 = toCanvas2(1,3); sp2 = toCanvas2(7,3); draw2(); }
+
+draw2();
+</script>
+</body>
+</html>
